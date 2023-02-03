@@ -30,8 +30,8 @@ public class EPController {
 
     @GetMapping ("/create_user")
     public String create(){
-        String name = "test";
-        String email = "test@email.com";
+        String name = "Kaushik Nambi";
+        String email = "kaushiknambi@mgail.";
         User user = userService.save(new User(name, email));
         return "saved";
     }
