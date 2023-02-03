@@ -5,6 +5,7 @@ import axios from 'axios';
 function App() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState([]);
+  const [ newProfile, setNewProfile] = useState(false)
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -23,11 +24,42 @@ function App() {
           })
           .then((res) => {
             setProfile(res.data);
+            setNewProfile(true)
           })
           .catch((err) => console.log(err));
       }
     },
     [ user ]
+  );
+
+  useEffect(
+    () => {
+      if (newProfile) {
+        var data = JSON.stringify({
+          "name" : profile.name,
+          "email" : profile.email
+        });
+        console.log(data);
+        
+        var config = {
+          method: 'post',
+          url: 'http://localhost:5000/user/create_user',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });        
+
+      }
+    }
   );
 
   // log out function to log the user out of google and set the profile array to null
