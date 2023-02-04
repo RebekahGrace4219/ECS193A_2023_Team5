@@ -3,9 +3,7 @@ package com.example.spring_mongo_demo;
 import com.example.spring_mongo_demo.data.User;
 import com.example.spring_mongo_demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -28,10 +26,8 @@ public class EPController {
         return "Logged In";
     }
 
-    @GetMapping ("/create_user")
-    public String create(){
-        String name = "Kaushik Nambi";
-        String email = "kaushiknambi@mgail.";
+    @GetMapping ("/create_user/{name}/{email}")
+    public String create(@PathVariable String name, @PathVariable String email){
         User user = userService.save(new User(name, email));
         return "saved";
     }

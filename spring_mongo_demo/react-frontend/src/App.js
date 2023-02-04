@@ -32,35 +32,35 @@ function App() {
       [ user ]
   );
 
-  useEffect(
-      () => {
-        if (newProfile) {
-          var data = JSON.stringify({
-            "name" : profile.name,
-            "email" : profile.email
-          });
-          console.log(data);
+    useEffect(
+        () => {
+            if (newProfile) {
+                var data = JSON.stringify({
+                    "name" : profile.name,
+                    "email" : profile.email
+                });
+                console.log(data);
 
-          var config = {
-            method: 'get',
-            url: 'http://localhost:8080/create_user'
-            // headers: {
-            //   'Content-Type': 'application/json'
-            // },
-            // data : data
-          };
+                var config = {
+                    method: 'post',
+                    url: 'http://localhost:5000/create_user',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data : data
+                };
 
-          axios(config)
-              .then(function (response) {
-                console.log(JSON.stringify(response.data));
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+                axios(config)
+                    .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
+            }
         }
-      }
-  );
+    );
 
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
