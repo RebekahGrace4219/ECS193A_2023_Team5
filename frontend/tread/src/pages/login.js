@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Login() {
@@ -8,6 +9,7 @@ function Login() {
   const [ newProfile, setNewProfile] = useState(false);
 
   /* Google Auth functions */
+  let navigate = useNavigate();
   // Login
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -62,7 +64,7 @@ function Login() {
             }
             else{
               console.log("The user exists.");
-              window.location.href = "/friendPage";
+              navigate("/friendPage");
 
             }
           })

@@ -1,7 +1,6 @@
-
 import React from "react";
-import Login from "./login";
-const FriendPage = (myId, myEmail) => {
+// Here, display the friend name and userid
+function friendRequestDiv () {
     async function checkFriendExists(id){
         return true; //for now
     }
@@ -14,16 +13,13 @@ const FriendPage = (myId, myEmail) => {
         return false;
     }
 
-    async function sendFriendRequest(myId, theirId){
-        return false;
-    }
-
     function getMyID(){
         return "555555";
     }
 
     async function updateFriendCode(theirId){
-        if (theirId.target.value.length === 6){
+        let myId = getMyID();
+        if (theirId.length === 6){
             // Check the server for the item
             if(await !checkFriendExists(theirId)){
                 console.log("Cannot add because this person does not exist");
@@ -35,35 +31,15 @@ const FriendPage = (myId, myEmail) => {
                 console.log("This person has a friend request on you already, so you are now friends.");
             }
             else{
-                sendFriendRequest(myId, theirId);
                 console.log("You sent a friend request");
             }
         }
     }
-
-    async function getFriendRequests(){
-        let myId = getMyID();
-        return false;
-        // to do
-
-    }
-    async function viewOpenFriendRequests(){
-        await getFriendRequests();
-    }
-
-  return (
-    <div>
-      <h1>Friend Page</h1>
-      <div>
-        <label>Search for friends</label>
-        <input type = "text" name = "textbox" onChange = {updateFriendCode}/>
-      </div>
-      <div>
-        <label>View open friend requests</label>
-
+    return (
+        <div>
+            <input type = "text" name = "textbox" onChange = {updateFriendCode}></input>
+            <textarea > </textarea>
         </div>
-    </div>
-  );
+    );
 };
-
-export default FriendPage;
+export default friendRequestDiv;
