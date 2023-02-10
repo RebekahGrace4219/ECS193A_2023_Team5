@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { UsernameForm } from './UsernameForm.js';
+
+
 
 function App() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState([]);
-  const [ newProfile, setNewProfile] = useState(false)
+  const [ newProfile, setNewProfile] = useState(false);
+  const [ toggle, setToggle] = useState(false);
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => signUp(codeResponse),
+    onSuccess: (codeResponse) => loginUser(codeResponse),
     onError: (error) => console.log('Login Failed:', error)
   });
 
@@ -16,20 +20,26 @@ function App() {
     return false;
   }
 
-  function signUp(codeResponse){
-    // 1. Ask the user what they what their username to be
-    // 2. Assign them a set of numbers as a hash
-    // 3. Check that this username is unique - move down the hash until true
-    // 4. Place the user into the database
+  function createEmailHash(email){
+    return 45;
   }
 
-  function login(codeResponse) {
-    if(checkUserInDatabase){
+  async function signUpUser(){
+    // 1. Assign them a set of numbers as a hash from their email
+    let hash = createEmailHash(profile.email);
+
+    // 2. Ask the user what they what their username to be
+    setToggle(true);
+
+    return false;
+  }
+
+  function loginUser(codeResponse) {
+    if(checkUserInDatabase()){
       setUser(codeResponse);
     }
     else{
       setUser(codeResponse);
-      signUp(codeResponse);
     }
   }
 
@@ -60,8 +70,8 @@ function App() {
           "name" : profile.name,
           "email" : profile.email
         });
-        console.log(data);
-
+        console.log("This is where I log the data");
+        signUpUser();
         var config = {
           method: 'post',
           url: 'http://localhost:5000/user/create_user',
@@ -78,9 +88,9 @@ function App() {
         .catch(function (error) {
           console.log(error);
         });
-
       }
-    }
+    },
+    [ newProfile]
   );
 
   // log out function to log the user out of google and set the profile array to null
@@ -103,6 +113,11 @@ function App() {
           <br />
           <br />
           <button onClick={logOut}>Log out</button>
+          {toggle ?
+            <UsernameForm id = "usernameForm"></UsernameForm>
+            :
+            <></>
+          }
         </div>
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>
