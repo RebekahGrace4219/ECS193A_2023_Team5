@@ -8,9 +8,30 @@ function App() {
   const [ newProfile, setNewProfile] = useState(false)
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => signUp(codeResponse),
     onError: (error) => console.log('Login Failed:', error)
   });
+
+  function checkUserInDatabase(codeResponse) {
+    return false;
+  }
+
+  function signUp(codeResponse){
+    // 1. Ask the user what they what their username to be
+    // 2. Assign them a set of numbers as a hash
+    // 3. Check that this username is unique - move down the hash until true
+    // 4. Place the user into the database
+  }
+
+  function login(codeResponse) {
+    if(checkUserInDatabase){
+      setUser(codeResponse);
+    }
+    else{
+      setUser(codeResponse);
+      signUp(codeResponse);
+    }
+  }
 
   useEffect(
     () => {
@@ -40,11 +61,11 @@ function App() {
           "email" : profile.email
         });
         console.log(data);
-        
+
         var config = {
           method: 'post',
           url: 'http://localhost:5000/user/create_user',
-          headers: { 
+          headers: {
             'Content-Type': 'application/json'
           },
           data : data
@@ -56,7 +77,7 @@ function App() {
         })
         .catch(function (error) {
           console.log(error);
-        });        
+        });
 
       }
     }
