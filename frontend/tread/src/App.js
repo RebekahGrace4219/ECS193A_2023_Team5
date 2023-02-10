@@ -40,11 +40,11 @@ function App() {
           "email" : profile.email
         });
         console.log(data);
-        
+
         var config = {
           method: 'post',
           url: 'http://localhost:5000/user/create_user',
-          headers: { 
+          headers: {
             'Content-Type': 'application/json'
           },
           data : data
@@ -56,7 +56,7 @@ function App() {
         })
         .catch(function (error) {
           console.log(error);
-        });        
+        });
 
       }
     }
