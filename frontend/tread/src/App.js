@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { UsernameForm } from './UsernameForm.js';
-
 
 
 function App() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState([]);
-  const [ newProfile, setNewProfile] = useState(false);
-  const [ toggle, setToggle] = useState(false);
+  const [ newProfile, setNewProfile] = useState(false)
+
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => loginUser(codeResponse),
+    onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log('Login Failed:', error)
   });
 
-  function checkUserInDatabase(codeResponse) {
-    return false;
+  function generateUsername(){
+    return "45";
   }
 
-  function createEmailHash(email){
-    return 45;
+  async function checkUserAlreadyExists(email){
+    var config = {
+      method: 'get',
+      url: 'http://localhost:5000/user/check_exist/' + email ,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    await axios(config)
+    .then(function (response) {
+      console.log("Response from the check works");
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log("Response from the check error");
+      console.log(error);
+    });
+
+    return true;
   }
 
-  async function signUpUser(){
-    // 1. Assign them a set of numbers as a hash from their email
-    let hash = createEmailHash(profile.email);
-
-    // 2. Ask the user what they what their username to be
-    setToggle(true);
-
-    return false;
-  }
-
-  function loginUser(codeResponse) {
-    if(checkUserInDatabase()){
-      setUser(codeResponse);
-    }
-    else{
-      setUser(codeResponse);
-    }
-  }
 
   useEffect(
     () => {
@@ -55,7 +53,11 @@ function App() {
           })
           .then((res) => {
             setProfile(res.data);
-            setNewProfile(true)
+            console.log("Check if the person exists");
+            console.log(res.data);
+            if(!checkUserAlreadyExists(res.data.email)){
+              setNewProfile(true)
+            }
           })
           .catch((err) => console.log(err));
       }
@@ -70,8 +72,8 @@ function App() {
           "name" : profile.name,
           "email" : profile.email
         });
-        console.log("This is where I log the data");
-        signUpUser();
+        console.log(data);
+
         var config = {
           method: 'post',
           url: 'http://localhost:5000/user/create_user',
@@ -88,9 +90,9 @@ function App() {
         .catch(function (error) {
           console.log(error);
         });
+
       }
-    },
-    [ newProfile]
+    }
   );
 
   // log out function to log the user out of google and set the profile array to null
@@ -113,11 +115,6 @@ function App() {
           <br />
           <br />
           <button onClick={logOut}>Log out</button>
-          {toggle ?
-            <UsernameForm id = "usernameForm"></UsernameForm>
-            :
-            <></>
-          }
         </div>
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>
