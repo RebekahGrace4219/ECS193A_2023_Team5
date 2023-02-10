@@ -21,7 +21,7 @@ function App() {
   async function checkUserAlreadyExists(email){
     var config = {
       method: 'get',
-      url: 'http://localhost:5000/user/check_exist/' + email ,
+      url: 'http://localhost:5000/username/check_exist/' + email ,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -70,13 +70,14 @@ function App() {
       if (newProfile) {
         var data = JSON.stringify({
           "name" : profile.name,
-          "email" : profile.email
+          "email" : profile.email,
+          "username" : "username"
         });
         console.log(data);
 
         var config = {
           method: 'post',
-          url: 'http://localhost:5000/user/create_user',
+          url: 'http://localhost:5000/username/create_user',
           headers: {
             'Content-Type': 'application/json'
           },
