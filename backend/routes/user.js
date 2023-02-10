@@ -28,4 +28,13 @@ router.route("/create_user").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route('/check_exist/:id').get(async (req, res) => {
+
+  const userExist = await User.findOne({ email: req["params"]["id"] });
+  let valid = true;
+  if (userExist === null){
+    valid = false;
+  }
+  return res.json(valid);
+});
 module.exports = router;

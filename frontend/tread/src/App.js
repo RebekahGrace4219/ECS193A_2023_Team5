@@ -2,15 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
+
 function App() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState([]);
   const [ newProfile, setNewProfile] = useState(false)
 
+
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log('Login Failed:', error)
   });
+
+  function generateUsername(){
+    return "45";
+  }
+
+  async function checkUserAlreadyExists(email){
+    var config = {
+      method: 'get',
+      url: 'http://localhost:5000/user/check_exist/' + email ,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    await axios(config)
+    .then(function (response) {
+      console.log("Response from the check works");
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log("Response from the check error");
+      console.log(error);
+    });
+
+    return true;
+  }
+
 
   useEffect(
     () => {
@@ -24,7 +53,11 @@ function App() {
           })
           .then((res) => {
             setProfile(res.data);
-            setNewProfile(true)
+            console.log("Check if the person exists");
+            console.log(res.data);
+            if(!checkUserAlreadyExists(res.data.email)){
+              setNewProfile(true)
+            }
           })
           .catch((err) => console.log(err));
       }
@@ -40,11 +73,11 @@ function App() {
           "email" : profile.email
         });
         console.log(data);
-        
+
         var config = {
           method: 'post',
           url: 'http://localhost:5000/user/create_user',
-          headers: { 
+          headers: {
             'Content-Type': 'application/json'
           },
           data : data
@@ -56,7 +89,7 @@ function App() {
         })
         .catch(function (error) {
           console.log(error);
-        });        
+        });
 
       }
     }
