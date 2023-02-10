@@ -31,6 +31,8 @@ router.route("/create_user").post((req, res) => {
 router.route('/check_exist/:id').get(async (req, res) => {
 
   const userExist = await User.findOne({ email: req["params"]["id"] });
+
+  // Early return should be added here
   let valid = true;
   if (userExist === null){
     valid = false;
