@@ -50,9 +50,9 @@ router.route('/remove_friend').get(async (req, res) => {
 });
 
 
-router.route('/add_friend').get(async (req, res) => {
-    const user_email = req.body.userEmail;
-    const friend_email = req.body.friendEmail;
+router.route('/add_friend/:myEmail/:theirEmail').get(async (req, res) => {
+    const user_email = req["params"]["myEmail"];
+    const friend_email = req["params"]["theirEmail"];
 
     const friendExists = await Users.findOne({ email: friend_email});
 
@@ -93,4 +93,4 @@ router.route('/add_friend').get(async (req, res) => {
 
 
 
-  module.exports = router;
+module.exports = router;

@@ -8,15 +8,6 @@ function Login() {
   const [ profile, setProfile ] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
 
-  state = {"id":"", "email":"email"};
-
-  function getId(){
-    return state["id"];
-  }
-
-  function getEmail(){
-    return state["email"];
-  }
 
   /* Google Auth functions */
   let navigate = useNavigate();
@@ -132,12 +123,13 @@ function Login() {
 
   async function send_post(){
     let username = await findValidUsername();
-    state["id"] = username;
-    state["email"] = profile.email;
     var data = JSON.stringify({
       "name" : profile.name,
       "email" : profile.email,
-      "username": username
+      "username": username,
+      "sent_requests":[],
+      "recieved_requests":[],
+      "friends":[]
     });
     console.log(data);
 
@@ -190,7 +182,7 @@ function Login() {
         <div>
 
 
-
+      <button onClick={() => logOut()}>Log out 🚀 </button>
         </div>
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>

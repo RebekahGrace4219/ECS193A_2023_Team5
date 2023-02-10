@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import axios from 'axios';
 import FriendPage  from './pages/friend';
 import Login from './pages/login';
 
