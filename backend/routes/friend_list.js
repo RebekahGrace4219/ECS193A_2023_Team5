@@ -35,6 +35,20 @@ router.route('/friend_request_list').get(async (req, res) => {
     return res.json(requestList)
 });
 
+router.route('/remove_friend').get(async (req, res) => {
+    const user_email = req.body.userEmail;
+    const friend_email = req.body.friendEmail;
+
+    // add error checking
+    const removeFriendFromUser = await Friend_lists.findOneAndUpdate({
+        userEmail: user_email, $pull: {friendsEmails: friend_email}});
+    const removeUserFromFriend = await Friend_lists.findOneAndUpdate({
+        userEmail: friend_email, $pull: {friendsEmails: user_email}});
+
+
+    return res.sendStatus(200)
+});
+
 
 router.route('/add_friend').get(async (req, res) => {
     const user_email = req.body.userEmail;
