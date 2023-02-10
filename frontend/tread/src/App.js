@@ -6,11 +6,8 @@ import axios from 'axios';
 function App() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState(false);
-  const [ chooseUsername, setChooseUsername] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
-  const [ usernameSubmitted, setUsernameSubmitted] = useState(false);
 
-  let state = {"text":"", "username":""};
 
   /* Google Auth functions */
   // Login
@@ -25,17 +22,6 @@ function App() {
     setProfile(null);
   };
 
-  /* Username Form information */
-  // Set the text state to the desired username
-  function inputUsername(text){
-    state["text"] = text.target.value;
-  }
-
-  // The username has been submitted, begin checking if it is valid
-  function submitUsername(e){
-    setUsernameSubmitted(true);
-    e.preventDefaults();
-  }
 
   /* Logged in now, set the profile information and if the user is new, open the submittal form */
   // Check the User's email has been already used
@@ -74,7 +60,7 @@ function App() {
             setProfile(res.data);
             if( ! await checkUserAlreadyExists(res.data.email) ){
               console.log("The user does not exist and must be added");
-              setChooseUsername(true);
+              setNewProfile(true);
             }
             else{
               console.log("The user exists.");
@@ -87,28 +73,29 @@ function App() {
   );
 
   /* Determine if the username is valid */
-  function convertInt4DigitString(integer){
+  function convertInt6DigitString(integer){
     let string = integer.toString();
 
-    while (string.length < 4){
+    while (string.length < 6){
       string = "0" + string;
     }
 
     return string;
   }
 
-  async function findValidUsername(username_base, base_digit_code){
+  async function findValidUsername(){
     let username_found = true;
-    let digit_string = convertInt4DigitString(base_digit_code);
-    let attempt_username = username_base + "#" + digit_string;
+
+    let value = Math.floor(Math.random() * 999999);
+    let digit_string = convertInt6DigitString(value);
+
 
     while (username_found){
-      digit_string = convertInt4DigitString(base_digit_code);
-      attempt_username = username_base + "#" + digit_string;
+      digit_string = convertInt6DigitString(value);
 
       var config = {
         method: 'get',
-        url: 'http://localhost:5000/user/check_exist_username/' + attempt_username ,
+        url: 'http://localhost:5000/user/check_exist_username/' + digit_string ,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -123,36 +110,32 @@ function App() {
           console.log(error);
         });
 
-      base_digit_code = (base_digit_code + 1) % 9999;
+        value = Math.floor(Math.random() * 999999);
     }
 
-    console.log("Decided on this username: " + attempt_username);
-    state["username"] = attempt_username;
-    return attempt_username;
+    console.log("Decided on this username: " + digit_string);
+
+    return digit_string;
   }
 
+  async function send_post(){
+    var data = JSON.stringify({
+      "name" : profile.name,
+      "email" : profile.email,
+      "username": await findValidUsername()
+    });
+    console.log(data);
 
+    var config = {
+      method: 'post',
+      url: 'http://localhost:5000/user/create_user',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
 
-  useEffect(
-    () => {
-      if (newProfile) {
-        var data = JSON.stringify({
-          "name" : profile.name,
-          "email" : profile.email,
-          "username": state["username"]
-        });
-        console.log(data);
-
-        var config = {
-          method: 'post',
-          url: 'http://localhost:5000/user/create_user',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-
-        axios(config)
+    axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
         })
@@ -160,8 +143,15 @@ function App() {
           console.log(error);
         });
 
+    return config;
+  }
+
+  useEffect(
+    () => {
+      if (newProfile) {
+        send_post();
       }
-    }
+    }, [newProfile]
   );
 
 
@@ -180,11 +170,7 @@ function App() {
           <br />
           <button onClick={logOut}>Log out</button>
 
-          {(chooseUsername) ? <form  id = "userForm" >
-        <label>Select a Username</label>
-        <input onChange = {inputUsername} type = "text" name = "UsernamePicker" id = "UsernamePicker"></input>
-        <button type = "submit" value = "Next"></button>
-        </form> : <></>}
+
         </div>
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>
