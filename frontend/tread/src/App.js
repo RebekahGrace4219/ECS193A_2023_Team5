@@ -21,23 +21,21 @@ function App() {
   async function checkUserAlreadyExists(email){
     var config = {
       method: 'get',
-      url: 'http://localhost:5000/username/check_exist/' + email ,
+      url: 'http://localhost:5000/user/check_exist/' + email ,
       headers: {
         'Content-Type': 'application/json'
       }
     };
 
+    let exist = false;
     await axios(config)
     .then(function (response) {
-      console.log("Response from the check works");
-      console.log(JSON.stringify(response.data));
+      exist = response.data;
     })
     .catch(function (error) {
-      console.log("Response from the check error");
       console.log(error);
     });
-
-    return true;
+    return exist;
   }
 
 
@@ -51,11 +49,11 @@ function App() {
               Accept: 'application/json'
             }
           })
-          .then((res) => {
+          .then(async (res) => {
             setProfile(res.data);
-            console.log("Check if the person exists");
-            console.log(res.data);
-            if(!checkUserAlreadyExists(res.data.email)){
+            console.log("Do I exist? " + await checkUserAlreadyExists(res.data.email));
+            if( ! await checkUserAlreadyExists(res.data.email) ){
+              console.log("Am i trying to set a new profile?");
               setNewProfile(true)
             }
           })
@@ -70,14 +68,13 @@ function App() {
       if (newProfile) {
         var data = JSON.stringify({
           "name" : profile.name,
-          "email" : profile.email,
-          "username" : "username"
+          "email" : profile.email
         });
         console.log(data);
 
         var config = {
           method: 'post',
-          url: 'http://localhost:5000/username/create_user',
+          url: 'http://localhost:5000/user/create_user',
           headers: {
             'Content-Type': 'application/json'
           },
