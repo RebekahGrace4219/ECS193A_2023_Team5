@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-import { useNavigate } from "react-router-dom";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import axios from 'axios';
-import FriendPage  from './pages/friend';
-import Login from './pages/login';
 
-function App() {
+function Login() {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
@@ -66,7 +62,7 @@ function App() {
             }
             else{
               console.log("The user exists.");
-              window.location.pathname = "/friendPage";
+              window.location.href = "/friendPage";
 
             }
           })
@@ -154,38 +150,37 @@ function App() {
     () => {
       if (newProfile) {
         send_post();
+        window.location.href = "/friendPage";
+
       }
     }, [newProfile]
   );
 
-  /*<br />
-      <br />
-      {profile ? (
-        <div>
-          <img src={profile.picture} alt="user image" />
+/* old code to display profile <img src={profile.picture} alt="user image" />
           <h3>User Logged in</h3>
           <p>Name: {profile.name}</p>
           <p>Email Address: {profile.email}</p>
           <br />
           <br />
-          <button onClick={logOut}>Log out</button>
+          <button onClick={logOut}>Log out</button>*/
+
+  return (
+    <div>
+
+      <h2>React Google Login</h2>
+
+      <br />
+      <br />
+      {profile ? (
+        <div>
+
 
 
         </div>
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>
       )}
-    </div>8*/
-
-  return (
-    <div>
-      <Router>
-      <Routes>
-        <Route path = "/" element = {<Login/>}/>
-        <Route path = "/friendPage" element={<FriendPage/>} />
-      </Routes>
-      </Router>
-      </div>
+    </div>
   );
 }
-export default App;
+export default Login;
