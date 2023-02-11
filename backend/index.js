@@ -16,7 +16,10 @@ connection.once("open", () => {
 });
 
 const userRouter = require("./routes/user");
+const friendRouter = require("./routes/friend_list")
+
 app.use("/user", userRouter);
+app.use("/friend_list", friendRouter)
 
 app.listen(5000, () => {
     console.log(`Server Started at ${5000}`)

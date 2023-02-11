@@ -1,6 +1,8 @@
 const router = require("express").Router();
 let Friend_lists = require("../models/friend_list.model");
-const Friend_requests = require("../models/friend_request.model");
+let Friend_requests = require("../models/friend_request.model");
+let Users = require("../models/user.model");
+
 
 
 router.route("/").get((req, res) => {
@@ -15,7 +17,7 @@ router.route("/").get((req, res) => {
 });
 
 
-router.route('/friend_list').get(async (req, res) => {
+router.route('/friend_list').post(async (req, res) => {
     const user_email = req.body.email;
 
     const friendList = await Friend_lists.findOne({
@@ -25,7 +27,7 @@ router.route('/friend_list').get(async (req, res) => {
     return res.json(friendList)
 });
 
-router.route('/friend_request_list').get(async (req, res) => {
+router.route('/friend_request_list').post(async (req, res) => {
     const user_email = req.body.email;
 
     const requestList = await Friend_requests.find({
@@ -35,28 +37,34 @@ router.route('/friend_request_list').get(async (req, res) => {
     return res.json(requestList)
 });
 
-router.route('/remove_friend').get(async (req, res) => {
+router.route('/remove_friend').post(async (req, res) => {
     const user_email = req.body.userEmail;
     const friend_email = req.body.friendEmail;
 
     // add error checking
-    const removeFriendFromUser = await Friend_lists.findOneAndUpdate({
-        userEmail: user_email, $pull: {friendsEmails: friend_email}});
-    const removeUserFromFriend = await Friend_lists.findOneAndUpdate({
-        userEmail: friend_email, $pull: {friendsEmails: user_email}});
+
+    const removeFriendFromUser = await Friend_lists.findOneAndUpdate(
+        {userEmail: user_email}, {$pull: {friendsEmails: friend_email}});
+
+    const removeUserFromFriend = await Friend_lists.findOneAndUpdate(
+        {userEmail: friend_email}, {$pull: {friendsEmails: user_email}});
+
+    console.log(removeFriendFromUser);
+    console.log(removeUserFromFriend);
 
 
     return res.sendStatus(200)
 });
 
 
-router.route('/add_friend').get(async (req, res) => {
-    const user_email = req.body.userEmail;
-    const friend_email = req.body.friendEmail;
+router.route('/request_friend').post(async (req, res) => {
+    const user_email = await req.body.userEmail;
+    const friend_email = await req.body.friendEmail;
 
     const friendExists = await Users.findOne({ email: friend_email});
 
     if (friendExists === null){
+        console.log("no user found ", friend_email)
         return res.sendStatus(404);
     }
 
@@ -77,19 +85,38 @@ router.route('/add_friend').get(async (req, res) => {
         })
 
     if (friendSentRequest !== null) {
-        await Friend_lists.findOneAndUpdate(
+        await Friend_lists.updateOne(
             {userEmail: user_email},
-            {$addToSet: { friendsEmails: friend_email}})
+            {$addToSet: { friendsEmails: friend_email}},
+            {upsert : true})
+
+
+        await Friend_lists.updateOne(
+            {userEmail: friend_email},
+            {$addToSet: { friendsEmails: user_email}},
+            {upsert : true})
         return res.sendStatus(200)
     }
 
-    Friend_requests.create({toEmail : friend_email, fromEmail : friend_email},
+    const alreadySentRequest = await Friend_requests.findOne({
+        toEmail : friend_email,
+        fromEmail : user_email
+    })
+
+    if (alreadySentRequest !== null) {
+        return res.send("already sent request");
+    }
+
+
+    Friend_requests.create({toEmail : friend_email, fromEmail : user_email},
         function (err) {
             if (err) return handleError(err);
             return res.sendStatus(200)
           });
 
 });
+
+
 
 
 
