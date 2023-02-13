@@ -1,7 +1,6 @@
 const router = require("express").Router();
 let Friend_lists = require("../models/friend_list.model");
-let Friend_requests = require("../models/friend_request.model");
-let Users = require("../models/user.model");
+const { remove } = require("../models/user.model");
 
 
 
@@ -17,104 +16,230 @@ router.route("/").get((req, res) => {
 });
 
 
+async function getPropertyOfFriendList(username, property) {
+    return Friend_lists.findOne({username: username }, property);
+}
+
+
 router.route('/friend_list').post(async (req, res) => {
-    const user_email = req.body.email;
+    const username = req.body.username;
 
-    const friendList = await Friend_lists.findOne({
-        userEmail: user_email }, 'friendsEmails');
+    const friendList = await getPropertyOfFriendList(username, 'friends');
 
-
-    return res.json(friendList)
+    return res.json(friendList);
 });
 
-router.route('/friend_request_list').post(async (req, res) => {
-    const user_email = req.body.email;
+router.route('/sent_request_list').post(async (req, res) => {
+    const username = req.body.username;
 
-    const requestList = await Friend_requests.find({
-        toEmail: user_email}, 'fromEmail');
+    const requestList = await getPropertyOfFriendList(username, 'sentRequests');
 
-
-    return res.json(requestList)
+    return res.json(requestList);
 });
+
+router.route('/received_request_list').post(async (req, res) => {
+    const username = req.body.username;
+
+    const requestList = await getPropertyOfFriendList(username, 'receivedRequests')
+
+    return res.json(requestList);
+});
+
+async function removeFriend(username, friendName) {
+    await Friend_lists.findOneAndUpdate(
+        {username: username}, {$pull: {friends: friendName}
+    });
+
+    await Friend_lists.findOneAndUpdate(
+        {username: friendName}, {$pull: {friends: username}
+    });
+
+}
 
 router.route('/remove_friend').post(async (req, res) => {
-    const user_email = req.body.userEmail;
-    const friend_email = req.body.friendEmail;
+    const username = req.body.username;
+    const friendName = req.body.friendName;
 
-    // add error checking
+    removeFriend(username, friendName);
 
-    const removeFriendFromUser = await Friend_lists.findOneAndUpdate(
-        {userEmail: user_email}, {$pull: {friendsEmails: friend_email}});
-
-    const removeUserFromFriend = await Friend_lists.findOneAndUpdate(
-        {userEmail: friend_email}, {$pull: {friendsEmails: user_email}});
-
-    console.log(removeFriendFromUser);
-    console.log(removeUserFromFriend);
-
-
-    return res.sendStatus(200)
+    return res.sendStatus(200);
 });
 
+async function isExistingUser(username) {
+    return Friend_lists.exists({username: username});
+}
 
-router.route('/request_friend').post(async (req, res) => {
-    const user_email = await req.body.userEmail;
-    const friend_email = await req.body.friendEmail;
+async function getUserFriendDocument(username) {
+    return Friend_lists.findOne({username: username});
+}
 
-    const friendExists = await Users.findOne({ email: friend_email});
+function isRequestSentAlready(userFriendDocument, friendName) {
+    return userFriendDocument["sentRequests"].includes(friendName);
+}
 
-    if (friendExists === null){
-        console.log("no user found ", friend_email)
+function isBlocking(userFriendDocument, friendName) {
+    return userFriendDocument["blocked"].includes(friendName);
+}
+
+async function unblock(blocker, blocked) {
+    await Friend_lists.findOneAndUpdate(
+        {username : blocker}, {$pull: {blocked: blocked}});
+    await Friend_lists.findOneAndUpdate(
+        {username : blocked}, {$pull: {blockedBy: blocker}});
+}
+
+
+function isBlockedBy(userFriendDocument, friendName) {
+    return userFriendDocument["blockedBy"].includes(friendName);
+}
+
+function isFriend(userFriendDocument, friendName) {
+    return userFriendDocument["friends"].includes(friendName);
+}
+
+function isRequestReceived(userFriendDocument, friendName) {
+    return userFriendDocument["receivedRequests"].includes(friendName);
+}
+
+async function removeRequest(sender, receiver) {
+    await Friend_lists.findOneAndUpdate(
+        {username : receiver}, {$pull: {receivedRequests : sender}}
+    );
+
+    await Friend_lists.findOneAndUpdate(
+        {username : sender}, {$pull: {sentRequests : receiver}}
+    );
+}
+
+
+async function acceptFriendRequest(username, friendName) {
+    await Friend_lists.findOneAndUpdate(
+        {username : username},
+        {
+            $addToSet: { friends : friendName},
+            $pull: {receivedRequests : friendName}
+        }
+    );
+    await Friend_lists.findOneAndUpdate(
+        {username : friendName},
+        {
+            $addToSet: { friends : username},
+            $pull: {sentRequests : username}
+        }
+    );
+}
+
+async function sendRequest(sender, receiver) {
+    await Friend_lists.findOneAndUpdate(
+        {username : sender},
+        {$addToSet: {sentRequests : receiver}}
+    );
+    await Friend_lists.findOneAndUpdate(
+        {username : receiver},
+        {$addToSet: { receivedRequests : sender}}
+    );
+}
+
+router.route('/send_friend_request').post(async (req, res) => {
+    const username = req.body.username
+    const friendName = req.body.friendName
+
+    if (!isExistingUser(friendName)) {
         return res.sendStatus(404);
     }
 
-    const alreadyFriends = await Friend_lists.findOne({
-        userEmail: user_email,
-        friendsEmails: friend_email
-        })
+    userFriendDocument = await getUserFriendDocument(username);
 
-    if (alreadyFriends !== null) {
-        // idk if we want to tell user if already added or just make them check
-        // discord makes them check
-        return res.sendStatus(404)
+    if (isRequestSentAlready(userFriendDocument, friendName)) {
+        return res.json("Already sent");
     }
 
-    const friendSentRequest = await Friend_requests.findOneAndDelete({
-        toEmail : user_email,
-        fromEmail : friend_email
-        })
-
-    if (friendSentRequest !== null) {
-        await Friend_lists.updateOne(
-            {userEmail: user_email},
-            {$addToSet: { friendsEmails: friend_email}},
-            {upsert : true})
-
-
-        await Friend_lists.updateOne(
-            {userEmail: friend_email},
-            {$addToSet: { friendsEmails: user_email}},
-            {upsert : true})
-        return res.sendStatus(200)
+    if (isBlocking(userFriendDocument, friendName)) {
+        unblock(username, friendName);
     }
 
-    const alreadySentRequest = await Friend_requests.findOne({
-        toEmail : friend_email,
-        fromEmail : user_email
-    })
-
-    if (alreadySentRequest !== null) {
-        return res.send("already sent request");
+    if (isBlockedBy(userFriendDocument, friendName)) {
+        return res.json("You are blocked");
     }
 
+    if (isFriend(userFriendDocument, friendName)) {
+        return res.json("You are already a friend")
+    }
 
-    Friend_requests.create({toEmail : friend_email, fromEmail : user_email},
-        function (err) {
-            if (err) return handleError(err);
-            return res.sendStatus(200)
-          });
+    if (isRequestReceived(userFriendDocument, friendName)) {
+        acceptFriendRequest(username, friendName);
+        return res.sendStatus(200);
+    }
 
+    sendRequest(username, friendName);
+
+    return res.sendStatus(200);
 });
+
+router.route('/accept_received_request').post(async (req, res) => {
+    const username = req.body.username
+    const friendName = req.body.friendName
+
+    // Careful that it is not called
+    acceptFriendRequest(username, friendName);
+
+    return res.sendStatus(200);
+});
+
+
+router.route('/remove_request').post(async (req, res) => {
+    const sender= req.body.sender;
+    const receiver = req.body.receiver;
+
+    removeRequest(sender, receiver);
+
+    return res.sendStatus(200);
+});
+
+router.route('/unblock_user').post(async (req, res) => {
+    const username= req.body.username;
+    const target = req.body.target;
+
+    unblock(username, target);
+
+    return res.sendStatus(200);
+});
+
+async function blockUser(username, target) {
+    await Friend_lists.findOneAndUpdate(
+        {username : username},
+        {$pull:
+            {receivedRequests : target,
+                sentRequests : target,
+            friends : target},
+            $addToSet: {blocked: target}}
+    );
+    await Friend_lists.findOneAndUpdate(
+        {username : target},
+        {$pull:
+            {sentRequests : username,
+            receivedRequests : username,
+        friends: username},
+        $addToSet: {blockedBy: username}}
+    );
+}
+
+router.route('/block_user').post(async (req, res) => {
+    const username = req.body.username;
+    const target = req.body.target;
+
+    if (!isExistingUser(target)) {
+        return res.sendStatus(404);
+    }
+
+    blockUser(username, target);
+
+
+
+    return res.sendStatus(200);
+});
+
+
 
 
 

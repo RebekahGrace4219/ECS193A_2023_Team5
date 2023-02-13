@@ -8,8 +8,12 @@ const Schema = mongoose.Schema;
 */
 const friendListSchema = new Schema(
   {
-    userEmail: String,
-    friendsEmails: [String]
+    username: String,
+    friends: [String],
+    blocked: [String],
+    blockedBy: [String],
+    sentRequests: [String],
+    receivedRequests: [String]
   },
   {
     collection: "friend_lists"
