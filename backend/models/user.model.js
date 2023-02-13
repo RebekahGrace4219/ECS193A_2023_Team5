@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const userSchema = new Schema(
   {
     name: String,
@@ -8,7 +7,7 @@ const userSchema = new Schema(
     username : String,
     sent_requests: [{source: String, dest: String}],
     recieved_requests: [{source: String, dest: String}],
-    friends: [String]
+    friends: [String],
   },
   {
     collection: "user_info"
