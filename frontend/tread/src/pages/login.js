@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import '../css/login.css';
 
-function Login() {
+const Login = () => {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
@@ -169,10 +170,12 @@ function Login() {
           <p>Email Address: {profile.email}</p>
           <br />
           <br />
-          <button onClick={logOut}>Log out</button>*/
+          <button onClick={logOut}>Log out</button>
 
-  return (
-    <div>
+
+
+
+      <Parent>Parent</Parent>
 
       <h2>React Google Login</h2>
 
@@ -187,6 +190,45 @@ function Login() {
       ) : (
         <button onClick={() => login()}>Sign in with Google 🚀 </button>
       )}
+
+    */
+
+  const backgroundStyle = {
+    backgroundImage: 'url(https://i.imgur.com/jgNSfpU.png)',
+    marginTop: '-20px',
+    height: '100vh',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  }
+/*
+<div className = 'Title'><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+      <div className = 'Subtitle'><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+      <div className='Spacing'>
+      <div className = 'loginSize'>
+
+      </div>
+      <div className = 'BackgroundSide'>
+        <div className = 'TitleDiv'>
+
+        </div>
+        <div></div>
+      </div>
+  </div>
+  <div>
+  <h1>Test Header</h1>
+  <div style = {backgroundStyle}><h2>header2</h2></div>
+  </div>
+*/
+  return (
+    <div className = "loginPage">
+      <div className = "loginSide">
+        <div className = "loginBackground"><h1>Login</h1></div>
+      </div>
+      <div className = "backgroundSide" style = {backgroundStyle}>
+        <div className = 'backgroundTitle'><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+        <div className = 'backgroundSubtitle'><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+      </div>
+
     </div>
   );
 }

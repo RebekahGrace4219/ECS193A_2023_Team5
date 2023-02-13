@@ -1,0 +1,26 @@
+
+.loginPage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.loginSide{
+    background-color: white;
+    width: 20%;
+}
+
+.backgroundSide{
+    width: 80%;
+}
+
+.backgroundTitle{
+    position: relative;
+    left: 100px;
+    top: 150px;
+}
+.backgroundSubtitle{
+    position: relative;
+    left: 110px;
+    top: 160px;
+}
