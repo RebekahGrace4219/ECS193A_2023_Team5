@@ -8,14 +8,13 @@ const userSchema = new Schema(
   {
     name: String,
     email: String,
-    username: String,
-    hash: String
+    username: String
   },
   {
     collection: "username_info"
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("Username", userSchema);
 
 module.exports = User;
