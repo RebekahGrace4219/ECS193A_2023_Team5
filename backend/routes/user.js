@@ -28,15 +28,16 @@ router.route("/create_user").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/check_exist/:id').get(async (req, res) => {
+router.route('/check_exist/').post(async (req, res) => {
 
-  const userExist = await User.findOne({ email: req["params"]["id"] });
+  return res.json(User.exists({username: req.body.username}));
 
-  // Early return should be added here
-  let valid = true;
-  if (userExist === null){
-    valid = false;
-  }
-  return res.json(valid);
+});
+
+
+router.route('/check_email_exist/').post(async (req, res) => {
+
+  return res.json(User.exists({email: req.body.email}));
+
 });
 module.exports = router;
