@@ -1,0 +1,39 @@
+#FriendObj{
+
+    max-width: 650px;
+}
+
+#friendsTitle{
+
+    width: 385px;
+    height: 40px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: left;
+
+    color: #014421;
+    padding: 0;
+    margin: 0;
+}
+
+#friendsTextInput{
+    box-sizing: border-box;
+
+
+    width: 643px;
+    height: 38px;
+
+    background: #D9D9D9;
+    border: 1px solid #014421;
+    border-radius: 20px;
+}
+
+.FriendSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

@@ -66,7 +66,7 @@ const Login = () => {
             }
             else{
               console.log("The user exists.");
-              navigate("/friendPage");
+              navigate("/profilePage");
 
             }
           })
@@ -158,20 +158,21 @@ const Login = () => {
     () => {
       if (newProfile) {
         send_post();
-        window.location.href = "/friendPage";
+        window.location.href = "/profilePage";
 
       }
     }, [newProfile]
   );
 
   return (
+
     <div className = "loginPage">
       <div className = "loginSide">
         <div className = "loginBox">
-          <div id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
-          <div id = "loginText"><p>Log in</p></div>
-          <div id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
-          <div id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
+          <div className = "loginBoxItem" id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
+          <div className = "loginBoxItem" id = "loginText"><p>Log in</p></div>
+          <div className = "loginBoxItem" id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
+          <div className = "loginBoxItem" id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
         </div>
       </div>
       <div className = "backgroundSide">
