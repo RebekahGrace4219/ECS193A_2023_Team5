@@ -3,7 +3,7 @@ const SideBar = () => {
 
     return (
         <div className = "sideBarClass">
-            <div id = "sideBarTreadLogo"><img id = "treadLogo" src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></div>
+            <div id = "sideBarTreadLogo"><img id = "treadLogoSideBar" src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></div>
             <div id = "sideBarButtons">
                 <div id = "sideBarChallenges">
                     <button className = "sideBarButtonClass"  id = "sideBarButtonChallenges">
