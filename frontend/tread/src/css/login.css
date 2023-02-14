@@ -24,7 +24,7 @@ body{
 
 .loginSide{
     background-color: white;
-    width: 30%;
+    width: 20%;
     height: 100%;
     padding: 0;
     margin:0;
@@ -51,9 +51,72 @@ body{
 
 .backgroundSide{
     background-color: green;
-    width: 70%;
+    width: 80%;
     height: 100%;
     padding: 0;
     margin: 0;
     background-size: cover;
+}
+
+#treadLogo{
+    width: 207px;
+    height: 207px;
+}
+
+#loginText{
+    width: 145px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+
+    color: #014421;
+}
+
+
+
+.SignInButton{
+    box-sizing: border-box;
+    width: 309px;
+    height: 56px;
+    margin:5px;
+    background:transparent;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.SignInButtonInner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonNames{
+    width: 136px;
+    height: 30px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: left;
+
+    color: #000000;
+    padding-left: 5px;
+}
+
+
+.imgDiv{
+    width:45px;
+    height:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

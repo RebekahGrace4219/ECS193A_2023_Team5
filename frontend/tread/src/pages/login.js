@@ -169,10 +169,25 @@ const Login = () => {
     <div className = "loginPage">
       <div className = "loginSide">
         <div className = "loginBox">
-          <div className = "loginBoxItem" id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
-          <div className = "loginBoxItem" id = "loginText"><p>Log in</p></div>
-          <div className = "loginBoxItem" id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
-          <div className = "loginBoxItem" id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
+          <div className = "loginBoxItem"><img id = "treadLogo" src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
+          <div className = "loginBoxItem"><p  id = "loginText">Log in</p></div>
+          <div className = "loginBoxItem">
+            <button className = "SignInButton" onClick = {() => login()}>
+              <div className = "SignInButtonInner">
+              <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/></div>
+
+              <p className = "buttonNames">Google</p>
+              </div>
+            </button>
+          </div>
+          <div className = "loginBoxItem">
+            <button className = "SignInButton">
+            <div className = "SignInButtonInner">
+              <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/></div>
+              <p className = "buttonNames">Facebook</p></div>
+            </button>
+
+          </div>
         </div>
       </div>
       <div className = "backgroundSide">
