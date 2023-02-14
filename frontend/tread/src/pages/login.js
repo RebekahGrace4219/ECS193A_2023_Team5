@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../css/login.css';
@@ -164,71 +164,26 @@ const Login = () => {
     }, [newProfile]
   );
 
-/* old code to display profile <img src={profile.picture} alt="user image" />
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email Address: {profile.email}</p>
-          <br />
-          <br />
-          <button onClick={logOut}>Log out</button>
-
-
-
-
-      <Parent>Parent</Parent>
-
-      <h2>React Google Login</h2>
-
-      <br />
-      <br />
-      {profile ? (
-        <div>
-
-
-      <button onClick={() => logOut()}>Log out 🚀 </button>
-        </div>
-      ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
-      )}
-
-    */
-
-  const backgroundStyle = {
-    backgroundImage: 'url(https://i.imgur.com/jgNSfpU.png)',
-    marginTop: '-20px',
-    height: '100vh',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
-  }
-/*
-<div className = 'Title'><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
-      <div className = 'Subtitle'><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
-      <div className='Spacing'>
-      <div className = 'loginSize'>
-
-      </div>
-      <div className = 'BackgroundSide'>
-        <div className = 'TitleDiv'>
-
-        </div>
-        <div></div>
-      </div>
-  </div>
-  <div>
-  <h1>Test Header</h1>
-  <div style = {backgroundStyle}><h2>header2</h2></div>
-  </div>
-*/
   return (
     <div className = "loginPage">
       <div className = "loginSide">
-        <div className = "loginBackground"><h1>Login</h1></div>
+        <div className = "loginBox">
+          <div id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
+          <div id = "loginText"><p>Log in</p></div>
+          <div id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
+          <div id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
+        </div>
       </div>
-      <div className = "backgroundSide" style = {backgroundStyle}>
-        <div className = 'backgroundTitle'><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
-        <div className = 'backgroundSubtitle'><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+      <div className = "backgroundSide">
+        <div className = "titleBox">
+          <div id = "title"><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+          <div id = "subtitle"><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+        </div>
+        <div id = "weightliftPhoto"><img src= "https://i.imgur.com/ifnDau9.png" alt = "Weightlifting"/></div>
+        <div id = "runPhoto"><img src= "https://i.imgur.com/nkzYE4O.png" alt = "running"/></div>
+        <div id = "treadmillPhoto"><img src= "https://i.imgur.com/lCxkPiY.png" alt = "Treadmill"/></div>
+        <div id = "pushUpPhoto"><img src= "https://i.imgur.com/s4OWEhz.png" alt = "Pushup"/></div>
       </div>
-
     </div>
   );
 }
