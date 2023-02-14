@@ -4,15 +4,16 @@ const userSchema = new Schema(
   {
     name: String,
     email: String,
-    username : String,
-    sent_requests: [{source: String, dest: String}],
-    recieved_requests: [{source: String, dest: String}],
-    friends: [String],
+    username: String,
+    ifMetric: Boolean,
   },
   {
     collection: "user_info"
   }
 );
+
+
+
 
 const User = mongoose.model("User", userSchema);
 
