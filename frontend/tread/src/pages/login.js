@@ -169,21 +169,32 @@ const Login = () => {
     <div className = "loginPage">
       <div className = "loginSide">
         <div className = "loginBox">
-          <div className = "loginBoxItem" id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
-          <div className = "loginBoxItem" id = "loginText"><p>Log in</p></div>
-          <div className = "loginBoxItem" id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
-          <div className = "loginBoxItem" id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
+          <div className = "loginBoxItem"><img id = "treadLogo" src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
+          <div className = "loginBoxItem"><p  id = "loginText">Log in</p></div>
+          <div className = "loginBoxItem">
+            <button className = "SignInButton" onClick = {() => login()}>
+              <div className = "SignInButtonInner">
+                <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/></div>
+                <p className = "buttonNames">Google</p>
+              </div>
+            </button>
+          </div>
+          <div className = "loginBoxItem">
+            <button className = "SignInButton">
+            <div className = "SignInButtonInner">
+              <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/></div>
+              <p className = "buttonNames">Facebook</p></div>
+            </button>
+
+          </div>
         </div>
       </div>
       <div className = "backgroundSide">
         <div className = "titleBox">
-          <div id = "title"><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
-          <div id = "subtitle"><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+          <div id = "title"><img id = "TreadTitle" src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+          <div id = "subtitle"><img id = "TreadSubtitle" src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
         </div>
-        <div id = "weightliftPhoto"><img src= "https://i.imgur.com/ifnDau9.png" alt = "Weightlifting"/></div>
-        <div id = "runPhoto"><img src= "https://i.imgur.com/nkzYE4O.png" alt = "running"/></div>
-        <div id = "treadmillPhoto"><img src= "https://i.imgur.com/lCxkPiY.png" alt = "Treadmill"/></div>
-        <div id = "pushUpPhoto"><img src= "https://i.imgur.com/s4OWEhz.png" alt = "Pushup"/></div>
+        <div><img  id = "weightLiftPhoto" src= "https://i.imgur.com/ifnDau9.png" alt = "Weightlifting"/></div>
       </div>
     </div>
   );
