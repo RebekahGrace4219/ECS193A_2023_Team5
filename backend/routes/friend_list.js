@@ -1,6 +1,5 @@
 const router = require("express").Router();
 let Friend_lists = require("../models/friend_list.model");
-const { remove } = require("../models/user.model");
 
 
 
@@ -32,17 +31,25 @@ router.route('/friend_list').post(async (req, res) => {
 router.route('/sent_request_list').post(async (req, res) => {
     const username = req.body.username;
 
-    const requestList = await getPropertyOfFriendList(username, 'sentRequests');
+    const sentRequestList = await getPropertyOfFriendList(username, 'sentRequests');
 
-    return res.json(requestList);
+    return res.json(sentRequestList);
 });
 
 router.route('/received_request_list').post(async (req, res) => {
     const username = req.body.username;
 
-    const requestList = await getPropertyOfFriendList(username, 'receivedRequests')
+    const requestList = await getPropertyOfFriendList(username, 'receivedRequests');
 
     return res.json(requestList);
+});
+
+router.route('/blocked_list').post(async (req, res) => {
+    const username = req.body.username;
+
+    const blockedList = await getPropertyOfFriendList(username, 'blocked');
+
+    return res.json(blockedList);
 });
 
 async function removeFriend(username, friendName) {
@@ -101,27 +108,16 @@ function isRequestReceived(userFriendDocument, friendName) {
     return userFriendDocument["receivedRequests"].includes(friendName);
 }
 
-async function removeRequest(sender, receiver) {
-    await Friend_lists.findOneAndUpdate(
-        {username : receiver}, {$pull: {receivedRequests : sender}}
-    );
-
-    await Friend_lists.findOneAndUpdate(
-        {username : sender}, {$pull: {sentRequests : receiver}}
-    );
-}
-
-
 async function acceptFriendRequest(username, friendName) {
     await Friend_lists.findOneAndUpdate(
-        {username : username},
+        {username : username, receivedRequests : friendName},
         {
             $addToSet: { friends : friendName},
             $pull: {receivedRequests : friendName}
         }
     );
     await Friend_lists.findOneAndUpdate(
-        {username : friendName},
+        {username : friendName, sentRequests : username},
         {
             $addToSet: { friends : username},
             $pull: {sentRequests : username}
@@ -180,18 +176,38 @@ router.route('/accept_received_request').post(async (req, res) => {
     const username = req.body.username
     const friendName = req.body.friendName
 
-    // Careful that it is not called
     acceptFriendRequest(username, friendName);
 
     return res.sendStatus(200);
 });
 
 
-router.route('/remove_request').post(async (req, res) => {
-    const sender= req.body.sender;
+async function removeRequest(sender, receiver) {
+    await Friend_lists.findOneAndUpdate(
+        {username : receiver}, {$pull: {receivedRequests : sender}}
+    );
+
+    await Friend_lists.findOneAndUpdate(
+        {username : sender}, {$pull: {sentRequests : receiver}}
+    );
+}
+
+
+
+router.route('/remove_sent_request').post(async (req, res) => {
+    const username= req.body.username;
     const receiver = req.body.receiver;
 
-    removeRequest(sender, receiver);
+    removeRequest(username, receiver);
+
+    return res.sendStatus(200);
+});
+
+router.route('/remove_received_request').post(async (req, res) => {
+    const username= req.body.username;
+    const sender = req.body.sender;
+
+    removeRequest(sender, username);
 
     return res.sendStatus(200);
 });
