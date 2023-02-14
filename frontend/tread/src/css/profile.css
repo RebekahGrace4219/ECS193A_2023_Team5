@@ -33,7 +33,7 @@ body{
 }
 
 #profileMiddle{
-    width: 60%;
+    width: 65%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,18 @@ body{
     align-items: center;
 }
 
+#innerProfileMiddle{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: left;
+}
 #profileEnd{
-    width: 30%;
+    width: 25%;
     height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap;
+    justify-content: space-around;
+
 }

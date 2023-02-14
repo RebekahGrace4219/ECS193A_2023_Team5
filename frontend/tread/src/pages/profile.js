@@ -14,8 +14,10 @@ const Profile = () => {
                 <SideBar></SideBar>
             </div>
             <div id = "profileMiddle">
+                <div id = "innerProfileMiddle">
                 <ProfileHeader></ProfileHeader>
                 <Friends></Friends>
+                </div>
             </div>
             <div id = "profileEnd">
                 <UserSettingsButton></UserSettingsButton>
