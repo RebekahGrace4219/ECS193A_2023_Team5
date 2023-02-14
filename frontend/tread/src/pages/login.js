@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import '../css/login.css';
 
-function Login() {
+const Login = () => {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
 
-  state = {"id":"", "email":"email"};
-
-  function getId(){
-    return state["id"];
-  }
-
-  function getEmail(){
-    return state["email"];
-  }
 
   /* Google Auth functions */
   let navigate = useNavigate();
@@ -74,7 +66,7 @@ function Login() {
             }
             else{
               console.log("The user exists.");
-              navigate("/friendPage");
+              navigate("/profilePage");
 
             }
           })
@@ -132,12 +124,13 @@ function Login() {
 
   async function send_post(){
     let username = await findValidUsername();
-    state["id"] = username;
-    state["email"] = profile.email;
     var data = JSON.stringify({
       "name" : profile.name,
       "email" : profile.email,
-      "username": username
+      "username": username,
+      "sent_requests":[],
+      "recieved_requests":[],
+      "friends":[]
     });
     console.log(data);
 
@@ -165,36 +158,33 @@ function Login() {
     () => {
       if (newProfile) {
         send_post();
-        window.location.href = "/friendPage";
+        window.location.href = "/profilePage";
 
       }
     }, [newProfile]
   );
 
-/* old code to display profile <img src={profile.picture} alt="user image" />
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email Address: {profile.email}</p>
-          <br />
-          <br />
-          <button onClick={logOut}>Log out</button>*/
-
   return (
-    <div>
 
-      <h2>React Google Login</h2>
-
-      <br />
-      <br />
-      {profile ? (
-        <div>
-
-
-
+    <div className = "loginPage">
+      <div className = "loginSide">
+        <div className = "loginBox">
+          <div className = "loginBoxItem" id = "treadLogo"><img src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
+          <div className = "loginBoxItem" id = "loginText"><p>Log in</p></div>
+          <div className = "loginBoxItem" id = "googleSignInButton"><button onClick = {() => login()}><img src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/>Google</button></div>
+          <div className = "loginBoxItem" id = "facebookSignInButton"><button><img src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/>Facebook</button></div>
         </div>
-      ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
-      )}
+      </div>
+      <div className = "backgroundSide">
+        <div className = "titleBox">
+          <div id = "title"><img src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+          <div id = "subtitle"><img src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+        </div>
+        <div id = "weightliftPhoto"><img src= "https://i.imgur.com/ifnDau9.png" alt = "Weightlifting"/></div>
+        <div id = "runPhoto"><img src= "https://i.imgur.com/nkzYE4O.png" alt = "running"/></div>
+        <div id = "treadmillPhoto"><img src= "https://i.imgur.com/lCxkPiY.png" alt = "Treadmill"/></div>
+        <div id = "pushUpPhoto"><img src= "https://i.imgur.com/s4OWEhz.png" alt = "Pushup"/></div>
+      </div>
     </div>
   );
 }
