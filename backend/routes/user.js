@@ -14,12 +14,14 @@ router.route("/").get((req, res) => {
 router.route("/create_user").post((req, res) => {
   const req_name = req.body.name;
   const req_email = req.body.email;
+  const req_username = req.body.username;
 
   // console.log(req.body)
 
   const newUser = new User({
     name: req_name,
-    email: req_email
+    email: req_email,
+    username: req_username
   });
 
   newUser
@@ -40,4 +42,5 @@ router.route('/check_email_exist/').post(async (req, res) => {
   return res.json(User.exists({email: req.body.email}));
 
 });
+
 module.exports = router;
