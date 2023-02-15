@@ -42,14 +42,20 @@
 
 #displayNameFriend{
     width: 143.1px;
-    height: 17.36px;
+    height: 15px;
     font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 18px;
     line-height: 24px;
     text-align: left;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 
     color: #014421;
+    padding-left: 4px;
+
+
 }
 
 #usernameFriend{

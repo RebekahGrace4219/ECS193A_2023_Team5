@@ -1,0 +1,9 @@
+.FriendSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: 350px;
+    overflow-y: scroll;
+    width: 100%;
+}
