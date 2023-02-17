@@ -1,20 +1,166 @@
 import "../css/friends.css"
-import FriendObj from "./FriendObj";
-
+import React, { useState, useEffect } from 'react';
+import AddFriend from "./AddFriends";
+import FriendBar from "./FriendBar";
+import FriendSection from './FriendSection';
+import axios from 'axios';
 const Friends = () => {
+
+    const [ifFriends, setIfFriends] = useState(true);
+    const [ifPending, setIfPending] = useState(false);
+    const [ifBlocked, setIfBlocked] = useState(false);
+    const [ifAddFriend, setIfAddFriend] = useState(false);
+    const [divList, setDivList] = useState([]);
+
+
+    async function getUpdatedFriendList() {
+        var data = JSON.stringify({
+            "username" : "RebekahGrace#4219"
+        });
+
+        var config = {
+            method: 'post',
+            url: 'http://localhost:5000/friend_list/friend_list',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data : data
+        };
+        let list = [];
+        axios(config)
+        .then(async function (response) {
+
+            for (let index = 0; index < response.data.friends.length; index++){
+                list.push({"displayName":response.data.friends[index], "received":false});
+            }
+            setDivList(list);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+    }
+
+    async function getUpdatedPendingList() {
+        var data = JSON.stringify({
+            "username" : "RebekahGrace#4219"
+        });
+
+        var config = {
+            method: 'post',
+            url: 'http://localhost:5000/friend_list/pending_requests',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data : data
+        };
+        let list = [];
+        axios(config)
+        .then(async function (response) {
+            for (let index = 0; index < response.data["receivedRequests"].length; index++){
+                list.push({"displayName":response.data["receivedRequests"][index], "received":true});
+            }
+            for (let index = 0; index < response.data["sentRequests"].length; index++){
+                list.push({"displayName":response.data["sentRequests"][index], "received":false});
+            }
+            setDivList(list);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+    }
+
+    async function getUpdatedBlockedList() {
+        var data = JSON.stringify({
+            "username" : "RebekahGrace#4219"
+        });
+
+        var config = {
+            method: 'post',
+            url: 'http://localhost:5000/friend_list/blocked_list',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data : data
+        };
+        let list = [];
+        axios(config)
+        .then(async function (response) {
+            for (let index = 0; index < response.data["blocked"].length; index++){
+                list.push({"displayName":response.data.blocked[index], "received":false});
+            }
+            setDivList(list);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+    }
+    const clickAllButton = (event) => {
+        setIfFriends(true);
+        setIfPending(false);
+        setIfBlocked(false);
+        setIfAddFriend(false);
+    }
+
+    const clickPendingButton = () => {
+        setIfFriends(false);
+        setIfPending(true);
+        setIfBlocked(false);
+        setIfAddFriend(false);
+    }
+
+    const clickBlockedButton = () => {
+        setIfFriends(false);
+        setIfPending(false);
+        setIfBlocked(true);
+        setIfAddFriend(false);
+    }
+
+    const clickAddFriendButton = () => {
+        setIfFriends(false);
+        setIfPending(false);
+        setIfBlocked(false);
+        setIfAddFriend(true);
+    }
+
+    useEffect(
+        () => {
+          if (ifFriends) {
+            getUpdatedFriendList();
+          }
+        }, [ifFriends]
+      );
+
+    useEffect(
+        () => {
+          if (ifPending) {
+            getUpdatedPendingList();
+          }
+        }, [ifPending]
+      );
+
+      useEffect(
+        () => {
+          if (ifBlocked) {
+            getUpdatedBlockedList();
+          }
+        }, [ifBlocked]
+      );
 
     return (
         <div id = "FriendObj">
-            <p id = "friendsTitle">Your Friends</p>
-            <div><input id = "friendsTextInput" type = "text"></input></div>
-            <div className = "FriendSection">
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "Clark Kent" username = "Superman#4579"></FriendObj>
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "J'onn J'onzz" username = "MartianManhunter#4567"></FriendObj>
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "Diana Prince" username = "WonderWoman#4569"></FriendObj>
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "Barry Allen" username = "Flash#4578"></FriendObj>
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "Bruce Wayne" username = "Batman#2456"></FriendObj>
-                <FriendObj profilePicture = "https://i.imgur.com/XY9rcVx.png" displayName = "John Stewart" username = "GreenLatern#2456"></FriendObj>
-            </div>
+            <FriendBar allButton = {clickAllButton} pendingButton = {clickPendingButton} blockedButton = {clickBlockedButton} addFriendButton = {clickAddFriendButton}/>
+
+            { ifAddFriend ?
+                <AddFriend></AddFriend>:
+                <div><input id = "friendsTextInput" type = "search"></input>
+                <FriendSection friends = {divList}/></div>
+            }
         </div>
     );
 }

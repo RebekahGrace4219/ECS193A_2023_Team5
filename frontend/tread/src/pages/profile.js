@@ -4,7 +4,7 @@ import ProfileHeader from '../components/ProfileHeader';
 import Friends from '../components/Friends';
 import UserSettingsButton from '../components/UserSettingsButton';
 import SuggestedFriends from '../components/SuggestedFriends';
-
+import Line from '../components/Line';
 /*        */
 const Profile = () => {
 
@@ -16,6 +16,7 @@ const Profile = () => {
             <div id = "profileMiddle">
                 <div id = "innerProfileMiddle">
                 <ProfileHeader></ProfileHeader>
+                <Line></Line>
                 <Friends></Friends>
                 </div>
             </div>

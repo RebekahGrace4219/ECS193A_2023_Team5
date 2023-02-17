@@ -19,6 +19,15 @@ async function getPropertyOfFriendList(username, property) {
     return Friend_lists.findOne({username: username }, property);
 }
 
+router.route('/pending_requests').post(async (req, res) => {
+    const username = req.body.username;
+
+    const pendingRequests = await Friend_lists.findOne({username: username },
+        'sentRequests receivedRequests');
+
+    return res.json(pendingRequests);
+});
+
 
 router.route('/friend_list').post(async (req, res) => {
     const username = req.body.username;
