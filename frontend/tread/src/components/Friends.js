@@ -1,6 +1,6 @@
 import "../css/friends.css"
 import React, { useState, useEffect } from 'react';
-import FriendObj from "./FriendObj";
+import AddFriend from "./AddFriends";
 import FriendBar from "./FriendBar";
 import FriendSection from './FriendSection';
 import axios from 'axios';
@@ -10,9 +10,8 @@ const Friends = () => {
     const [ifPending, setIfPending] = useState(false);
     const [ifBlocked, setIfBlocked] = useState(false);
     const [ifAddFriend, setIfAddFriend] = useState(false);
-    const [divList, setDivList] = useState([{"displayName":"Bruce"}]);
-    let pendingFriendsList = [];
-    let blockedList = [];
+    const [divList, setDivList] = useState([]);
+
 
     async function getUpdatedFriendList() {
         var data = JSON.stringify({
@@ -32,7 +31,7 @@ const Friends = () => {
         .then(async function (response) {
 
             for (let index = 0; index < response.data.friends.length; index++){
-                list.push({"displayName":response.data.friends[index]});
+                list.push({"displayName":response.data.friends[index], "received":false});
             }
             setDivList(list);
         })
@@ -63,9 +62,8 @@ const Friends = () => {
                 list.push({"displayName":response.data["receivedRequests"][index], "received":true});
             }
             for (let index = 0; index < response.data["sentRequests"].length; index++){
-                list.push({"displayName":response.data["sentRequests"][index]});
+                list.push({"displayName":response.data["sentRequests"][index], "received":false});
             }
-            console.log(list);
             setDivList(list);
         })
         .catch(function (error) {
@@ -91,12 +89,9 @@ const Friends = () => {
         let list = [];
         axios(config)
         .then(async function (response) {
-            console.log("Hit blocked button");
-            console.log(response.data);
             for (let index = 0; index < response.data["blocked"].length; index++){
-                list.push({"displayName":response.data.blocked[index]});
+                list.push({"displayName":response.data.blocked[index], "received":false});
             }
-            console.log(list);
             setDivList(list);
         })
         .catch(function (error) {
@@ -106,7 +101,6 @@ const Friends = () => {
 
     }
     const clickAllButton = (event) => {
-        console.log(event);
         setIfFriends(true);
         setIfPending(false);
         setIfBlocked(false);
@@ -163,8 +157,8 @@ const Friends = () => {
             <FriendBar allButton = {clickAllButton} pendingButton = {clickPendingButton} blockedButton = {clickBlockedButton} addFriendButton = {clickAddFriendButton}/>
 
             { ifAddFriend ?
-                <h1>AddFriendHere</h1> :
-                <div><input id = "friendsTextInput" type = "text"></input>
+                <AddFriend></AddFriend>:
+                <div><input id = "friendsTextInput" type = "search"></input>
                 <FriendSection friends = {divList}/></div>
             }
         </div>

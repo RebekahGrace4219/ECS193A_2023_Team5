@@ -58,6 +58,13 @@
 
 }
 
+.acceptButton{
+    border-radius: 2px;
+    border: 1px #014421;
+    margin: 2px;
+    background-color: #014421;
+    color: white;
+}
 #usernameFriend{
     /* @username#9999 */
     width: 122px;
