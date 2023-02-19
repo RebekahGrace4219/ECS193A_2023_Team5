@@ -5,8 +5,8 @@ import Friends from '../components/Friends';
 import UserSettingsButton from '../components/UserSettingsButton';
 import SuggestedFriends from '../components/SuggestedFriends';
 import Line from '../components/Line';
-/*        */
-const Profile = () => {
+
+const Profile = (props) => {
 
     return (
         <div id = "Profile">
@@ -17,7 +17,9 @@ const Profile = () => {
                 <div id = "innerProfileMiddle">
                 <ProfileHeader></ProfileHeader>
                 <Line></Line>
-                <Friends></Friends>
+                {props.friend ?
+                    <Friends></Friends> : <></>
+                }
                 </div>
             </div>
             <div id = "profileEnd">
