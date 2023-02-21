@@ -1,5 +1,5 @@
 import '../css/friendBar.css';
-import BarButton from './Shared/BarButton';
+import BarButton from '../Shared/BarButton';
 const FriendBar = (props) => {
 
     return (
