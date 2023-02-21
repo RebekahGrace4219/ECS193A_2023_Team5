@@ -61,3 +61,60 @@ h2{
     padding-top: 3px;
     padding-bottom:3px;
 }
+
+.challengeForm{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.selectBar{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sectionBarTitle{
+
+    width: 385px;
+    height: 40px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: left;
+
+    color: #014421;
+    padding: 0;
+    margin: 0;
+}
+
+.sectionBar{
+    display: flex;
+    align-items: end;
+}
+
+.challengeBox{
+    box-sizing: border-box;
+
+    width: 955px;
+    height: 96px;
+
+    background: #F1EEEA;
+    border: 3px solid #014421;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    margin: 20px;
+}

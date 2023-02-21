@@ -15,8 +15,8 @@ function App() {
         <Route path = "/" element = {<Login/>}/>
         <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profilePage" element = {<Profile/>} />
-        <Route path = "/currentChallengePage" element = {<Challenge ifCurrentChallenge = "true"/>} />
-        <Route path = "/weeklyChallengePage" element = {<Challenge ifCurrentChallenge = "false"/>} />
+        <Route path = "/currentChallengePage" element = {<Challenge>{{"ifCurrentChallenge":true}}</Challenge>} />
+        <Route path = "/weeklyChallengePage" element = {<Challenge>{{"ifCurrentChallenge":false}}</Challenge>} />
       </Routes>
       </Router>
       </div>

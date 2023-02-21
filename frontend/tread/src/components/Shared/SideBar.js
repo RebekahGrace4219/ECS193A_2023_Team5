@@ -2,7 +2,7 @@ import '../../css/Shared/sideBar.css'
 import React, {useState, useEffect} from 'react';
 const SideBar = (props) => {
     console.log(window.location.pathname);
-    const [challengeButton, setChallengeButton] = useState(window.location.pathname === "/currentChallengePage");
+    const [challengeButton, setChallengeButton] = useState(window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage");
     const [socialButton, setSocialButton] = useState(window.location.pathname === "/socialPage");
     const [settingsButton, setSettingsButton] = useState(window.location.pathname === "/profilePage");
     const [location, setLocation] = useState();
@@ -27,6 +27,7 @@ const SideBar = (props) => {
           if (challengeButton) {
             // send you to the challenge page
             setButtonOn("sideBarButtonChallenges", "challengeImage");
+
           }else{
             setButtonOff("sideBarButtonChallenges", "challengeImage");
           }
@@ -62,7 +63,10 @@ const SideBar = (props) => {
       );
 
     function clickChallengeButton(){
-        setLocation("/currentChallengePage");
+      if((window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage")){
+        return;
+      }
+      setLocation("/currentChallengePage");
     }
 
     function clickSocialButton(){

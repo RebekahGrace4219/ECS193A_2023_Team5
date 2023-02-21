@@ -1,7 +1,8 @@
 
-import ProgressBar from './ProgressBar.js';
-import "../../css/Challenge/ChallengeBox.css"
-const ChallengeBox = () => {
+import ProgressBar from '../ProgressBar.js';
+import "../../../css/Challenge/ChallengeBoxIssued.css";
+import "../../../css/Shared/shared.css";
+const ChallengeBoxIssued = () => {
     /*            <div id = "peopleCount">People Image</div>
             <div id = "line"></div>
             <div id = "exerciseProgress">
@@ -19,11 +20,11 @@ const ChallengeBox = () => {
             </div>
 */
     return (
-        <div id = "ChallengeBox">
-
+        <div id = "ChallengeBoxIssued"  className = "ChallengeBox">
+            ChallengeBoxIssued
 
         </div>
     );
 }
 
-export default ChallengeBox;
+export default ChallengeBoxIssued;
