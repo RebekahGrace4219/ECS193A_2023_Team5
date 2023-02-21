@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../css/login.css';
@@ -8,161 +7,81 @@ const Login = () => {
   const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState(false);
   const [ newProfile, setNewProfile] = useState(false);
+  // needs variable for nonce
 
+  function handleCredentialResponse(token) {
+    // Check that recieved nonce is correct
+    // Send request to backend for nonce reply in result with cnonce:
+    // nonce with timestamp so repeat attacks won't work.
+    // Figure out CSRF attacks (double cookie sending)
+    // Also alot of stuff will have to change for HTTPS.
 
-  /* Google Auth functions */
-  let navigate = useNavigate();
-  // Login
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log('Login Failed:', error)
-  });
-
-  // log out function to log the user out of google and set the profile array to null
-  const logOut = () => {
-    googleLogout();
-    setProfile(null);
-  };
-
-
-  /* Logged in now, set the profile information and if the user is new, open the submittal form */
-  // Check the User's email has been already used
-  async function checkUserAlreadyExists(email){
+    console.log(token)
+    console.log("Encoded JWT ID token: " + token.credential);
     var config = {
-      method: 'get',
-      url: 'http://localhost:5000/user/check_exist/' + email ,
+      method: 'post',
+      url: 'http://localhost:5000/auth/login/google',
       headers: {
-        'Content-Type': 'application/json'
+        Authorization: `${token.credential}`,
+        Accept: 'application/json'
       }
     };
-
     let exist = false;
-    await axios(config)
+    axios(config)
     .then(function (response) {
+      console.log(response.headers);
       exist = response.data;
     })
     .catch(function (error) {
       console.log(error);
     });
-    return exist;
+
   }
 
-  // Log in the user
-  useEffect(
-    () => {
-      if (user) {
-        axios
-          .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: 'application/json'
-            }
-          })
-          .then(async (res) => {
-            setProfile(res.data);
-            if( ! await checkUserAlreadyExists(res.data.email) ){
-              console.log("The user does not exist and must be added");
-              setNewProfile(true);
-            }
-            else{
-              console.log("The user exists.");
-              navigate("/profilePage");
+  function loadScript(scriptUrl) {
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    document.body.appendChild(script);
 
-            }
-          })
-          .catch((err) => console.log(err));
+    return new Promise((res, rej) => {
+      script.onload = function() {
+        res();
       }
-    },
-    [ user ]
-  );
-
-  /* Determine if the username is valid */
-  function convertInt6DigitString(integer){
-    let string = integer.toString();
-
-    while (string.length < 6){
-      string = "0" + string;
-    }
-
-    return string;
-  }
-
-  async function findValidUsername(){
-    let username_found = true;
-
-    let value = Math.floor(Math.random() * 999999);
-    let digit_string = convertInt6DigitString(value);
-
-
-    while (username_found){
-      digit_string = convertInt6DigitString(value);
-
-      var config = {
-        method: 'get',
-        url: 'http://localhost:5000/user/check_exist_username/' + digit_string ,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-
-      await axios(config)
-        .then(function (response) {
-          username_found = response.data;
-        })
-        .catch(function (error) {
-          console.log("erorr trying to check if the username exists");
-          console.log(error);
-        });
-
-        value = Math.floor(Math.random() * 999999);
-    }
-
-    console.log("Decided on this username: " + digit_string);
-
-    return digit_string;
-  }
-
-  async function send_post(){
-    let username = await findValidUsername();
-    var data = JSON.stringify({
-      "name" : profile.name,
-      "email" : profile.email,
-      "username": username,
-      "sent_requests":[],
-      "recieved_requests":[],
-      "friends":[]
+      script.onerror = function () {
+        rej();
+      }
     });
-    console.log(data);
-
-    var config = {
-      method: 'post',
-      url: 'http://localhost:5000/user/create_user',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-
-    axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-    return config;
   }
 
-  useEffect(
-    () => {
-      if (newProfile) {
-        send_post();
-        window.location.href = "/profilePage";
+  function googleSignIn() {
+    if (window.google) {
+      const google = window.google;
+      google.accounts.id.initialize({
+        client_id: "1076047412250-apdkut808sf29i8ju8k0lt1jp4gh8n8s.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        // Need to set a random nonce
+        nonce: ""
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large" }  // customization attributes
+      );
+      google.accounts.id.prompt(); // also display the One Tap dialog
+    }
+  }
 
-      }
-    }, [newProfile]
-  );
+  // google sign in
+  loadScript('https://accounts.google.com/gsi/client')
+    .then(() => {
+      googleSignIn();
+    })
+    .catch(() => {
+      console.error('Script loading failed! Handle this error');
+    });
+
+
+  // log out function to log the user out of google and set the profile array to null
+
 
   return (
 
@@ -172,7 +91,9 @@ const Login = () => {
           <div className = "loginBoxItem"><img id = "treadLogo" src = "https://i.imgur.com/cHe0EGL.png" alt = "logo"/></div>
           <div className = "loginBoxItem"><p  id = "loginText">Log in</p></div>
           <div className = "loginBoxItem">
-            <button className = "SignInButton" onClick = {() => login()}>
+
+          <div id="buttonDiv"></div>
+            <button className = "SignInButton">
               <div className = "SignInButtonInner">
                 <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/></div>
                 <p className = "buttonNames">Google</p>
