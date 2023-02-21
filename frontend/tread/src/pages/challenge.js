@@ -1,16 +1,17 @@
-import SideBar from "../components/SideBar";
-import ChallengeHeader from "../components/Challenge/ChallengeHeader"
-import Line from "../components/Line"
-const Challenge = () => {
+import SideBar from "../components/Shared/SideBar";
+import CurrentChallenge from "../components/Challenge/currentChallenge";
+import WeeklyChallenge from "../components/Challenge/weeklyChallenge";
+import "../css/Challenge/challenge.css";
+
+const Challenge = (props) => {
 
     return (
         <div id = "Challenge">
             <div id = "sideBar">
                 <SideBar></SideBar>
             </div>
-            <div id = "challengePage">
-                <ChallengeHeader headerType = "Current"/>
-                <Line />
+            <div id = "currentChallengeForm">
+                {props.ifCurrentChallenge ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
             </div>
         </div>
       );

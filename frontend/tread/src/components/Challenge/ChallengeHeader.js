@@ -1,5 +1,5 @@
 import UserSettingsButton from "../UserSettingsButton";
-import "../../css/shared.css"
+import "../../css/Shared/shared.css"
 import "../../css/Challenge/ChallengeHeader.css"
 const ChallengeHeader = (props) => {
 
