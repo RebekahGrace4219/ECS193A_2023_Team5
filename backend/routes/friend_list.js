@@ -2,7 +2,7 @@ const router = require("express").Router();
 let Friend_lists = require("../models/friend_list.model");
 
 
-
+/*
 router.route("/").get((req, res) => {
     Friend_lists.find()
       .then(function (data) {
@@ -13,7 +13,7 @@ router.route("/").get((req, res) => {
       });
 
 });
-
+*/
 
 async function getPropertyOfFriendList(username, property) {
     return Friend_lists.findOne({username: username }, property);
@@ -21,7 +21,7 @@ async function getPropertyOfFriendList(username, property) {
 
 
 router.route('/friend_list').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
 
     const friendList = await getPropertyOfFriendList(username, 'friends');
 
@@ -29,7 +29,7 @@ router.route('/friend_list').post(async (req, res) => {
 });
 
 router.route('/sent_request_list').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
 
     const sentRequestList = await getPropertyOfFriendList(username, 'sentRequests');
 
@@ -37,7 +37,7 @@ router.route('/sent_request_list').post(async (req, res) => {
 });
 
 router.route('/received_request_list').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
 
     const requestList = await getPropertyOfFriendList(username, 'receivedRequests');
 
@@ -45,7 +45,7 @@ router.route('/received_request_list').post(async (req, res) => {
 });
 
 router.route('/blocked_list').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
 
     const blockedList = await getPropertyOfFriendList(username, 'blocked');
 
@@ -64,7 +64,7 @@ async function removeFriend(username, friendName) {
 }
 
 router.route('/remove_friend').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
     const friendName = req.body.friendName;
 
     removeFriend(username, friendName);
@@ -73,7 +73,7 @@ router.route('/remove_friend').post(async (req, res) => {
 });
 
 async function isExistingUser(username) {
-    return Friend_lists.exists({username: username});
+    return (await Friend_lists.exists({username: username}).lean() !== null);
 }
 
 async function getUserFriendDocument(username) {
@@ -137,7 +137,7 @@ async function sendRequest(sender, receiver) {
 }
 
 router.route('/send_friend_request').post(async (req, res) => {
-    const username = req.body.username
+    const username = req.session.username
     const friendName = req.body.friendName
 
     if (!isExistingUser(friendName)) {
@@ -173,7 +173,7 @@ router.route('/send_friend_request').post(async (req, res) => {
 });
 
 router.route('/accept_received_request').post(async (req, res) => {
-    const username = req.body.username
+    const username = req.session.username
     const friendName = req.body.friendName
 
     acceptFriendRequest(username, friendName);
@@ -195,7 +195,7 @@ async function removeRequest(sender, receiver) {
 
 
 router.route('/remove_sent_request').post(async (req, res) => {
-    const username= req.body.username;
+    const username= req.session.username;
     const receiver = req.body.receiver;
 
     removeRequest(username, receiver);
@@ -204,7 +204,7 @@ router.route('/remove_sent_request').post(async (req, res) => {
 });
 
 router.route('/remove_received_request').post(async (req, res) => {
-    const username= req.body.username;
+    const username= req.session.username;
     const sender = req.body.sender;
 
     removeRequest(sender, username);
@@ -213,7 +213,7 @@ router.route('/remove_received_request').post(async (req, res) => {
 });
 
 router.route('/unblock_user').post(async (req, res) => {
-    const username= req.body.username;
+    const username= req.session.username;
     const target = req.body.target;
 
     unblock(username, target);
@@ -241,7 +241,7 @@ async function blockUser(username, target) {
 }
 
 router.route('/block_user').post(async (req, res) => {
-    const username = req.body.username;
+    const username = req.session.username;
     const target = req.body.target;
 
     if (!isExistingUser(target)) {
