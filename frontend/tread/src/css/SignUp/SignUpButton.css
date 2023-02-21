@@ -1,0 +1,28 @@
+#SignUpButton{
+    box-sizing: border-box;
+
+    width: 116px;
+    height: 34px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#SignUpButtonText{
+    width: 141px;
+    height: 27px;
+
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+
+    color: #F9A800;
+}

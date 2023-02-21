@@ -1,0 +1,17 @@
+#ChallengeHeader{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width:100%;
+    height: 150px;
+}
+
+#headerDescription{
+    padding-top: 7px;
+}
+
+#userButton{
+    display: flex;
+    align-items: center;
+}

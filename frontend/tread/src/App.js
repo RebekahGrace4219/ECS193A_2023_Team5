@@ -1,9 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import FriendPage  from './pages/friend_old';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from './pages/login';
 import Profile from './pages/profile';
-import "./App.css"
+import SignUp from './pages/signUp';
+import Challenge from './pages/challenge';
+import "./App.css";
 
 function App() {
 
@@ -12,8 +13,10 @@ function App() {
       <Router>
       <Routes>
         <Route path = "/" element = {<Login/>}/>
-        <Route path = "/friendPage" element={<FriendPage/>} />
+        <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profilePage" element = {<Profile/>} />
+        <Route path = "/currentChallengePage" element = {<Challenge>{{"ifCurrentChallenge":true}}</Challenge>} />
+        <Route path = "/weeklyChallengePage" element = {<Challenge>{{"ifCurrentChallenge":false}}</Challenge>} />
       </Routes>
       </Router>
       </div>

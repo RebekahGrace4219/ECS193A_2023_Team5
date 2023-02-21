@@ -1,0 +1,4 @@
+#ChallengeScroll{
+    overflow-y: scroll;
+    max-height: 74vh;
+}

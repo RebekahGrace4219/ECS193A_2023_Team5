@@ -1,5 +1,5 @@
-.FriendBarButton{
-    width: 210px;
+.BarButton{
+    width: 150px;
     height: 22px;
 
     font-style: normal;
@@ -11,7 +11,6 @@
     text-align: center;
 
     border-width: 0px;
-    border-color:    #F9A800;
     background-color: transparent;
 
 
@@ -20,4 +19,6 @@
     justify-content: center;
     margin: 2px;
     border-radius: 4px;
+
+    color: #014421;
 }
