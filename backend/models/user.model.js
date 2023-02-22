@@ -9,15 +9,14 @@ const userSchema = new Schema(
     picture: String,
     email: String,
     username: String,
+    displayName: String,
+    profilePhoto: String,
     ifMetric: Boolean,
   },
   {
     collection: "user_info"
   }
 );
-
-
-
 
 const User = mongoose.model("User", userSchema);
 

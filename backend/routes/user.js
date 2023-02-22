@@ -31,7 +31,7 @@ router.route("/create_user").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/check__username_exist').post(async (req, res) => {
+router.route('/check_username_exist').post(async (req, res) => {
   return res.json(await User.exists({username: req.body.username}).lean() !== null);
 
 });

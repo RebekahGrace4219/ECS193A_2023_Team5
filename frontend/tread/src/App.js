@@ -4,6 +4,7 @@ import Login from './pages/login';
 import Profile from './pages/profile';
 import SignUp from './pages/signUp';
 import Challenge from './pages/challenge';
+import ProfileSettings from './pages/profileSettings';
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path = "/" element = {<Login/>}/>
         <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profilePage" element = {<Profile/>} />
+        <Route path = "/profileSettingsPage" element = {<ProfileSettings/>} />
         <Route path = "/currentChallengePage" element = {<Challenge>{{"ifCurrentChallenge":true}}</Challenge>} />
         <Route path = "/weeklyChallengePage" element = {<Challenge>{{"ifCurrentChallenge":false}}</Challenge>} />
       </Routes>

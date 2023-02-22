@@ -59,11 +59,13 @@ function formatDiscriminator(discriminator) {
   return discriminator.toString().padStart(4 , '0')
 }
 
-router.route('/sign-up').post(async (req, res,) => {
+router.route('/sign_up').post(async (req, res,) => {
   if (req.session.username) {
     return res.status(400).json("Error: already has username");
   }
   const chosenUsername = req.body.username;
+  const profilePhotoURL = req.body.photo;
+  const displayName = req.body.displayName;
 
   if (!isValidUsername(chosenUsername)) {
     return res.status(400).json("Error: invalid username")
@@ -78,11 +80,15 @@ router.route('/sign-up').post(async (req, res,) => {
       completeUsername = chosenUsername + '#' + formatDiscriminator(discriminator);
     } while (await User.exists({username: completeUsername}).lean() !== null || discriminator == end);
   }
+  console.log(completeUsername);
+
   req.session.username = completeUsername;
   await User.findOneAndUpdate({
     authenticationSource : req.session.authenticationSource,
     authenticationID : req.session.authenticationID}, {
-    username : completeUsername
+    username : completeUsername,
+    profilePhoto: profilePhotoURL,
+    displayName: displayName
   });
 
 

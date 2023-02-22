@@ -1,12 +1,9 @@
 html{
-    width:100%;
     height:100%;
     padding: 0;
     margin:0;
 }
-
 body{
-    width:100%;
     height:100%;
     padding: 0;
     margin:0;
@@ -35,6 +32,8 @@ body{
 }
 
 .loginBox{
+    padding: 0;
+    margin: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -80,14 +79,12 @@ body{
     position:relative;
     left: 10%;
     top: 10%;
+    width: 100px;
 }
-#TreadTitle{
-    width: 24%;
-}
+
 
 #TreadSubtitle{
     padding-top: 2%;
-    width: 24%;
 }
 
 .SignInButton{
