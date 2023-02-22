@@ -4,6 +4,7 @@ import SignUpDisplayName from "./SignUpDisplayName";
 import SignUpUsername from "./SignUpUsername";
 import axios from 'axios';
 import '../../css/SignUp/SignUpForm.css';
+import '../../css/Shared/shared.css';
 const SignUpForm = () => {
     const [photo, setPhoto] = useState();
     const [displayName, setDisplayName] = useState();
@@ -68,7 +69,7 @@ const SignUpForm = () => {
             <SignUpPhoto func = {setPhoto}></SignUpPhoto>
             <SignUpDisplayName  func = {setDisplayName} ></SignUpDisplayName>
             <SignUpUsername  func = {setUsername}></SignUpUsername>
-            <button id = "SignUpButton" onClick = {submitSignUpInformation}><p id = "SignUpButtonText">Sign Up</p></button>
+            <button className = "ProfileButton" onClick = {submitSignUpInformation}><p className = "ProfileButtonText">Sign Up</p></button>
             <p>{response}</p>
         </div>);
 }

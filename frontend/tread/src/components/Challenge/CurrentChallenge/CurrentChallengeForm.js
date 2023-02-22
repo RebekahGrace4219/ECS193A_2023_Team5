@@ -12,7 +12,8 @@ const CurrentChallengeForm = () => {
     const [ifIncoming, setIfIncoming] = useState(false);
 
     async function getIssuedRequests(){
-        setChallengeList(["hello", "issued", "requests"]);
+        setChallengeList([{"title": "Do 250 push up.", "expiration": "Expires in 2d", "completion":"212/250"},
+        {"title": "Do 50 deadlifts", "expiration": "Expires in 12d", "completion":"37/50"}]);
     }
 
     async function getSentRequests(){

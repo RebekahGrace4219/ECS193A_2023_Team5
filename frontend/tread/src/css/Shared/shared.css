@@ -118,3 +118,68 @@ h2{
 
     margin: 20px;
 }
+
+
+
+.ProfileButton{
+    box-sizing: border-box;
+
+    width: 116px;
+    height: 34px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfileButtonText{
+    width: 141px;
+    height: 27px;
+
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+
+    color: #F9A800;
+}
+
+.DeleteButton{
+
+    box-sizing: border-box;
+
+
+    width: 107px;
+    height: 38px;
+
+
+    background: #B90A0A;
+    border: 1px solid #000000;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.DeleteButtonText{
+    /* Delete */
+    width: 67px;
+    height: 24px;
+    max-width: 100%;
+    max-height: 100%;
+
+    font-family:'?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+
+    color: #F1EEEA;
+}
