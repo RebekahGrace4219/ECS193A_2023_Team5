@@ -1,10 +1,10 @@
 import '../css/profile.css'
 import SideBar from '../components/Shared/SideBar';
-import ProfileHeader from '../components/ProfileHeader';
+import ProfileHeader from '../components/Profile/ProfileHeader';
 import Friends from '../components/Friends';
 import UserSettingsButton from '../components/UserSettingsButton';
-import SuggestedFriends from '../components/SuggestedFriends';
-import Line from '../components/Line';
+import SuggestedFriends from '../components/Shared/SuggestedFriends';
+import Line from '../components/Shared/Line';
 
 const Profile = (props) => {
     return (

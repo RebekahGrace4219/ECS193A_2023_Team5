@@ -1,4 +1,4 @@
-import '../css/friendBar.css';
+import '../../css/Social/friendBar.css';
 import BarButton from '../Shared/BarButton';
 const FriendBar = (props) => {
 
