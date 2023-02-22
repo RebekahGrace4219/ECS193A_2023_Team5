@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React from 'react';
 import axios from 'axios';
 import '../css/login.css';
 
 const Login = () => {
-  const [ user, setUser ] = useState([]);
-  const [ profile, setProfile ] = useState(false);
-  const [ newProfile, setNewProfile] = useState(false);
   // needs variable for nonce
 
   function handleCredentialResponse(token) {
@@ -26,11 +22,18 @@ const Login = () => {
         Accept: 'application/json'
       }
     };
-    let exist = false;
+    let isNewUser = false;
     axios(config)
     .then(function (response) {
       console.log(response.headers);
-      exist = response.data;
+      isNewUser = response.data.isNewUser;
+      console.log(response.data.isNewUser);
+      if (isNewUser){
+        window.location.href = "./signUpPage";
+      }
+      else{
+        window.location.href = "./currentChallengePage";
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -93,27 +96,17 @@ const Login = () => {
           <div className = "loginBoxItem">
 
           <div id="buttonDiv"></div>
-            <button className = "SignInButton">
-              <div className = "SignInButtonInner">
-                <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/YynpaHO.png" alt = "google logo"/></div>
-                <p className = "buttonNames">Google</p>
-              </div>
-            </button>
+
           </div>
           <div className = "loginBoxItem">
-            <button className = "SignInButton">
-            <div className = "SignInButtonInner">
-              <div className = "imgDiv"><img className = "SingInButtonImage" src= "https://i.imgur.com/2QWqIA4.png" alt = "facebook logo"/></div>
-              <p className = "buttonNames">Facebook</p></div>
-            </button>
 
           </div>
         </div>
       </div>
       <div className = "backgroundSide">
         <div className = "titleBox">
-          <div id = "title"><img id = "TreadTitle" src= "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
-          <div id = "subtitle"><img id = "TreadSubtitle" src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
+          <div id = "TreadTitleDiv"><img id = "TreadTitle" src = "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
+          <div id = "TreadSubtitleDiv"><img id = "TreadSubtitle" src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>
         </div>
         <div><img  id = "weightLiftPhoto" src= "https://i.imgur.com/ifnDau9.png" alt = "Weightlifting"/></div>
       </div>

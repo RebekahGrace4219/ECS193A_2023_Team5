@@ -1,4 +1,4 @@
-import "../css/suggestedFriends.css"
+import "../../css/suggestedFriends.css"
 import SuggestedFriendObj from "./SuggestedFriendObj";
 const SuggestedFriends = () => {
 

@@ -1,4 +1,4 @@
-import '../css/Line.css'
+import '../../css/Line.css'
 
 const Line = () => {
     return(<div id = "LineItem"></div>)

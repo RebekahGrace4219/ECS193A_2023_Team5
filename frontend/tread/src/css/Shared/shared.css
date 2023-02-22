@@ -58,8 +58,8 @@ h2{
     background: #F1EEEA;
     border: 1px solid #F9A800;
     border-radius: 15px;
-    padding-top: 3px;
-    padding-bottom:3px;
+    padding:3px;
+    padding-left: 15px;
 }
 
 .challengeForm{
@@ -98,7 +98,7 @@ h2{
 
 .sectionBar{
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .challengeBox{
