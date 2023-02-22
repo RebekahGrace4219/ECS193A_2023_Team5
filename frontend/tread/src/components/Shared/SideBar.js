@@ -4,7 +4,7 @@ const SideBar = (props) => {
     console.log(window.location.pathname);
     const [challengeButton, setChallengeButton] = useState(window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage");
     const [socialButton, setSocialButton] = useState(window.location.pathname === "/socialPage");
-    const [settingsButton, setSettingsButton] = useState(window.location.pathname === "/profilePage");
+    const [settingsButton, setSettingsButton] = useState(window.location.pathname === "/profileSettingsPage");
     const [location, setLocation] = useState();
 
 
@@ -74,7 +74,7 @@ const SideBar = (props) => {
     }
 
     function clickSettingsButton(){
-        setLocation("/profilePage");
+        setLocation("/profileSettingsPage");
     }
 
     return (
