@@ -75,6 +75,7 @@ class Challenge{
     }
 
 
+
     convertToJSON(){
         json = {}
         json["sentUser"] = this.sentUser;
@@ -88,6 +89,8 @@ class Challenge{
         json["challengeID"] = this.challengeID;
     }
 
+    calculateCompletionAmount(username){
 
+    }
 
 }
