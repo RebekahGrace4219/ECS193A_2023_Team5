@@ -13,100 +13,84 @@ const ENUM_CHALLENGE_DESTINATION = {
 }
 
 class Challenge{
-    constructor(sentUser, recievedUser, recievedType, issueDate, dueDate, exerciseList, challengeID){
-        this.sentUser = sentUser;
-        this.recievedUser = recievedUser;
-        this.recievedType = ENUM_CHALLENGE_DESTINATION[recievedType];
-        this.issueDate = issueDate;
-        this.dueDate = dueDate;
+    constructor(json){
+        this.sentUser = this.loadProperty(json, "sentUser", "");
+        this.receivedUser =  this.loadProperty(json, "receivedUser", "");
+        this.receivedType = this.loadProperty(json, "receivedType", "");
+        this.issueDate = this.loadProperty(json, "issueDate", "");
+        this.dueDate = this.loadProperty(json, "dueDate", "");
+        this.exerciseList = this.loadProperty(json, "exerciseList", []);
+        this.people = this.loadProperty(json, "people", {});
+        this.status = this.loadProperty(json, "status", "pending");
+        this.challengeID = this.determineChallengeID(json);
+    }
+
+    loadProperty(json, propertyName, defaultValue){
+        if(json.hasOwnProperty(propertyName)){
+            return json[propertyName];
+        }
+        return defaultValue;
+    }
+
+    generateUniqueChallengeID(){
+        //TODO
+        return 5;
+    }
+
+    determineChallengeID(json){
+        if (json.hasOwnProperty("challengeID")){
+            return json["challengeID"];
+        }
+        return generateUniqueChallengeID();
+    }
+
+    setExerciseList(exerciseList){
         this.exerciseList = exerciseList;
-        this.challengeID = challengeID;
 
-
-        this.users = this.populateUsers();
-        this.progress = this.createProgressBars();
-        this.status = this.determineStatus();
-    }
-
-    checkErrors(){
-        if (this.exerciseList.length <= 0){
-            Error("The length of the exercise list should be at least 1.");
+        if (exerciseList.length <= 0 || exerciseList.length > 5){
+            //TODO, write error
+            return false;
         }
 
-        if (this.exerciseList.length > 5){
-            Error("The length of the exercise list should be no more than 5.")
-        }
 
-        if(this.issueDate > this.dueDate){
-            Error("The challenge is issued before it is due.");
-        }
+        this.people.keys().foreach((key)=>{
+            this.people[key] = {};
+
+            for(let i = 0; i < exerciseList.length; i++){
+                this.people[key][i] = 0;
+            }
+        })
+
+        return true;
 
     }
-    populateUsers(){
-        if (this.recievedType === ENUM_CHALLENGE_DESTINATION["personal"]){
-            this.users = new Set([this.sentUser]);
-        }
-        else if (this.recievedType === ENUM_CHALLENGE_DESTINATION["friend"]){
-            this.users = new Set([this.sentUser, this.recievedUser]);
-        }
-        else if (this.recievedType === ENUM_CHALLENGE_DESTINATION["league"]){
-            // TODO: must pull all the users from the league
-            this.users = new Set();
-        }
-    }
 
-    createProgressBars(){
-        // For each user, for each exercise, log how much they have done
-        let progress = {}
-        let arrayUsers = Array.from(this.users);
-        for (let userIndex = 0; userIndex < arrayUsers.length; userIndex++){
-            progress[arrayUsers[userIndex]] = createExerciseListProgress();
-        }
-        return progress;
-    }
-
-    createExerciseListProgress(){
-        let exerciseProgress = {}
-        for (let exerciseIndex = 0; exerciseIndex < this.exerciseList.length; i++){
-            type = excerciseList[exerciseIndex][0];
-            exerciseProgress[type] = 0;
-        }
-        return exerciseProgress;
-    }
-
-    determineStatus(){
-        if (this.recievedType === ENUM_CHALLENGE_DESTINATION["personal"]){
-            this.status =  ENUM_CHALLENGE_STATUS["accepted"];
-        }
-        else if (this.recievedType === ENUM_CHALLENGE_DESTINATION["friend"]){
-            this.status =  ENUM_CHALLENGE_STATUS["pending"];
-        }
-        else if (this.recievedType === ENUM_CHALLENGE_DESTINATION["league"]){
-            this.status =  ENUM_CHALLENGE_STATUS["accepted"];
-        }
-    }
 
     acceptChallenge(){
         this.status = ENUM_CHALLENGE_STATUS["accepted"];
-        // TODO: Change Challenges in the Collection
     }
 
     declineChallenge(){
         this.status = ENUM_CHALLENGE_STATUS["declined"];
-        // TODO: Change Challenges in the Collection
     }
 
-    updateProgress(username, exerciseLog){
-        // TODO
-    }
+
 
     convertToJSON(){
-        // TODO
+        json = {}
+        json["sentUser"] = this.sentUser;
+        json["receivedUser"] = this.receivedUser;
+        json["receivedType"] = this.receivedType;
+        json["issueDate"] = this.issueDate;
+        json["dueDate"] = this.dueDate;
+        json["exerciseList"] = this.exerciseList;
+        json["people"] = this.people;
+        json["status"] = this.status;
+        json["challengeID"] = this.challengeID;
     }
 
-    createFromJSON(){
-        //TODO
-    }
+    calculateCompletionAmount(username){
 
+    }
 
 }

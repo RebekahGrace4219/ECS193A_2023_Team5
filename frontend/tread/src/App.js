@@ -6,6 +6,7 @@ import SignUp from './pages/signUp';
 import Challenge from './pages/challenge';
 import ProfileSettings from './pages/profileSettings';
 import "./App.css";
+import AddChallenge from './pages/addChallenge';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path = "/profileSettingsPage" element = {<ProfileSettings/>} />
         <Route path = "/currentChallengePage" element = {<Challenge>{{"ifCurrentChallenge":true}}</Challenge>} />
         <Route path = "/weeklyChallengePage" element = {<Challenge>{{"ifCurrentChallenge":false}}</Challenge>} />
+        <Route path = "/addChallengePage" element = {<AddChallenge/>}/>
       </Routes>
       </Router>
       </div>
