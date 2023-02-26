@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../css/login.css';
+import '../css/Login/login.css';
 
 const Login = () => {
   // needs variable for nonce

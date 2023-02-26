@@ -1,4 +1,4 @@
-
+import '../css/Front/front.css'
 const Front = () => {
     return (
         <div id = "Front">

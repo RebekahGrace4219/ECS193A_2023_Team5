@@ -5,6 +5,8 @@ import FriendSection from "../components/Social/FriendSection";
 import LeagueSection from "../components/Social/LeagueSection";
 import UserSettingsButton from "../components/Shared/UserSettingsButton";
 import SuggestionBox from "../components/Shared/SuggestionBox";
+
+import '../css/Shared/page3.css'
 const Social = (props) => {
     return (
         <div id = "Social" className='Body3Part'>

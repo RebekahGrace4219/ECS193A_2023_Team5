@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 import SideBar from '../components/Shared/SideBar';
 import SocialHeader from "../components/Social/SocialHeader";
 import LeagueHeader from "../components/Social/LeagueHeader";
@@ -11,8 +10,6 @@ import UserSettingsButton from '../components/Shared/UserSettingsButton';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import "../css/Shared/page3.css"
-
-
 
 const League = (props) => {
     function getLeagueName(){
