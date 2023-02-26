@@ -19,7 +19,7 @@ function App() {
       <Router>
       <Routes>
         <Route path = "/" element = {<Front/>}/>
-        <Route path = "/login" element = {<Login/>}/>
+        <Route path = "/loginPage" element = {<Login/>}/>
         <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profileSettingsPage" element = {<ProfileSettings/>} />
         <Route path = "/addChallengePage" element = {<AddChallenge/>} />
@@ -28,10 +28,10 @@ function App() {
         <Route path = "/weeklyChallengePage" element = {<Challenge>{{"type":"weekly"}}</Challenge>} />
         <Route path = "/socialFriendPage" element = {<Social>{{"type":"friend"}}</Social>}/>
         <Route path = "/socialLeaguePage" element = {<Social>{{"type":"league"}}</Social>}/>
-        <Route path = "/profileFriendPage" element = {<Profile>{{"type":"friend"}}</Profile>} />
-        <Route path = "/profileLeaguePage" element = {<Profile>{{"type":"league"}}</Profile>} />
         <Route path = "/profileMedalPage" element = {<Profile>{{"type":"medal"}}</Profile>} />
-        <Route path = "/leaguePage" element = {<League></League>}/>
+        <Route path = "/profileStatsPage" element = {<Profile>{{"type":"stats"}}</Profile>} />
+        <Route path = "/leagueDescriptionPage?" element = {<League>{{"type":"description"}}</League>}/>
+        <Route path = "/leagueMemberPage?" element = {<League>{{"type":"member"}}</League>}/>
       </Routes>
       </Router>
       </div>

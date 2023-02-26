@@ -1,28 +1,44 @@
-import Leagues from "../components/Social/Leagues";
 import SideBar from "../components/Shared/SideBar";
-
-import Line from "../components/Shared/Line";
+import SocialHeader from "../components/Social/SocialHeader";
+import RecentActivity from "../components/Social/RecentActivity";
+import FriendSection from "../components/Social/FriendSection";
+import LeagueSection from "../components/Social/LeagueSection";
 import UserSettingsButton from "../components/Shared/UserSettingsButton";
-import SuggestedFriends from "../components/Shared/SuggestedFriends";
-const SocialPage = (props) => {/*
-    return(
-        <div id = "Social">
-        <div id = "sideBar">
-            <SideBar></SideBar>
-        </div>
-        <div id = "profileMiddle">
-            <div id = "innerProfileMiddle">
-            <SocialHeader></SocialHeader>
-            <Line></Line>
-            {props.ifFriends ? <Friends></Friends> : <Leagues></Leagues>}
-
+import SuggestionBox from "../components/Shared/SuggestionBox";
+const Social = (props) => {
+    return (
+        <div id = "Social" className='Body3Part'>
+            <div className = "leftSide3Part">
+                <SideBar></SideBar>
             </div>
+            {
+                (props.children.type === "friend") ?
+                <div className = "middleSide3Part">
+                    <SocialHeader>{{"type":"button"}}</SocialHeader>
+                    <RecentActivity>{{"type":"friend"}}</RecentActivity>
+                    <FriendSection/>
+                </div>
+                :
+                <div className = "middleSide3Part">
+                    <SocialHeader>{{"type":"button"}}</SocialHeader>
+                    <RecentActivity>{{"type":"league"}}</RecentActivity>
+                    <LeagueSection/>
+                </div>
+            }
+            {
+                (props.children.type === "friend") ?
+                <div className = "rightSide3Part">
+                    <UserSettingsButton/>
+                    <SuggestionBox>{{"type":"friend"}}</SuggestionBox>
+                </div>
+                :
+                <div className = "rightSide3Part">
+                    <UserSettingsButton/>
+                    <SuggestionBox>{{"type":"league"}}</SuggestionBox>
+                </div>
+            }
+
         </div>
-        <div id = "profileEnd">
-            <UserSettingsButton></UserSettingsButton>
-            {props.ifFriends ? <SuggestedFriends></SuggestedFriends> : <SuggestedLeagues></SuggestedLeagues>}
-        </div>
-    </div>)*/
-    return (<div>SocialPage</div>)
+      );
 }
-export default SocialPage;
+export default Social;
