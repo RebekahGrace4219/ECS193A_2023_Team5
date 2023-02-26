@@ -1,5 +1,5 @@
 
-import "../../css/SignUp/SignUpSideBar.css";
+import "../../css/SignUp/signUpSideBar.css";
 const SignUpSideBar = () => {
     return (
         <div id = "SignUpSideBar">
