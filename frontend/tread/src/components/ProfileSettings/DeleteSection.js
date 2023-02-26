@@ -1,6 +1,5 @@
 import '../../css/Shared/shared.css'
 import '../../css/ProfileSettings/DeleteSection.css';
-import DeletePopUp from './DeletePopUp';
 const DeleteSection = () => {
 
     return (
@@ -11,7 +10,7 @@ const DeleteSection = () => {
             <span className = "greenBaseText"> your account. You will </span>
             <span className = "redBaseText">lose</span>
             <span className = "greenBaseText"> all your friends, leagues, and medals. All your insights will be gone with no way to recover them. </span></p>
-            <DeletePopUp> <span> Modal content </span></DeletePopUp>
+
 
         </div>
     )
