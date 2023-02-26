@@ -2,9 +2,12 @@ import '../../css/Shared/sideBar.css'
 import React, {useState, useEffect} from 'react';
 const SideBar = () => {
     console.log(window.location.pathname);
-    const [challengeButton, setChallengeButton] = useState(window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage");
-    const [socialButton, setSocialButton] = useState(window.location.pathname === "/socialPage");
-    const [settingsButton, setSettingsButton] = useState(window.location.pathname === "/profileSettingsPage");
+    let challengePages = ["/currentChallengePage",  "/weeklyChallengePage"];
+    let socialPages = ["/socialFriendPage", "/socialLeaguePage"];
+    let profileSettingsPages = ["/profileSettingsPage"];
+    const [challengeButton] = useState(challengePages.includes(window.location.pathname));
+    const [socialButton] = useState(socialPages.includes(window.location.pathname));
+    const [settingsButton] = useState(profileSettingsPages.includes(window.location.pathname));
     const [location, setLocation] = useState();
 
 
@@ -27,7 +30,6 @@ const SideBar = () => {
           if (challengeButton) {
             // send you to the challenge page
             setButtonOn("sideBarButtonChallenges", "challengeImage");
-
           }else{
             setButtonOff("sideBarButtonChallenges", "challengeImage");
           }
@@ -67,18 +69,24 @@ const SideBar = () => {
     }
 
     function clickChallengeButton(){
-      if((window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage")){
+      if(challengePages.includes(window.location.pathname)){
         return;
       }
       setLocation("/currentChallengePage");
     }
 
     function clickSocialButton(){
-        setLocation("/socialPage");
+      if(socialPages.includes(window.location.pathname)){
+        return;
+      }
+        setLocation("/socialFriendPage");
     }
 
     function clickSettingsButton(){
-        setLocation("/profileSettingsPage");
+      if(socialPages.includes(window.location.pathname)){
+        return;
+      }
+      setLocation("/profileSettingsPage");
     }
 
     return (

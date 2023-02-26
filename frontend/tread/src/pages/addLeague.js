@@ -10,8 +10,6 @@ const AddLeague = () => {
         <div className = "rightSide2Part">
             <LeagueForm></LeagueForm>
         </div>
-
-
     </div>
     );
 }
