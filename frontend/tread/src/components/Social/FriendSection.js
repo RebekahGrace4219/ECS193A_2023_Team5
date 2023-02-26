@@ -1,5 +1,5 @@
 import FriendObj from './FriendObj'
-import '../css/friendSection.css'
+import '../../css/Social/friendSection.css'
 const FriendSection = (props) => {
     return (
     <div className = "FriendSection">

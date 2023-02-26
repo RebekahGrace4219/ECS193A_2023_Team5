@@ -1,4 +1,4 @@
-import ChallengeForm from "../components/ChallengeForm/ChallengeForm";
+import ChallengeForm from "../components/AddChallenge/ChallengeForm";
 import SideBar from "../components/Shared/SideBar";
 import "../css/Shared/page2.css";
 const AddChallenge = () => {
