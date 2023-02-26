@@ -1,4 +1,4 @@
-import "../../css/profileHeader.css"
+import "../../css/Profile/profileHeader.css"
 import React, {useState} from 'react';
 
 const ProfileHeader = () => {
