@@ -1,6 +1,6 @@
 import '../../css/Shared/shared.css';
 import '../../css/ProfileSettings/ProfileSettingsHeader.css';
-import UserSettingsButton from '../UserSettingsButton';
+import UserSettingsButton from '../Shared/UserSettingsButton';
 import EditDisplayNameSection from './EditDisplayNameSection';
 import EditProfilePhotoSection from './EditProfilePhotoSection';
 import Line from '../Shared/Line';

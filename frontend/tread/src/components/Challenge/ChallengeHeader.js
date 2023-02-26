@@ -1,4 +1,4 @@
-import UserSettingsButton from "../UserSettingsButton";
+import UserSettingsButton from "../Shared/UserSettingsButton";
 import "../../css/Shared/shared.css"
 import "../../css/Challenge/ChallengeHeader.css"
 const ChallengeHeader = () => {

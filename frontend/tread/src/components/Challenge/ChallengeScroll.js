@@ -9,16 +9,16 @@ import '../../css/Challenge/ChallengeScroll.css';
 const ChallengeScroll = (props) => {
 
     function issuedChallenges(challenge){
-        return (<ChallengeBoxIssued>challenge</ChallengeBoxIssued>);
+        return (<ChallengeBoxIssued>{challenge}</ChallengeBoxIssued>);
     }
     function sentChallenges(challenge){
-        return (<ChallengeBoxSent>challenge</ChallengeBoxSent>);
+        return (<ChallengeBoxSent>{challenge}</ChallengeBoxSent>);
     }
     function incomingChallenges(challenge){
-        return (<ChallengeBoxIncoming>challenge</ChallengeBoxIncoming>);
+        return (<ChallengeBoxIncoming>{challenge}</ChallengeBoxIncoming>);
     }
     function globalChallenges(challenge){
-        return (<ChallengeBoxGlobal>challenge</ChallengeBoxGlobal>);
+        return (<ChallengeBoxGlobal>{challenge}</ChallengeBoxGlobal>);
     }
     return (
         <div id = "ChallengeScroll">

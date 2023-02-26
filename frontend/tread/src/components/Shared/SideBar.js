@@ -62,6 +62,10 @@ const SideBar = () => {
         }, [location]
       );
 
+    function moveToFrontPage(){
+      window.location.href = "/";
+    }
+
     function clickChallengeButton(){
       if((window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage")){
         return;
@@ -79,7 +83,7 @@ const SideBar = () => {
 
     return (
         <div className = "sideBarClass">
-            <div id = "sideBarTreadLogo"><img id = "treadLogoSideBar" src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></div>
+            <button id = "sideBarTreadLogo" ><img id = "treadLogoSideBar" onClick={moveToFrontPage} src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></button>
             <div id = "sideBarButtons">
                 <div id = "sideBarChallenges">
                     <button className = "sideBarButtonClass" onClick = {clickChallengeButton}  id = "sideBarButtonChallenges">
