@@ -44,12 +44,12 @@ const ProfileSettingsForm = () => {
     return (
     <div className = "Form">
         <div className="formObj">
-                <h1 className="formObjInner">Profile Picture</h1>
+                <h2 className="formObjInner">Profile Picture</h2>
                 <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">
-                <h1 className="formObjInner">Display Name</h1>
+                <h2 className="formObjInner">Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
                 <input className="formTextInput" type = "text"  onChange = {validateDisplay}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
