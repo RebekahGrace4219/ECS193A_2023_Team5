@@ -16,7 +16,9 @@ const ProfileSettings = () => {
             <ProfileSettingsHeader></ProfileSettingsHeader>
             <Line></Line>
             <ProfileSettingsForm></ProfileSettingsForm>
+            <Line></Line>
             <SensorSection></SensorSection>
+            <Line></Line>
             <DeleteSection></DeleteSection>
         </div>
     </div>

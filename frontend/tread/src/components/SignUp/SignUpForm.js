@@ -20,31 +20,31 @@ const SignUpForm = () => {
     const [submitErrorResponse, setSubmitErrorResponse] = useState();
 
     function validateDisplay(event){
-        let displayName = event.target.value;
-        if (displayName.length === 0){
+        let displayNameInput = event.target.value;
+        if (displayNameInput.length === 0){
             setDisplayErrorResponse("Cannot sign up, display name needs to be at least one character");
             return false;
         }
 
         setDisplayErrorResponse("");
-        setDisplayName(displayName);
+        setDisplayName(displayNameInput);
         return true;
     }
 
     function validateUsername(event){
-        let username = event.target.value;
-        if (username.length === 0 || username.length > 32){
+        let usernameInput = event.target.value;
+        if (usernameInput.length === 0 || usernameInput.length > 32){
             setUsernameErrorResponse("Cannot sign up, username needs to be between 1-32 characters");
             return false;
         }
 
-        if (!(/^[a-z0-9]+$/i.test(displayName))) {
+        if (!(/^[a-z0-9]+$/i.test(usernameInput))) {
             setUsernameErrorResponse("Cannot sign up, username should be alphanumeric");
             return false;
         }
 
         setUsernameErrorResponse("");
-        setUsername(username);
+        setUsername(usernameInput);
     }
 
     function submitSignUp(){
