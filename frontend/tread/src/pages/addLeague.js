@@ -1,5 +1,6 @@
-import LeagueForm from "../components/Social/LeagueForm";
+
 import SideBar from "../components/Shared/SideBar";
+import LeagueForm from "../components/AddLeague/LeagueForm";
 import "../css/Shared/page2.css";
 const AddLeague = () => {
     return (

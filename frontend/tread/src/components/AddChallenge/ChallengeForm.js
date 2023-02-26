@@ -1,6 +1,6 @@
 import Line from "../Shared/Line";
 import {useState, useEffect} from 'react';
-import '../../css/AddChallenge/challengeForm.css'
+import '../../css/Shared/form.css'
 import '../../css/Shared/button.css'
 import '../../css/Shared/errorBox.css'
 
@@ -153,14 +153,14 @@ const ChallengeForm = () =>{
 
 
     return (
-        <div id = "ChallengeForm">
+        <div id = "ChallengeForm" className = "Form">
             <h1>Challenges</h1>
             <h2>Create a Challenge</h2>
             <Line/>
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">Exercise Type:</p>
-                <div className = "challengeFormObjInner">
-                    <select className = "challengeFormSelect" onChange = {sportChange}>
+            <div className = "formObj">
+                <p className = "formObjInner">Exercise Type:</p>
+                <div className = "formObjInner">
+                    <select className = "formSelect" onChange = {sportChange}>
                         {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                     </select>
                 </div>
@@ -168,20 +168,20 @@ const ChallengeForm = () =>{
             </div>
 
             {selfSpecify ?
-                <div className="challengeFormObj">
-                    <p className = "challengeFormObjInner">Specify your own activity: </p>
-                    <input className = "challengeFormObjInner" type = "text"/>
+                <div className="formObj">
+                    <p className = "formObjInner">Specify your own activity: </p>
+                    <input className = "formObjInner" type = "text"/>
                     <p className = "errorBox">{specifyErrorResponse}</p>
                 </div>
                 :
                 <></>
             }
 
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">How much?</p>
-                <div className = "challengeFormObjInner">
+            <div className = "formObj">
+                <p className = "formObjInner">How much?</p>
+                <div className = "formObjInner">
                     <input type = "number" min = "1" />
-                    <select>
+                    <select className = "formSelect">
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
                         <option value = "km">km</option>
@@ -194,20 +194,20 @@ const ChallengeForm = () =>{
                 </div>
             </div>
 
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">Start Date</p>
-                <input id="issueDate" className = "challengeFormObjInner" type = "date" min = {getToday()}></input>
+            <div className = "formObj">
+                <p className = "formObjInner">Start Date</p>
+                <input id="issueDate" className = "formObjInner" type = "date" min = {getToday()}></input>
             </div>
 
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">End Date</p>
-                <input id="dueDate" className = "challengeFormObjInner" type = "date" min = {getTomorrow()}></input>
+            <div className = "formObj">
+                <p className = "formObjInner">End Date</p>
+                <input id="dueDate" className = "formObjInner" type = "date" min = {getTomorrow()}></input>
             </div>
 
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">What kind of challenge?</p>
-                <div className = "challengeFormObjInner">
-                    <select className="challengeFormSelect" onChange = {receiverChange}>
+            <div className = "formObj">
+                <p className = "formObjInner">What kind of challenge?</p>
+                <div className = "formObjInner">
+                    <select className="formSelect" onChange = {receiverChange}>
                         <option value = "Self">Self</option>
                         <option value = "Friend">Friend</option>
                         <option value = "League">League</option>
@@ -216,8 +216,8 @@ const ChallengeForm = () =>{
             </div>
 
             { (receiverGroup  != "Self") ?
-            <div className = "challengeFormObj">
-                <p className = "challengeFormObjInner">Who should receive the challenge?</p>
+            <div className = "formObj">
+                <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
                     <select>
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
@@ -230,7 +230,7 @@ const ChallengeForm = () =>{
             <></>
 
             }
-            <div className = "challengeFormObj">
+            <div className = "formObj">
             <button className="submitButton" onClick = {submitChallenge}><p className = "submitButtonText">Submit</p></button>
             <p className = "errorBox">{submitErrorResponse}</p>
             </div>

@@ -1,17 +1,21 @@
-#ChallengeForm {
+.Form {
     width: 90%;
     padding-top : 30px;
 }
 
-.challengeFormObj{
+.formObj{
     padding-top: 10px;
 }
 
-.challengeFormObjInner{
+.formObjInner{
     padding: 0;
     margin: 0;
 }
 
-.challengeFormSelect{
+.formSelect{
+
+}
+
+.formTextInput{
 
 }
