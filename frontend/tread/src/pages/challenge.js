@@ -1,6 +1,6 @@
 import SideBar from "../components/Shared/SideBar";
-import CurrentChallenge from "../components/Challenge/CurrentChallenge/CurrentChallenge";
-import WeeklyChallenge from "../components/Challenge/WeeklyChallenge/WeeklyChallenge";
+import CurrentChallenge from "../components/Challenge/CurrentChallenge";
+import WeeklyChallenge from "../components/Challenge/WeeklyChallenge";
 import "../css/Shared/page2.css";
 
 const Challenge = (props) => {

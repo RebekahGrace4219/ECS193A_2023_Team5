@@ -1,6 +1,6 @@
-import CurrentSwitch from "../CurrentSwitch";
-import ChallengeScroll from "../ChallengeScroll";
-import '../../../css/Shared/shared.css';
+import CurrentSwitch from "./CurrentSwitch";
+import ChallengeScroll from "./ChallengeScroll";
+import '../../css/Shared/shared.css';
 const WeeklyChallengeForm = () => {
     let challengeScrollType = "global";
     let challengeList = [{"title": "Do 250 push up.", "friend":"friendname"}];

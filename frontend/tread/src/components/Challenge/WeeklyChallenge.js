@@ -1,5 +1,5 @@
 
-import ChallengeHeader from "../ChallengeHeader";
+import ChallengeHeader from "./ChallengeHeader";
 import WeeklyChallengeForm from "./WeeklyChallengeForm";
 const WeeklyChallenge = () => {
     return (

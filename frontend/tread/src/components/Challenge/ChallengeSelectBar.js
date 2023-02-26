@@ -1,5 +1,5 @@
-import BarButton from "../../Shared/BarButton";
-import "../../../css/Shared/shared.css"
+import BarButton from "../Shared/BarButton";
+import "../../css/Shared/shared.css"
 const ChallengeSelectBar = (props) => {
     return (
         <div id = "ChallengeSelectBar" className="selectBar">

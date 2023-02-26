@@ -1,10 +1,10 @@
 
 import React, {useState, useEffect} from 'react';
-import AddChallengeButton from './CurrentChallenge/AddChallengeButton';
-import ChallengeBoxIssued from "./CurrentChallenge/ChallengeBoxIssued";
-import ChallengeBoxIncoming from './CurrentChallenge/ChallengeBoxIncoming';
-import ChallengeBoxSent from './CurrentChallenge/ChallengeBoxSent';
-import ChallengeBoxGlobal from './WeeklyChallenge/ChallengeBoxGlobal';
+import AddChallengeButton from './AddChallengeButton';
+import ChallengeBoxIssued from "./ChallengeBoxIssued";
+import ChallengeBoxIncoming from './ChallengeBoxIncoming';
+import ChallengeBoxSent from './ChallengeBoxSent';
+import ChallengeBoxGlobal from './ChallengeBoxGlobal';
 import '../../css/Challenge/ChallengeScroll.css';
 const ChallengeScroll = (props) => {
 

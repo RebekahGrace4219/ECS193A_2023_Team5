@@ -1,6 +1,6 @@
 
-import "../../../css/Challenge/ChallengeBoxSent.css";
-import "../../../css/Shared/shared.css";
+import "../../css/Challenge/ChallengeBoxSent.css";
+import "../../css/Shared/shared.css";
 const ChallengeBoxSent = (props) => {
     return (
         <div id = "ChallengeBoxSent" className = "challengeBox">

@@ -1,6 +1,6 @@
 
-import "../../../css/Challenge/ChallengeBoxIncoming.css";
-import "../../../css/Shared/shared.css";
+import "../../css/Challenge/ChallengeBoxIncoming.css";
+import "../../css/Shared/shared.css";
 import AcceptButton from "./AcceptButton";
 import DeclineButton from "./DeclineButton";
 const ChallengeBoxIncoming = (props) => {

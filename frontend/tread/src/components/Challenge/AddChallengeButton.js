@@ -1,5 +1,5 @@
 
-import '../../../css/Challenge/AddChallengeButton.css';
+import '../../css/Challenge/AddChallengeButton.css';
 
 const AddChallengeButton = () => {
     function moveToAddForm(){

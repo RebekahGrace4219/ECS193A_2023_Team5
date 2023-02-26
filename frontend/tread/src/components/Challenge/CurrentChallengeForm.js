@@ -1,9 +1,9 @@
-import CurrentSwitch from "../CurrentSwitch";
-import ChallengeScroll from "../ChallengeScroll";
+import CurrentSwitch from "./CurrentSwitch";
+import ChallengeScroll from "./ChallengeScroll";
 import ChallengeSelectBar from "./ChallengeSelectBar";
 import React, {useState, useEffect} from 'react';
-import '../../../css/Shared/shared.css';
-import '../../../css/Challenge/CurrentChallengeForm.css'
+import '../../css/Shared/shared.css';
+import '../../css/Challenge/CurrentChallengeForm.css'
 const CurrentChallengeForm = () => {
     const [challengeList, setChallengeList] = useState([]);
     const [challengeScrollType, setChallengeScrollType] = useState("issued");
