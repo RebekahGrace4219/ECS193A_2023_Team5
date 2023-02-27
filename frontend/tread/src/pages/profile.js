@@ -1,28 +1,34 @@
-import '../css/profile.css'
 import SideBar from '../components/Shared/SideBar';
 import ProfileHeader from '../components/Profile/ProfileHeader';
-import Friends from '../components/Friends';
-import UserSettingsButton from '../components/UserSettingsButton';
-import SuggestedFriends from '../components/Shared/SuggestedFriends';
-import Line from '../components/Shared/Line';
+import StatsSection from '../components/Profile/StatsSection';
+import MedalsSection from '../components/Profile/MedalsSection';
+import UserSettingsButton from '../components/Shared/UserSettingsButton';
+import SuggestionBox from '../components/Shared/SuggestionBox';
+
+import '../css/Shared/page3.css';
 
 const Profile = (props) => {
     return (
-        <div id = "Profile">
-            <div id = "sideBar">
+        <div id = "Profile" className='Body3Part'>
+            <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
-            <div id = "profileMiddle">
-                <div id = "innerProfileMiddle">
-                <ProfileHeader></ProfileHeader>
-                <Line></Line>
-                <Friends></Friends>
-
+            {
+                (props.children.type === "stats") ?
+                <div className = "middleSide3Part">
+                    <ProfileHeader/>
+                    <StatsSection/>
                 </div>
-            </div>
-            <div id = "profileEnd">
-                <UserSettingsButton></UserSettingsButton>
-                <SuggestedFriends></SuggestedFriends>
+                :
+                <div className = "middleSide3Part">
+                    <ProfileHeader/>
+                    <MedalsSection/>
+                </div>
+
+            }
+            <div className = "rightSide3Part">
+                <UserSettingsButton/>
+                <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
             </div>
         </div>
       );

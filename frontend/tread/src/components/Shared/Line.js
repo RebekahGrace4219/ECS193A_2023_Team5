@@ -1,4 +1,4 @@
-import '../../css/Line.css'
+import '../../css/Shared/Line.css'
 
 const Line = () => {
     return(<div id = "LineItem"></div>)

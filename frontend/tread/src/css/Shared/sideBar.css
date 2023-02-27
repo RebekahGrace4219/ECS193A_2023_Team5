@@ -39,3 +39,8 @@
 #treadLogoSideBar{
     padding: 23px;
 }
+
+#sideBarTreadLogo{
+    background-color: transparent;
+    border: 0px;
+}

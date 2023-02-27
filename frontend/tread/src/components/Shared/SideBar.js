@@ -2,9 +2,12 @@ import '../../css/Shared/sideBar.css'
 import React, {useState, useEffect} from 'react';
 const SideBar = () => {
     console.log(window.location.pathname);
-    const [challengeButton, setChallengeButton] = useState(window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage");
-    const [socialButton, setSocialButton] = useState(window.location.pathname === "/socialPage");
-    const [settingsButton, setSettingsButton] = useState(window.location.pathname === "/profileSettingsPage");
+    let challengePages = ["/currentChallengePage",  "/weeklyChallengePage"];
+    let socialPages = ["/socialFriendPage", "/socialLeaguePage"];
+    let profileSettingsPages = ["/profileSettingsPage"];
+    const [challengeButton] = useState(challengePages.includes(window.location.pathname));
+    const [socialButton] = useState(socialPages.includes(window.location.pathname));
+    const [settingsButton] = useState(profileSettingsPages.includes(window.location.pathname));
     const [location, setLocation] = useState();
 
 
@@ -27,7 +30,6 @@ const SideBar = () => {
           if (challengeButton) {
             // send you to the challenge page
             setButtonOn("sideBarButtonChallenges", "challengeImage");
-
           }else{
             setButtonOff("sideBarButtonChallenges", "challengeImage");
           }
@@ -62,24 +64,34 @@ const SideBar = () => {
         }, [location]
       );
 
+    function moveToFrontPage(){
+      window.location.href = "/";
+    }
+
     function clickChallengeButton(){
-      if((window.location.pathname === "/currentChallengePage"  || window.location.pathname === "/weeklyChallengePage")){
+      if(challengePages.includes(window.location.pathname)){
         return;
       }
       setLocation("/currentChallengePage");
     }
 
     function clickSocialButton(){
-        setLocation("/socialPage");
+      if(socialPages.includes(window.location.pathname)){
+        return;
+      }
+        setLocation("/socialFriendPage");
     }
 
     function clickSettingsButton(){
-        setLocation("/profileSettingsPage");
+      if(socialPages.includes(window.location.pathname)){
+        return;
+      }
+      setLocation("/profileSettingsPage");
     }
 
     return (
         <div className = "sideBarClass">
-            <div id = "sideBarTreadLogo"><img id = "treadLogoSideBar" src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></div>
+            <button id = "sideBarTreadLogo" ><img id = "treadLogoSideBar" onClick={moveToFrontPage} src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></button>
             <div id = "sideBarButtons">
                 <div id = "sideBarChallenges">
                     <button className = "sideBarButtonClass" onClick = {clickChallengeButton}  id = "sideBarButtonChallenges">
