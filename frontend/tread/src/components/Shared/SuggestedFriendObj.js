@@ -1,4 +1,4 @@
-import '../../css/suggestedFriendObj.css'
+import '../../css/suggestionBoxObj.css'
 
 const SuggestedFriendObj = (props) => {
 
