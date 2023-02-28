@@ -1,7 +1,7 @@
 import "../../css/Shared/suggestionBoxObj.css";
 
 const SuggestedFriendObj = (props) => {
-
+    console.log(props);
     return (
         <div id = "SuggestedFriendObj">
             <div className = "profilePhoto"><img id = "profilePhotoSuggested" src = "https://i.imgur.com/7vaxEiJ.png"/></div>
