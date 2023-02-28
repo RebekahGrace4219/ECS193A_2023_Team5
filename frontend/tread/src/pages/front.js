@@ -1,10 +1,13 @@
 import '../css/Front/front.css'
 const Front = () => {
+    function moveLogin(){
+        window.location.href = "/loginPage";
+    }
     return (
         <div id = "Front">
             <div id = "top">
                 <button>About</button>
-                <button>Log in/Sign up</button>
+                <button onClick = {moveLogin}>Log in/Sign up</button>
             </div>
             <div>
                 <div id = "logoTitleSide">
