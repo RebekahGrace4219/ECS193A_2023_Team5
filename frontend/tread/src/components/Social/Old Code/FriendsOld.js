@@ -2,7 +2,7 @@ import "../css/friends.css"
 import React, { useState, useEffect } from 'react';
 import AddFriend from "./AddFriends";
 import FriendBar from "./FriendBar";
-import FriendSection from './FriendSection';
+import FriendSection from '../FriendSection';
 import axios from 'axios';
 const Friends = () => {
 

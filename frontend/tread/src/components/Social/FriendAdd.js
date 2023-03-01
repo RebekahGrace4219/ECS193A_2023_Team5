@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import '../css/addFriend.css'
+import '../../css/Social/addFriend.css'
 import axios from 'axios';
-const AddFriend = () => {
+
+const FriendAdd = () => {
+
     const [userText, setUserText] = useState("");
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
         var data = JSON.stringify({
-            "username" : "RebekahGrace#4219",
             "friendName": usernameText
         });
 
@@ -29,7 +30,6 @@ const AddFriend = () => {
             else {
                 setUserText("Request denied: "+ response.data);
             }
-            console.log(response);
         })
         .catch(function (error) {
           console.log(error);
@@ -51,6 +51,8 @@ const AddFriend = () => {
         </div>
     </div>);
 
+
+
 }
 
-export default AddFriend;
+export default FriendAdd;

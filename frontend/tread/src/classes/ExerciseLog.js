@@ -49,7 +49,6 @@ class ExerciseLog{
         else if(COUNT_UNITS.includes(this.unitMeasurement)){
             return ENUM_UNIT_TYPES["count"];
         }
-        console.log("This ExerciseLog was fed an unsupported size type.");
         return "count";
     }
 
@@ -75,7 +74,6 @@ class ExerciseLog{
             return this.amount * 60;
         }
 
-        console.log("Error in Exercise Log: Attempting to convert time into minutes, but not a recongized unit of time");
         return this.amount;
     }
 
@@ -96,7 +94,6 @@ class ExerciseLog{
             return this.amount * 1000;
         }
 
-        console.log("Error in Exercise Log: Attempting to convert distance into meters, but not a recongized unit of distance");
         return this.amount;
     }
 

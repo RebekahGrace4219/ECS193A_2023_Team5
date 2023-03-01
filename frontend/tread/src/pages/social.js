@@ -8,17 +8,19 @@ import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import '../css/Shared/page3.css'
 const Social = (props) => {
+
     return (
         <div id = "Social" className='Body3Part'>
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
+
             {
                 (props.children.type === "friend") ?
                 <div className = "middleSide3Part">
                     <SocialHeader>{{"type":"button"}}</SocialHeader>
                     <RecentActivity>{{"type":"friend"}}</RecentActivity>
-                    <FriendSection/>
+                    <FriendSection></FriendSection>
                 </div>
                 :
                 <div className = "middleSide3Part">
@@ -27,6 +29,7 @@ const Social = (props) => {
                     <LeagueSection/>
                 </div>
             }
+
             {
                 (props.children.type === "friend") ?
                 <div className = "rightSide3Part">

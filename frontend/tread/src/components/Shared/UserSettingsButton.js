@@ -16,10 +16,9 @@ const UserSettingsButton = () => {
         setLogoutDisplay(false);
     }
 
-    function startLogoutDisplay(){
-        setLogoutDisplay(true);
+    function toggleLogoutDisplay(){
+        setLogoutDisplay(!logoutDisplay);
     }
-
     function moveProfilePage(){
         window.location.href = "./profileStatsPage"
     }
@@ -60,7 +59,7 @@ const UserSettingsButton = () => {
                 </div>
             </button>
             <div id = "userSettingButtonSection">
-                <button className = "dropDownButton" onClick = {startLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png"/></button>
+                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png"/></button>
                 {
                     logoutDisplay ?
                     <select id = "LogoutSelect" onChange={movePage}>

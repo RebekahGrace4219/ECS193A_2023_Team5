@@ -1,52 +1,82 @@
-import '../../css/Social/friendObj.css';
-import React, {useState} from 'react';
-import axios from 'axios';
+import {useState} from 'react';
+import FriendSelect from "./FriendSelect";
+import SentSelect from "./SentSelect";
+import ReceivedSelect from "./ReceivedSelect";
+import BlockedSelect from "./BlockedSelect";
 
 const FriendObj = (props) => {
-    const [ifAcceptButton, setAcceptButton] = useState(true);
-    async function acceptFriendRequest(){
-        setAcceptButton(false);
+    const [selectShow, setSelectShow] = useState();
+    let type = props.type;
 
-        var data = JSON.stringify({
-            "username" : "RebekahGrace#4219",
-            "friendName": props.children.displayName
-        });
-
-        var config = {
-            method: 'post',
-            url: 'http://localhost:5000/friend_list//accept_received_request',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data : data
-        };
-
-        axios(config)
-        .then(async function (response) {
-            console.log(response.status);
-        })
-        .catch(function (error) {
-            console.log(error.status);
-        });
+    function toggleSelectShow(){
+        setSelectShow(!selectShow);
     }
 
-    return (
-        <div className = "friendObjClass">
-            <div className = "imgPortion">
-                <div className = "imgClass"><img id = "profileImage" src = "https://i.imgur.com/XY9rcVx.png"/></div>
-            </div>
-            <div className = "namingPortion">
-                <div id = "displayNameFriend">{props.children.displayName}</div>
-                {props.children.received&&ifAcceptButton ? <button onClick = {acceptFriendRequest} className="acceptButton">Accept</button>: <></>}
-            </div>
-            <div className = "morePortion">
-                <img id = "moreImage" src= "https://i.imgur.com/pnzihUp.png" alt = "three dots"></img>
-            </div>
+    function unfriend(){
+        console.log("Unfriend this person");
+    }
 
+    function block(){
+        console.log("Block this person");
+    }
 
+    function revoke(){
+        console.log("Revoke sent request");
+    }
+
+    function unblock(){
+        console.log("Unblock this person");
+    }
+
+    function accept(){
+        console.log("Accept received request");
+    }
+
+    function decline(){
+        console.log("Decline received request");
+    }
+
+    function friendReact(value){
+        if(value === "unfriend"){
+            unfriend();
+        }
+        else if(value === "block"){
+            block();
+        }
+        else if(value === "revoke"){
+            revoke();
+        }
+        else if(value === "unblock"){
+            unblock();
+        }
+        else if (value === "accept"){
+            accept();
+        }
+        else if (value === "decline"){
+            decline();
+        }
+    }
+    return(
+        <div id = "FriendObj">
+            <div>
+                <img src = {props.children.profilePhoto}/>
+            </div>
+            <div>
+                <p>{props.children.displayName}</p>
+                <p>{props.children.username}</p>
+            </div>
+            <div>
+                <button onClick = {toggleSelectShow}>
+                    <img src = ""/>
+                </button>
+                {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}
+                {(selectShow && type === "sent") ? <SentSelect friendReact = {friendReact}></SentSelect>: <></>}
+                {(selectShow && type === "received") ? <ReceivedSelect friendReact = {friendReact}></ReceivedSelect>: <></>}
+                {(selectShow && type === "blocked") ? <BlockedSelect friendReact = {friendReact}></BlockedSelect>: <></>}
+            </div>
         </div>
-    );
-}
+    )
 
+}
 
 export default FriendObj;

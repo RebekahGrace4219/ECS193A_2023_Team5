@@ -50,7 +50,7 @@ const SignUpForm = () => {
     function submitSignUp(){
         // validate the pieces information
         // Send to post
-            // If fail, update the failure reason on the three forms for failure
+            // If fail, up date the failure reason on the three forms for failure
             // If succeed, move away from page
     }
 
