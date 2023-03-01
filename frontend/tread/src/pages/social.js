@@ -20,7 +20,7 @@ const Social = (props) => {
                 <div className = "middleSide3Part">
                     <SocialHeader>{{"type":"button"}}</SocialHeader>
                     <RecentActivity>{{"type":"friend"}}</RecentActivity>
-                    <FriendSection/>
+                    <FriendSection></FriendSection>
                 </div>
                 :
                 <div className = "middleSide3Part">

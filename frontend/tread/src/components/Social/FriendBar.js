@@ -23,11 +23,11 @@ const FriendBar = (props) => {
 
     return (
         <div id = "FriendBar">
-            <BarButton func = {setFriend} name = "All"></BarButton>
-            <BarButton func = {setSent} name = "Sent"></BarButton>
-            <BarButton func = {setReceived} name = "Received"></BarButton>
-            <BarButton func = {setBlocked} name = "Blocked"></BarButton>
-            <BarButton func = {setAdd} name = "Add Friend"></BarButton>
+            <BarButton function = {setFriend} name = "All"></BarButton>
+            <BarButton function = {setSent} name = "Sent"></BarButton>
+            <BarButton function = {setReceived} name = "Received"></BarButton>
+            <BarButton function = {setBlocked} name = "Blocked"></BarButton>
+            <BarButton function = {setAdd} name = "Add Friend"></BarButton>
         </div>
     )
 
