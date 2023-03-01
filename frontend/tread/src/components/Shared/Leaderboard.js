@@ -35,8 +35,7 @@ const LeaderboardChallenge = (props) => {
         return (<LeaderboardChallengeObj>{input}</LeaderboardChallengeObj>);
     }
     const [sss] = useState(convertChallengeObj(props.children.progress));
-    console.log(props.children.progress);
-    console.log(sss);
+
     return (
         <div>
             <h2>Progress Leaderboard</h2>

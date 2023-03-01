@@ -1,11 +1,17 @@
-import FriendObj from './FriendObj'
-import '../../css/Social/friendSection.css'
+import FriendBar from './FriendBar';
+import FriendScroll from './FriendScroll';
+
 const FriendSection = (props) => {
     return (
-    <div className = "FriendSection">
-        {props.friends.map((name) => {
-            return (<FriendObj>{name}</FriendObj>);})}
-    </div>);
+    <div>
+        <div>
+            <h2>Friends</h2>
+            <FriendBar></FriendBar>
+        </div>
+
+        <FriendScroll></FriendScroll>
+    </div>
+    )
 }
 
 export default FriendSection;

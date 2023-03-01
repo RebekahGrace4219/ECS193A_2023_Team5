@@ -1,7 +1,7 @@
 import '../../css/Shared/sideBar.css'
 import React, {useState, useEffect} from 'react';
 const SideBar = () => {
-    console.log(window.location.pathname);
+
     let challengePages = ["/currentChallengePage",  "/weeklyChallengePage"];
     let socialPages = ["/socialFriendPage", "/socialLeaguePage"];
     let profileSettingsPages = ["/profileSettingsPage"];

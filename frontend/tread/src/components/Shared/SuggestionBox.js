@@ -1,8 +1,8 @@
 import "../../css/Shared/suggestionBox.css";
 import {useState, useEffect} from 'react';
-import SuggestedFriendObj from "./SuggestedFriendObj";
-import SuggestedLeagueObj from "./SuggestedLeagueObj";
-import RecentMedalObj from "./RecentMedalObj";
+import SuggestedFriendObj from "../Social/SuggestedFriendObj";
+import SuggestedLeagueObj from "../Social/SuggestedLeagueObj";
+import RecentMedalObj from "../Profile/RecentMedalObj";
 
 const SuggestionBox= (props) => {
 

@@ -1,7 +1,6 @@
 import '../../css/Shared/circleButton.css'
 const AcceptButton = (props) => {
     function onAccept(){
-        console.log(props.challengeID);
     }
 
     return(

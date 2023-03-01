@@ -5,12 +5,10 @@ export const UsernameForm = () => {
     };
 
     function inputUsername(text){
-      console.log(text.target.value);
       state["text"] = text.target.value;
     }
 
     function submitUsername(){
-      console.log("Submit: "+ state["text"]);
       state["valid"] = true;
     }
 

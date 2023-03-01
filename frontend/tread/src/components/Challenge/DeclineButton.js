@@ -1,7 +1,6 @@
 import '../../css/Shared/circleButton.css'
 const DeclineButton = (props) => {
     function onDecline(){
-        console.log(props.challengeID);
     }
 
     return(

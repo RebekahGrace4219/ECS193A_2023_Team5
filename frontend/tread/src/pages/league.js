@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 
 import SideBar from '../components/Shared/SideBar';
 import SocialHeader from "../components/Social/SocialHeader";
-import LeagueHeader from "../components/Social/LeagueHeader";
-import LeagueChallengeList from "../components/Social/LeagueChallengeList";
-import LeagueLeaderboard from "../components/Social/LeagueLeaderboard";
-import LeagueMemberList from "../components/Social/LeagueMemberList";
+import LeagueHeader from "../components/League/LeagueHeader";
+import LeagueChallengeList from "../components/League/LeagueChallengeList";
+import LeagueLeaderboard from "../components/League/LeagueLeaderboard";
+import LeagueMemberList from "../components/League/LeagueMemberList";
 import UserSettingsButton from '../components/Shared/UserSettingsButton';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 

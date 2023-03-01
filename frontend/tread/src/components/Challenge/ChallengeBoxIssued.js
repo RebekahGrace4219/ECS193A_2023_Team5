@@ -9,7 +9,7 @@ import {useState} from 'react';
 const ChallengeBoxIssued = (props) => {
     const [shortVersion, setShortVersion] = useState(true);
 
-    /*console.log(props);
+    /*;
 
     const [shortVersion, setShortVersion] = props.children;*/
     /*            <div id = "peopleCount">People Image</div>

@@ -29,7 +29,6 @@ const AddFriend = () => {
             else {
                 setUserText("Request denied: "+ response.data);
             }
-            console.log(response);
         })
         .catch(function (error) {
           console.log(error);
