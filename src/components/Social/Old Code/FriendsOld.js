@@ -4,6 +4,8 @@ import AddFriend from "./AddFriends";
 import FriendBar from "./FriendBar";
 import FriendSection from '../FriendSection';
 import axios from 'axios';
+const backend_url = process.env.REACT_APP_PROD_BACKEND 
+
 const Friends = () => {
 
     const [ifFriends, setIfFriends] = useState(true);
@@ -20,7 +22,7 @@ const Friends = () => {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/friend_list/friend_list',
+            url: backend_url+'/friend_list/friend_list',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -49,7 +51,7 @@ const Friends = () => {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/friend_list/pending_requests',
+            url: backend_url+'/friend_list/pending_requests',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -80,7 +82,7 @@ const Friends = () => {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/friend_list/blocked_list',
+            url: backend_url+'/friend_list/blocked_list',
             headers: {
               'Content-Type': 'application/json'
             },

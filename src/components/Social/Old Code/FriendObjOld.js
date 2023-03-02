@@ -2,6 +2,9 @@ import '../../css/Social/friendObj.css';
 import React, {useState} from 'react';
 import axios from 'axios';
 
+const backend_url = process.env.REACT_APP_PROD_BACKEND 
+
+
 const FriendObj = (props) => {
     const [ifAcceptButton, setAcceptButton] = useState(true);
     async function acceptFriendRequest(){
@@ -14,7 +17,7 @@ const FriendObj = (props) => {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/friend_list//accept_received_request',
+            url: backend_url+'/friend_list//accept_received_request',
             headers: {
               'Content-Type': 'application/json'
             },

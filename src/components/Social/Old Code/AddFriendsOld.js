@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import '../css/addFriend.css'
 import axios from 'axios';
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND 
+
+
 const AddFriend = () => {
     const [userText, setUserText] = useState("");
     const [usernameText, setUsernameText] = useState("");
@@ -13,7 +17,7 @@ const AddFriend = () => {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/friend_list/send_friend_request',
+            url: backend_url+'/friend_list/send_friend_request',
             headers: {
               'Content-Type': 'application/json'
             },

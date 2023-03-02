@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import '../css/Login/login.css';
 
+const backend_url = process.env.REACT_APP_PROD_BACKEND 
+const env_client_id = process.env.REACT_APP_CLIENT_ID
 const Login = () => {
   // needs variable for nonce
 
@@ -14,9 +16,13 @@ const Login = () => {
 
     console.log(token)
     console.log("Encoded JWT ID token: " + token.credential);
+    console.log("TEST MESSAGE");
+    console.log("backend_url: " + backend_url);
+    console.log("client id: " + env_client_id);
+
     var config = {
       method: 'post',
-      url: 'http://localhost:5000/auth/login/google',
+      url: backend_url+'/auth/login/google',
       headers: {
         Authorization: `${token.credential}`,
         Accept: 'application/json'
@@ -60,7 +66,7 @@ const Login = () => {
     if (window.google) {
       const google = window.google;
       google.accounts.id.initialize({
-        client_id: "1076047412250-apdkut808sf29i8ju8k0lt1jp4gh8n8s.apps.googleusercontent.com",
+        client_id: env_client_id,
         callback: handleCredentialResponse,
         // Need to set a random nonce
         nonce: ""
