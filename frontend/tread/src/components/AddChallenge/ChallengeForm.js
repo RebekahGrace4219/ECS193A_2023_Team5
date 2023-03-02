@@ -185,7 +185,7 @@ const ChallengeForm = () =>{
             {selfSpecify ?
                 <div className="formObj">
                     <p className = "formObjInner">Specify your own activity: </p>
-                    <input className = "formObjInner" type = "text"/>
+                    <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
                     <p className = "errorBox">{specifyErrorResponse}</p>
                 </div>
                 :
