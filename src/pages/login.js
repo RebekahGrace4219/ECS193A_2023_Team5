@@ -3,14 +3,14 @@ import axios from 'axios';
 import '../css/Login/login.css';
 import { useNavigate } from 'react-router-dom'
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND 
-const backend_url = process.env.REACT_APP_DEV_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 const env_client_id = process.env.REACT_APP_CLIENT_ID
 
 const Login = () => {
   // needs variable for nonce
   function handleCredentialResponse(token) {
-    
+
     // Check that recieved nonce is correct
     // Send request to backend for nonce reply in result with cnonce:
     // nonce with timestamp so repeat attacks won't work.
@@ -25,20 +25,20 @@ const Login = () => {
 
     var config = {
       method: 'post',
-      url: backend_url+'/auth/login/google',
+      url: backend_url+'auth/login/google',
+      withCredentials: true,
+      credentials: 'include',
       headers: {
         Authorization: `${token.credential}`,
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     };
     let isNewUser = false;
     axios(config)
     .then(function (response) {
-      console.log(response.headers);
       isNewUser = response.data.isNewUser;
-      console.log(response.data.isNewUser);
+
       if (isNewUser){
-        window.sessionStorage.setItem("token", token)
         window.location.href = "./signUpPage";
       }
       else{

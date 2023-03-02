@@ -17,15 +17,17 @@ const SignUpForm = () => {
         //TODO
         var config  = {
             method : 'post',
-            url: backend_url+'/auth/get_profile_photo',
+            url: backend_url+'auth/get_profile_photo',
             headers: {
                 Accept: 'application/json',
-              }
+              },
+            withCredentials: true,
+            credentials: 'include'
         };
         axios(config)
         .then(function(response) {
-            console.log("We got the response")
-            console.log(response)
+            console.log(response.data)
+            return response.data;
         })
         .catch(function(error){
             console.log(error)
