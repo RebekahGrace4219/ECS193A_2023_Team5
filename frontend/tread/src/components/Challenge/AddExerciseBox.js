@@ -94,18 +94,15 @@ let sportList =  [
 
 
 const AddExerciseBox = () => {
-    let [selfSpecify, setSelfSpecify] = useState(false);
-    let [sportExercise, setSportExercise] = useState("");
-    let [selfEntryErrorResponse, setSpecifyErrorResponse] = useState("");
-    let [exerciseTime, setExerciseTime] = useState(0);
-    let [exerciseAmount, setExerciseAmount] = useState(0);
-    let [exerciseDate, setExerciseDate] = useState();
+    const [selfSpecify, setSelfSpecify] = useState(false);
+    const [sport, setSport] = useState("");
+    const [specifyError, setSpecifyError] = useState("");
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
 
-        if (event.target.value != "Other (Specify Below)"){
-            setSportExercise(event.target.value);
+        if (event.target.value !== "Other (Specify Below)"){
+            setSport(event.target.value);
         }
     }
 
@@ -113,62 +110,35 @@ const AddExerciseBox = () => {
         let selfEntry = event.target.value;
 
         if (selfEntry.length === 0 || selfEntry.length > 32){
-            setSpecifyErrorResponse("The sport object should be 1-32 characters");
+            setSpecifyError("The sport object should be 1-32 characters");
             return false;
         }
-        setSpecifyErrorResponse("");
-        setSportExercise(event.target.value);
+        setSpecifyError("");
+        setSport(event.target.value);
     }
 
-    return (
+    return(
         <div id = "AddExerciseBox">
             <div>
                 <p>Exercise</p>
-                <select className = "formSelect" onChange = {sportChange}>
-                        {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
+                <select onChange = {sportChange}>
+                    {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                 </select>
-                { selfSpecify ?
+            </div>
+            {selfSpecify ?
                 <div>
+                    <p>Specify your own activity: </p>
                     <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
-                    <p>{selfEntryErrorResponse}</p>
-                </div>:<></>}
-
-            </div>
-
-            <div>
-                <p>Time</p>
-                <div>
-                    <input type = "number"/>
-                    <select className = "formSelect" onChange = {}>
-                        <option value = "s">s</option>
-                        <option value = "min">min</option>
-                        <option value = "hr">hr</option>
-                </select>
+                    <p className = "errorBox">{specifyError}</p>
                 </div>
-            </div>
+                :
+                <></>
+            }
 
-            <div>
-                <p>Amount</p>
-                <div>
-                    <input type = "number"/>
-                    <select className = "formSelect" onChange = {}>
-                        <option value = "m">s</option>
-                        <option value = "km">min</option>
-                        <option value = "ft">hr</option>
-                        <option value = "yard">hr</option>
-                        <option value = "mile">hr</option>
-                        <option value = "rep">hr</option>
-                        <option value = "ct">hr</option>
-                </select>
-                </div>
-            </div>
 
-            <div>
-                <p>Date</p>
-                <input type = "date"/>
-            </div>
         </div>
     )
+
 }
 
 export default AddExerciseBox;

@@ -99,17 +99,19 @@ const ChallengeForm = () =>{
     const [sport, setSport] = useState("");
     const [specifyError, setSpecifyError] = useState("");
     const [unit, setUnit] = useState("");
+    const [amount, setAmount] = useState(0);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [receiverGroup, setReceiverGroup] = useState();
     const [receiver, setReceiver] = useState();
-
+    const [inviteOptions, setInviteOptions] = useState([]);
+    const [submitError, setSubmitError] = useState("");
     /***/
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
 
-        if (event.target.value != "Other (Specify Below)"){
+        if (event.target.value !== "Other (Specify Below)"){
             setSport(event.target.value);
         }
     }
@@ -125,6 +127,9 @@ const ChallengeForm = () =>{
         setSport(event.target.value);
     }
 
+    function amountChange(event){
+        setAmount(event.target.value);
+    }
     function unitChange(event){
         setUnit(event.target.value);
     }
@@ -208,7 +213,7 @@ const ChallengeForm = () =>{
                 <div className="formObj">
                     <p className = "formObjInner">Specify your own activity: </p>
                     <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
-                    <p className = "errorBox">{specifyErrorResponse}</p>
+                    <p className = "errorBox">{specifyError}</p>
                 </div>
                 :
                 <></>
@@ -217,8 +222,8 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">How much?</p>
                 <div className = "formObjInner">
-                    <input type = "number" min = "1" onChange = {unitChange}/>
-                    <select className = "formSelect">
+                    <input type = "number" min = "1" onChange = {amountChange}/>
+                    <select className = "formSelect" onChange = {unitChange}>
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
                         <option value = "km">km</option>
@@ -252,7 +257,7 @@ const ChallengeForm = () =>{
                 </div>
             </div>
 
-            { (receiverGroup  != "Self") ?
+            { (receiverGroup  !== "Self") ?
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
@@ -270,7 +275,7 @@ const ChallengeForm = () =>{
 
             <div className = "formObj">
             <button className="submitButton" onClick = {submitChallenge}><p className = "submitButtonText">Submit</p></button>
-            <p className = "errorBox">{submitErrorResponse}</p>
+            <p className = "errorBox">{submitError}</p>
             </div>
 
         </div>
