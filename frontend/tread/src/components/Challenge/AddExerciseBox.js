@@ -95,18 +95,29 @@ let sportList =  [
 
 const AddExerciseBox = () => {
     let [selfSpecify, setSelfSpecify] = useState(false);
-    let [selfEntryErrorResponse, setSelfEntryErrorResponse] = useState("");
-    let [exerciseType, setExerciseType] = useState("");
+    let [sportExercise, setSportExercise] = useState("");
+    let [selfEntryErrorResponse, setSpecifyErrorResponse] = useState("");
     let [exerciseTime, setExerciseTime] = useState(0);
     let [exerciseAmount, setExerciseAmount] = useState(0);
     let [exerciseDate, setExerciseDate] = useState();
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
+
+        if (event.target.value != "Other (Specify Below)"){
+            setSportExercise(event.target.value);
+        }
     }
 
-    function changeExerciseType(){
+    function selfSpecifyChange(event){
+        let selfEntry = event.target.value;
 
+        if (selfEntry.length === 0 || selfEntry.length > 32){
+            setSpecifyErrorResponse("The sport object should be 1-32 characters");
+            return false;
+        }
+        setSpecifyErrorResponse("");
+        setSportExercise(event.target.value);
     }
 
     return (
@@ -118,7 +129,7 @@ const AddExerciseBox = () => {
                 </select>
                 { selfSpecify ?
                 <div>
-                    <input className = "formObjInner" type = "text" onChange = {changeExerciseType}/>
+                    <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
                     <p>{selfEntryErrorResponse}</p>
                 </div>:<></>}
 
@@ -128,7 +139,7 @@ const AddExerciseBox = () => {
                 <p>Time</p>
                 <div>
                     <input type = "number"/>
-                    <select className = "formSelect" onChange = {sportChange}>
+                    <select className = "formSelect" onChange = {}>
                         <option value = "s">s</option>
                         <option value = "min">min</option>
                         <option value = "hr">hr</option>
@@ -140,7 +151,7 @@ const AddExerciseBox = () => {
                 <p>Amount</p>
                 <div>
                     <input type = "number"/>
-                    <select className = "formSelect" onChange = {sportChange}>
+                    <select className = "formSelect" onChange = {}>
                         <option value = "m">s</option>
                         <option value = "km">min</option>
                         <option value = "ft">hr</option>

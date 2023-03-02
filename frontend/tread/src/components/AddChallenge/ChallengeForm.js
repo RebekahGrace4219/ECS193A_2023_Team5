@@ -95,19 +95,22 @@ let sportList =  [
     ];
 
 const ChallengeForm = () =>{
+    const [selfSpecify, setSelfSpecify] = useState(false);
+    const [sport, setSport] = useState("");
+    const [specifyError, setSpecifyError] = useState("");
+    const [unit, setUnit] = useState("");
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [receiverGroup, setReceiverGroup] = useState();
+    const [receiver, setReceiver] = useState();
 
-    let [selfSpecify, setSelfSpecify] = useState(false);
-    let [sportExercise, setSportExercise] = useState("");
-    let [receiverGroup, setReceiverGroup] = useState("Self");
-    let [inviteOptions, setInviteOptions] = useState([]);
-    let [specifyErrorResponse, setSpecifyErrorResponse] = useState("");
-    let [submitErrorResponse, setSubmitErrorResponse] = useState("");
+    /***/
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
 
         if (event.target.value != "Other (Specify Below)"){
-            setSportExercise(event.target.value);
+            setSport(event.target.value);
         }
     }
 
@@ -115,23 +118,42 @@ const ChallengeForm = () =>{
         let selfEntry = event.target.value;
 
         if (selfEntry.length === 0 || selfEntry.length > 32){
-            setSpecifyErrorResponse("The sport object should be 1-32 characters");
+            setSpecifyError("The sport object should be 1-32 characters");
             return false;
         }
-        setSpecifyErrorResponse("");
-        setSportExercise(event.target.value);
+        setSpecifyError("");
+        setSport(event.target.value);
+    }
+
+    function unitChange(event){
+        setUnit(event.target.value);
+    }
+
+    function startDateChange(event){
+        setStartDate(event.target.value);
+    }
+
+    function endDateChange(event){
+        setEndDate(event.target.value);
     }
 
     function receiverChange(event){
+        setReceiver(event.target.value);
+    }
+
+    function receiverGroupChange(event){
         setReceiverGroup(event.target.value);
     }
 
     function getToday(){
+        //TODO
         return "2023-05-06";
     }
 
     function getTomorrow(){
+        // TODO
         return "2023-05-06";
+
     }
 
     function getFriends(){
@@ -144,8 +166,8 @@ const ChallengeForm = () =>{
         setInviteOptions(["league1", "leauge2", "league3"]);
     }
 
-
     function submitChallenge(){
+        //TODO
         // Validate the input
             // If the user selects "self specify", there needs to be a string > length 1 in the field
                 // -> if not, set the error response using setSpecifyErrorResponse();
@@ -195,7 +217,7 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">How much?</p>
                 <div className = "formObjInner">
-                    <input type = "number" min = "1" />
+                    <input type = "number" min = "1" onChange = {unitChange}/>
                     <select className = "formSelect">
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
@@ -211,18 +233,18 @@ const ChallengeForm = () =>{
 
             <div className = "formObj">
                 <p className = "formObjInner">Start Date</p>
-                <input id="issueDate" className = "formObjInner" type = "date" min = {getToday()}></input>
+                <input id="issueDate" className = "formObjInner" type = "date" min = {getToday()} onChange = {startDateChange}></input>
             </div>
 
             <div className = "formObj">
                 <p className = "formObjInner">End Date</p>
-                <input id="dueDate" className = "formObjInner" type = "date" min = {getTomorrow()}></input>
+                <input id="dueDate" className = "formObjInner" type = "date" min = {getTomorrow()} onChange = {endDateChange}></input>
             </div>
 
             <div className = "formObj">
                 <p className = "formObjInner">What kind of challenge?</p>
                 <div className = "formObjInner">
-                    <select className="formSelect" onChange = {receiverChange}>
+                    <select className="formSelect" onChange = {receiverGroupChange}>
                         <option value = "Self">Self</option>
                         <option value = "Friend">Friend</option>
                         <option value = "League">League</option>
@@ -234,7 +256,7 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
-                    <select>
+                    <select onChange = {receiverChange}>
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
                     </select>
                 </div>
@@ -245,6 +267,7 @@ const ChallengeForm = () =>{
             <></>
 
             }
+
             <div className = "formObj">
             <button className="submitButton" onClick = {submitChallenge}><p className = "submitButtonText">Submit</p></button>
             <p className = "errorBox">{submitErrorResponse}</p>
