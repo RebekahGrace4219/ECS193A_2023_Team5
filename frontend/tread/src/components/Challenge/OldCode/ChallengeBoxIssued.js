@@ -1,10 +1,10 @@
 
-import ProgressBar from "../Shared/ProgressBar";
+import ProgressBar from "../../Shared/ProgressBar";
 import "../../css/Challenge/ChallengeBoxIssued.css";
 import "../../css/Shared/shared.css";
 import CompleteInformation from './CompleteInformation.js';
 import IssuedTitle from './IssuedTitle.js';
-import LeaderboardChallenge from "../Shared/Leaderboard";
+import LeaderboardChallenge from "../../Shared/Leaderboard";
 import {useState} from 'react';
 const ChallengeBoxIssued = (props) => {
     const [shortVersion, setShortVersion] = useState(true);

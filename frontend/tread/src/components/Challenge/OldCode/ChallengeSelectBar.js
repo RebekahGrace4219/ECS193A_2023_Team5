@@ -1,4 +1,4 @@
-import BarButton from "../Shared/BarButton";
+import BarButton from "../../Shared/BarButton";
 import "../../css/Shared/shared.css"
 const ChallengeSelectBar = (props) => {
     return (

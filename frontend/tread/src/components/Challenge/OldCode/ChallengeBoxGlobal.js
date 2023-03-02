@@ -1,7 +1,7 @@
 
 import "../../css/Challenge/ChallengeBoxGlobal.css";
 import "../../css/Shared/shared.css";
-import ProgressBar from "../Shared/ProgressBar";
+import ProgressBar from "../../Shared/ProgressBar";
 import CompleteInformation from "./CompleteInformation";
 const ChallengeBoxGlobal = (props) => {
     return (
