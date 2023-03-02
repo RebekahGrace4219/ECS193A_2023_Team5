@@ -95,9 +95,18 @@ let sportList =  [
 
 const AddExerciseBox = () => {
     let [selfSpecify, setSelfSpecify] = useState(false);
+    let [selfEntryErrorResponse, setSelfEntryErrorResponse] = useState("");
+    let [exerciseType, setExerciseType] = useState("");
+    let [exerciseTime, setExerciseTime] = useState(0);
+    let [exerciseAmount, setExerciseAmount] = useState(0);
+    let [exerciseDate, setExerciseDate] = useState();
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
+    }
+
+    function changeExerciseType(){
+
     }
 
     return (
@@ -107,7 +116,12 @@ const AddExerciseBox = () => {
                 <select className = "formSelect" onChange = {sportChange}>
                         {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                 </select>
-                { selfSpecify ? <input className = "formObjInner" type = "text"/> :<></>}
+                { selfSpecify ?
+                <div>
+                    <input className = "formObjInner" type = "text" onChange = {changeExerciseType}/>
+                    <p>{selfEntryErrorResponse}</p>
+                </div>:<></>}
+
             </div>
 
             <div>

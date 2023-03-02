@@ -97,6 +97,7 @@ let sportList =  [
 const ChallengeForm = () =>{
 
     let [selfSpecify, setSelfSpecify] = useState(false);
+    let [sportExercise, setSportExercise] = useState("");
     let [receiverGroup, setReceiverGroup] = useState("Self");
     let [inviteOptions, setInviteOptions] = useState([]);
     let [specifyErrorResponse, setSpecifyErrorResponse] = useState("");
@@ -104,6 +105,21 @@ const ChallengeForm = () =>{
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
+
+        if (event.target.value != "Other (Specify Below)"){
+            setSportExercise(event.target.value);
+        }
+    }
+
+    function selfSpecifyChange(event){
+        let selfEntry = event.target.value;
+
+        if (selfEntry.length === 0 || selfEntry.length > 32){
+            setSpecifyErrorResponse("The sport object should be 1-32 characters");
+            return false;
+        }
+        setSpecifyErrorResponse("");
+        setSportExercise(event.target.value);
     }
 
     function receiverChange(event){
