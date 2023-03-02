@@ -26,6 +26,7 @@ const SignUpForm = () => {
         };
         axios(config)
         .then(function(response) {
+            console.log("response received")
             console.log(response.data)
             return response.data;
         })
@@ -54,7 +55,7 @@ const SignUpForm = () => {
         return true;
     }
 
-    function validateUsername(event){
+    function validateUsername(event){      
         let usernameInput = event.target.value;
         if (usernameInput.length === 0 || usernameInput.length > 32){
             setUsernameErrorResponse("Cannot sign up, username needs to be between 1-32 characters");
@@ -71,12 +72,40 @@ const SignUpForm = () => {
     }
 
     function submitSignUp(){
+      console.log(displayErrorResponse);
+      console.log(usernameErrorResponse);
+      if (displayErrorResponse != "" || usernameErrorResponse != ""){
+        setSubmitErrorResponse("Correct the highlighted fields to proceed")
+        return false
+      }  
+      
+      var config = {
+          method : 'post',
+          url : backend_url + 'auth/sign_up',
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+          data :
+          {
+            username : username,
+            picture : photo,
+            displayName :displayName
+          }
+        };
+      axios(config)
+      .then(function(response){
+        window.location.href = "./currentChallengePage";
+      })
+      .catch(function(error){
+        console.log(error)
+      });
+      }
         // validate the pieces information
         // Send to post
             // If fail, up date the failure reason on the three forms for failure
             // If succeed, move away from page
-    }
-
     function uploadPhoto(photo){
         setPhoto(photo);
     }
