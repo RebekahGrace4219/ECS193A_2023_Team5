@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../../css/Social/addFriend.css'
 import axios from 'axios';
-const backend_url = process.env.REACT_APP_PROD_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND 
+const backend_url = process.env.REACT_APP_DEV_BACKEND 
 
 const FriendAdd = () => {
 

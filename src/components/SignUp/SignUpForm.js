@@ -7,9 +7,30 @@ import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
 import '../../css/Shared/header.css';
 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND 
+const backend_url = process.env.REACT_APP_DEV_BACKEND 
+
+const token = window.sessionStorage.getItem("token")
+
 const SignUpForm = () => {
     function getProfilePhoto(){
         //TODO
+        var config  = {
+            method : 'post',
+            url: backend_url+'/auth/get_profile_photo',
+            headers: {
+                Accept: 'application/json',
+              }
+        };
+        axios(config)
+        .then(function(response) {
+            console.log("We got the response")
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error)
+            console.log("No response")
+        });
     }
 
     const [photo, setPhoto] = useState(getProfilePhoto());
