@@ -1,13 +1,16 @@
+import ChallengeScroll from "./ChallengeScroll";
 
-import ChallengeHeader from "./ChallengeHeader";
-import WeeklyChallengeForm from "./WeeklyChallengeForm";
 const WeeklyChallenge = () => {
 
     return (
             <div id = "WeeklyChallenge">
-                <ChallengeHeader/>
-                <WeeklyChallengeForm/>
+              <div>
+                <h2>Global Challenges</h2>
+              </div>
+
+              <ChallengeScroll type = "weekly"></ChallengeScroll>
             </div>
+
           );
 }
 

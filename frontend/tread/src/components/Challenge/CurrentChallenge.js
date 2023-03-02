@@ -1,14 +1,19 @@
-
-import AddExerciseBox from "./AddExerciseBox";
-import ChallengeHeader from "./ChallengeHeader";
-import CurrentChallengeForm from "./CurrentChallengeForm";
+import {useState} from 'react';
+import CurrentChallengeBar from './CurrentChallegeBar';
+import ChallengeScroll from './ChallengeScroll';
 const CurrentChallenge = () => {
-
+    const [challengeState, setChallengeState] = useState("issued");
     return (
         <div id = "CurrentChallenge">
-            <ChallengeHeader/>
-            <AddExerciseBox></AddExerciseBox>
-            <CurrentChallengeForm/>
+          <div>
+            <h2>Personal Challenges</h2>
+            <CurrentChallengeBar func = {setChallengeState}></CurrentChallengeBar>
+          </div>
+
+          {(challengeState === "issued") ? <ChallengeScroll type = "issued"></ChallengeScroll> : <>/</>}
+          {(challengeState === "sent") ? <ChallengeScroll type = "sent"></ChallengeScroll> : <>/</>}
+          {(challengeState === "received") ? <ChallengeScroll type = "received"></ChallengeScroll> : <>/</>}
+
         </div>
       );
 }
