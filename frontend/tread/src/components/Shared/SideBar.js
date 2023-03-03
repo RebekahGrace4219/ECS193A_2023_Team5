@@ -83,7 +83,7 @@ const SideBar = () => {
     }
 
     function clickSettingsButton(){
-      if(socialPages.includes(window.location.pathname)){
+      if(profileSettingsPages.includes(window.location.pathname)){
         return;
       }
       setLocation("/profileSettingsPage");
