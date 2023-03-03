@@ -33,12 +33,12 @@ const Login = () => {
         Accept: 'application/json',
       },
     };
-    let isNewUser = false;
+    let hasUsername= false;
     axios(config)
     .then(function (response) {
-      isNewUser = response.data.isNewUser;
+      hasUsername = response.data.hasUsername;
 
-      if (isNewUser){
+      if (!hasUsername){
         window.location.href = "./signUpPage";
       }
       else{
