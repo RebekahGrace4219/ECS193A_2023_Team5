@@ -8,6 +8,7 @@ import AddChallengeButton from "./AddChallengeButton";
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [information, setInformation] = useState([]);
+    let [username] = useState(getUsername());
 
     function getIssued(){
         //TODO
@@ -15,7 +16,7 @@ const ChallengeScroll = (props) => {
             {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
             "exerciseType":"Run",
             "unit":"km",
-            "count":10,
+            "amount":100,
             "dueDate":"2023-03-10",
             "username":"Bruce Wayne",
             "photos":{
@@ -23,7 +24,7 @@ const ChallengeScroll = (props) => {
                 "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
                 "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
             "sentUser": "Clark Kent",
-            "receivedUser": "Justice Leauge",
+            "receivedUser": "Justice League",
             "type": "league"}]);
     }
 
@@ -33,7 +34,7 @@ const ChallengeScroll = (props) => {
             {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
             "exerciseType":"Run",
             "unit":"km",
-            "count":10,
+            "amount":100,
             "dueDate":"2023-03-10",
             "username":"Bruce Wayne",
             "photos":{
@@ -41,7 +42,7 @@ const ChallengeScroll = (props) => {
                 "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
                 "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
             "sentUser": "Clark Kent",
-            "receivedUser": "Justice Leauge",
+            "receivedUser": "Justice League",
             "type": "league"}]);
     }
 
@@ -51,7 +52,7 @@ const ChallengeScroll = (props) => {
             {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
             "exerciseType":"Run",
             "unit":"km",
-            "count":10,
+            "amount":100,
             "dueDate":"2023-03-10",
             "username":"Bruce Wayne",
             "photos":{
@@ -59,7 +60,7 @@ const ChallengeScroll = (props) => {
                 "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
                 "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
             "sentUser": "Clark Kent",
-            "receivedUser": "Justice Leauge",
+            "receivedUser": "Justice League",
             "type": "league"}]);
 
     }
@@ -69,7 +70,7 @@ const ChallengeScroll = (props) => {
         {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
         "exerciseType":"Run",
         "unit":"km",
-        "count":10,
+        "amount":10,
         "dueDate":"2023-03-10",
         "username":"Bruce Wayne",
         "photos":{
@@ -77,24 +78,29 @@ const ChallengeScroll = (props) => {
             "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
             "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
         "sentUser": "Clark Kent",
-        "receivedUser": "Justice Leauge",
-        "type": "league"}]);
+        "receivedUser": "Justice League",
+        "type": "league",
+    "top5":true}]);
 
 }
+    function getUsername(){
+        //TODO
+        return "Bruce Wayne";
+    }
     function makeIssuedChallengeObj(input){
-        return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
+        return (<IssuedChallengeObj username = {username}>{input}</IssuedChallengeObj>);
     }
 
     function makeSentChallengeObj(input){
-        return (<SentChallengeObj>{input}</SentChallengeObj>);
+        return (<SentChallengeObj username = {username}>{input}</SentChallengeObj>);
     }
 
     function makeReceivedChallengeObj(input){
-        return (<ReceivedChallengeObj>{input}</ReceivedChallengeObj>);
+        return (<ReceivedChallengeObj username = {username}>{input}</ReceivedChallengeObj>);
     }
 
     function makeWeeklyChallengeObj(input){
-        return (<WeeklyChallengeObj>{input}</WeeklyChallengeObj>);
+        return (<WeeklyChallengeObj username = {username}>{input}</WeeklyChallengeObj>);
     }
 
     useEffect (

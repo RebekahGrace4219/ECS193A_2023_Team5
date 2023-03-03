@@ -97,6 +97,10 @@ const AddExerciseBox = () => {
     const [selfSpecify, setSelfSpecify] = useState(false);
     const [sport, setSport] = useState("");
     const [specifyError, setSpecifyError] = useState("");
+    const [unit, setUnit] = useState("");
+    const [amount, setAmount] = useState(0);
+    const [completionDate, setCompletionDate] = useState();
+    const [submitError, setSubmitError] = useState("");
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
@@ -117,6 +121,20 @@ const AddExerciseBox = () => {
         setSport(event.target.value);
     }
 
+    function amountChange(event){
+        setAmount(event.target.value);
+    }
+    function unitChange(event){
+        setUnit(event.target.value);
+    }
+
+    function completionDateChange(event){
+        completionDateChange(event.target.value);
+    }
+
+    function submitExercise(){
+        //TODO
+    }
     return(
         <div id = "AddExerciseBox">
             <div>
@@ -128,14 +146,38 @@ const AddExerciseBox = () => {
             {selfSpecify ?
                 <div>
                     <p>Specify your own activity: </p>
-                    <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
+                    <input type = "text" onChange = {selfSpecifyChange}/>
                     <p className = "errorBox">{specifyError}</p>
                 </div>
                 :
                 <></>
             }
 
+            <div>
+                <p>How much?</p>
+                <input type = "number" min = "1" onChange = {amountChange}/>
+                    <select className = "formSelect" onChange = {unitChange}>
+                        <option value = "ct">ct</option>
+                        <option value = "m">m</option>
+                        <option value = "km">km</option>
+                        <option value = "ft">ft</option>
+                        <option value = "yd">yd</option>
+                        <option value = "mi">mi</option>
+                        <option value = "min">min</option>
+                        <option value = "hr">hr</option>
+                    </select>
+            </div>
 
+
+            <div>
+                <p>Date</p>
+                <input type = "date" onChange = {completionDateChange}></input>
+            </div>
+
+            <div>
+                <button className="submitButton" onClick = {submitExercise}><p className = "submitButtonText">Submit</p></button>
+                <p>{submitError}</p>
+            </div>
         </div>
     )
 

@@ -1,5 +1,6 @@
-
+import ProgressBar from "./ProgressBar";
 const LeaderboardEntry = (props) => {
+
     return (
     <div id = "LeaderboardEntry">
         <div>
@@ -11,7 +12,7 @@ const LeaderboardEntry = (props) => {
         <div>
             <img src={props.children.photo}/>
             <p>{props.children.displayName}</p>
-            <ProgressBar>{{"children":{props.children.complete}}}</ProgressBar>
+            <ProgressBar>{{"children":props.children.complete}}</ProgressBar>
             <img src= "https://i.imgur.com/lfvWyWP.png"/>
             <p>{props.children.score}</p>
         </div>
