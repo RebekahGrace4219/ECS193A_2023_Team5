@@ -42,27 +42,27 @@ const LeagueForm = () => {
             <Line/>
 
         <div className="formObj">
-            <p className="formObjInner">League Picture</p>
+            <h2>League Picture</h2>
             <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
         </div>
 
         <div className="formObj">
-            <p className="formObjInner">League Name</p>
+            <h2>League Name</h2>
             <input className="formTextInput" type = "text"  onChange = {validateLeagueName}/>
             <p className = "errorBox">{leagueNameErrorResponse}</p>
         </div>
 
         <div className="formObj">
-            <p className="formObjInner">League Description</p>
+            <h2>League Description</h2>
             <input className="formTextInput" onChange = {validateLeagueDescription} type = "text"/>
             <p className = "errorBox">{leagueDescriptionErrorResponse}</p>
         </div>
 
         <div className="formObj">
-            <p className="formObjInner">What type of league?</p>
+            <h2>League Type</h2>
             <p className="formObjInner">In a private league, you the owner, will have to accept join requests.</p>
             <p className="formObjInner">In a public league, anyone can join</p>
-            <select>
+            <select className = "formSelect">
                 <option value = "private">Private</option>
                 <option value = "public">Public</option>
             </select>
