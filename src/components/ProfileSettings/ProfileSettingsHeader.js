@@ -1,5 +1,3 @@
-import React, {useState} from 'react';
-
 import '../../css/Shared/header.css';
 import '../../css/ProfileSettings/ProfileSettingsHeader.css';
 

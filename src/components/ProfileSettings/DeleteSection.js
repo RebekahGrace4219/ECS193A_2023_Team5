@@ -14,7 +14,7 @@ const DeleteSection = () => {
             <span className = "greenBaseText"> your account. You will </span>
             <span className = "redBaseText">lose</span>
             <span className = "greenBaseText"> all your friends, leagues, and medals. All your insights will be gone with no way to recover them. </span></p>
-            <button className = "DeleteButton" onClick = {deleteAccount}>Delete</button>
+            <button className = "deleteButton" onClick = {deleteAccount}><p className = "deleteButtonText">Delete</p></button>
 
         </div>
     )
