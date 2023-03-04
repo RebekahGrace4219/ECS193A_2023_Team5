@@ -26,8 +26,13 @@ const ProfileSettingsForm = () => {
 
     function validateDisplay(event){
         let displayNameInput = event.target.value;
-        if (displayNameInput.length === 0){
-            setDisplayErrorResponse("Cannot sign up, display name needs to be at least one character");
+        if (displayNameInput.length === 0 || displayNameInput.length > 32){
+            setDisplayErrorResponse("Cannot sign up, display name between 1-32 characters");
+            return false;
+        }
+
+        if (!(/^[a-z0-9 ]+$/i.test(displayNameInput))) {
+            setDisplayErrorResponse("Display Name input must only have alphanumeric and spaces");
             return false;
         }
 
@@ -44,12 +49,12 @@ const ProfileSettingsForm = () => {
     return (
     <div className = "Form">
         <div className="formObj">
-                <h2 className="formObjInner">Profile Picture</h2>
+                <h2>Profile Picture</h2>
                 <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">
-                <h2 className="formObjInner">Display Name</h2>
+                <h2>Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
                 <input className="formTextInput" type = "text"  onChange = {validateDisplay}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
