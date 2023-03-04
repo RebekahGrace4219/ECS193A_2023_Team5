@@ -1,0 +1,40 @@
+h1{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+
+    color: #014421;
+    padding: 0;
+    margin:0;
+}
+
+
+
+h2{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: left;
+
+    padding: 0;
+    margin:0;
+
+    color: #014421;
+}
+
+h3{
+    width: 100px;
+    height: 24px;
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+
+    text-align: center;
+
+    color: #014421;
+}
