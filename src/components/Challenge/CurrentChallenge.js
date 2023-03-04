@@ -10,9 +10,9 @@ const CurrentChallenge = () => {
             <CurrentChallengeBar func = {setChallengeState}></CurrentChallengeBar>
           </div>
 
-          {(challengeState === "issued") ? <ChallengeScroll type = "issued"></ChallengeScroll> : <>/</>}
-          {(challengeState === "sent") ? <ChallengeScroll type = "sent"></ChallengeScroll> : <>/</>}
-          {(challengeState === "received") ? <ChallengeScroll type = "received"></ChallengeScroll> : <>/</>}
+          {(challengeState === "issued") ? <ChallengeScroll type = "issued" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <>/</>}
+          {(challengeState === "sent") ? <ChallengeScroll type = "sent" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <>/</>}
+          {(challengeState === "received") ? <ChallengeScroll type = "received" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <>/</>}
 
         </div>
       );
