@@ -16,7 +16,23 @@
 }
 
 .formSelect{
+    box-sizing: border-box;
+    height: 38px;
 
+    background: #F1EEEA;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+}
+
+.formDateInput{
+    box-sizing: border-box;
+
+    width: 384px;
+    height: 56px;
+
+    background: #F1EEEA;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
 }
 
 .formTextInput{
