@@ -7,10 +7,31 @@ import AddChallengeButton from "./AddChallengeButton";
 
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
+    let [leagueID] = useState(props.leagueID);
+    let [ifLeague] = useState(props.ifLeague);
     let [information, setInformation] = useState([]);
     let [username] = useState(getUsername());
 
-    function getIssued(){
+    function getIssuedFriend(){
+        //TODO
+        setInformation([
+            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
+            "exerciseType":"Run",
+            "unit":"km",
+            "amount":100,
+            "dueDate":"2023-03-10",
+            "username":"Bruce Wayne",
+            "photos":{
+                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
+                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
+                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
+            "sentUser": "Clark Kent",
+            "receivedUser": "Justice League",
+            "type": "league"}]);
+    }
+
+
+    function getIssuedLeague(){
         //TODO
         setInformation([
             {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
@@ -105,8 +126,11 @@ const ChallengeScroll = (props) => {
 
     useEffect (
         () => {
-            if(scrollType === "issued"){
-                getIssued();
+            if(scrollType === "issued" && ifLeague){
+                getIssuedLeague();
+            }
+            else if(scrollType === "issued" && ifLeague){
+                getIssuedFriend();
             }
             else if(scrollType === "sent"){
                 getSent();

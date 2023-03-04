@@ -40,6 +40,7 @@ const IssuedChallengeObj = (props) => {
         }
         return leaderBoardInfo;
     }
+
     return (
     <div id = "IssuedChallengeObj">
         <div>

@@ -41,10 +41,16 @@ const LeagueObj = (props) => {
             revoke();
         }
     }
+
+    function moveLeaguePage(){
+        window.location.href = "leagueDescriptionPage?=" + props.children.leagueID;
+    }
     return(
         <div id = "LeagueObj">
             <div>
+                <button onClick = {moveLeaguePage}>
                 <img src = {props.children.picture}/>
+                </button>
             </div>
             <div>
                 <p>{props.children.leagueName}</p>
