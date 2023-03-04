@@ -22,6 +22,7 @@
     background: #F1EEEA;
     border: 1px solid #F9A800;
     border-radius: 15px;
+    margin-top: 3px;
 }
 
 .formDateInput{
@@ -36,7 +37,6 @@
 }
 
 .formTextInput{
-
     box-sizing: border-box;
 
     width: 384px;
