@@ -7,8 +7,8 @@ import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
 import '../../css/Shared/header.css';
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND 
-const backend_url = process.env.REACT_APP_DEV_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const token = window.sessionStorage.getItem("token")
 
@@ -60,7 +60,7 @@ const SignUpForm = () => {
         return true;
     }
 
-    function validateUsername(event){      
+    function validateUsername(event){
         let usernameInput = event.target.value;
         if (usernameInput.length === 0 || usernameInput.length > 32){
             setUsernameErrorResponse("Cannot sign up, username needs to be between 1-32 characters");
@@ -82,8 +82,8 @@ const SignUpForm = () => {
       if (displayErrorResponse != "" || usernameErrorResponse != ""){
         setSubmitErrorResponse("Correct the highlighted fields to proceed")
         return false
-      }  
-      
+      }
+
       var config = {
           method : 'post',
           url : backend_url + 'auth/sign_up',
