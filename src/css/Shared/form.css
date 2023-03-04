@@ -10,6 +10,7 @@
 .formObjInner{
     padding: 0;
     margin: 0;
+    font-size: 24px;
 }
 
 .formSelect{
@@ -18,4 +19,16 @@
 
 .formTextInput{
 
+    box-sizing: border-box;
+
+    width: 384px;
+    height: 40px;
+
+    background-color: transparent;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+}
+
+.errorBox{
+    color: red;
 }
