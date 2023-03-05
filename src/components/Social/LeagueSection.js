@@ -2,6 +2,8 @@ import LeagueBar from "./LeagueBar";
 import LeagueScroll from "./LeagueScroll";
 import Line from "../Shared/Line";
 import {useState} from 'react';
+import "../../css/Shared/section.css";
+import "../../css/Shared/bar.css";
 const LeagueSection = () => {
     const [leagueState, setLeagueState] = useState("league");
 
@@ -9,14 +11,13 @@ const LeagueSection = () => {
         window.location.href = "./addLeaguePage";
     }
     return (
-        <div id = "LeagueSection">
-            <div>
-                <h2>Leagues</h2>
+        <div id = "LeagueSection" className="section">
+            <div className ="selectButtonHeader">
+                <h1>Leagues</h1>
                 <LeagueBar func = {setLeagueState}></LeagueBar>
             </div>
 
         <div>
-        <Line></Line>
         <div>
             <button onClick = {addLeague}>Add League</button>
         </div>

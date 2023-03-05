@@ -1,5 +1,5 @@
 import BarButton from "../Shared/BarButton";
-
+import "../../css/Shared/bar.css";
 const FriendBar = (props) => {
     function setFriend(){
         props.func("friend");
@@ -22,7 +22,7 @@ const FriendBar = (props) => {
     }
 
     return (
-        <div id = "FriendBar">
+        <div id = "FriendBar" className="bar">
             <BarButton function = {setFriend} name = "All"></BarButton>
             <BarButton function = {setSent} name = "Sent"></BarButton>
             <BarButton function = {setReceived} name = "Received"></BarButton>
