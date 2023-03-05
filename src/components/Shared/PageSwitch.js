@@ -29,24 +29,24 @@ const PageSwitch = (props) => {
         <div>
         {  props.type === "challenge" ?
             <div id ="PageSwitch">
-                <button onClick = {moveCurrentChallenge}>Current</button>
-                <button onClick = {moveWeeklyChallenge}>Global</button>
+                <button className = "switchButton" onClick = {moveCurrentChallenge}><p className = "switchButtonText">Current</p></button>
+                <button className = "switchButton" onClick = {moveWeeklyChallenge}><p className = "switchButtonText">Global</p></button>
             </div>
             :
             <></>
         }
         {  props.type === "social" ?
             <div id ="PageSwitch">
-                <button onClick = {moveSocialFriend}>Friend</button>
-                <button onClick = {moveSocialLeague}>League</button>
+                <button className = "switchButton" onClick = {moveSocialFriend}><p className = "switchButtonText">Friend</p></button>
+                <button className = "switchButton" onClick = {moveSocialLeague}><p className = "switchButtonText">League</p></button>
             </div>
             :
             <></>
         }
         {  props.type === "profile" ?
             <div id ="PageSwitch">
-                <button onClick = {moveProfileStats}>Stats</button>
-                <button onClick = {moveProfileMedals}>Medals</button>
+                <button className = "switchButton" onClick = {moveProfileStats}><p className = "switchButtonText">Stats</p></button>
+                <button className = "switchButton" onClick = {moveProfileMedals}><p className = "switchButtonText">Medals</p></button>
             </div>
             :
             <></>

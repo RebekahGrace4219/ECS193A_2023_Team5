@@ -28,20 +28,22 @@ const ProfileHeader = () => {
 
     return (
         <div id = "ProfileHeader">
-            <div>
+            <div className = "headerTop">
                 <h1>Profile</h1>
                 <PageSwitch type = "profile"></PageSwitch>
             </div>
-            <div>
+            <div className = "profileBody">
+                <div id = "profileInformationSide">
                 <div>
-                    <img src = {profilePhoto} alt = "profile"/>
+                    <img id = "profilePhoto" src = {profilePhoto} alt = "profile"/>
                 </div>
                 <div>
                     <h1>{displayName}</h1>
                     <h3>{username}</h3>
                 </div>
+                </div>
                 <div>
-                    <h3>Add code</h3>
+                    <h2>Add code</h2>
                     <img src = "https://i.imgur.com/rpi5EL2.png"/>
                 </div>
             </div>

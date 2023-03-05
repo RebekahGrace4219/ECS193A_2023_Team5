@@ -25,8 +25,6 @@ h2{
 }
 
 h3{
-    width: 100px;
-    height: 24px;
 
     font-family: '?????';
     font-style: normal;
@@ -34,7 +32,5 @@ h3{
     font-size: 24px;
     line-height: 24px;
 
-    text-align: center;
-
-    color: #014421;
+    color: #00853F;
 }
