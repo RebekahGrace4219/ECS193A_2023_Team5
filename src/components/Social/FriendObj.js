@@ -3,7 +3,7 @@ import FriendSelect from "./FriendSelect";
 import SentSelect from "./SentSelect";
 import ReceivedSelect from "./ReceivedSelect";
 import BlockedSelect from "./BlockedSelect";
-import "../../css/Social/friendObj.css";
+import "../../css/Social/obj.css";
 
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
@@ -58,16 +58,16 @@ const FriendObj = (props) => {
         }
     }
     return(
-        <div id = "FriendObj">
-            <div className = "friendObjSection">
+        <div id = "FriendObj" className = "displayObj">
+            <div className = "objSection">
                 <img className = "friendProfilePhoto" src = {props.children.profilePicture}/>
             </div>
-            <div className = "friendObjSection">
-                <p className = "friendObjDisplayName">{props.children.displayName}</p>
-                <p className = "friendObjUsername">{props.children.username}</p>
+            <div className = "objSection objWritingSection">
+                <p className = "objDisplayName">{props.children.displayName}</p>
+                <p className = "objUsername">{props.children.username}</p>
             </div>
-            <div className = "friendObjSection">
-                <button className = "friendObjButton" onClick = {toggleSelectShow}>
+            <div className = "objSection">
+                <button className = "objButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
                 {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}

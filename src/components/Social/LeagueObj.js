@@ -3,6 +3,8 @@ import LeagueSelect from './LeagueSelect';
 import OwnerSelect from './OwnerSelect';
 import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
+
+import "../../css/Social/obj.css";
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;
@@ -46,20 +48,20 @@ const LeagueObj = (props) => {
         window.location.href = "leagueDescriptionPage?=" + props.children.leagueID;
     }
     return(
-        <div id = "LeagueObj">
-            <div>
-                <button onClick = {moveLeaguePage}>
-                <img src = {props.children.picture}/>
+        <div id = "LeagueObj" className = "displayObj">
+            <div className = "objSection">
+                <button className = "objButton" onClick = {moveLeaguePage}>
+                <img className = "friendProfilePhoto" src = {props.children.picture}/>
                 </button>
             </div>
-            <div>
-                <p>{props.children.leagueName}</p>
-                <p>{props.children.memberCount} Members</p>
-                <p>{props.children.challengeCount} active challenges</p>
+            <div className = "objSection objWritingSection">
+                <p className = "objDisplayName">{props.children.leagueName}</p>
+                <p className = "objUsername">{props.children.memberCount} Members</p>
+                <p className = "objUsername">{props.children.challengeCount} active challenges</p>
             </div>
-            <div>
-                <button onClick = {toggleSelectShow}>
-                    <img src = ""/>
+            <div className = "objSection">
+                <button className = "objButton" onClick = {toggleSelectShow}>
+                    <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
                 {(selectShow && type === "league") ? <LeagueSelect leagueReact = {leagueReact}></LeagueSelect>: <></>}
                 {(selectShow && type === "owner") ? <OwnerSelect leagueReact = {leagueReact}></OwnerSelect>: <></>}
