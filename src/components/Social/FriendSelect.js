@@ -1,8 +1,8 @@
-
+import "../../css/Shared/form.css";
 const FriendSelect = (props) => {
     return(
         <div>
-            <select onChange = {props.friendReact}>
+            <select className = "formSelect" onChange = {props.friendReact}>
                 <option value = "Unfriend">Unfriend</option>
                 <option value = "Block">Block</option>
             </select>

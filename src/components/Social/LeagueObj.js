@@ -3,7 +3,6 @@ import LeagueSelect from './LeagueSelect';
 import OwnerSelect from './OwnerSelect';
 import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
-
 import "../../css/Social/obj.css";
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
