@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react';
 import MedalsBar from './MedalsBar';
 import MedalsScroll from './MedalsScroll';
-
+import "../../css/Profile/medalsSection.css";
+import "../../css/Shared/bar.css";
 const MedalsSection = () => {
     const [ifEarned, setIfEarned] = useState(true);
 

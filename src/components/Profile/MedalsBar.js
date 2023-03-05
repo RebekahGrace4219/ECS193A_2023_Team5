@@ -1,4 +1,5 @@
 import BarButton from "../Shared/BarButton";
+import "../../css/Shared/bar.css";
 const MedalsBar = (props) => {
     function setEarned(){
         props.changeFunction(true);
@@ -9,9 +10,9 @@ const MedalsBar = (props) => {
     }
 
     return (
-    <div id = "MedalsBar">
+    <div id = "MedalsBar" className = "bar">
         <BarButton function = {setEarned} name = "Earned"></BarButton>
-        <BarButton function = {setInProgress} name = "InProgress"></BarButton>
+        <BarButton function = {setInProgress} name = "In Progress"></BarButton>
     </div>
     );
 }

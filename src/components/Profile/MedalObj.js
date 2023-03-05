@@ -1,21 +1,24 @@
-
+import "../../css/Profile/medalObj.css";
 
 const MedalObj = (props) => {
     return(
-        <div id = "MedalCompleteObj">
-            <div>
-                <img src = "https://i.imgur.com/OElCeGQ.png"></img>
+        <div id = "MedalObj">
+            <div className = "medalLeft">
+                <div>
+                    <img  className = "medalsItem" src = "https://i.imgur.com/OElCeGQ.png"></img>
+                </div>
+                <div>
+                    <p className = "medalsItem medalsText">{props.description}</p>
+                </div>
             </div>
-            <div>
-                <p>{props.description}</p>
-            </div>
-            <div>
+
+            <div className = "medalRight">
                 {
                     props.ifEarned
                     ?
-                    <p>Earned : {props.date}</p>
+                    <p className = "medalsItem medalsText">Earned : {props.date}</p>
                     :
-                    <p>Progress : {props.done}/{props.total}</p>
+                    <p className = "medalsItem medalsText">Progress : {props.done}/{props.total}</p>
                 }
 
             </div>
