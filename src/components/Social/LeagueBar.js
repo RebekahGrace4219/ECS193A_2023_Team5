@@ -1,5 +1,5 @@
 import BarButton from "../Shared/BarButton";
-
+import "../../css/Shared/bar.css";
 const LeagueBar = (props) => {
     function setLeague(){
         props.func("league");
@@ -19,7 +19,7 @@ const LeagueBar = (props) => {
 
 
     return (
-        <div id = "LeagueBar">
+        <div id = "LeagueBar" className="bar">
             <BarButton function = {setLeague} name = "All"></BarButton>
             <BarButton function = {setOwner} name = "Owner"></BarButton>
             <BarButton function = {setAdmin} name = "Admin"></BarButton>

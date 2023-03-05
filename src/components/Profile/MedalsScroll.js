@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import MedalObj from './MedalObj';
+import "../../css/Shared/scroll.css";
 const MedalsScroll = (props) => {
     let [type] = useState(props.children.type);
     let [informationMap, setInformationMap] = useState([]);
@@ -51,7 +52,7 @@ const MedalsScroll = (props) => {
         }, [type]
       );
     return (
-        <div id = "MedalsScroll">
+        <div id = "MedalsScroll" className = "scroll">
             {informationMap.map(createObj)}
         </div>
     );

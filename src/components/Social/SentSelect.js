@@ -1,8 +1,8 @@
-
+import "../../css/Shared/form.css";
 const SentSelect = (props) => {
     return(
         <div>
-            <select onSelect = {props.friendReact}>
+            <select className = "formSelect" onSelect = {props.friendReact}>
                 <option value = "revoke">Revoke Request</option>
                 <option value = "block">Block</option>
             </select>

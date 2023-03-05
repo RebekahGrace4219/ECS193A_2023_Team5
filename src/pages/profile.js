@@ -31,7 +31,7 @@ const Profile = (props) => {
             }
             <div className = "rightSide3Part">
                 <UserSettingsButton/>
-                <SuggestionBox>{{"type":"league"}}</SuggestionBox>
+                <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
             </div>
         </div>
       );

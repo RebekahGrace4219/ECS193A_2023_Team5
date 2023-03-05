@@ -2,9 +2,13 @@ import "../../css/Shared/suggestionBoxObj.css";
 
 const RecentMedalObj = (props) => {
     return(
-        <div id = "RecentMedalObj">
-            <img src = "https://i.imgur.com/tvafW72.png" alt = "trophy"></img>
-            <p>{props.name}</p>
+        <div id = "RecentMedalObj" className="suggestionObj">
+            <div className = "suggestionImageSection">
+                <img className = "suggestionImage" src = "https://i.imgur.com/tvafW72.png" alt = "trophy"></img>
+            </div>
+            <div className = "suggestionWritingSection" id = "MedalsWritingSection">
+                <p className = "suggestionTextStyle">{props.name}</p>
+            </div>
         </div>
     )
 }

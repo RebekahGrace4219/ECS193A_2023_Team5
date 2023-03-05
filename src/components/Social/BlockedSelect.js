@@ -1,9 +1,9 @@
-
+import "../../css/Shared/form.css";
 const BlockedSelect = (props) => {
 
     return(
         <div>
-            <select onChange = {props.friendReact}>
+            <select className = "formSelect" onChange = {props.friendReact}>
                 <option value = "Unblock">Unblock</option>
             </select>
         </div>
