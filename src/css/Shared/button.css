@@ -82,3 +82,7 @@
     width: 25px;
     height: 25px;
 }
+
+.movePageButton{
+    border-style: none;
+}

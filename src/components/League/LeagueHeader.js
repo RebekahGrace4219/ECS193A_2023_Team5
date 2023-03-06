@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import "../../css/League/leagueHeader.css";
-
+import "../../css/Shared/button.css";
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
     const [leagueName] = useState(getLeagueName());
@@ -33,6 +33,14 @@ const LeagueHeader = (props) => {
         //
         return 23;
     }
+
+    function moveDescriptionPage(){
+        window.location.href = "./leagueDescriptionPage?="+ id;
+    }
+
+    function moveMemberPage(){
+        window.location.href = "./leagueMemberPage?=" + id;
+    }
     return(
         <div id = "LeagueHeader">
             <div className = "leagueHeaderTop">
@@ -41,12 +49,12 @@ const LeagueHeader = (props) => {
             </div>
             <div className = "leagueMain">
                 <div className = "leagueMainLeft">
-                    <div className = "leaguePhotoDiv leagueItem">
+                    <div className = "leaguePhotoDiv">
                         <img className = "leagueProfilePhoto" src = {leaguePhoto} alt = "league"/>
                     </div>
                     <div className='leagueItem'>
-                        <h3>{numberMembers} Members</h3>
-                        <h3>{numberChallenges} Active Challenges</h3>
+                        <button className = "movePageButton" onClick = {moveDescriptionPage}><h3>{numberChallenges} Active Challenges</h3></button>
+                        <button className = "movePageButton" onClick = {moveMemberPage} ><h3>{numberMembers} Members</h3></button>
                     </div>
                 </div>
                 <div className='leagueMainRight'>
