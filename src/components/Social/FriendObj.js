@@ -4,7 +4,7 @@ import SentSelect from "./SentSelect";
 import ReceivedSelect from "./ReceivedSelect";
 import BlockedSelect from "./BlockedSelect";
 import "../../css/Social/obj.css";
-
+import "../../css/Shared/button.css";
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;
@@ -67,7 +67,7 @@ const FriendObj = (props) => {
                 <p className = "objUsername">{props.children.username}</p>
             </div>
             <div className = "objSection">
-                <button className = "objButton" onClick = {toggleSelectShow}>
+                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
                 {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}
