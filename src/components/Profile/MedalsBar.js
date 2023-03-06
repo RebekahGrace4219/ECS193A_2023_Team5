@@ -10,7 +10,7 @@ const MedalsBar = (props) => {
     }
 
     return (
-    <div id = "MedalsBar" className = "bar">
+    <div className = "bar">
         <BarButton function = {setEarned} name = "Earned"></BarButton>
         <BarButton function = {setInProgress} name = "In Progress"></BarButton>
     </div>

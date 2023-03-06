@@ -1,20 +1,23 @@
 import ProgressBar from "./ProgressBar";
+import "../../css/Shared/leaderboard.css";
 const LeaderboardEntry = (props) => {
 
     return (
     <div id = "LeaderboardEntry">
         <div>
             {(props.children.level === 1) ? <img src = "https://i.imgur.com/m5iDo4X.png"/>: <></>}
-            {(props.children.level === 1) ? <img src = "https://i.imgur.com/QctK692.png"/>: <></>}
-            {(props.children.level === 1) ? <img src = "https://i.imgur.com/QaT2m92.png"/>: <></>}
+            {(props.children.level === 2) ? <img src = "https://i.imgur.com/QctK692.png"/>: <></>}
+            {(props.children.level === 3) ? <img src = "https://i.imgur.com/QaT2m92.png"/>: <></>}
             {(props.children.level > 3) ? <p>{props.children.level}</p>: <></>}
         </div>
-        <div>
-            <img src={props.children.photo}/>
-            <p>{props.children.displayName}</p>
-            <ProgressBar>{{"children":props.children.complete}}</ProgressBar>
-            <img src= "https://i.imgur.com/lfvWyWP.png"/>
-            <p>{props.children.score}</p>
+        <div className = "leaderboardRightSide">
+            <img className = "leaderboardPhoto firstDiv" src={props.children.photo}/>
+            <p className="leaderboardText secondDiv">{props.children.displayName}</p>
+            <div className = "thirdDiv">
+                <ProgressBar>{{"completed":props.children.complete}}</ProgressBar>
+            </div>
+            <img className = "leaderboardPhoto fourthDiv" src= "https://i.imgur.com/lfvWyWP.png"/>
+            <p className="leaderboardText fifthDiv">{props.children.score}</p>
         </div>
     </div>
     );

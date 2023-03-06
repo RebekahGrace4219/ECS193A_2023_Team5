@@ -5,8 +5,14 @@ const SocialHeader = (props) => {
     <div id = "SocialHeader">
         <h1>Social Hub</h1>
         {
-            (props.children.type === "button") ?
+            (props.children.type === "social") ?
             <PageSwitch type = "social"></PageSwitch>
+            :
+            <></>
+        }
+                {
+            (props.children.type === "league") ?
+            <PageSwitch type = "league" leagueID = {props.children.leagueID}></PageSwitch>
             :
             <></>
         }

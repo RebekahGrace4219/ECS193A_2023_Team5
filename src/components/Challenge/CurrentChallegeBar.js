@@ -1,4 +1,5 @@
 import BarButton from "../Shared/BarButton";
+import "../../css/Shared/bar.css";
 const CurrentChallengeBar = (props) => {
     function setIssued(){
         props.func("issued");
@@ -12,7 +13,7 @@ const CurrentChallengeBar = (props) => {
         props.func("received");
     }
     return (
-    <div id = "CurrentChallengeBar">
+    <div className = "bar">
         <BarButton function = {setIssued} name = "All"></BarButton>
         <BarButton function = {setSent} name = "Sent"></BarButton>
         <BarButton function = {setReceived} name = "Received"></BarButton>

@@ -7,7 +7,7 @@ import "../../css/Social/obj.css";
 import axios from 'axios';
 
 const backend_url = process.env.REACT_APP_DEV_BACKEND
-
+import "../../css/Shared/button.css";
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;
@@ -24,7 +24,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children[0].username
         },
@@ -38,7 +38,7 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
-      });  
+      });
     }
 
     function block(){
@@ -49,7 +49,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           target : props.children[0].username
         },
@@ -63,7 +63,7 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
-      });  
+      });
     }
 
     function revoke(){
@@ -114,7 +114,7 @@ const FriendObj = (props) => {
                 <p className = "objUsername">{props.children[0].username}</p>
             </div>
             <div className = "objSection">
-                <button className = "objButton" onClick = {toggleSelectShow}>
+                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
                 {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}

@@ -4,7 +4,7 @@ import WeeklyChallengeObj from "./WeeklyChallengeObj";
 import ReceivedChallengeObj from "./ReceivedChallengeObj";
 import {useState, useEffect} from 'react';
 import AddChallengeButton from "./AddChallengeButton";
-
+import "../../css/Challenge/ChallengeScroll.css";
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [leagueID] = useState(props.leagueID);
@@ -24,7 +24,9 @@ const ChallengeScroll = (props) => {
             "photos":{
                 "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
                 "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
+                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png",
+                " Prince":"https://i.imgur.com/3Ia9gVG.png",
+                "Diana":"https://i.imgur.com/3Ia9gVG.png"},
             "sentUser": "Clark Kent",
             "receivedUser": "Justice League",
             "type": "league"}]);
@@ -129,7 +131,7 @@ const ChallengeScroll = (props) => {
             if(scrollType === "issued" && ifLeague){
                 getIssuedLeague();
             }
-            else if(scrollType === "issued" && ifLeague){
+            else if(scrollType === "issued" && !ifLeague){
                 getIssuedFriend();
             }
             else if(scrollType === "sent"){
@@ -145,11 +147,11 @@ const ChallengeScroll = (props) => {
     );
 
     return (<div id = "ChallengeScroll">
-        {(scrollType === "issued") ? information.map(makeIssuedChallengeObj): <></>}
-        {(scrollType === "issued") ? <AddChallengeButton></AddChallengeButton>: <></>}
-        {(scrollType === "sent") ? information.map(makeSentChallengeObj): <></>}
-        {(scrollType === "received") ? information.map(makeReceivedChallengeObj): <></>}
-        {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj): <></>}
+        {(scrollType === "issued") ? information.map(makeIssuedChallengeObj) : <></>}
+        {(scrollType === "issued" && !ifLeague) ? <AddChallengeButton></AddChallengeButton> : <></>}
+        {(scrollType === "sent") ? information.map(makeSentChallengeObj) : <></>}
+        {(scrollType === "received") ? information.map(makeReceivedChallengeObj) : <></>}
+        {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj) : <></>}
     </div>);
 }
 
