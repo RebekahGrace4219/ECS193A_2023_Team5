@@ -5,9 +5,9 @@ import ReceivedSelect from "./ReceivedSelect";
 import BlockedSelect from "./BlockedSelect";
 import "../../css/Social/obj.css";
 import axios from 'axios';
-
-const backend_url = process.env.REACT_APP_DEV_BACKEND
 import "../../css/Shared/button.css";
+const backend_url = process.env.REACT_APP_DEV_BACKEND
+
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;

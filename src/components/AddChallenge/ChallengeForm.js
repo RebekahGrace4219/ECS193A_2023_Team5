@@ -154,11 +154,11 @@ const ChallengeForm = () =>{
 
     function getToday(){
       let date_ob = new Date()
-      
+
       let date = ("0" + date_ob.getDate()).slice(-2);
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
       let year = date_ob.getFullYear();
-  
+
       return (year + "-" + month + "-" + date);
     }
 
@@ -169,7 +169,7 @@ const ChallengeForm = () =>{
       let date = ("0" + date_ob.getDate()).slice(-2);
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
       let year = date_ob.getFullYear();
-  
+
       return (year + "-" + month + "-" + date);
     }
 
@@ -186,9 +186,7 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
-            console.log("got the list");
-            console.log(response.data.friends);
-            setInviteOptions(response.data.friends);
+            setInviteOptions(response.data);
         })
         .catch(function(error){
             console.log(error);
@@ -211,7 +209,6 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
-            console.log("got the list");
             for(let item of response.data){
               array_leagues.push(item.leagueName + " - " + item._id);
             }
@@ -234,9 +231,9 @@ const ChallengeForm = () =>{
         var recipient = ""
         recipient = receiver
         if (receiverGroup === "League"){
-          recipient = receiver.split('-')[1].trim(); 
+          recipient = receiver.split('-')[1].trim();
         }
-        
+
         var config ={
           method : 'post',
           url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
@@ -250,8 +247,8 @@ const ChallengeForm = () =>{
             receivedUser : recipient,
             issueDate : startDate,
             dueDate : endDate,
-            unit : unit, 
-            amount : amount, 
+            unit : unit,
+            amount : amount,
             exerciseName : sport,
           }
         };
