@@ -12,8 +12,8 @@ const LeagueMemberList = (props) => {
             {"username": "Person 1", "displayName": "Person 1" , "userType": "owner", "photo": "https://i.imgur.com/q3vP5BH.png"},
             {"username": "Person 2", "displayName": "Person 2" , "userType": "admin", "photo": "https://i.imgur.com/q3vP5BH.png"},
             {"username": "Person 3", "displayName": "Person 3" , "userType": "admin", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "Person 4", "displayName": "Person 4" , "userType": "other", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "Person 5", "displayName": "Person 5" , "userType": "other", "photo": "https://i.imgur.com/q3vP5BH.png"},
+            {"username": "Person 4", "displayName": "Person 4" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
+            {"username": "Person 5", "displayName": "Person 5" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
 
         ];
     }

@@ -7,6 +7,12 @@
     height: 100px;
 }
 
+#ChallengeTitle{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+}
+
 #headerDescription{
     padding-top: 7px;
 }

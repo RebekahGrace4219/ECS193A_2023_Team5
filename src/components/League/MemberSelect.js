@@ -12,7 +12,7 @@ const MemberSelect = (props) => {
                 {(adminTeam && userType !== "owner") ? <option value = "kick">Kick Out</option> : <></>}
                 {(adminTeam && userType !== "owner") ? <option value = "ban">Ban</option> : <></>}
                 {(adminTeam && userType === "admin") ? <option value = "removeAdmin">Remove Admin</option> : <></>}
-                {(adminTeam && userType === "other") ? <option value = "addAdmin">Add Admin</option> : <></>}
+                {(adminTeam && userType === "participant") ? <option value = "addAdmin">Add Admin</option> : <></>}
             </select>
         </div>
     );

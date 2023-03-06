@@ -1,0 +1,36 @@
+#AddExerciseBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    background: #F1EEEA;
+    border: 3px solid #014421;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 20px;
+    width: 900px;
+
+    margin-bottom : 40px;
+}
+
+.horizontalForm{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.twoDivForm{
+    display: flex;
+    flex-direction: flex-end;
+}
+
+.formButton{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
