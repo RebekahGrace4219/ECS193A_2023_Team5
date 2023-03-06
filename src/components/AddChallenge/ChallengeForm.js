@@ -1,7 +1,9 @@
+import axios from 'axios';
 import Line from "../Shared/Line";
 import {useState, useEffect} from 'react';
 import '../../css/Shared/form.css'
 import '../../css/Shared/button.css'
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 let sportList =  [
     "Aikido",
@@ -95,13 +97,13 @@ let sportList =  [
 
 const ChallengeForm = () =>{
     const [selfSpecify, setSelfSpecify] = useState(false);
-    const [sport, setSport] = useState("");
+    const [sport, setSport] = useState("Aikido");
     const [specifyError, setSpecifyError] = useState("");
-    const [unit, setUnit] = useState("");
+    const [unit, setUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [receiverGroup, setReceiverGroup] = useState();
+    const [receiverGroup, setReceiverGroup] = useState("self");
     const [receiver, setReceiver] = useState();
     const [inviteOptions, setInviteOptions] = useState([]);
     const [submitError, setSubmitError] = useState("");
@@ -112,6 +114,7 @@ const ChallengeForm = () =>{
 
         if (event.target.value !== "Other (Specify Below)"){
             setSport(event.target.value);
+            setSpecifyError("")
         }
     }
 
@@ -150,28 +153,117 @@ const ChallengeForm = () =>{
     }
 
     function getToday(){
-        //TODO
-        return "2023-05-06";
+      let date_ob = new Date()
+      
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+  
+      return (year + "-" + month + "-" + date);
     }
 
     function getTomorrow(){
-        // TODO
-        return "2023-05-06";
+      var date_ob = new Date()
+      date_ob.setDate(date_ob.getDate() + 1);
 
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+  
+      return (year + "-" + month + "-" + date);
     }
 
     function getFriends(){
         // use SetInviteOptions to make it a list of friend names
-        setInviteOptions(["friend1", "friend2", "friend3"]);
+        var config ={
+          method: 'post',
+          url : backend_url+'friend_list/friend_list',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include'
+        };
+        axios(config)
+        .then(function(response){
+            console.log("got the list");
+            console.log(response.data.friends);
+            setInviteOptions(response.data.friends);
+        })
+        .catch(function(error){
+            console.log(error);
+            console.log("No response")
+        });
+        // setInviteOptions(["friend1", "friend2", "friend3"]);
     }
 
     function getLeagues(){
         // use SetInviteOptions to make it a list of leagues that user is ADMIN or OWNER of
-        setInviteOptions(["league1", "leauge2", "league3"]);
+        var array_leagues = []
+        var config ={
+          method: 'post',
+          url : backend_url+'league/get_admin_leagues',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include'
+        };
+        axios(config)
+        .then(function(response){
+            console.log("got the list");
+            for(let item of response.data){
+              array_leagues.push(item.leagueName + " - " + item._id);
+            }
+            setInviteOptions(array_leagues);
+        })
+        .catch(function(error){
+            console.log(error);
+            console.log("No response")
+        });
+        // setInviteOptions(["league1", "leauge2", "league3"]);
     }
 
     function submitChallenge(){
         //TODO
+        if (specifyError !== ""){
+          setSubmitError("Correct the highlighted fields to proceed")
+          return false;
+        }
+
+        var recipient = ""
+        recipient = receiver
+        if (receiverGroup === "League"){
+          recipient = receiver.split('-')[1].trim(); 
+        }
+        
+        var config ={
+          method : 'post',
+          url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+          data :
+          {
+            receivedUser : recipient,
+            issueDate : startDate,
+            dueDate : endDate,
+            unit : unit, 
+            amount : amount, 
+            exerciseName : sport,
+          }
+        };
+        axios(config)
+        .then(function(response){
+          window.location.href = "./currentChallengePage";
+        })
+        .catch(function(err){
+          setSubmitError("Error in issuing challenge");
+          console.log(err)
+        })
+
         // Validate the input
             // If the user selects "self specify", there needs to be a string > length 1 in the field
                 // -> if not, set the error response using setSpecifyErrorResponse();

@@ -3,28 +3,80 @@ import PageSwitch from "../Shared/PageSwitch";
 import "../../css/Profile/profileHeader.css";
 import "../../css/Shared/header.css";
 
+import axios from 'axios';
+
 const ProfileHeader = () => {
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
     function getDisplayName(){
         // GET from db
-        return "Rebekah Grace";
+        var config = {
+          method : 'post',
+          url : backend_url + 'user/get_display_name',
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+          console.log(response.data.displayName)
+          setDisplayName(response.data.displayName)
+          return response.data.displayName;
+        })
+        .catch(function(error){
+          console.log(error)
+        });
     }
 
     function getUsername(){
-        // Get from db
-        return "@BronzeTiger#4567";
+      var config = {
+        method : 'post',
+        url : backend_url + 'user/get_username',
+        headers: {
+          Accept: 'application/json',
+        },
+        withCredentials: true,
+        credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+          console.log(response.data);
+          setUsername(response.data)
+          return response.data;
+        })
+        .catch(function(error){
+          console.log(error)
+        });
     }
 
     function getProfilePhoto(){
-        // get from db
-        return "https://i.imgur.com/2BMQKKi.png";
+      var config  = {
+        method : 'post',
+        url: backend_url+'auth/get_profile_photo',
+        headers: {
+            Accept: 'application/json',
+          },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log("response received")
+          console.log(response.data)
+          setPhoto(response.data)
+          return response.data;
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });
     }
 
-
-    const [displayName] = useState(getDisplayName());
-    const [username] = useState(getUsername());
-    const [profilePhoto] = useState(getProfilePhoto());
-
+    const [displayName, setDisplayName] = useState(getDisplayName());
+    const [username, setUsername] = useState(getUsername());
+    const [profilePhoto, setPhoto] = useState(getProfilePhoto());
 
     return (
         <div id = "ProfileHeader">
@@ -44,7 +96,7 @@ const ProfileHeader = () => {
                 </div>
                 <div>
                     <h2>Add code</h2>
-                    <img src = "https://i.imgur.com/rpi5EL2.png"/>
+                    <img src = "https://i.imgur.com/rpi5EL2.png" alt = "QR Code for adding"/>
                 </div>
             </div>
 

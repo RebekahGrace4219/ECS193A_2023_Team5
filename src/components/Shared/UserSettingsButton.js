@@ -1,16 +1,37 @@
 import {useState, useEffect} from 'react';
 import "../../css/Shared/userSettingsButton.css"
+import axios from 'axios';
+
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const UserSettingsButton = () => {
 
-    const [displayName] = useState(getDisplayName());
-    const [username] = useState(getUsername());
-    const [profilePhoto] = useState(getPhoto())
+    const [displayName, setDisplayName] = useState(getDisplayName());
+    const [username, setUsername] = useState(getUsername());
+    const [profilePhoto, setPhoto] = useState(getPhoto())
     const [logoutDisplay, setLogoutDisplay] = useState(false);
     const [decisionState, setDecisionState] = useState("");
 
     function logout(){
-        //TODO
+      var config  = {
+        method : 'post',
+        url: backend_url+'auth/logout',
+        headers: {
+            Accept: 'application/json',
+          },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log("logged out")
+          window.location.href = "./";
+
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });
     }
 
     function stopLogoutDisplay(){
@@ -25,15 +46,64 @@ const UserSettingsButton = () => {
     }
 
     function getDisplayName(){
-        return "Rebekah Grace";
-    }
+      // GET from db
+      var config = {
+        method : 'post',
+        url : backend_url + 'user/get_display_name',
+        headers: {
+          Accept: 'application/json',
+        },
+        withCredentials: true,
+        credentials: 'include',
+      };
+      axios(config)
+      .then(function(response){
+        setDisplayName(response.data.displayName)
+        return response.data.displayName;
+      })
+      .catch(function(error){
+        console.log(error)
+      });
+  }
 
-    function getUsername(){
-        return "BronzeTiger#4557";
-    }
+  function getUsername(){
+    var config = {
+      method : 'post',
+      url : backend_url + 'user/get_username',
+      headers: {
+        Accept: 'application/json',
+      },
+      withCredentials: true,
+      credentials: 'include',
+      };
+      axios(config)
+      .then(function(response){
+        setUsername(response.data)
+        return response.data;
+      })
+      .catch(function(error){
+        console.log(error)
+      });
+  }
 
-    function getPhoto(){
-        return "";
+  function getPhoto(){
+      var config  = {
+        method : 'post',
+        url: backend_url+'auth/get_profile_photo',
+        headers: {
+            Accept: 'application/json',
+          },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          setPhoto(response.data)
+          return response.data;
+      })
+      .catch(function(error){
+          console.log(error)
+      });
     }
 
     function movePage(event){
@@ -56,7 +126,7 @@ const UserSettingsButton = () => {
         <div id = "UserSettingsButton" >
             <button id = "UserSettingsLeft" onClick={moveProfilePage}>
                 <div>
-                    <img id = "UserSettingButtonProfileImage" src = {profilePhoto}/>
+                    <img id = "UserSettingButtonProfileImage" src = {profilePhoto} alt = "Profile"/>
                 </div>
                 <div id = "userSettingNaming">
                     <p id ="userSettingDisplayName">{displayName}</p>
@@ -64,7 +134,7 @@ const UserSettingsButton = () => {
                 </div>
             </button>
             <div id = "userSettingButtonSection">
-                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png"/></button>
+                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png" alt = "Dropdown"/></button>
                 {
                     logoutDisplay ?
                     <select id = "LogoutSelect" onChange={movePage}>
