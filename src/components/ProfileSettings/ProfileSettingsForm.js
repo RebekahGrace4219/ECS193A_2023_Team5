@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import PhotoUpload from '../Shared/PhotoUpload';
@@ -25,9 +25,6 @@ const ProfileSettingsForm = () => {
         };
         axios(config)
         .then(function(response) {
-            console.log("response received")
-            console.log(response.data)
-            setPhoto(response.data)
             return response.data;
         })
         .catch(function(error){
@@ -49,8 +46,7 @@ const ProfileSettingsForm = () => {
         };
         axios(config)
         .then(function(response){
-          console.log(response.data)
-          return response.data;
+          return response.data.displayName;
         })
         .catch(function(error){
           console.log(error)
@@ -62,6 +58,7 @@ const ProfileSettingsForm = () => {
     }
 
     function validateDisplay(event){
+      event.preventDefault();
         let displayNameInput = event.target.value;
         if (displayNameInput.length === 0 || displayNameInput.length > 32){
             setDisplayErrorResponse("Cannot sign up, display name between 1-32 characters");
@@ -84,7 +81,7 @@ const ProfileSettingsForm = () => {
           setSubmitErrorResponse("Correct Highlighted fields to proceed");
           return false;
         }
-
+        console.log("on submit: ", photo, displayName);
         var config = {
           method : 'post',
           url : backend_url + 'user/update_profile_info',
@@ -108,6 +105,9 @@ const ProfileSettingsForm = () => {
       });
     }
 
+    function stopSubmit(event){
+      event.preventDefault();
+    }
 
     return (
     <div className = "Form">
@@ -119,7 +119,7 @@ const ProfileSettingsForm = () => {
             <div className="formObj">
                 <h2>Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
-                <input className="formTextInput" type = "text"  onChange = {validateDisplay}/>
+                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" onChange = {validateDisplay} onSubmit = {stopSubmit}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
             </div>
 

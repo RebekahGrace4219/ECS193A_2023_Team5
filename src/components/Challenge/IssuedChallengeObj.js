@@ -44,33 +44,7 @@ const IssuedChallengeObj = (props) => {
         return leaderBoardInfo;
     }
 
-    /*
 
-            <div>
-                <p>{title}</p>
-                <p>{dueDate}</p>
-                <button className = "challengeInformationButton" onClick = {toggleState}></button>
-            </div>
-            <div>
-                <ProgressBar>{{"completed":percentageDone}}</ProgressBar>
-                {
-                    (percentageDone < 100) ?
-                    <p>{myProgress}/{total}</p>
-                    :
-                    <p>Complete</p>
-                }
-            </div>
-        </div>
-        </div>
-            {showState ?
-            <div>
-                <Line></Line>
-                <Leaderboard>{{"title":"Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
-            </div>
-            :
-            <></>
-            }
-    */
     return (
     <div id = "issuedChallengeObj" className = "completeChallengeBox">
         <div className = "challengeBox">
