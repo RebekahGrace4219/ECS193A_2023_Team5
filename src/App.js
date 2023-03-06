@@ -11,7 +11,7 @@ import Challenge from "./pages/challenge";
 import Social from "./pages/social";
 import Profile from "./pages/profile";
 import League from "./pages/league";
-
+import TestDiv from "./pages/test";
 function App() {
 
   return (
@@ -19,6 +19,7 @@ function App() {
       <Router>
       <Routes>
         <Route path = "/" element = {<Front/>}/>
+        <Route path = "/test" element = {<TestDiv/>}/>
         <Route path = "/loginPage" element = {<Login/>}/>
         <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profileSettingsPage" element = {<ProfileSettings/>} />

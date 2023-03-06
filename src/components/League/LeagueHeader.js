@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import "../../css/League/leagueHeader.css";
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
@@ -33,22 +34,22 @@ const LeagueHeader = (props) => {
         return 23;
     }
     return(
-        <div>
-            <div>
+        <div id = "LeagueHeader">
+            <div className = "leagueHeaderTop">
                 <h2>{leagueName}</h2>
                 <p>{leagueDescription}</p>
             </div>
-            <div>
-                <div>
-                    <div>
-                        <img src = {leaguePhoto} alt = "league"/>
+            <div className = "leagueMain">
+                <div className = "leagueMainLeft">
+                    <div className = "leaguePhotoDiv leagueItem">
+                        <img className = "leagueProfilePhoto" src = {leaguePhoto} alt = "league"/>
                     </div>
-                    <div>
-                        <p>{numberMembers} Members</p>
-                        <p>{numberChallenges} Active Challenges</p>
+                    <div className='leagueItem'>
+                        <h3>{numberMembers} Members</h3>
+                        <h3>{numberChallenges} Active Challenges</h3>
                     </div>
                 </div>
-                <div>
+                <div className='leagueMainRight'>
                     <h2>Add Code</h2>
                     <img src = "https://i.imgur.com/rpi5EL2.png" alt = "qrcode"/>
                 </div>

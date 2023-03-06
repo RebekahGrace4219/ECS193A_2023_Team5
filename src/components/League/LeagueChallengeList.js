@@ -7,7 +7,7 @@ const LeagueChallengeList = (props) => {
 
     return(<div>
         <h2>Active Challenges</h2>
-        <ChallengeScroll type = "issued" ifLeague = {true} leagueID = {id}></ChallengeScroll> : <>/</>
+        <ChallengeScroll type = "issued" ifLeague = {true} leagueID = {id}></ChallengeScroll>
     </div>
 
     );

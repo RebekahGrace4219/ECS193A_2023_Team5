@@ -1,10 +1,36 @@
 .photoDisplayObj{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 #numberObj{
     background-color:black;
     border-radius: 25px;
     color: white;
+}
+
+#PhotoDisplay{
+    width: 180px;
+    height: 96px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction:"row";
+}
+
+.lastPhotoDisplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.lastPhotoText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:0;
+    padding:0;
 }
