@@ -1,0 +1,68 @@
+.leaderboardPhoto{
+    width: 30px;
+    height: 30px;
+}
+
+#LeaderboardEntry{
+    display: flex;
+    flex-direction: row;
+}
+
+.leaderboardRightSide{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: 600px;
+    height: 50px;
+
+    background: #F1EEEA;
+    border: 3px solid #014421;
+    border-radius: 20px;
+}
+
+.leaderboardText{
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.firstDiv{
+    width: 30px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.secondDiv{
+    width: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.thirdDiv{
+    width: 250px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.fourthDiv{
+    width: 31px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.fifthDiv{
+    width: 10px;
+
+    padding-left: 10px;
+    padding-right: 20px;
+}

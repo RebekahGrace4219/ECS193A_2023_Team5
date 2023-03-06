@@ -1,0 +1,102 @@
+.challengeSection{
+    width: 900px;
+}
+.completeChallengeBox{
+    width: 870px;
+
+    box-sizing: border-box;
+    background: #F1EEEA;
+    border: 3px solid #014421;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+}
+
+
+.challengeBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leaderboardSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.photoDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+    width: 180px;
+}
+
+.challengeText{
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+
+
+    color: #000000;
+}
+
+.challengeMiddle{
+    display: flex;
+    flex-direction: column;
+    width: 620px;
+
+    padding: 5px;
+    height: 100%;
+}
+.challengeInnerMiddle{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    height: 40px;
+}
+
+.challengeEnd{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-right: 10px;
+}
+.challengeDropButton{
+    border-style: none;
+    background-color: transparent;
+    height: 50px;
+}
+.challengeInnerEnd{
+    display: flex;
+    margin:0;
+    justify-content: space-between;
+    height: 40px;
+    padding-right: 10px;
+}
+/*
+.weeklyPhotoDiv{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    width: 180px;
+}
+
+.innerWeeklyPhotoDiv{
+    padding: 10px;
+}*/

@@ -18,13 +18,13 @@ const Social = (props) => {
             {
                 (props.children.type === "friend") ?
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"button"}}</SocialHeader>
+                    <SocialHeader>{{"type":"social"}}</SocialHeader>
                     <RecentActivity>{{"type":"friend"}}</RecentActivity>
                     <FriendSection></FriendSection>
                 </div>
                 :
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"button"}}</SocialHeader>
+                    <SocialHeader>{{"type":"social"}}</SocialHeader>
                     <RecentActivity>{{"type":"league"}}</RecentActivity>
                     <LeagueSection/>
                 </div>

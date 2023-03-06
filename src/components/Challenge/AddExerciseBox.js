@@ -1,5 +1,6 @@
 import {useState} from 'react';
-
+import "../../css/Challenge/addExercise.css";
+import "../../css/Shared/form.css";
 let sportList =  [
     "Aikido",
     "Archery",
@@ -137,25 +138,28 @@ const AddExerciseBox = () => {
     }
     return(
         <div id = "AddExerciseBox">
-            <div>
+            <h2>Add an Exercise</h2>
+            <div className = "horizontalForm">
                 <p>Exercise</p>
-                <select onChange = {sportChange}>
+                <select className = "formSelect" onChange = {sportChange}>
                     {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                 </select>
             </div>
             {selfSpecify ?
-                <div>
+                <div className = "horizontalForm">
                     <p>Specify your own activity: </p>
-                    <input type = "text" onChange = {selfSpecifyChange}/>
-                    <p className = "errorBox">{specifyError}</p>
+                    <input className = "formTextInput" type = "text" onChange = {selfSpecifyChange}/>
+                    {specifyError ? <p className = "errorBox">{specifyError}</p> :<></>}
                 </div>
                 :
                 <></>
             }
 
-            <div>
+            <div className = "horizontalForm">
+
                 <p>How much?</p>
-                <input type = "number" min = "1" onChange = {amountChange}/>
+                <div className='twoDivForm'>
+                <input className = "formTextInput" type = "number" min = "1" onChange = {amountChange}/>
                     <select className = "formSelect" onChange = {unitChange}>
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
@@ -166,15 +170,16 @@ const AddExerciseBox = () => {
                         <option value = "min">min</option>
                         <option value = "hr">hr</option>
                     </select>
+                </div>
             </div>
 
 
-            <div>
+            <div className = "horizontalForm">
                 <p>Date</p>
-                <input type = "date" onChange = {completionDateChange}></input>
+                <input className = "formDateInput" type = "date" onChange = {completionDateChange}></input>
             </div>
 
-            <div>
+            <div className = "formButton">
                 <button className="submitButton" onClick = {submitExercise}><p className = "submitButtonText">Submit</p></button>
                 <p>{submitError}</p>
             </div>
