@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import PhotoUpload from '../Shared/PhotoUpload';
 
 import axios from 'axios';
+import PhotoUpload from '../Shared/PhotoUpload';
 import '../../css/SignUp/SignUpForm.css';
 import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
@@ -10,11 +10,8 @@ import '../../css/Shared/header.css';
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 
-const token = window.sessionStorage.getItem("token")
-
 const SignUpForm = () => {
     function getProfilePhoto(){
-        //TODO
         var config  = {
             method : 'post',
             url: backend_url+'auth/get_profile_photo',
@@ -28,6 +25,7 @@ const SignUpForm = () => {
         .then(function(response) {
             console.log("response received")
             console.log(response.data)
+            setPhoto(response.data)
             return response.data;
         })
         .catch(function(error){
@@ -39,9 +37,9 @@ const SignUpForm = () => {
     const [photo, setPhoto] = useState(getProfilePhoto());
     const [displayName, setDisplayName] = useState();
     const [username, setUsername] = useState();
-    const [displayErrorResponse, setDisplayErrorResponse] = useState();
-    const [usernameErrorResponse, setUsernameErrorResponse] = useState();
-    const [submitErrorResponse, setSubmitErrorResponse] = useState();
+    const [displayErrorResponse, setDisplayErrorResponse] = useState("");
+    const [usernameErrorResponse, setUsernameErrorResponse] = useState("");
+    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
     function validateDisplay(event){
         let displayNameInput = event.target.value;
@@ -79,7 +77,7 @@ const SignUpForm = () => {
     function submitSignUp(){
       console.log(displayErrorResponse);
       console.log(usernameErrorResponse);
-      if (displayErrorResponse != "" || usernameErrorResponse != ""){
+      if (displayErrorResponse !== "" || usernameErrorResponse !== ""){
         setSubmitErrorResponse("Correct the highlighted fields to proceed")
         return false
       }

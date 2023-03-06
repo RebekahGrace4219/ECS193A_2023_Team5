@@ -1,10 +1,29 @@
 import '../../css/Shared/header.css'
 import '../../css/Shared/coloredText.css';
 import '../../css/Shared/button.css';
+import axios from 'axios';
+const backend_url = process.env.REACT_APP_DEV_BACKEND
+
 const DeleteSection = () => {
 
     function deleteAccount(){
         //TODO: send request to delete user account
+        var config = {
+          method : 'delete',
+          url : backend_url + 'user/delete_account',
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+          window.location.href = "./";
+        })
+        .catch(function(error){
+          console.log(error)
+        });
     }
     return (
         <div id = "DeleteSection">
