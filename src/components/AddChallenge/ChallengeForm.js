@@ -192,7 +192,6 @@ const ChallengeForm = () =>{
             console.log(error);
             console.log("No response")
         });
-        // setInviteOptions(["friend1", "friend2", "friend3"]);
     }
 
     function getLeagues(){
@@ -218,7 +217,6 @@ const ChallengeForm = () =>{
             console.log(error);
             console.log("No response")
         });
-        // setInviteOptions(["league1", "leauge2", "league3"]);
     }
 
     function submitChallenge(){
