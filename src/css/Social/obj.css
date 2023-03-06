@@ -1,0 +1,59 @@
+.displayObj{
+    box-sizing: border-box;
+
+    width: 400px;
+    height: 95px;
+
+    background: #F1EEEA;
+    border: 1px solid #F9A800;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.objProfilePhoto{
+    width: 66px;
+    height: 66px;
+}
+
+.objSection{
+    margin: 5px;
+}
+
+.objDisplayName{
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+
+    color: #014421;
+
+    padding: 0;
+    margin: 0;
+}
+
+.objUsername{
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* identical to box height */
+
+    padding: 0;
+    margin: 0;
+
+    color: #00853F;
+}
+
+.objButton{
+    border-style:none;
+}
+
+.objWritingSection{
+    width: 300px;
+}

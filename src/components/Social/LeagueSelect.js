@@ -1,8 +1,8 @@
-
+import "../../css/Shared/form.css"
 const LeagueSelect = (props) => {
     return(
         <div>
-            <select onChange = {props.leagueReact}>
+            <select className = "formSelect" onChange = {props.leagueReact}>
                 <option value = "leave">Leave League</option>
             </select>
         </div>

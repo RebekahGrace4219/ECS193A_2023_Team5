@@ -1,6 +1,9 @@
 import MemberSelect from "./MemberSelect";
 import "../../css/Shared/ProfileSmall.css";
+import {useState} from 'react';
+import "../../css/League/member.css";
 const MemberEntry = (props) => {
+    const [selectShow, setSelectShow] = useState();
     console.log("member entry", props);
     function addFriend(){
         // todo
@@ -26,6 +29,18 @@ const MemberEntry = (props) => {
 
     }
 
+    function accept(){
+
+    }
+
+    function decline(){
+
+    }
+
+    function unban(){
+
+    }
+
     function reactionFunction(input){
         let reaction = input.target.value;
 
@@ -47,16 +62,35 @@ const MemberEntry = (props) => {
         else if(reaction === "addAdmin"){
             addAdmin();
         }
+        else if(reaction === "accept"){
+            accept();
+        }
+        else if(reaction === "decline"){
+            decline();
+        }
+        else if(reaction === "unban"){
+            unban();
+        }
     }
+
+    function toggleSelectShow(){
+        setSelectShow(!selectShow);
+    }
+
     return(
-        <div>
-            <div>
-                <img className = "smallProfilePicture" src = {props.children.photo} />
+        <div className = "memberEntry">
+            <div className = "memberEntryLeft">
+                <div>
+                    <img className = "memberPicture" src = {props.children.photo} />
+                </div>
+                <div class = "memberNames">
+                    <p className = "memberDisplayName memberEntryText">{props.children.displayName}</p>
+                    <p className = "memberUsername memberEntryText">{props.children.username}</p>
+                </div>
             </div>
-            <div>
-                <p>{props.children.displayName}</p>
-                <p>{props.children.username}</p>
-            </div>
+            <div className = "memberEntryRight">
+
+
             <div>
                 {(props.children.userType === "admin" || props.children.userType === "owner") ?
                 <img src = "https://i.imgur.com/551l8WX.png" alt = "key"/>
@@ -71,10 +105,18 @@ const MemberEntry = (props) => {
                 <></>
                 }
             </div>
+
             <div>
-                <MemberSelect memberReact = {reactionFunction} selfType = {props.selfType} userType = {props.children.userType}></MemberSelect>
+                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
+                    <img src = "https://i.imgur.com/pnzihUp.png"/>
+                </button>
+                {(selectShow) ? <MemberSelect memberReact = {reactionFunction} scrollType = {props.scrollType} selfType = {props.selfType} userType = {props.children.userType}></MemberSelect>: <></>}
             </div>
+            </div>
+
         </div>
+
+
     )
 }
 

@@ -5,6 +5,7 @@ const UserSettingsButton = () => {
 
     const [displayName] = useState(getDisplayName());
     const [username] = useState(getUsername());
+    const [profilePhoto] = useState(getPhoto())
     const [logoutDisplay, setLogoutDisplay] = useState(false);
     const [decisionState, setDecisionState] = useState("");
 
@@ -31,6 +32,10 @@ const UserSettingsButton = () => {
         return "BronzeTiger#4557";
     }
 
+    function getPhoto(){
+        return "";
+    }
+
     function movePage(event){
         setDecisionState(event.target.value);
     }
@@ -51,7 +56,7 @@ const UserSettingsButton = () => {
         <div id = "UserSettingsButton" >
             <button id = "UserSettingsLeft" onClick={moveProfilePage}>
                 <div>
-                    <img id = "UserSettingButtonProfileImage" src = "https://i.imgur.com/7vaxEiJ.png"/>
+                    <img id = "UserSettingButtonProfileImage" src = {profilePhoto}/>
                 </div>
                 <div id = "userSettingNaming">
                     <p id ="userSettingDisplayName">{displayName}</p>

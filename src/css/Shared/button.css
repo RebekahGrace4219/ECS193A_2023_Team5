@@ -1,0 +1,120 @@
+.submitButton{
+    box-sizing: border-box;
+
+    width: 150px;
+    height: 34px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitButtonText{
+    width: 141px;
+    height: 27px;
+
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+
+    color: #F9A800;
+}
+
+.deleteButton{
+    box-sizing: border-box;
+
+    width: 116px;
+    height: 34px;
+
+    background: red;
+    border: 1px solid black;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deleteButtonText{
+    width: 141px;
+    height: 27px;
+
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+
+    color: white;
+}
+
+.challengeInformationButton{
+    border-style: none;
+    margin:0;
+    padding:0;
+
+    background-color: transparent;
+}
+
+.circleButton{
+    background-color: #D9D9D9;
+    border-color: #F9A800;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-radius: 50px;
+    border-width: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.circleButtonInner{
+    width: 25px;
+    height: 25px;
+}
+
+.movePageButton{
+    border-style: none;
+}
+
+.moreInfoButton{
+    border-style:none;
+    background-color: transparent;
+}
+
+.memberDisplayName{
+    width: 194.01px;
+    height: 28.14px;
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+
+    color: #014421;
+}
+
+.memberUsername{
+    width: 194.01px;
+    height: 28.14px;
+
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+
+    color: #000000;
+
+}

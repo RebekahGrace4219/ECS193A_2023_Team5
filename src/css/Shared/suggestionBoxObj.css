@@ -1,28 +1,23 @@
-#SuggestedFriendObj{
+.suggestionObj{
     width: 265px;
     height: 78px;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
     padding-top:10px;
     padding-bottom: 10px;
+
+    display: flex;
+    flex-wrap: nowrap;
 }
 
-#profilePhotoSuggested{
-    width: 78px;
-    height: 78px;
-}
+.suggestionWritingSection{
+    padding-left: 10px;
 
-.writingSectionSuggested{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    padding-left: 10px;
+
 }
 
-#displayNameSuggested{
+.suggestionHeaderStyle{
     width: 194.01px;
     height: 28.14px;
 
@@ -33,9 +28,14 @@
     text-align: left;
 
     color: #F9A800;
+    padding: 0;
+    margin:0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.MutualStyle{
+.suggestionTextStyle{
     width: 194px;
     height: 28px;
 
@@ -46,4 +46,19 @@
     text-align: left;
 
     color: #FFDF9E;
+    padding: 0;
+    margin:0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.suggestionImage{
+    width: 78px;
+    height: 78px;
+}
+
+#MedalsWritingSection{
+    align-items: center;
+    justify-content: center;
 }

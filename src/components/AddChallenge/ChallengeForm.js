@@ -2,7 +2,6 @@ import Line from "../Shared/Line";
 import {useState, useEffect} from 'react';
 import '../../css/Shared/form.css'
 import '../../css/Shared/button.css'
-import '../../css/Shared/errorBox.css'
 
 let sportList =  [
     "Aikido",
@@ -212,7 +211,7 @@ const ChallengeForm = () =>{
             {selfSpecify ?
                 <div className="formObj">
                     <p className = "formObjInner">Specify your own activity: </p>
-                    <input className = "formObjInner" type = "text" onChange = {selfSpecifyChange}/>
+                    <input className = "formTextInput" type = "text" onChange = {selfSpecifyChange}/>
                     <p className = "errorBox">{specifyError}</p>
                 </div>
                 :
@@ -222,7 +221,7 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">How much?</p>
                 <div className = "formObjInner">
-                    <input type = "number" min = "1" onChange = {amountChange}/>
+                    <input className = "formTextInput" type = "number" onChange = {amountChange}/>
                     <select className = "formSelect" onChange = {unitChange}>
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
@@ -238,12 +237,12 @@ const ChallengeForm = () =>{
 
             <div className = "formObj">
                 <p className = "formObjInner">Start Date</p>
-                <input id="issueDate" className = "formObjInner" type = "date" min = {getToday()} onChange = {startDateChange}></input>
+                <input id="issueDate" className = "formDateInput" type = "date" min = {getToday()} onChange = {startDateChange}></input>
             </div>
 
             <div className = "formObj">
                 <p className = "formObjInner">End Date</p>
-                <input id="dueDate" className = "formObjInner" type = "date" min = {getTomorrow()} onChange = {endDateChange}></input>
+                <input id="dueDate" className = "formDateInput" type = "date" min = {getTomorrow()} onChange = {endDateChange}></input>
             </div>
 
             <div className = "formObj">
@@ -257,11 +256,11 @@ const ChallengeForm = () =>{
                 </div>
             </div>
 
-            { (receiverGroup  !== "Self") ?
+            { (receiverGroup  === "Friend" || receiverGroup === "League") ?
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
-                    <select onChange = {receiverChange}>
+                    <select onChange = {receiverChange} className = "formSelect">
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
                     </select>
                 </div>

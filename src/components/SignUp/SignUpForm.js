@@ -7,8 +7,8 @@ import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
 import '../../css/Shared/header.css';
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND 
-const backend_url = process.env.REACT_APP_DEV_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const token = window.sessionStorage.getItem("token")
 
@@ -60,7 +60,7 @@ const SignUpForm = () => {
         return true;
     }
 
-    function validateUsername(event){      
+    function validateUsername(event){
         let usernameInput = event.target.value;
         if (usernameInput.length === 0 || usernameInput.length > 32){
             setUsernameErrorResponse("Cannot sign up, username needs to be between 1-32 characters");
@@ -82,8 +82,8 @@ const SignUpForm = () => {
       if (displayErrorResponse != "" || usernameErrorResponse != ""){
         setSubmitErrorResponse("Correct the highlighted fields to proceed")
         return false
-      }  
-      
+      }
+
       var config = {
           method : 'post',
           url : backend_url + 'auth/sign_up',
@@ -123,26 +123,26 @@ const SignUpForm = () => {
             </div>
 
             <div className="formObj">
-                <h1 className="formObjInner">Profile Picture</h1>
+                <h1>Profile Picture</h1>
                 <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">
-                <h1 className="formObjInner">Display Name</h1>
-                <p className="formObjInner">This is what others will see</p>
+                <h1>Display Name</h1>
+                <p className="formObjInner">This is what others will see.</p>
                 <input className="formTextInput" type = "text"  onChange = {validateDisplay}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
             </div>
 
             <div className="formObj">
-                <h1 className="formObjInner">Username</h1>
-                <p className="formObjInner">This is a unique identifier to you.</p>
+                <h1>Username</h1>
+                <p className="formObjInner">This is a public, but unique identifier to you.</p>
                 <input className="formTextInput" type = "text"  onChange = {validateUsername}/>
                 <p className = "errorBox">{usernameErrorResponse}</p>
             </div>
 
             <div className = "formObj">
-                <button className="submitButton" onClick = {submitSignUp}><p className = "submitButtonText">Submit</p></button>
+                <button className="submitButton" onClick = {submitSignUp}><p className = "submitButtonText">Sign Up</p></button>
                 <p className = "errorBox">{submitErrorResponse}</p>
             </div>
 
