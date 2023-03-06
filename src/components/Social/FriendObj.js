@@ -4,6 +4,9 @@ import SentSelect from "./SentSelect";
 import ReceivedSelect from "./ReceivedSelect";
 import BlockedSelect from "./BlockedSelect";
 import "../../css/Social/obj.css";
+import axios from 'axios';
+
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
@@ -14,11 +17,53 @@ const FriendObj = (props) => {
     }
 
     function unfriend(){
-        console.log("Unfriend this person");
+      console.log(props.children[0].username)
+      var config = {
+        method : 'post',
+        url : backend_url + 'friend_list/remove_friend',
+        headers: {
+          Accept: 'application/json',
+        },
+        data : 
+        {
+          friendName : props.children[0].username
+        },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log(response.data)
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });  
     }
 
     function block(){
-        console.log("Block this person");
+      console.log(props.children[0].username)
+      var config = {
+        method : 'post',
+        url : backend_url + 'friend_list/block_user',
+        headers: {
+          Accept: 'application/json',
+        },
+        data : 
+        {
+          target : props.children[0].username
+        },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log(response.data)
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });  
     }
 
     function revoke(){
@@ -37,34 +82,36 @@ const FriendObj = (props) => {
         console.log("Decline received request");
     }
 
-    function friendReact(value){
-        if(value === "unfriend"){
-            unfriend();
-        }
-        else if(value === "block"){
-            block();
-        }
-        else if(value === "revoke"){
-            revoke();
-        }
-        else if(value === "unblock"){
-            unblock();
-        }
-        else if (value === "accept"){
-            accept();
-        }
-        else if (value === "decline"){
-            decline();
-        }
+    function friendReact(event){
+      let value = event.target.value;
+      console.log(value)
+      if(value === "Unfriend"){
+          unfriend();
+      }
+      else if(value === "Block"){
+          block();
+      }
+      else if(value === "revoke"){
+          revoke();
+      }
+      else if(value === "unblock"){
+          unblock();
+      }
+      else if (value === "accept"){
+          accept();
+      }
+      else if (value === "decline"){
+          decline();
+      }
     }
     return(
         <div id = "FriendObj" className = "displayObj">
             <div className = "objSection">
-                <img className = "friendProfilePhoto" src = {props.children.profilePicture}/>
+                <img className = "friendProfilePhoto" src = {props.children[0].profilePicture}/>
             </div>
             <div className = "objSection objWritingSection">
-                <p className = "objDisplayName">{props.children.displayName}</p>
-                <p className = "objUsername">{props.children.username}</p>
+                <p className = "objDisplayName">{props.children[0].displayName}</p>
+                <p className = "objUsername">{props.children[0].username}</p>
             </div>
             <div className = "objSection">
                 <button className = "objButton" onClick = {toggleSelectShow}>
