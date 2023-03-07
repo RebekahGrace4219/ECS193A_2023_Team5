@@ -76,6 +76,12 @@ const LeagueForm = () => {
           return false;
         }
 
+        console.log("trying to send",           {
+          leagueName : leagueName,
+          leagueType : leagueType,
+          leagueDescription : leagueDescription,
+          leaguePicture: photo
+        });
         var config = {
           method : 'post',
           url : backend_url + 'league/create_league',

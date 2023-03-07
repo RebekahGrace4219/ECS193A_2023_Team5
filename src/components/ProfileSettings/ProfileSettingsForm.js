@@ -8,10 +8,11 @@ import "../../css/Shared/form.css";
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const ProfileSettingsForm = (props) => {
-    const [photo, setPhoto] = useState(props.children.profilePhoto);
+
+    const [photo, setPhoto] = useState(props.children.photo);
     const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
-    const [submitErrorResponse, setSubmitErrorResponse] = useState();
+    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
     function uploadPhoto(photo){
         setPhoto(photo);
@@ -73,13 +74,13 @@ const ProfileSettingsForm = (props) => {
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload defaultImage = {props.children.photo} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">
                 <h2>Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
-                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" onChange = {validateDisplay} onSubmit = {stopSubmit}/>
+                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" placeholder={props.children.displayName} onChange = {validateDisplay} onSubmit = {stopSubmit}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
             </div>
 

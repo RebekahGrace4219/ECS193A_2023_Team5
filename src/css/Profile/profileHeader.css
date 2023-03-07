@@ -18,6 +18,8 @@
 #profilePhoto{
     height: 180px;
     width: 180px;
+    margin-right: 20px;
+    border-radius: 20px;
 }
 
 .profileBody{
