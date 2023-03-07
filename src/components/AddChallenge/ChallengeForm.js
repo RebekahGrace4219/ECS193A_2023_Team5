@@ -187,7 +187,6 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
-            console.log(response);
             setInviteOptions(response.data);
         })
         .catch(function(error){
