@@ -3,35 +3,48 @@ import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
-    const [leagueName] = useState(getLeagueName());
-    const [numberMembers] = useState(getNumberMembers());
-    const [numberChallenges] = useState(getNumberChallenges());
-    const [leagueDescription] = useState(getLeagueDescription());
-    const [leaguePhoto] = useState(getLeaguePhoto());
+    const [loaded, setLoaded] = useState(false);
+    const [leagueName, setLeagueName] = useState();
+    const [numberMembers, setNumberMembers] = useState();
+    const [numberChallenges, setNumberChallenges] = useState();
+    const [leagueDescription, setLeagueDescription] = useState();
+    const [leaguePhoto, setLeaguePhoto] = useState();
 
+    useEffect (
+        () => {
+            if(!loaded){
+                getLeagueName();
+                getNumberChallenges();
+                getLeagueDescription();
+                getLeaguePhoto();
+                getNumberMembers();
+                setLoaded(true);
+            }
+        }, [loaded]
+    );
     function getLeagueName(){
         // use id to the get the league name
-        return "Pokemon League";
+        setLeagueName("Pokemon League");
     }
 
     function getNumberChallenges(){
         // use id to get the challenges
-        return 2;
+        setNumberChallenges(2);
     }
 
     function getLeagueDescription() {
         // use id to get the league description
-        return "We play Pokemon Go while biking";
+        setLeagueDescription("We play pokemon go while hiking");
     }
 
     function getLeaguePhoto(){
         // use id to get League photo
-        return "https://i.imgur.com/TqFO1Ha.png";
+        setLeaguePhoto("https://i.imgur.com/TqFO1Ha.png");
     }
 
     function getNumberMembers(){
         //
-        return 23;
+        setNumberMembers(3);
     }
 
     function moveDescriptionPage(){

@@ -38,13 +38,13 @@ const LeagueForm = () => {
       setLeagueTypeErrorResponse("")
 
     }
-    
+
     function validateLeagueDescription(event){
       let league_description = event.target.value;
       if (league_description.length > 255){
         setLeagueDescriptionErrorResponse("Description too Long")
         return false;
-      }  
+      }
 
       setLeagueDescriptionErrorResponse("")
       setLeagueDescription(league_description);
@@ -55,7 +55,7 @@ const LeagueForm = () => {
       if (league_name.length === 0 || league_name.length > 32){
         setLeagueNameErrorResponse("Cannot create League, League Name must be between 1-32 characters")
         return false
-      }  
+      }
 
       if ((/^\s+$/i.test(league_name))) {
         setLeagueNameErrorResponse("Cannot create league, League Name can't be a string of spaces");
@@ -74,8 +74,8 @@ const LeagueForm = () => {
         if (leagueNameErrorResponse !== "" || leagueDescriptionErrorResponse !== ""){
           setSubmitErrorResponse("Correct the highlighted fields to proceed")
           return false;
-        }  
-        
+        }
+
         var config = {
           method : 'post',
           url : backend_url + 'league/create_league',
@@ -88,7 +88,8 @@ const LeagueForm = () => {
           {
             leagueName : leagueName,
             leagueType : leagueType,
-            leagueDescription : leagueDescription
+            leagueDescription : leagueDescription,
+            leaguePicture: photo
           }
         };
         axios(config)
