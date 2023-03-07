@@ -13,7 +13,7 @@ const ProfileSettings = () => {
             <SideBar></SideBar>
         </div>
         <div className="rightSide2Part">
-            <ProfileSettingsHeader></ProfileSettingsHeader>
+            <ProfileSettingsHeader>{{"displayName": "Rebekah", "photo":""}}</ProfileSettingsHeader>
             <Line></Line>
             <ProfileSettingsForm></ProfileSettingsForm>
             <Line></Line>

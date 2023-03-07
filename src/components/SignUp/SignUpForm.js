@@ -84,8 +84,8 @@ const SignUpForm = (props) => {
           data :
           {
             username : username,
-            picture : photo,
-            displayName :submitPhoto
+            picture : submitPhoto,
+            displayName : displayName
           }
         };
       axios(config)
