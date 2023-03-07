@@ -12,7 +12,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;
-
+    console.log("LeagueObj",props);
     function toggleSelectShow(){
         setSelectShow(!selectShow);
     }
@@ -25,7 +25,7 @@ const LeagueObj = (props) => {
       //   headers: {
       //     Accept: 'application/json',
       //   },
-      //   data : 
+      //   data :
       //   {
       //     leagueID : props.children._id
       //   },
@@ -39,7 +39,7 @@ const LeagueObj = (props) => {
       // .catch(function(error){
       //     console.log(error)
       //     console.log("No response")
-      // });     
+      // });
       console.log("Leave the league")
     }
 
@@ -72,13 +72,13 @@ const LeagueObj = (props) => {
     }
 
     function moveLeaguePage(){
-        window.location.href = "leagueDescriptionPage?=" + props.children.leagueID;
+        window.location.href = "leagueDescriptionPage?=" + props.children._id;
     }
     return(
         <div id = "LeagueObj" className = "displayObj">
             <div className = "objSection">
                 <button className = "objButton" onClick = {moveLeaguePage}>
-                <img className = "friendProfilePhoto" src = {props.children.picture}/>
+                <img className = "objProfilePhoto" src = {props.children.leaguePicture}/>
                 </button>
             </div>
             <div className = "objSection objWritingSection">

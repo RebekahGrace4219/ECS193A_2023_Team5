@@ -6,9 +6,10 @@ import Leaderboard from "../Shared/Leaderboard";
 
 import "../../css/Challenge/ChallengeObj.css";
 const WeeklyChallengeObj = (props) => {
-    let username = props.username;
-    let myProgress = props.children.progress.progress;
-    let total = props.children.progress.exercise.amount;
+    console.log(props);
+
+    let myProgress = props.children.progress;
+    let total = props.children.exercise.amount;
     let percentageDone = myProgress/total * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
 
@@ -31,6 +32,7 @@ const WeeklyChallengeObj = (props) => {
         }
         return b;
     }
+
     function makeLeaderboardObj(){
         let keys = Object.keys(props.children.progress);
         let leaderBoardInfo = [];
@@ -53,7 +55,7 @@ const WeeklyChallengeObj = (props) => {
         if(!props.children.top5){
             let selfObj = {};
             selfObj["photo"] = props.children.self["photo"];
-            selfObj["displayName"] = username;
+            selfObj["displayName"] = "me";
             selfObj["complete"] = min(myProgress / total * 100, 100);
             selfObj["score"] = myProgress;
             selfObj["level"] = min(keys.length,6);
@@ -108,6 +110,7 @@ const WeeklyChallengeObj = (props) => {
         </div> :<></>}
     </div>
     );
+    //return (<div>Gloval challenge</div>)
 }
 
 export default WeeklyChallengeObj;

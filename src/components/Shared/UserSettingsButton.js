@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import "../../css/Shared/userSettingsButton.css"
+import "../../css/Shared/form.css"
 import axios from 'axios';
 
 const backend_url = process.env.REACT_APP_DEV_BACKEND
@@ -150,7 +151,7 @@ const UserSettingsButton = () => {
                 <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png" alt = "Dropdown"/></button>
                 {
                     logoutDisplay ?
-                    <select id = "LogoutSelect" onChange={movePage}>
+                    <select className = "formSelect" id = "LogoutSelect" onChange={movePage}>
                         <option value = ""></option>
                         <option value = "Profile">Profile</option>
                         <option value = "Logout">Logout</option>
