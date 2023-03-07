@@ -33,6 +33,8 @@ const PhotoUpload = (props) => {
     function onImageChange(event) {
         let image = event.target.files[0];
         let url = URL.createObjectURL(image);
+        document.getElementById("uploadProfilePicture").src = url;
+
         setImageSrc(url);
         props.func(url);
     }
@@ -40,7 +42,7 @@ const PhotoUpload = (props) => {
     return (
         <div>
             <div className = "photoShow">
-                <img className = "loadedProfileImage" src = {props.defaultImage} alt = "profile"></img>
+                <img id = "uploadProfilePicture" className = "loadedProfileImage" src = {props.defaultImage} alt = "profile"></img>
             </div>
             <input className = "uploadPhoto" type = "file" accept = "image/*" onChange = {onImageChange}></input>
         </div>
