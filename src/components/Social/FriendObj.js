@@ -17,7 +17,6 @@ const FriendObj = (props) => {
     }
 
     function unfriend(){
-      console.log(props.children[0].username)
       var config = {
         method : 'post',
         url : backend_url + 'friend_list/remove_friend',
@@ -42,7 +41,6 @@ const FriendObj = (props) => {
     }
 
     function block(){
-      console.log(props.children[0].username)
       var config = {
         method : 'post',
         url : backend_url + 'friend_list/block_user',
@@ -51,7 +49,7 @@ const FriendObj = (props) => {
         },
         data :
         {
-          target : props.children[0].username
+          friendName : props.children[0].username
         },
         withCredentials: true,
         credentials: 'include'
@@ -84,7 +82,7 @@ const FriendObj = (props) => {
 
     function friendReact(event){
       let value = event.target.value;
-      console.log(value)
+
       if(value === "Unfriend"){
           unfriend();
       }

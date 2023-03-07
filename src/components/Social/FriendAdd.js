@@ -10,33 +10,28 @@ const FriendAdd = () => {
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
-        console.log(usernameText);
 
         var config = {
-            method: 'post',
-            url: backend_url+'friend_list/send_friend_request',
+            method : 'post',
+            url : backend_url + 'friend_list/send_friend_request',
             headers: {
-              'Content-Type': 'application/json'
+              Accept: 'application/json',
             },
-            data : {
-                friendName: usernameText
-            }
-        };
-
-
-        axios(config)
-        .then(async function (response) {
-            if (response.status === 200){
-                setUserText("Request succesfully sent");
-            }
-            else {
-                setUserText("Request denied: "+ response.data);
-            }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+            data :
+            {
+              friendName : usernameText
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data);
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     const handleTextChange = (event) => {

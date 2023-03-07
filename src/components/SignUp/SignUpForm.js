@@ -69,10 +69,6 @@ const SignUpForm = (props) => {
         submitPhoto = photo;
       }
 
-      console.log("sent username: ", username);
-      console.log(photo);
-      console.log(props.children.photo);
-      console.log("The submitted photo is: ", submitPhoto);
       var config = {
           method : 'post',
           url : backend_url + 'auth/sign_up',
