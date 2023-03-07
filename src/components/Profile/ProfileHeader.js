@@ -1,12 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PageSwitch from "../Shared/PageSwitch";
 import "../../css/Profile/profileHeader.css";
 import "../../css/Shared/header.css";
 
 import axios from 'axios';
 
+const backend_url = process.env.REACT_APP_DEV_BACKEND;
+
 const ProfileHeader = () => {
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+    const [load] = useState(false);
+    const [displayName, setDisplayName] = useState("");
+    const [username, setUsername] = useState("");
+    const [profilePhoto, setPhoto] = useState("");
+
+
+    useEffect (
+      () => {
+          if(!load){
+              getUsername();
+              getProfilePhoto();
+              getDisplayName();
+          }
+      }, [load]
+    );
 
     function getDisplayName(){
         // GET from db
@@ -21,9 +37,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
         };
         axios(config)
         .then(function(response){
-          console.log(response.data.displayName)
-          setDisplayName(response.data.displayName)
-          return response.data.displayName;
+          setDisplayName(response.data.displayName);
         })
         .catch(function(error){
           console.log(error)
@@ -42,9 +56,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
         };
         axios(config)
         .then(function(response){
-          console.log(response.data);
-          setUsername(response.data)
-          return response.data;
+          setUsername(response.data);
         })
         .catch(function(error){
           console.log(error)
@@ -63,10 +75,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
       };
       axios(config)
       .then(function(response) {
-          console.log("response received")
-          console.log(response.data)
-          setPhoto(response.data)
-          return response.data;
+          setPhoto(response.data);
       })
       .catch(function(error){
           console.log(error)
@@ -74,9 +83,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
       });
     }
 
-    const [displayName, setDisplayName] = useState(getDisplayName());
-    const [username, setUsername] = useState(getUsername());
-    const [profilePhoto, setPhoto] = useState(getProfilePhoto());
+
 
     return (
         <div id = "ProfileHeader">
