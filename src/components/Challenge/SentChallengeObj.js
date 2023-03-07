@@ -8,7 +8,7 @@ const SentChallengeObj = (props) => {
     return (
     <div className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
-            <PhotoDisplay></PhotoDisplay>
+            <PhotoDisplay photos = {props.children.pictures}></PhotoDisplay>
             <BoxLine></BoxLine>
         </div>
         <div className="challengeMiddle">
@@ -16,7 +16,7 @@ const SentChallengeObj = (props) => {
             <p className="challengeText">{receivedUser} hasn't accepted your challenge.</p>
         </div>
         <div className = "challengeEnd">
-            <DeleteChallengeButton></DeleteChallengeButton>
+            <DeleteChallengeButton id = {props.children._id}></DeleteChallengeButton>
         </div>
     </div>
     );

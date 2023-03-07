@@ -7,10 +7,12 @@ import Leaderboard from "../Shared/Leaderboard";
 import "../../css/Challenge/ChallengeObj.css";
 const WeeklyChallengeObj = (props) => {
     let username = props.username;
-    let myProgress = props.children.progress[props.username];
-    let total = props.children.amount;
+    let myProgress = props.children.progress.progress;
+    let total = props.children.progress.exercise.amount;
     let percentageDone = myProgress/total * 100;
-    let title = props.children.exerciseType + " " + props.children.amount + " " + props.children.unit
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
+
+
 
     function sortProgress(a, b){
         return -1*(a.complete - b.complete);

@@ -1,11 +1,7 @@
 import {useState} from 'react';
 import '../../css/Challenge/PhotoDisplay.css';
 const PhotoDisplay = (props) => {
-
-    let pictures = {
-        "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-        "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-        "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"};
+    let pictures = props.photos;
     const [length] =  useState(findLength(pictures));
     const [pictureLength] = useState(min(3, length));
     const [firstThreePictureList, setPictureList] = useState(moveList(pictures));
@@ -15,16 +11,14 @@ const PhotoDisplay = (props) => {
         return (a<b?(a):b);
     }
 
-    function findLength(hashPictures){
-        return Object.keys(hashPictures).length;
+    function findLength(pictures){
+        return pictures.length;
     }
 
     function moveList(hashPictures) {
-        let keyList = Object.keys(hashPictures);
         let list_ = [];
-        for(let i = 0; i < min(keyList.length, 3); i++){
-            list_.push(hashPictures[keyList[i]]);
-
+        for(let i = 0; i < min(pictures.length, 3); i++){
+            list_.push(pictures[i].picture);
         }
         return list_;
     }
