@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import "../../css/Shared/form.css";
 const MemberSelect = (props) => {
-    console.log(props);
     const [selfType] = useState(props.selfType);
     const [scrollType] = useState(props.scrollType);
     const [userType] = useState(props.userType);

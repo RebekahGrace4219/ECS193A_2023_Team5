@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
+import axios from "axios";
+const backend_url = process.env.REACT_APP_DEV_BACKEND;
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
@@ -19,13 +21,29 @@ const LeagueHeader = (props) => {
                 getLeagueDescription();
                 getLeaguePhoto();
                 getNumberMembers();
-                setLoaded(true);
             }
         }, [loaded]
     );
     function getLeagueName(){
-        // use id to the get the league name
-        setLeagueName("Pokemon League");
+        var config  = {
+          method : 'post',
+          url: backend_url+'league/get_league_name',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include',
+          data : {
+            leagueID: id
+          }
+        };
+        axios(config)
+        .then(function(response) {
+            setLeagueName(response.data.leagueName);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getNumberChallenges(){
@@ -34,13 +52,50 @@ const LeagueHeader = (props) => {
     }
 
     function getLeagueDescription() {
-        // use id to get the league description
-        setLeagueDescription("We play pokemon go while hiking");
+        var config  = {
+            method : 'post',
+            url: backend_url+'league/get_league_description',
+            headers: {
+                Accept: 'application/json',
+              },
+            withCredentials: true,
+            credentials: 'include',
+            data : {
+              leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+
+              setLeagueDescription(response.data.leagueDescription);
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
     function getLeaguePhoto(){
-        // use id to get League photo
-        setLeaguePhoto("https://i.imgur.com/TqFO1Ha.png");
+        var config  = {
+            method : 'post',
+            url: backend_url+'league/get_league_picture',
+            headers: {
+                Accept: 'application/json',
+              },
+            withCredentials: true,
+            credentials: 'include',
+            data : {
+              leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+
+
+              setLeaguePhoto(response.data.leaguePicture);
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
     function getNumberMembers(){

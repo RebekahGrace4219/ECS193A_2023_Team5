@@ -42,7 +42,6 @@ const ProfileSettingsForm = (props) => {
           setSubmitErrorResponse("Correct Highlighted fields to proceed");
           return false;
         }
-        console.log("on submit: ", photo, displayName);
         var config = {
           method : 'post',
           url : backend_url + 'user/update_profile_info',

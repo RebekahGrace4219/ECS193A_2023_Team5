@@ -2,43 +2,235 @@ import MemberSelect from "./MemberSelect";
 import "../../css/Shared/ProfileSmall.css";
 import {useState} from 'react';
 import "../../css/League/member.css";
+
+import axios from 'axios';
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
-    console.log("member entry", props);
+    console.log("MemberEntry", props.leagueID);
+
     function addFriend(){
-        // todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'friend_list/send_friend_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              friendName : props.children.username
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data);
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function block(){
-        //todo
+      var config = {
+        method : 'post',
+        url : backend_url + 'friend_list/block_user',
+        headers: {
+          Accept: 'application/json',
+        },
+        data :
+        {
+
+          friendName : props.children.username
+        },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log(response.data)
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });
     }
 
     function kickOut(){
-        // todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/kick_member',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function ban(){
-        //ban
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/ban_user',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function removeAdmin(){
-        //todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/remove_admin',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function addAdmin(){
-
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/add_admin',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function accept(){
-
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/accept_join_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function decline(){
-
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/decline_join_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function unban(){
-
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/unbar_user',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function reactionFunction(input){

@@ -40,7 +40,6 @@ const PhotoDisplay = (props) => {
 
     function calculatePictureDiv(){
         let photoObj = firstThreePictureList.map(createPhotoObj);
-        console.log(length);
         let additionalDivNumber = length - 3;
 
         if (additionalDivNumber > 0){

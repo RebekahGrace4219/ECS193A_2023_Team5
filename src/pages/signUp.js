@@ -21,7 +21,6 @@ const SignUp = () => {
         };
         axios(config)
         .then(function(response) {
-            console.log("The post request gets", response.data);
             setPhoto(response.data);
             return response.data;
         })

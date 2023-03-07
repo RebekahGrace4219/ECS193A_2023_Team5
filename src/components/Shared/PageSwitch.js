@@ -1,6 +1,5 @@
 import "../../css/Shared/pageSwitch.css"
 const PageSwitch = (props) => {
-
     function moveProfileStats(){
         window.location.href = "./profileStatsPage";
     }

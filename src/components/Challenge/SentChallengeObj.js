@@ -2,7 +2,7 @@ import BoxLine from "./BoxLine";
 import PhotoDisplay from "./PhotoDisplay";
 import DeleteChallengeButton from "./DeleteChallengeButton";
 const SentChallengeObj = (props) => {
-    console.log(props);
+
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let receivedUser = props.children.receivedUser;
     return (
