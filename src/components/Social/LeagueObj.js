@@ -4,6 +4,11 @@ import OwnerSelect from './OwnerSelect';
 import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
 import "../../css/Social/obj.css";
+
+import axios from 'axios';
+
+const backend_url = process.env.REACT_APP_DEV_BACKEND
+
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     let type = props.type;
@@ -13,7 +18,29 @@ const LeagueObj = (props) => {
     }
 
     function leave(){
-        console.log("leave the league");
+      // console.log(props.children._id)
+      // var config = {
+      //   method : 'post',
+      //   url : backend_url + 'league/leave_league',
+      //   headers: {
+      //     Accept: 'application/json',
+      //   },
+      //   data : 
+      //   {
+      //     leagueID : props.children._id
+      //   },
+      //   withCredentials: true,
+      //   credentials: 'include'
+      // };
+      // axios(config)
+      // .then(function(response) {
+      //     console.log(response.data)
+      // })
+      // .catch(function(error){
+      //     console.log(error)
+      //     console.log("No response")
+      // });     
+      console.log("Leave the league")
     }
 
     function removeAdmin(){
@@ -28,7 +55,8 @@ const LeagueObj = (props) => {
         console.log("revoke request to join league");
     }
 
-    function leagueReact(value){
+    function leagueReact(event){
+        let value = event.target.value;
         if(value === "leave"){
             leave();
         }
@@ -55,8 +83,8 @@ const LeagueObj = (props) => {
             </div>
             <div className = "objSection objWritingSection">
                 <p className = "objDisplayName">{props.children.leagueName}</p>
-                <p className = "objUsername">{props.children.memberCount} Members</p>
-                <p className = "objUsername">{props.children.challengeCount} active challenges</p>
+                <p className = "objUsername">{props.children.members.length} Members</p>
+                <p className = "objUsername">{props.children.activeChallenges} active challenges</p>
             </div>
             <div className = "objSection">
                 <button className = "objButton" onClick = {toggleSelectShow}>

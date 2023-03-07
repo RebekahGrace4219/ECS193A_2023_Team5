@@ -187,8 +187,8 @@ const ChallengeForm = () =>{
         axios(config)
         .then(function(response){
             console.log("got the list");
-            console.log(response.data.friends);
-            setInviteOptions(response.data.friends);
+            console.log(response.data);
+            setInviteOptions(response.data);
         })
         .catch(function(error){
             console.log(error);

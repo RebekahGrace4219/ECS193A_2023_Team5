@@ -88,7 +88,10 @@ const LeagueForm = () => {
           {
             leagueName : leagueName,
             leagueType : leagueType,
-            leagueDescription : leagueDescription
+            leagueDescription : leagueDescription,
+            league :{
+              Picture : photo
+            } 
           }
         };
         axios(config)
