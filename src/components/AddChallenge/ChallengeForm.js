@@ -137,11 +137,11 @@ const ChallengeForm = () =>{
     }
 
     function startDateChange(event){
-        setStartDate(event.target.value);
+        setStartDate(event.target.valueAsNumber);
     }
 
     function endDateChange(event){
-        setEndDate(event.target.value);
+        setEndDate(event.target.valueAsNumber);
     }
 
     function receiverChange(event){

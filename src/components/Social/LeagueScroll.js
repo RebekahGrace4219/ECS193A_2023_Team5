@@ -28,7 +28,7 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });  
+        });
     }
 
     function getSent(){
@@ -56,7 +56,7 @@ const LeagueScroll = (props) => {
         // get Received
         var config = {
           method : 'post',
-          url : backend_url + 'league/get_admin_league_info',
+          url : backend_url + 'league/get_admin_leagues_with_challenge_count',
           headers: {
             Accept: 'application/json',
           },
@@ -71,7 +71,7 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        }); 
+        });
       }
 
     function getOwner(){
@@ -93,7 +93,7 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });     
+        });
       }
 
     function makeLeagueObj(input){
