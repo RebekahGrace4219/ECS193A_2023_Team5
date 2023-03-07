@@ -1,6 +1,7 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
+
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
     const [loaded, setLoaded] = useState(false);

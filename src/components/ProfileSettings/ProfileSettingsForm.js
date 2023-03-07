@@ -7,51 +7,11 @@ import "../../css/Shared/form.css";
 
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 
-const ProfileSettingsForm = () => {
-    const [photo, setPhoto] = useState(getProfilePhoto());
-    const [displayName, setDisplayName] = useState(getDisplayName());
+const ProfileSettingsForm = (props) => {
+    const [photo, setPhoto] = useState(props.children.profilePhoto);
+    const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
     const [submitErrorResponse, setSubmitErrorResponse] = useState();
-
-    function getProfilePhoto(){
-        var config  = {
-            method : 'post',
-            url: backend_url+'auth/get_profile_photo',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            return response.data;
-        })
-        .catch(function(error){
-            console.log(error)
-            console.log("No response")
-        });
-    }
-
-    function getDisplayName(){
-        // TODO get the display name from the db
-        var config = {
-          method : 'post',
-          url : backend_url + 'user/get_display_name',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include',
-        };
-        axios(config)
-        .then(function(response){
-          return response.data.displayName;
-        })
-        .catch(function(error){
-          console.log(error)
-        });
-    }
 
     function uploadPhoto(photo){
         setPhoto(photo);
