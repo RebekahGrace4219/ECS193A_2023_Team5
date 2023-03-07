@@ -2,7 +2,10 @@ import {useState} from 'react';
 import '../../css/Challenge/PhotoDisplay.css';
 const PhotoDisplay = (props) => {
 
-    let pictures = props.children.photos;
+    let pictures = {
+        "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
+        "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
+        "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"};
     const [length] =  useState(findLength(pictures));
     const [pictureLength] = useState(min(3, length));
     const [firstThreePictureList, setPictureList] = useState(moveList(pictures));

@@ -145,6 +145,7 @@ const ChallengeForm = () =>{
     }
 
     function receiverChange(event){
+        console.log(event);
         setReceiver(event.target.value);
     }
 
@@ -186,6 +187,7 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
+            console.log(response);
             setInviteOptions(response.data);
         })
         .catch(function(error){
@@ -228,7 +230,7 @@ const ChallengeForm = () =>{
 
         var recipient = ""
         recipient = receiver
-        if (receiverGroup === "League"){
+        if (receiverGroup === "league"){
           recipient = receiver.split('-')[1].trim();
         }
 
@@ -270,10 +272,10 @@ const ChallengeForm = () =>{
 
     useEffect(
         () => {
-          if (receiverGroup === "Friend") {
+          if (receiverGroup === "friend") {
             getFriends();
           }
-          else if(receiverGroup === "League"){
+          else if(receiverGroup === "league"){
             getLeagues();
           }
         }, [receiverGroup]
@@ -336,18 +338,19 @@ const ChallengeForm = () =>{
                 <p className = "formObjInner">What kind of challenge?</p>
                 <div className = "formObjInner">
                     <select className="formSelect" onChange = {receiverGroupChange}>
-                        <option value = "Self">Self</option>
-                        <option value = "Friend">Friend</option>
-                        <option value = "League">League</option>
+                        <option value = "self">Self</option>
+                        <option value = "friend">Friend</option>
+                        <option value = "league">League</option>
                     </select>
                 </div>
             </div>
 
-            { (receiverGroup  === "Friend" || receiverGroup === "League") ?
+            { (receiverGroup  === "friend" || receiverGroup === "league") ?
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
                     <select onChange = {receiverChange} className = "formSelect">
+                        <option value = ""></option>
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
                     </select>
                 </div>

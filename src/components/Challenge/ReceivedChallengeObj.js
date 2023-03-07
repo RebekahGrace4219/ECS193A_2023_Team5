@@ -4,12 +4,12 @@ import AcceptChallengeButton from "./AcceptChallengeButton";
 import DeclineChallengeButton from "./DeclineChallengeButton";
 
 const ReceivedChallengeObj = (props) => {
-    let title = props.children.exerciseType + " " + props.children.amount + " " + props.children.unit
-    let dueDate = props.children.dueDate;
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
+    let dueDate = props.children.dueDate.split("T")[0];
     return (
     <div id = "ReceivedChallengedObj" className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
-            <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
+            <PhotoDisplay></PhotoDisplay>
             <BoxLine></BoxLine>
         </div>
         <div className="challengeMiddle">
