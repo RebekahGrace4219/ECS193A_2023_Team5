@@ -1,9 +1,10 @@
 import ChallengeScroll from "./ChallengeScroll";
 
+import "../../css/Challenge/ChallengeObj.css"
 const WeeklyChallenge = () => {
 
     return (
-            <div id = "WeeklyChallenge">
+            <div id = "WeeklyChallenge" className = "challengeSection">
               <div>
                 <h2>Global Challenges</h2>
               </div>

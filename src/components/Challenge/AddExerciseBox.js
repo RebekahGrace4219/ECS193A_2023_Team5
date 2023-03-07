@@ -137,7 +137,7 @@ const AddExerciseBox = () => {
     }
 
     function completionDateChange(event){
-        setCompletionDate(event.target.value);
+        setCompletionDate(event.target.valueAsNumber);
     }
 
     function submitExercise(){
