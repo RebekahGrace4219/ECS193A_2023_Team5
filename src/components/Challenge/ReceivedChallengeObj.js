@@ -9,7 +9,7 @@ const ReceivedChallengeObj = (props) => {
     return (
     <div id = "ReceivedChallengedObj" className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
-            <PhotoDisplay></PhotoDisplay>
+            <PhotoDisplay photos = {props.children.pictures}></PhotoDisplay>
             <BoxLine></BoxLine>
         </div>
         <div className="challengeMiddle">
@@ -17,8 +17,8 @@ const ReceivedChallengeObj = (props) => {
             <p className="challengeText">{dueDate}</p>
         </div>
         <div className = "challengeEnd">
-            <AcceptChallengeButton></AcceptChallengeButton>
-            <DeclineChallengeButton></DeclineChallengeButton>
+            <AcceptChallengeButton id = {props.children._id} ></AcceptChallengeButton>
+            <DeclineChallengeButton id = {props.children._id}></DeclineChallengeButton>
         </div>
     </div>
     );

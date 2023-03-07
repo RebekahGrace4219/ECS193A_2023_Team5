@@ -8,11 +8,11 @@ import "../../css/Challenge/ChallengeObj.css";
 import "../../css/Shared/button.css";
 
 const IssuedChallengeObj = (props) => {
-    let myProgress = props.children.progress[props.username];
-    let total = props.children.amount;
+    let myProgress = props.children.progress.progress;
+    let total = props.children.progress.exercise.amount;
     let percentageDone = myProgress/total * 100;
-    let title = props.children.exerciseType + " " + props.children.amount + " " + props.children.unit
-    let dueDate = props.children.dueDate;
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
+    let dueDate = props.children.dueDate.split("T")[0];
 
     const [showState, setState] = useState(false);
     function toggleState(){
@@ -49,8 +49,7 @@ const IssuedChallengeObj = (props) => {
     <div id = "issuedChallengeObj" className = "completeChallengeBox">
         <div className = "challengeBox">
         <div className="photoDiv">
-            <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
-            <BoxLine></BoxLine>
+        <PhotoDisplay photos = {props.children.pictures}></PhotoDisplay><BoxLine></BoxLine>
         </div>
         <div className = "challengeMiddle">
             <div className = "challengeInnerMiddle">

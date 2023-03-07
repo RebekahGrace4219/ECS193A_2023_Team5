@@ -234,6 +234,14 @@ const ChallengeForm = () =>{
           recipient = receiver.split('-')[1].trim();
         }
 
+        console.log(      {
+            receivedUser : recipient,
+            issueDate : startDate,
+            dueDate : endDate,
+            unit : unit,
+            amount : amount,
+            exerciseName : sport,
+          });
         var config ={
           method : 'post',
           url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
