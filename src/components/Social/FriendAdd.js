@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../../css/Social/addFriend.css'
 import axios from 'axios';
-// const backend_url = process.env.REACT_APP_PROD_BACKEND 
-const backend_url = process.env.REACT_APP_DEV_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const FriendAdd = () => {
 
@@ -10,17 +10,17 @@ const FriendAdd = () => {
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
-        var data = JSON.stringify({
-            "friendName": usernameText
-        });
+        console.log(usernameText);
 
         var config = {
             method: 'post',
-            url: backend_url+'/friend_list/send_friend_request',
+            url: backend_url+'friend_list/send_friend_request',
             headers: {
               'Content-Type': 'application/json'
             },
-            data : data
+            data : {
+                friendName: usernameText
+            }
         };
 
 

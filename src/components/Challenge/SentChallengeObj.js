@@ -2,12 +2,13 @@ import BoxLine from "./BoxLine";
 import PhotoDisplay from "./PhotoDisplay";
 import DeleteChallengeButton from "./DeleteChallengeButton";
 const SentChallengeObj = (props) => {
-    let title = props.children.exerciseType + " " + props.children.amount + " " + props.children.unit
+    console.log(props);
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let receivedUser = props.children.receivedUser;
     return (
     <div className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
-            <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
+            <PhotoDisplay></PhotoDisplay>
             <BoxLine></BoxLine>
         </div>
         <div className="challengeMiddle">
