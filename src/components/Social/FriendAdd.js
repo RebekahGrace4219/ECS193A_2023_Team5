@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../../css/Social/addFriend.css'
 import axios from 'axios';
-// const backend_url = process.env.REACT_APP_PROD_BACKEND 
-const backend_url = process.env.REACT_APP_DEV_BACKEND 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const FriendAdd = () => {
 
@@ -10,33 +10,28 @@ const FriendAdd = () => {
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
-        var data = JSON.stringify({
-            "friendName": usernameText
-        });
 
         var config = {
-            method: 'post',
-            url: backend_url+'/friend_list/send_friend_request',
+            method : 'post',
+            url : backend_url + 'friend_list/send_friend_request',
             headers: {
-              'Content-Type': 'application/json'
+              Accept: 'application/json',
             },
-            data : data
-        };
-
-
-        axios(config)
-        .then(async function (response) {
-            if (response.status === 200){
-                setUserText("Request succesfully sent");
-            }
-            else {
-                setUserText("Request denied: "+ response.data);
-            }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+            data :
+            {
+              friendName : usernameText
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data);
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     const handleTextChange = (event) => {

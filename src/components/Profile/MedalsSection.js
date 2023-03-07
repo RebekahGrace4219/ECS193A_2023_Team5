@@ -3,6 +3,7 @@ import MedalsBar from './MedalsBar';
 import MedalsScroll from './MedalsScroll';
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
+
 const MedalsSection = () => {
     const [ifEarned, setIfEarned] = useState(true);
 

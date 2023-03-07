@@ -3,6 +3,8 @@ import ProgressBar from "../Shared/ProgressBar";
 import {useState} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
+
+import "../../css/Challenge/ChallengeObj.css";
 const WeeklyChallengeObj = (props) => {
     let username = props.username;
     let myProgress = props.children.progress[props.username];
@@ -35,7 +37,7 @@ const WeeklyChallengeObj = (props) => {
             let personObj = {};
             personObj["photo"] = props.children.photos[person];
             personObj["displayName"] = person;
-            personObj["complete"] = props.children.progress[person] / total * 100;
+            personObj["complete"] = min(props.children.progress[person] / total * 100,100);
             personObj["score"] = props.children.progress[person];
             leaderBoardInfo.push(personObj);
         }
@@ -50,7 +52,7 @@ const WeeklyChallengeObj = (props) => {
             let selfObj = {};
             selfObj["photo"] = props.children.self["photo"];
             selfObj["displayName"] = username;
-            selfObj["complete"] = myProgress / total * 100;
+            selfObj["complete"] = min(myProgress / total * 100, 100);
             selfObj["score"] = myProgress;
             selfObj["level"] = min(keys.length,6);
             leaderBoardInfo.push(selfObj);
@@ -65,28 +67,38 @@ const WeeklyChallengeObj = (props) => {
 
 
     return (
-    <div>
-        <div>
-        <div>
-            <img src = "https://i.imgur.com/XkWZOEN.png"/>
-            <p>Global</p>
-        </div>
-        <BoxLine></BoxLine>
-        <div>
-            <div>
-                <p>{title}</p>
-                <button className = "challengeInformationButton" onClick = {toggleState}></button>
+    <div className = "completeChallengeBox">
+        <div className = "challengeBox">
+        <div className="photoDiv">
+            <div className="weeklyPhotoDiv">
+                <img className = "innerWeeklyPhotoDiv" src = "https://i.imgur.com/XkWZOEN.png"/>
+                <p className = "innerWeeklyPhotoDiv challengeText">Global</p>
             </div>
-            <div>
+            <BoxLine></BoxLine>
+        </div>
+
+        <div className = "challengeMiddle">
+            <div className = "challengeInnerMiddle">
+                <p className="challengeText">{title}</p>
+
+            </div>
+            <div className = "challengeInnerMiddle">
                 <ProgressBar>{{"completed":percentageDone}}</ProgressBar>
-                {
-                    (percentageDone < 100) ?
-                    <p>{myProgress}/{total}</p>
-                    :
-                    <p>Complete</p>
-                }
             </div>
         </div>
+
+        <div className = "challengeEnd">
+            <button className = "challengeDropButton" onClick = {toggleState}>
+                <img src = "https://i.imgur.com/DiUB6gk.png" alt = "expandButton"/>
+            </button>
+            {
+                (percentageDone < 100) ?
+                <p className = "challengeInnerEnd">{myProgress}/{total}</p>
+                :
+                <p className = "challengeInnerEnd">Complete</p>
+            }
+        </div>
+
         </div>
         {showState ? <div>
             <Line></Line>

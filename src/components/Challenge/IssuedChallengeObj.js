@@ -1,9 +1,12 @@
 import PhotoDisplay from "./PhotoDisplay";
 import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
+import "../../css/Challenge/ChallengeObj.css";
+import "../../css/Shared/button.css";
+
 const IssuedChallengeObj = (props) => {
     let myProgress = props.children.progress[props.username];
     let total = props.children.amount;
@@ -41,33 +44,48 @@ const IssuedChallengeObj = (props) => {
         return leaderBoardInfo;
     }
 
+
     return (
-    <div id = "IssuedChallengeObj">
-        <div>
-        <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
-        <BoxLine></BoxLine>
-        <div>
-            <div>
-                <p>{title}</p>
-                <p>{dueDate}</p>
-                <button className = "challengeInformationButton" onClick = {toggleState}></button>
+    <div id = "issuedChallengeObj" className = "completeChallengeBox">
+        <div className = "challengeBox">
+        <div className="photoDiv">
+            <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
+            <BoxLine></BoxLine>
+        </div>
+        <div className = "challengeMiddle">
+            <div className = "challengeInnerMiddle">
+                <p className="challengeText">{title}</p>
+                <p className="challengeText">{dueDate}</p>
+
             </div>
-            <div>
+            <div className = "challengeInnerMiddle">
                 <ProgressBar>{{"completed":percentageDone}}</ProgressBar>
-                {
-                    (percentageDone < 100) ?
-                    <p>{myProgress}/{total}</p>
-                    :
-                    <p>Complete</p>
-                }
             </div>
         </div>
+
+        <div className = "challengeEnd">
+            <button className = "challengeDropButton" onClick = {toggleState}>
+                <img src = "https://i.imgur.com/DiUB6gk.png" alt = "expandButton"/>
+            </button>
+            {
+                (percentageDone < 100) ?
+                <p className = "challengeInnerEnd">{myProgress}/{total}</p>
+                :
+                <p className = "challengeInnerEnd">Complete</p>
+            }
         </div>
-        {showState ? <div>
-            <Line></Line>
-            <Leaderboard>{{"title":"Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
-        </div> :<></>}
-    </div>);
+
+        </div>
+        {showState ?
+            <div className = "leaderboardSection">
+                <Line></Line>
+                <Leaderboard>{{"title":"Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
+            </div>
+            :
+            <></>
+        }
+    </div>
+    );
 }
 
 export default IssuedChallengeObj;

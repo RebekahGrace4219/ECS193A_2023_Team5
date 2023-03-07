@@ -6,11 +6,24 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const UserSettingsButton = () => {
 
-    const [displayName, setDisplayName] = useState(getDisplayName());
-    const [username, setUsername] = useState(getUsername());
-    const [profilePhoto, setPhoto] = useState(getPhoto())
-    const [logoutDisplay, setLogoutDisplay] = useState(false);
-    const [decisionState, setDecisionState] = useState("");
+  const [load] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+  const [username, setUsername] = useState("");
+  const [profilePhoto, setPhoto] = useState("");
+
+  const [logoutDisplay, setLogoutDisplay] = useState(false);
+  const [decisionState, setDecisionState] = useState("");
+
+  useEffect (
+    () => {
+        if(!load){
+            getUsername();
+            getProfilePhoto();
+            getDisplayName();
+        }
+    }, [load]
+  );
+
 
     function logout(){
       var config  = {
@@ -86,7 +99,7 @@ const UserSettingsButton = () => {
       });
   }
 
-  function getPhoto(){
+  function getProfilePhoto(){
       var config  = {
         method : 'post',
         url: backend_url+'auth/get_profile_photo',

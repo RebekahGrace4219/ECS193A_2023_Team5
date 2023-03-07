@@ -5,7 +5,7 @@ import ReceivedSelect from "./ReceivedSelect";
 import BlockedSelect from "./BlockedSelect";
 import "../../css/Social/obj.css";
 import axios from 'axios';
-
+import "../../css/Shared/button.css";
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const FriendObj = (props) => {
@@ -23,7 +23,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -37,7 +37,7 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
-      });  
+      });
     }
 
     function block(){
@@ -47,7 +47,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -61,7 +61,7 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
-      });  
+      });
     }
 
     function revoke(){
@@ -166,7 +166,7 @@ const FriendObj = (props) => {
 
     function friendReact(event){
       let value = event.target.value;
-      console.log(value)
+
       if(value === "Unfriend"){
           unfriend();
       }
@@ -196,7 +196,7 @@ const FriendObj = (props) => {
                 <p className = "objUsername">{props.children.username}</p>
             </div>
             <div className = "objSection">
-                <button className = "objButton" onClick = {toggleSelectShow}>
+                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
                 {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}

@@ -11,7 +11,7 @@ const ProgressBar = (props) => {
     const fillerStyles = {
       height: '100%',
       width: `${props.children.completed}%`,
-      backgroundColor: "#454545",
+      backgroundColor: "#014421",
       borderRadius: 50,
       textAlign: 'right'
     }
@@ -25,7 +25,7 @@ const ProgressBar = (props) => {
     return (
       <div style={containerStyles}>
         <div style={fillerStyles}>
-          <span style={labelStyles}>{`${props.children.completed}%`}</span>
+          <span style={labelStyles}>{``}</span>
         </div>
       </div>
     );

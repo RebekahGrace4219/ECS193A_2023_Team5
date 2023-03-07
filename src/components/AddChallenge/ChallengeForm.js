@@ -145,6 +145,7 @@ const ChallengeForm = () =>{
     }
 
     function receiverChange(event){
+        console.log(event);
         setReceiver(event.target.value);
     }
 
@@ -154,11 +155,11 @@ const ChallengeForm = () =>{
 
     function getToday(){
       let date_ob = new Date()
-      
+
       let date = ("0" + date_ob.getDate()).slice(-2);
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
       let year = date_ob.getFullYear();
-  
+
       return (year + "-" + month + "-" + date);
     }
 
@@ -169,7 +170,7 @@ const ChallengeForm = () =>{
       let date = ("0" + date_ob.getDate()).slice(-2);
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
       let year = date_ob.getFullYear();
-  
+
       return (year + "-" + month + "-" + date);
     }
 
@@ -186,15 +187,12 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
-            console.log("got the list");
-            console.log(response.data);
             setInviteOptions(response.data);
         })
         .catch(function(error){
             console.log(error);
             console.log("No response")
         });
-        // setInviteOptions(["friend1", "friend2", "friend3"]);
     }
 
     function getLeagues(){
@@ -211,7 +209,6 @@ const ChallengeForm = () =>{
         };
         axios(config)
         .then(function(response){
-            console.log("got the list");
             for(let item of response.data){
               array_leagues.push(item.leagueName + " - " + item._id);
             }
@@ -221,7 +218,6 @@ const ChallengeForm = () =>{
             console.log(error);
             console.log("No response")
         });
-        // setInviteOptions(["league1", "leauge2", "league3"]);
     }
 
     function submitChallenge(){
@@ -233,10 +229,10 @@ const ChallengeForm = () =>{
 
         var recipient = ""
         recipient = receiver
-        if (receiverGroup === "League"){
-          recipient = receiver.split('-')[1].trim(); 
+        if (receiverGroup === "league"){
+          recipient = receiver.split('-')[1].trim();
         }
-        
+
         var config ={
           method : 'post',
           url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
@@ -250,8 +246,8 @@ const ChallengeForm = () =>{
             receivedUser : recipient,
             issueDate : startDate,
             dueDate : endDate,
-            unit : unit, 
-            amount : amount, 
+            unit : unit,
+            amount : amount,
             exerciseName : sport,
           }
         };
@@ -275,10 +271,10 @@ const ChallengeForm = () =>{
 
     useEffect(
         () => {
-          if (receiverGroup === "Friend") {
+          if (receiverGroup === "friend") {
             getFriends();
           }
-          else if(receiverGroup === "League"){
+          else if(receiverGroup === "league"){
             getLeagues();
           }
         }, [receiverGroup]
@@ -341,18 +337,19 @@ const ChallengeForm = () =>{
                 <p className = "formObjInner">What kind of challenge?</p>
                 <div className = "formObjInner">
                     <select className="formSelect" onChange = {receiverGroupChange}>
-                        <option value = "Self">Self</option>
-                        <option value = "Friend">Friend</option>
-                        <option value = "League">League</option>
+                        <option value = "self">Self</option>
+                        <option value = "friend">Friend</option>
+                        <option value = "league">League</option>
                     </select>
                 </div>
             </div>
 
-            { (receiverGroup  === "Friend" || receiverGroup === "League") ?
+            { (receiverGroup  === "friend" || receiverGroup === "league") ?
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
                     <select onChange = {receiverChange} className = "formSelect">
+                        <option value = ""></option>
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
                     </select>
                 </div>

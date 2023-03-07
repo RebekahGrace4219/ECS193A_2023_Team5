@@ -1,6 +1,5 @@
 import "../../css/Shared/pageSwitch.css"
 const PageSwitch = (props) => {
-
     function moveProfileStats(){
         window.location.href = "./profileStatsPage";
     }
@@ -25,6 +24,14 @@ const PageSwitch = (props) => {
         window.location.href = "./socialLeaguePage";
     }
 
+    function moveLeagueDescription(){
+        window.location.href = "./leagueDescriptionPage?="+ props.leagueID;
+    }
+
+    function moveLeagueMember(){
+        window.location.href = "./leagueMemberPage?=" + props.leagueID;
+    }
+
     return(
         <div>
         {  props.type === "challenge" ?
@@ -47,6 +54,14 @@ const PageSwitch = (props) => {
             <div id ="PageSwitch">
                 <button className = "switchButton" onClick = {moveProfileStats}><p className = "switchButtonText">Stats</p></button>
                 <button className = "switchButton" onClick = {moveProfileMedals}><p className = "switchButtonText">Medals</p></button>
+            </div>
+            :
+            <></>
+        }
+        {  props.type === "league" ?
+            <div id ="PageSwitch">
+                <button className = "switchButton" onClick = {moveLeagueDescription}><p className = "switchButtonText">Description</p></button>
+                <button className = "switchButton" onClick = {moveLeagueMember}><p className = "switchButtonText">Members</p></button>
             </div>
             :
             <></>

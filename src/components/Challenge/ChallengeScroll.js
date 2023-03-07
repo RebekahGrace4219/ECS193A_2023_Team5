@@ -4,7 +4,9 @@ import WeeklyChallengeObj from "./WeeklyChallengeObj";
 import ReceivedChallengeObj from "./ReceivedChallengeObj";
 import {useState, useEffect} from 'react';
 import AddChallengeButton from "./AddChallengeButton";
-
+import "../../css/Challenge/ChallengeScroll.css";
+import axios from "axios";
+const backend_url = process.env.REACT_APP_DEV_BACKEND;
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [leagueID] = useState(props.leagueID);
@@ -24,7 +26,9 @@ const ChallengeScroll = (props) => {
             "photos":{
                 "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
                 "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
+                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png",
+                " Prince":"https://i.imgur.com/3Ia9gVG.png",
+                "Diana":"https://i.imgur.com/3Ia9gVG.png"},
             "sentUser": "Clark Kent",
             "receivedUser": "Justice League",
             "type": "league"}]);
@@ -50,39 +54,43 @@ const ChallengeScroll = (props) => {
     }
 
     function getSent(){
-            //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/sent_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
+
+
     }
 
     function getReceived(){
-            //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/received_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
 
     }
     function getWeekly(){
@@ -129,7 +137,7 @@ const ChallengeScroll = (props) => {
             if(scrollType === "issued" && ifLeague){
                 getIssuedLeague();
             }
-            else if(scrollType === "issued" && ifLeague){
+            else if(scrollType === "issued" && !ifLeague){
                 getIssuedFriend();
             }
             else if(scrollType === "sent"){
@@ -145,11 +153,11 @@ const ChallengeScroll = (props) => {
     );
 
     return (<div id = "ChallengeScroll">
-        {(scrollType === "issued") ? information.map(makeIssuedChallengeObj): <></>}
-        {(scrollType === "issued") ? <AddChallengeButton></AddChallengeButton>: <></>}
-        {(scrollType === "sent") ? information.map(makeSentChallengeObj): <></>}
-        {(scrollType === "received") ? information.map(makeReceivedChallengeObj): <></>}
-        {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj): <></>}
+        {(scrollType === "issued") ? information.map(makeIssuedChallengeObj) : <></>}
+        {(scrollType === "issued" && !ifLeague) ? <AddChallengeButton></AddChallengeButton> : <></>}
+        {(scrollType === "sent") ? information.map(makeSentChallengeObj) : <></>}
+        {(scrollType === "received") ? information.map(makeReceivedChallengeObj) : <></>}
+        {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj) : <></>}
     </div>);
 }
 

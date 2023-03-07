@@ -10,31 +10,9 @@ import '../../css/Shared/header.css';
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 
-const SignUpForm = () => {
-    function getProfilePhoto(){
-        var config  = {
-            method : 'post',
-            url: backend_url+'auth/get_profile_photo',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            console.log("response received")
-            console.log(response.data)
-            setPhoto(response.data)
-            return response.data;
-        })
-        .catch(function(error){
-            console.log(error)
-            console.log("No response")
-        });
-    }
+const SignUpForm = (props) => {
 
-    const [photo, setPhoto] = useState(getProfilePhoto());
+    const [photo, setPhoto] = useState("");
     const [displayName, setDisplayName] = useState();
     const [username, setUsername] = useState();
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
@@ -82,6 +60,15 @@ const SignUpForm = () => {
         return false
       }
 
+      let submitPhoto = "";
+
+      if (!photo){
+        submitPhoto = props.children.profilePhoto;
+      }
+      else{
+        submitPhoto = photo;
+      }
+
       var config = {
           method : 'post',
           url : backend_url + 'auth/sign_up',
@@ -93,8 +80,8 @@ const SignUpForm = () => {
           data :
           {
             username : username,
-            picture : photo,
-            displayName :displayName
+            picture : submitPhoto,
+            displayName : displayName
           }
         };
       axios(config)
@@ -110,8 +97,10 @@ const SignUpForm = () => {
             // If fail, up date the failure reason on the three forms for failure
             // If succeed, move away from page
     function uploadPhoto(photo){
+        console.log(photo);
         setPhoto(photo);
     }
+
 
     return (
         <div id = "SignUpForm">
@@ -122,7 +111,7 @@ const SignUpForm = () => {
 
             <div className="formObj">
                 <h1>Profile Picture</h1>
-                <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload defaultImage = {props.children.profilePhoto} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">

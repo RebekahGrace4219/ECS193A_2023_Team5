@@ -2,17 +2,20 @@ import BoxLine from "./BoxLine";
 import PhotoDisplay from "./PhotoDisplay";
 import DeleteChallengeButton from "./DeleteChallengeButton";
 const SentChallengeObj = (props) => {
-    let title = props.children.exerciseType + " " + props.children.amount + " " + props.children.unit
+
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let receivedUser = props.children.receivedUser;
     return (
-    <div>
-        <PhotoDisplay>{{"photos": props.children.photos}}</PhotoDisplay>
-        <BoxLine></BoxLine>
-        <div>
-            <p>{title}</p>
-            <p>{receivedUser} hasn't accepted your challenge.</p>
+    <div className = "challengeBox completeChallengeBox">
+        <div className="photoDiv">
+            <PhotoDisplay></PhotoDisplay>
+            <BoxLine></BoxLine>
         </div>
-        <div>
+        <div className="challengeMiddle">
+            <p className="challengeText">{title}</p>
+            <p className="challengeText">{receivedUser} hasn't accepted your challenge.</p>
+        </div>
+        <div className = "challengeEnd">
             <DeleteChallengeButton></DeleteChallengeButton>
         </div>
     </div>

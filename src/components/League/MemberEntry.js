@@ -1,29 +1,241 @@
 import MemberSelect from "./MemberSelect";
 import "../../css/Shared/ProfileSmall.css";
+import {useState} from 'react';
+import "../../css/League/member.css";
+
+import axios from 'axios';
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 const MemberEntry = (props) => {
-    console.log("member entry", props);
+    const [selectShow, setSelectShow] = useState();
+    console.log("MemberEntry", props.leagueID);
+
     function addFriend(){
-        // todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'friend_list/send_friend_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              friendName : props.children.username
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data);
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function block(){
-        //todo
+      var config = {
+        method : 'post',
+        url : backend_url + 'friend_list/block_user',
+        headers: {
+          Accept: 'application/json',
+        },
+        data :
+        {
+
+          friendName : props.children.username
+        },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log(response.data)
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });
     }
 
     function kickOut(){
-        // todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/kick_member',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function ban(){
-        //ban
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/ban_user',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function removeAdmin(){
-        //todo
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/remove_admin',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function addAdmin(){
+      console.log("adding admin",
+        {
+          recipient : props.children.username,
+          leagueID: props.leagueID
+        });
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/add_admin',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
+    }
 
+    function accept(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/accept_join_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
+    }
+
+    function decline(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/decline_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
+    }
+
+    function unban(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/unban_user',
+            headers: {
+              Accept: 'application/json',
+            },
+            data :
+            {
+              recipient : props.children.username,
+              leagueID: props.leagueID
+            },
+            withCredentials: true,
+            credentials: 'include'
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              console.log("No response")
+          });
     }
 
     function reactionFunction(input){
@@ -47,16 +259,35 @@ const MemberEntry = (props) => {
         else if(reaction === "addAdmin"){
             addAdmin();
         }
+        else if(reaction === "accept"){
+            accept();
+        }
+        else if(reaction === "decline"){
+            decline();
+        }
+        else if(reaction === "unban"){
+            unban();
+        }
     }
+
+    function toggleSelectShow(){
+        setSelectShow(!selectShow);
+    }
+
     return(
-        <div>
-            <div>
-                <img className = "smallProfilePicture" src = {props.children.photo} />
+        <div className = "memberEntry">
+            <div className = "memberEntryLeft">
+                <div>
+                    <img className = "memberPicture" src = {props.children.photo} />
+                </div>
+                <div class = "memberNames">
+                    <p className = "memberDisplayName memberEntryText">{props.children.displayName}</p>
+                    <p className = "memberUsername memberEntryText">{props.children.username}</p>
+                </div>
             </div>
-            <div>
-                <p>{props.children.displayName}</p>
-                <p>{props.children.username}</p>
-            </div>
+            <div className = "memberEntryRight">
+
+
             <div>
                 {(props.children.userType === "admin" || props.children.userType === "owner") ?
                 <img src = "https://i.imgur.com/551l8WX.png" alt = "key"/>
@@ -71,10 +302,18 @@ const MemberEntry = (props) => {
                 <></>
                 }
             </div>
+
             <div>
-                <MemberSelect memberReact = {reactionFunction} selfType = {props.selfType} userType = {props.children.userType}></MemberSelect>
+                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
+                    <img src = "https://i.imgur.com/pnzihUp.png"/>
+                </button>
+                {(selectShow) ? <MemberSelect memberReact = {reactionFunction} scrollType = {props.scrollType} selfType = {props.selfType} userType = {props.children.userType}></MemberSelect>: <></>}
             </div>
+            </div>
+
         </div>
+
+
     )
 }
 

@@ -42,7 +42,7 @@ const LeagueLeaderboard = (props) => {
     <Leaderboard>{{"title":"League Leaderboard", "entries": makeLeaderboardObj()}}</Leaderboard>
 </div>*/
 return(
-
+<div></div>
 );
 
 }
