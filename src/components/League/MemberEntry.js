@@ -134,6 +134,11 @@ const MemberEntry = (props) => {
     }
 
     function addAdmin(){
+      console.log("adding admin",
+        {
+          recipient : props.children.username,
+          leagueID: props.leagueID
+        });
         var config = {
             method : 'post',
             url : backend_url + 'league/add_admin',
@@ -186,7 +191,7 @@ const MemberEntry = (props) => {
     function decline(){
         var config = {
             method : 'post',
-            url : backend_url + 'league/decline_join_request',
+            url : backend_url + 'league/decline_request',
             headers: {
               Accept: 'application/json',
             },
@@ -211,7 +216,7 @@ const MemberEntry = (props) => {
     function unban(){
         var config = {
             method : 'post',
-            url : backend_url + 'league/unbar_user',
+            url : backend_url + 'league/unban_user',
             headers: {
               Accept: 'application/json',
             },

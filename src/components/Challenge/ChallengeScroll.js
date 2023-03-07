@@ -9,7 +9,6 @@ import axios from "axios";
 const backend_url = process.env.REACT_APP_DEV_BACKEND;
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
-    console.log("Challenge Scroll", props.leagueID);
     let [leagueID] = useState(props.leagueID);
     let [ifLeague] = useState(props.ifLeague);
     let [information, setInformation] = useState([]);
