@@ -1,6 +1,10 @@
 import {useState} from 'react';
 import "../../css/Challenge/addExercise.css";
 import "../../css/Shared/form.css";
+
+import axios from "axios";
+const backend_url = process.env.REACT_APP_DEV_BACKEND;
+
 let sportList =  [
     "Aikido",
     "Archery",
@@ -96,9 +100,9 @@ let sportList =  [
 
 const AddExerciseBox = () => {
     const [selfSpecify, setSelfSpecify] = useState(false);
-    const [sport, setSport] = useState("");
+    const [sport, setSport] = useState("Aikido");
     const [specifyError, setSpecifyError] = useState("");
-    const [unit, setUnit] = useState("");
+    const [unit, setUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
     const [completionDate, setCompletionDate] = useState();
     const [submitError, setSubmitError] = useState("");
@@ -126,29 +130,82 @@ const AddExerciseBox = () => {
         setAmount(event.target.value);
     }
     function unitChange(event){
+        console.log(
+         "setting unit", event.target.value
+        );
         setUnit(event.target.value);
     }
 
     function completionDateChange(event){
-        completionDateChange(event.target.value);
+        setCompletionDate(event.target.value);
     }
 
     function submitExercise(){
-        //TODO
+        // Check that the sport has length > 0
+        if (sport.length === 0){
+            setSpecifyError("Sport should have length greater than 0");
+            setSubmitError("Sport should be selected.")
+            return false;
+        }
+
+        if (amount <= 0){
+            setSubmitError("Exercise amount needs to be positive");
+            return false;
+        }
+
+        console.log("Sending",{
+            loggedDate: completionDate,
+            exerciseName: sport,
+            unit: unit,
+            amount: amount
+
+        });
+        var config = {
+            method : 'post',
+            url : backend_url + 'exercise_log/add',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                loggedDate: completionDate,
+                exerciseName: sport,
+                unit: unit,
+                amount: amount
+
+            }
+        };
+        axios(config)
+        .then(function(response){
+            console.log(response);
+            console.log("success!!!");
+            // wipe all the info
+            setSport("");
+            setAmount(0);
+            document.getElementById("addExerciseAmount").value = 0;
+            document.getElementById("addExerciseSelfSpecify").text = 0;
+            document.getElementById("addExerciseSport").value = "Archery";
+            document.getElementById("addExerciseSelfUnit").value = "ct";
+            document.getElementById("addExerciseDate").value = "";
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
     return(
         <div id = "AddExerciseBox">
             <h2>Add an Exercise</h2>
             <div className = "horizontalForm">
                 <p>Exercise</p>
-                <select className = "formSelect" onChange = {sportChange}>
+                <select id = "addExerciseSport" className = "formSelect" onChange = {sportChange}>
                     {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                 </select>
             </div>
             {selfSpecify ?
                 <div className = "horizontalForm">
                     <p>Specify your own activity: </p>
-                    <input className = "formTextInput" type = "text" onChange = {selfSpecifyChange}/>
+                    <input className = "formTextInput" id = "addExerciseSelfSpecify" type = "text" onChange = {selfSpecifyChange}/>
                     {specifyError ? <p className = "errorBox">{specifyError}</p> :<></>}
                 </div>
                 :
@@ -159,8 +216,8 @@ const AddExerciseBox = () => {
 
                 <p>How much?</p>
                 <div className='twoDivForm'>
-                <input className = "formTextInput" type = "number" min = "1" onChange = {amountChange}/>
-                    <select className = "formSelect" onChange = {unitChange}>
+                <input className = "formTextInput" id = "addExerciseAmount" type = "number" min = "1" onChange = {amountChange}/>
+                    <select className = "formSelect" id = "addExerciseUnit" onChange = {unitChange}>
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
                         <option value = "km">km</option>
@@ -176,7 +233,7 @@ const AddExerciseBox = () => {
 
             <div className = "horizontalForm">
                 <p>Date</p>
-                <input className = "formDateInput" type = "date" onChange = {completionDateChange}></input>
+                <input className = "formDateInput" id = "addExerciseDate" type = "date" onChange = {completionDateChange}></input>
             </div>
 
             <div className = "formButton">

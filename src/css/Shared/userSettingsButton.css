@@ -26,7 +26,7 @@
     justify-content: center;
 }
 #userSettingDisplayName{
-    width: 194.01px;
+    width: 150px;
     height: 28.14px;
     font-style: normal;
     font-weight: 600;
@@ -40,7 +40,7 @@
 }
 
 #userSettingUsername{
-    width: 194.01px;
+    width: 150px;
     height: 28.14px;
     font-style: normal;
     font-weight: 400;
@@ -58,6 +58,7 @@
     padding: 0;
     margin: 0;
     justify-content: center;
+    flex-direction: column;
 }
 
 .dropDownButton{

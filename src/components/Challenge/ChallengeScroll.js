@@ -12,7 +12,6 @@ const ChallengeScroll = (props) => {
     let [leagueID] = useState(props.leagueID);
     let [ifLeague] = useState(props.ifLeague);
     let [information, setInformation] = useState([]);
-    let [username] = useState(getUsername());
 
     function getIssuedFriend(){
         var config = {
@@ -37,21 +36,27 @@ const ChallengeScroll = (props) => {
 
 
     function getIssuedLeague(){
-        //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/accepted_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: leagueID
+            }
+        };
+        axios(config)
+        .then(function(response){
+
+            console.log(response);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getSent(){
@@ -98,7 +103,7 @@ const ChallengeScroll = (props) => {
 
     }
     function getWeekly(){
-        /*var config = {
+        var config = {
             method : 'post',
             url : backend_url + 'global_challenge/get_challenges',
             headers: {
@@ -109,13 +114,12 @@ const ChallengeScroll = (props) => {
         };
         axios(config)
         .then(function(response){
-
             console.log(response.data);
             setInformation(response.data);
         })
         .catch(function(error){
             console.log(error)
-        });*/
+        });
 
     }
     function getUsername(){
@@ -123,25 +127,25 @@ const ChallengeScroll = (props) => {
         return "Bruce Wayne";
     }
     function makeIssuedChallengeObj(input){
-        return (<IssuedChallengeObj username = {username}>{input}</IssuedChallengeObj>);
+        return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
     }
 
     function makeSentChallengeObj(input){
-        return (<SentChallengeObj username = {username}>{input}</SentChallengeObj>);
+        return (<SentChallengeObj>{input}</SentChallengeObj>);
     }
 
     function makeReceivedChallengeObj(input){
-        return (<ReceivedChallengeObj username = {username}>{input}</ReceivedChallengeObj>);
+        return (<ReceivedChallengeObj>{input}</ReceivedChallengeObj>);
     }
 
     function makeWeeklyChallengeObj(input){
-        return (<WeeklyChallengeObj username = {username}>{input}</WeeklyChallengeObj>);
+        return (<WeeklyChallengeObj>{input}</WeeklyChallengeObj>);
     }
 
     useEffect (
         () => {
             if(scrollType === "issued" && ifLeague){
-                //getIssuedLeague();
+                getIssuedLeague();
             }
             else if(scrollType === "issued" && !ifLeague){
                 getIssuedFriend();
