@@ -7,8 +7,6 @@ import axios from 'axios';
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
-    console.log("MemberEntry", props.leagueID);
-
     function addFriend(){
         var config = {
             method : 'post',

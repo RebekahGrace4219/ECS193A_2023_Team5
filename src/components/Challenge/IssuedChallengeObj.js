@@ -6,42 +6,66 @@ import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
 import "../../css/Challenge/ChallengeObj.css";
 import "../../css/Shared/button.css";
+import axios from "axios";
 
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 const IssuedChallengeObj = (props) => {
     let myProgress = props.children.progress.progress;
     let total = props.children.progress.exercise.amount;
     let percentageDone = myProgress/total * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let dueDate = props.children.dueDate.split("T")[0];
+    let challengeID = props.children._id;
+
+    const [leaderboardInfo, setLeaderboardInfo] = useState([]);
 
     const [showState, setState] = useState(false);
     function toggleState(){
         setState(!showState);
     }
 
-    function sortProgress(a, b){
-        return -1*(a.complete - b.complete);
+    function getLeaderboard(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/get_challenge_leaderboard',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                challengeID: challengeID
+            }
+        };
+        axios(config)
+        .then(function(response){
+            setLeaderboardInfo(response.data.map(makeLeaderboardObj));
+            console.log("Item sends: ", leaderboardInfo);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
-    function makeLeaderboardObj(){
-        let keys = Object.keys(props.children.progress);
-        let leaderBoardInfo = [];
-        for (let i = 0; i < keys.length; i++){
-            let person = keys[i];
-            let personObj = {};
-            personObj["photo"] = props.children.photos[person];
-            personObj["displayName"] = person;
-            personObj["complete"] = props.children.progress[person] / total * 100;
-            personObj["score"] = props.children.progress[person];
-            leaderBoardInfo.push(personObj);
-        }
 
-        leaderBoardInfo.sort(sortProgress);
+    useEffect (
+        () => {
+            if(showState){
+                getLeaderboard();
+            }
+        }, [showState]
+    );
 
-        for (let i = 0; i < keys.length; i++){
-            leaderBoardInfo[i]["level"] = i+1;
-        }
-        return leaderBoardInfo;
+    function makeLeaderboardObj(item, index){
+        console.log(item, index);
+        let entry = {}
+        entry["level"] = index + 1;
+        entry["photo"] = item["pictures"];
+        entry["name"] = item["username"];
+        entry["complete"] = item["progress"]/total * 100;
+        entry["score"] = item["progress"]
+        return entry;
     }
 
 
@@ -75,10 +99,11 @@ const IssuedChallengeObj = (props) => {
         </div>
 
         </div>
+
         {showState ?
             <div className = "leaderboardSection">
                 <Line></Line>
-                <Leaderboard>{{"title":"Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
+                <Leaderboard>{{"title":"Challenge", "entries": {leaderboardInfo}}}</Leaderboard>
             </div>
             :
             <></>

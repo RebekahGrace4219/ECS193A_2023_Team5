@@ -2,7 +2,6 @@ import ChallengeScroll from "./ChallengeScroll";
 
 import "../../css/Challenge/ChallengeObj.css"
 const WeeklyChallenge = () => {
-
     return (
             <div id = "WeeklyChallenge" className = "challengeSection">
               <div>
@@ -11,7 +10,6 @@ const WeeklyChallenge = () => {
 
               <ChallengeScroll type = "weekly" ifLeague = {false} leagueID = {""}></ChallengeScroll>
             </div>
-
           );
 }
 

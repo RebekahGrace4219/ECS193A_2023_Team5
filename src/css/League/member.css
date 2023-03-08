@@ -1,7 +1,7 @@
 #LeagueMemberList{
     box-sizing: border-box;
 
-    width: 648px;
+    width: 820px;
 
     background: #D9D9D9;
     border: 1px solid #F9A800;
@@ -14,10 +14,13 @@
 }
 
 .leagueMemberHeader{
-    width: 648px;
+    width: 820px;
+    display: flex;
+    flex-direction: column;
+
 }
 .memberEntry{
-    width: 600px;
+    width: 780px;
     height: 80px;
     background-color: transparent;
 

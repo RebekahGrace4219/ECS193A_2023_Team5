@@ -12,7 +12,7 @@ const LeaderboardEntry = (props) => {
         </div>
         <div className = "leaderboardRightSide">
             <img className = "leaderboardPhoto firstDiv" src={props.children.photo}/>
-            <p className="leaderboardText secondDiv">{props.children.displayName}</p>
+            <p className="leaderboardText secondDiv">{props.children.name}</p>
             <div className = "thirdDiv">
                 <ProgressBar>{{"completed":props.children.complete}}</ProgressBar>
             </div>
