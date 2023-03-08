@@ -18,7 +18,7 @@ const IssuedChallengeObj = (props) => {
     let myProgressRealUnits = Math.round(convertProgress(myProgressBaseUnits, props.children.exercise.unit));
     let percentageDone = myProgressBaseUnits/totalBaseUnits * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
-    let dueDate = props.children.dueDate.split("T")[0];
+    let dueDate = new Date(props.children.dueDate).toISOString().split("T")[0];
     let challengeID = props.children._id;
 
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
