@@ -11,9 +11,12 @@ import axios from "axios";
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 const IssuedChallengeObj = (props) => {
-    let myProgress = props.children.progress.progress;
-    let total = props.children.progress.exercise.amount;
-    let percentageDone = myProgress/total * 100;
+    console.log("Issued Object: ", props.children.exercise);
+    let myProgressBaseUnits = props.children.progress.progress;
+    let totalBaseUnits = props.children.progress.exercise.convertedAmount;
+    let totalRealUnits = props.children.progress.exercise.amount;
+    let myProgressRealUnits = convertProgress(myProgressBaseUnits, props.children.exercise.unit);
+    let percentageDone = myProgressBaseUnits/totalBaseUnits * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let dueDate = props.children.dueDate.split("T")[0];
     let challengeID = props.children._id;
@@ -25,6 +28,25 @@ const IssuedChallengeObj = (props) => {
         setState(!showState);
     }
 
+    function convertProgress(progress, goal_unit){
+
+        let conversionKey = {
+            "ct":1,
+            "m":1,
+            "km":(1/1000),
+            "ft": 3.28084,
+            "yd": 1.0936133333333,
+            "mi": 0.00062137121212119323429,
+            "s": 60,
+            "min": 1,
+            "hr": (1/60)
+        }
+
+        return progress*conversionKey[goal_unit];
+
+        return 1;
+
+    }
     function getLeaderboard(){
         var config = {
             method : 'post',
@@ -63,8 +85,8 @@ const IssuedChallengeObj = (props) => {
         entry["level"] = index + 1;
         entry["photo"] = item["pictures"];
         entry["name"] = item["username"];
-        entry["complete"] = item["progress"]/total * 100;
-        entry["score"] = item["progress"]
+        entry["complete"] = item["progress"]/totalBaseUnits * 100;
+        entry["score"] = convertProgress(item["progress"], props.children.exercise.unit);
         return entry;
     }
 
@@ -92,7 +114,7 @@ const IssuedChallengeObj = (props) => {
             </button>
             {
                 (percentageDone < 100) ?
-                <p className = "challengeInnerEnd">{myProgress}/{total}</p>
+                <p className = "challengeInnerEnd">{myProgressRealUnits}/{totalRealUnits}</p>
                 :
                 <p className = "challengeInnerEnd">Complete</p>
             }
