@@ -10,12 +10,13 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 
 const WeeklyChallengeObj = (props) => {
-    let myProgress = props.children.progress;
-    let total = props.children.exercise.amount;
-    let percentageDone = myProgress/total * 100;
+    let myProgressBaseUnits = props.children.progress;
+    let totalBaseUnits = props.children.exercise.convertedAmount;
+    let totalRealUnits = props.children.exercise.amount;
+    let percentageDone = myProgressBaseUnits/totalBaseUnits * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let challengeID = props.children.challengeID;
-
+    let myProgressRealUnits = Math.round(convertProgress(myProgressBaseUnits, props.children.exercise.unit));
     const [showState, setState] = useState(false);
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
     const [top5, setTop5] = useState([]);
@@ -86,14 +87,35 @@ const WeeklyChallengeObj = (props) => {
         });
     }
 
+
+    function convertProgress(progress, goal_unit){
+
+        let conversionKey = {
+            "ct":1,
+            "m":1,
+            "km":(1/1000),
+            "ft": 3.28084,
+            "yd": 1.0936133333333,
+            "mi": 0.00062137121212119323429,
+            "s": 60,
+            "min": 1,
+            "hr": (1/60)
+        }
+
+        return progress*conversionKey[goal_unit];
+
+        return 1;
+
+    }
+
     function makeLeaderboardObj(item, index){
         console.log(item, index);
         let entry = {}
         entry["level"] = index + 1;
         entry["photo"] = item["pictures"];
         entry["name"] = item["username"];
-        entry["complete"] = item["progress"]/total * 100;
-        entry["score"] = item["progress"]
+        entry["complete"] = item["progress"]/totalBaseUnits * 100;
+        entry["score"] = Math.round(convertProgress(item["progress"], props.children.exercise.unit));
         return entry;
     }
 
@@ -132,7 +154,7 @@ const WeeklyChallengeObj = (props) => {
             </button>
             {
                 (percentageDone < 100) ?
-                <p className = "challengeInnerEnd">{myProgress}/{total}</p>
+                <p className = "challengeInnerEnd">{myProgressRealUnits}/{totalRealUnits}</p>
                 :
                 <p className = "challengeInnerEnd">Complete</p>
             }
