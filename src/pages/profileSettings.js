@@ -8,7 +8,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 
 import "../css/Shared/page2.css"
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 const ProfileSettings = () => {
     const [load, setLoad] = useState(false);
     const [profilePhoto, setPhoto] = useState("");

@@ -8,7 +8,7 @@ import "../../css/Social/obj.css";
 
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();

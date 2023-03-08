@@ -6,7 +6,7 @@ import Leaderboard from "../Shared/Leaderboard";
 import axios from "axios";
 import "../../css/Challenge/ChallengeObj.css";
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 
 const WeeklyChallengeObj = (props) => {

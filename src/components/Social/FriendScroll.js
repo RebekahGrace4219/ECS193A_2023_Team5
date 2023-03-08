@@ -2,7 +2,7 @@ import FriendObj from './FriendObj';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 
 const FriendScroll = (props) => {
@@ -28,7 +28,7 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });  
+        });
     }
 
     function getSent(){
@@ -50,7 +50,7 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });  
+        });
         // setInformation([[{"displayName":"Sent Requests", "username":"Batman", "profilePicture": "https://i.imgur.com/jJaPs4q.png"}]]);
     }
 
@@ -73,7 +73,7 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });      
+        });
       }
 
     function getBlocked(){

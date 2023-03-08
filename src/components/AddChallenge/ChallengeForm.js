@@ -3,7 +3,7 @@ import Line from "../Shared/Line";
 import {useState, useEffect} from 'react';
 import '../../css/Shared/form.css'
 import '../../css/Shared/button.css'
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 let sportList =  [
     "Aikido",

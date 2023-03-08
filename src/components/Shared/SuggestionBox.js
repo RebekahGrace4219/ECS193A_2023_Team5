@@ -6,7 +6,7 @@ import RecentMedalObj from "../Profile/RecentMedalObj";
 import axios from "axios";
 
 
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 const SuggestionBox= (props) => {
 

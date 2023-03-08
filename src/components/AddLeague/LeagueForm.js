@@ -6,7 +6,7 @@ import '../../css/Shared/errorBox.css'
 import { useState } from "react";
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 const LeagueForm = () => {
     const [photo, setPhoto] = useState("https://i.imgur.com/sXwXq45.png");

@@ -6,7 +6,7 @@ import {useState, useEffect} from 'react';
 import AddChallengeButton from "./AddChallengeButton";
 import "../../css/Challenge/ChallengeScroll.css";
 import axios from "axios";
-const backend_url = process.env.REACT_APP_DEV_BACKEND;
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [leagueID] = useState(props.leagueID);

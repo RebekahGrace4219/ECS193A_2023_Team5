@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
 import axios from "axios";
-const backend_url = process.env.REACT_APP_DEV_BACKEND;
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
