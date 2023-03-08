@@ -3,59 +3,87 @@ import {useState, useEffect} from 'react';
 import SuggestedFriendObj from "../Social/SuggestedFriendObj";
 import SuggestedLeagueObj from "../Social/SuggestedLeagueObj";
 import RecentMedalObj from "../Profile/RecentMedalObj";
+import axios from "axios";
+
+
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const SuggestionBox= (props) => {
 
     let [informationType] = useState(props.children.type);
     let [informationMap, setInformationMap] = useState([]);
 
-    function getFriendInformation(){
-        // ask for top 6 friends
+    function getRecommendedFriends(){
         // process or get information in the form of [{"DisplayName":value, "MutalFriends": value, "MutualLeagues":value, "ProfilePhoto":},...]
-        setInformationMap( [
-            {"DisplayName": "Shazam", "MutualFriends": 6, "MutualLeagues": 4},
-            {"DisplayName": "Wonder Woman", "MutualFriends": 7, "MutualLeagues": 6},
-            {"DisplayName": "Bruce Wayne", "MutualFriends": 4, "MutualLeagues": 4},
-            {"DisplayName": "Alan Rickman", "MutualFriends": 8, "MutualLeagues": 2},
-            {"DisplayName": "Sinead O'Connor", "MutualFriends": 1, "MutualLeagues": 1},
-            {"DisplayName": "Pikachu", "MutualFriends": 2, "MutualLeagues": 0},
-        ]);
+
+        var config = {
+            method : 'post',
+            url : backend_url + 'friend_list/get_recommended',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformationMap(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
-    function getLeagueInformation(){
-        // ask for top 6 friends
+    function getRecommendedLeagues(){
         // process or get information in the form of [{"LeagueName":value, "MutualFriends":value},...]
-        setInformationMap( [
-            {"LeagueName": "Justice", "MutualFriends": 6},
-            {"LeagueName": "Avengers", "MutualFriends": 7},
-            {"LeagueName": "Free Swim", "MutualFriends": 4},
-            {"LeagueName": "Weighlifting Bros", "MutualFriends": 8},
-            {"LeagueName": "Lifting Weights and Friends", "MutualFriends": 1},
-            {"LeagueName": "Pokemon", "MutualFriends": 2},
-        ]);
+
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_recommended',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformationMap(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
-    function getMedalInformation(){
-        // ask for top 6 friends
+    function getRecentMedals(){
         // process or get information in the form of [{"Name":medalName},...]
-        setInformationMap( [
-            {"Name":"Run 100 miles"},
-            {"Name":"Swim 100 miles"},
-            {"Name":"Walk 100 miles"},
-            {"Name":"Run 250 miles"},
-            {"Name":"100 burpees"},
-            {"Name":"Try a new sport!"},
 
-        ]);
+
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_recently_earned',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformationMap(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
     useEffect(
         () => {
           if (informationType === "friend") {
-            getFriendInformation();
+            getRecommendedFriends();
           } else if(informationType === "league"){
-            getLeagueInformation();
+            getRecommendedLeagues();
           } else if (informationType === "medal"){
-            getMedalInformation();
+            getRecentMedals();
           }
         },[informationType]
       );
