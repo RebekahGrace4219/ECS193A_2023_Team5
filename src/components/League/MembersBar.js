@@ -20,6 +20,10 @@ const MembersBar = (props) => {
         props.changeFunction("banned");
     }
 
+    function setAdd(){
+        props.changeFunction("addUser");
+    }
+
     return (
         <div>
         { (props.selfType === "admin" || props.selfType === "owner")
@@ -30,6 +34,8 @@ const MembersBar = (props) => {
 
             <BarButton function = {setInvited} name = "Invited"></BarButton>
             <BarButton function = {setBanned} name = "Banned"></BarButton>
+
+            <BarButton function = {setAdd} name = "Add User"></BarButton>
         </div>
         :
         <></>

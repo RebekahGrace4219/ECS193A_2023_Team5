@@ -6,8 +6,16 @@
 #LeaderboardEntry{
     display: flex;
     flex-direction: row;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
+.leaderboardEntryImage{
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
+}
 .leaderboardRightSide{
     display: flex;
     flex-direction: row;

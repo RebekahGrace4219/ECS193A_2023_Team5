@@ -26,7 +26,7 @@ const ChallengeScroll = (props) => {
         axios(config)
         .then(function(response){
 
-            console.log(response);
+            console.log("Issued, " , response.data);
             setInformation(response.data);
         })
         .catch(function(error){
@@ -38,7 +38,7 @@ const ChallengeScroll = (props) => {
     function getIssuedLeague(){
         var config = {
             method : 'post',
-            url : backend_url + 'challenges/accepted_challenges',
+            url : backend_url + 'challenges/league_challenges',
             headers: {
             Accept: 'application/json',
             },
@@ -114,7 +114,7 @@ const ChallengeScroll = (props) => {
         };
         axios(config)
         .then(function(response){
-            console.log(response.data);
+            console.log("Weekly", response.data);
             setInformation(response.data);
         })
         .catch(function(error){

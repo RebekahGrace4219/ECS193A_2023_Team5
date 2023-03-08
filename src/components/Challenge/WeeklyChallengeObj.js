@@ -14,9 +14,12 @@ const WeeklyChallengeObj = (props) => {
     let total = props.children.exercise.amount;
     let percentageDone = myProgress/total * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
-    let challengeID = props.children._id;
+    let challengeID = props.children.challengeID;
+
     const [showState, setState] = useState(false);
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
+    const [top5, setTop5] = useState([]);
+    const [selfData, setSelfData] = useState([]);
 
     function max(a, b){
         if (a>b){
@@ -36,6 +39,28 @@ const WeeklyChallengeObj = (props) => {
         setState(!showState);
     }
 
+    function selfInTop5(){
+        let myUsername = selfData[0].username;
+
+        for (let i = 0; i < top5.length; i++){
+            if (myUsername === top5[i].username){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function buildLeaderboard(){
+        let top5Info = top5.map(makeLeaderboardObj);
+
+        if(!selfInTop5){
+            let item = selfData.map(makeLeaderboardObj);
+            item[0]["level"] = " - ";
+            top5Info.push(item[0]);
+        }
+
+        setLeaderboardInfo(top5Info);
+    }
     function getLeaderboard(){
         var config = {
             method : 'post',
@@ -51,11 +76,10 @@ const WeeklyChallengeObj = (props) => {
         };
         axios(config)
         .then(function(response){
-            //setLeaderboardInfo(response.data.map(makeLeaderboardObj));
-            console.log("response",
-                response.data
-            );
-            //console.log("Item sends: ", response.data.map(makeLeaderboardObj));
+            setTop5(response.data[0]);
+            setSelfData(response.data[1]);
+            buildLeaderboard();
+
         })
         .catch(function(error){
             console.log(error)
@@ -115,13 +139,21 @@ const WeeklyChallengeObj = (props) => {
         </div>
 
         </div>
+
+
+        {showState
+        ?
+        <div className = "leaderboardSection">
+            <Line></Line>
+            <Leaderboard>{{"title":"Global Challenge", "entries": {leaderboardInfo}}}</Leaderboard>
+        </div>
+        :
+        <></>
+        }
+
     </div>
     );
-    /** </div>
-        {showState ? <div>
-            <Line></Line>
-            <Leaderboard>{{"title":"Global Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
-        </div> :<></>}*/
+
 }
 
 export default WeeklyChallengeObj;

@@ -3,50 +3,133 @@ import MemberEntry from './MemberEntry';
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
 import MembersBar from './MembersBar';
+import axios from "axios";
+import MemberAdd from './MemberAdd';
+const backend_url = process.env.REACT_APP_DEV_BACKEND;
+
 const LeagueMemberList = (props) => {
     const [id] = useState(props.children.id);
     const [memberScroll, setMemberScroll] = useState("all");
     const [memberList, setMemberList] = useState([]);
     const [load, setLoad] = useState(false);
     const [selfType, setSelfType] = useState("");
-    console.log("here self type is", selfType);
+
     function getAll(){
-        // get list from service
-        setMemberList( [
-            {"username": "User#6822", "displayName": "Person 1" , "userType": "owner", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "Kauboy#8925", "displayName": "Person 2" , "userType": "admin", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "yadda#7651", "displayName": "Person 3" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_member_list',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
+            console.log("All", response.data);
+            setMemberList(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
 
-        ]);
     }
-    function getRequesting(){
-        // get list from service
-        setMemberList( [
-            {"username": "yadda#7651", "displayName": "Person 3" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
 
-        ]);
+    function getRequesting(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_pending_request_list',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
+
+            console.log("Request", response.data);
+            setMemberList(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
     function getBanned(){
         // get list from service
-        setMemberList( [
-            {"username": "User#6822", "displayName": "Person 1" , "userType": "owner", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "Kauboy#8925", "displayName": "Person 2" , "userType": "admin", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "yadda#7651", "displayName": "Person 3" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_banned_list',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
 
-        ]);
+            console.log("Banned", response.data);
+            setMemberList(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
     function getInvited(){
         // get list from service
-        setMemberList( [
-            {"username": "User#6822", "displayName": "Person 1" , "userType": "owner", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "Kauboy#8925", "displayName": "Person 2" , "userType": "admin", "photo": "https://i.imgur.com/q3vP5BH.png"},
-            {"username": "yadda#7651", "displayName": "Person 3" , "userType": "participant", "photo": "https://i.imgur.com/q3vP5BH.png"},
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_sent_invite_list',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
 
-        ]);
+            console.log("Invited", response.data);
+            setMemberList(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getSelfType(){
-        setSelfType("owner");
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_role',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
+            setSelfType(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     useEffect (
@@ -103,6 +186,8 @@ const LeagueMemberList = (props) => {
             {
                 (memberScroll === "invited" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
             }
+            {
+                (memberScroll === "addUser" && (selfType === "admin" || selfType === "owner")) ? <MemberAdd leagueID = {id}></MemberAdd>:<></>}
         </div>
     )
 }

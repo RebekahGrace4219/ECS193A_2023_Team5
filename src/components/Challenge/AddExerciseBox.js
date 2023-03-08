@@ -183,8 +183,10 @@ const AddExerciseBox = () => {
             // wipe all the info
             setSport("");
             setAmount(0);
+            setSpecifyError("");
+            setSubmitError("");
             document.getElementById("addExerciseAmount").value = 0;
-            document.getElementById("addExerciseSelfSpecify").text = 0;
+            document.getElementById("addExerciseSelfSpecify").value = "";
             document.getElementById("addExerciseSport").value = "Archery";
             document.getElementById("addExerciseSelfUnit").value = "ct";
             document.getElementById("addExerciseDate").value = "";
@@ -198,7 +200,7 @@ const AddExerciseBox = () => {
             <h2>Add an Exercise</h2>
             <div className = "horizontalForm">
                 <p>Exercise</p>
-                <select id = "addExerciseSport" className = "formSelect" onChange = {sportChange}>
+                <select id = "addExerciseSport" name = "addExerciseSport" className = "formSelect" onChange = {sportChange}>
                     {sportList.map((name)=>{return <option value = {name}>{name}</option>;})}
                 </select>
             </div>

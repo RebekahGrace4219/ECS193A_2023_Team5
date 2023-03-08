@@ -268,13 +268,6 @@ const ChallengeForm = () =>{
           console.log(err)
         })
 
-        // Validate the input
-            // If the user selects "self specify", there needs to be a string > length 1 in the field
-                // -> if not, set the error response using setSpecifyErrorResponse();
-            // All other fields should be locked by their own types and do not need to be validated
-        // Sent the post request (make sure to select the exercise in the drop down or the self specify based on selfSpecify and only send one)
-        // Check the post request response, set the submitErrorResponse message if it fails
-        // if post succeeds, move to the current page
     }
 
     useEffect(

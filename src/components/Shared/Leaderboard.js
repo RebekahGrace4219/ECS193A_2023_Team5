@@ -1,7 +1,7 @@
 import LeaderboardEntry from "./LeaderboardEntry";
 
 const Leaderboard = (props) => {
-    console.log("leaderboard receives", props.children.entries.leaderboardInfo);
+
 
     function makeLeaderboardEntryObj(input){
         return (<LeaderboardEntry>{input}</LeaderboardEntry>)
