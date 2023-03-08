@@ -47,8 +47,25 @@ const LeagueHeader = (props) => {
     }
 
     function getNumberChallenges(){
-        // use id to get the challenges
-        setNumberChallenges(2);
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_league_active_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
+            setNumberChallenges(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getLeagueDescription() {
@@ -99,8 +116,25 @@ const LeagueHeader = (props) => {
     }
 
     function getNumberMembers(){
-        //
-        setNumberMembers(3);
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_member_list',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+        };
+        axios(config)
+        .then(function(response){
+            setNumberMembers(response.data.length);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function moveDescriptionPage(){
