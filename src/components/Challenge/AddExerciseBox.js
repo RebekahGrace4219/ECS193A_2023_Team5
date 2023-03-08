@@ -104,7 +104,7 @@ const AddExerciseBox = () => {
     const [specifyError, setSpecifyError] = useState("");
     const [unit, setUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
-    const [completionDate, setCompletionDate] = useState();
+    const [completionDate, setCompletionDate] = useState(Date.now());
     const [submitError, setSubmitError] = useState("");
 
     function sportChange(event){
@@ -138,6 +138,23 @@ const AddExerciseBox = () => {
 
     function completionDateChange(event){
         setCompletionDate(event.target.valueAsNumber);
+    }
+
+    function resetInfo(){
+        setSelfSpecify(false);
+        setSport("Aikido");
+        setSpecifyError("");
+        setUnit("ct");
+        setAmount(0);
+        setCompletionDate(Date.now());
+        setSubmitError("");
+    }
+
+    function resetVisuals(){
+        document.getElementById("addExerciseSport").value = "Aikido";
+        document.getElementById("addExerciseAmount").value = 0;
+        document.getElementById("addExerciseUnit").value = "ct";
+        document.getElementById("addExerciseDate").value = "";
     }
 
     function submitExercise(){
@@ -179,17 +196,8 @@ const AddExerciseBox = () => {
         axios(config)
         .then(function(response){
             console.log(response);
-            console.log("success!!!");
-            // wipe all the info
-            setSport("");
-            setAmount(0);
-            setSpecifyError("");
-            setSubmitError("");
-            document.getElementById("addExerciseAmount").value = 0;
-            document.getElementById("addExerciseSelfSpecify").value = "";
-            document.getElementById("addExerciseSport").value = "Archery";
-            document.getElementById("addExerciseSelfUnit").value = "ct";
-            document.getElementById("addExerciseDate").value = "";
+            resetInfo();
+            resetVisuals();
         })
         .catch(function(error){
             console.log(error)
