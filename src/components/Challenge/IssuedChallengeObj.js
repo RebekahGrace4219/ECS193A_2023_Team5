@@ -15,7 +15,7 @@ const IssuedChallengeObj = (props) => {
     let myProgressBaseUnits = props.children.progress.progress;
     let totalBaseUnits = props.children.progress.exercise.convertedAmount;
     let totalRealUnits = props.children.progress.exercise.amount;
-    let myProgressRealUnits = convertProgress(myProgressBaseUnits, props.children.exercise.unit);
+    let myProgressRealUnits = Math.round(convertProgress(myProgressBaseUnits, props.children.exercise.unit));
     let percentageDone = myProgressBaseUnits/totalBaseUnits * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let dueDate = props.children.dueDate.split("T")[0];
@@ -86,7 +86,7 @@ const IssuedChallengeObj = (props) => {
         entry["photo"] = item["pictures"];
         entry["name"] = item["username"];
         entry["complete"] = item["progress"]/totalBaseUnits * 100;
-        entry["score"] = convertProgress(item["progress"], props.children.exercise.unit);
+        entry["score"] = Math.round(convertProgress(item["progress"], props.children.exercise.unit));
         return entry;
     }
 
