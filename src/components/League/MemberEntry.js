@@ -237,9 +237,9 @@ const MemberEntry = (props) => {
     }
 
     function revoke(){
-      /*var config = {
+      var config = {
         method : 'post',
-        url : backend_url + 'league/unban_user',
+        url : backend_url + 'league/undo_invite',
         headers: {
           Accept: 'application/json',
         },
@@ -258,8 +258,7 @@ const MemberEntry = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
-      });*/
-      //TODO
+      });
     }
     function reactionFunction(input){
         let reaction = input.target.value;
