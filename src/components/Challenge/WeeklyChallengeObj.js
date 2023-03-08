@@ -1,23 +1,25 @@
 import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
-
+import axios from "axios";
 import "../../css/Challenge/ChallengeObj.css";
-const WeeklyChallengeObj = (props) => {
-    console.log(props);
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_DEV_BACKEND
 
+
+const WeeklyChallengeObj = (props) => {
     let myProgress = props.children.progress;
     let total = props.children.exercise.amount;
     let percentageDone = myProgress/total * 100;
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
+    let challengeID = props.children.challengeID;
 
-
-
-    function sortProgress(a, b){
-        return -1*(a.complete - b.complete);
-    }
+    const [showState, setState] = useState(false);
+    const [leaderboardInfo, setLeaderboardInfo] = useState([]);
+    const [top5, setTop5] = useState([]);
+    const [selfData, setSelfData] = useState([]);
 
     function max(a, b){
         if (a>b){
@@ -33,42 +35,75 @@ const WeeklyChallengeObj = (props) => {
         return b;
     }
 
-    function makeLeaderboardObj(){
-        let keys = Object.keys(props.children.progress);
-        let leaderBoardInfo = [];
-        for (let i = 0; i < max(keys.length,5); i++){
-            let person = keys[i];
-            let personObj = {};
-            personObj["photo"] = props.children.photos[person];
-            personObj["displayName"] = person;
-            personObj["complete"] = min(props.children.progress[person] / total * 100,100);
-            personObj["score"] = props.children.progress[person];
-            leaderBoardInfo.push(personObj);
-        }
-
-        leaderBoardInfo.sort(sortProgress);
-
-        for (let i = 0; i < keys.length; i++){
-            leaderBoardInfo[i]["level"] = i+1;
-        }
-
-        if(!props.children.top5){
-            let selfObj = {};
-            selfObj["photo"] = props.children.self["photo"];
-            selfObj["displayName"] = "me";
-            selfObj["complete"] = min(myProgress / total * 100, 100);
-            selfObj["score"] = myProgress;
-            selfObj["level"] = min(keys.length,6);
-            leaderBoardInfo.push(selfObj);
-        }
-
-        return leaderBoardInfo;
-    }
-    const [showState, setState] = useState(false);
     function toggleState(){
         setState(!showState);
     }
 
+    function selfInTop5(){
+        let myUsername = selfData[0].username;
+
+        for (let i = 0; i < top5.length; i++){
+            if (myUsername === top5[i].username){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function buildLeaderboard(){
+        let top5Info = top5.map(makeLeaderboardObj);
+
+        if(!selfInTop5){
+            let item = selfData.map(makeLeaderboardObj);
+            item[0]["level"] = " - ";
+            top5Info.push(item[0]);
+        }
+
+        setLeaderboardInfo(top5Info);
+    }
+    function getLeaderboard(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'global_challenge/get_leaderboard',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                challengeID: challengeID
+            }
+        };
+        axios(config)
+        .then(function(response){
+            setTop5(response.data[0]);
+            setSelfData(response.data[1]);
+            buildLeaderboard();
+
+        })
+        .catch(function(error){
+            console.log(error)
+        });
+    }
+
+    function makeLeaderboardObj(item, index){
+        console.log(item, index);
+        let entry = {}
+        entry["level"] = index + 1;
+        entry["photo"] = item["pictures"];
+        entry["name"] = item["username"];
+        entry["complete"] = item["progress"]/total * 100;
+        entry["score"] = item["progress"]
+        return entry;
+    }
+
+    useEffect (
+        () => {
+            if(showState){
+                getLeaderboard();
+            }
+        }, [showState]
+    );
 
     return (
     <div className = "completeChallengeBox">
@@ -104,13 +139,21 @@ const WeeklyChallengeObj = (props) => {
         </div>
 
         </div>
-        {showState ? <div>
+
+
+        {showState
+        ?
+        <div className = "leaderboardSection">
             <Line></Line>
-            <Leaderboard>{{"title":"Global Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
-        </div> :<></>}
+            <Leaderboard>{{"title":"Global Challenge", "entries": {leaderboardInfo}}}</Leaderboard>
+        </div>
+        :
+        <></>
+        }
+
     </div>
     );
-    //return (<div>Gloval challenge</div>)
+
 }
 
 export default WeeklyChallengeObj;

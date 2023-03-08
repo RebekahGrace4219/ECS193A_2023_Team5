@@ -7,8 +7,6 @@ import axios from 'axios';
 const backend_url = process.env.REACT_APP_DEV_BACKEND
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
-    console.log("MemberEntry", props.leagueID);
-
     function addFriend(){
         var config = {
             method : 'post',
@@ -238,6 +236,31 @@ const MemberEntry = (props) => {
           });
     }
 
+    function revoke(){
+      /*var config = {
+        method : 'post',
+        url : backend_url + 'league/unban_user',
+        headers: {
+          Accept: 'application/json',
+        },
+        data :
+        {
+          recipient : props.children.username,
+          leagueID: props.leagueID
+        },
+        withCredentials: true,
+        credentials: 'include'
+      };
+      axios(config)
+      .then(function(response) {
+          console.log(response.data)
+      })
+      .catch(function(error){
+          console.log(error)
+          console.log("No response")
+      });*/
+      //TODO
+    }
     function reactionFunction(input){
         let reaction = input.target.value;
 
@@ -268,6 +291,9 @@ const MemberEntry = (props) => {
         else if(reaction === "unban"){
             unban();
         }
+        else if (reaction === "revoke"){
+          revoke();
+        }
     }
 
     function toggleSelectShow(){
@@ -278,7 +304,7 @@ const MemberEntry = (props) => {
         <div className = "memberEntry">
             <div className = "memberEntryLeft">
                 <div>
-                    <img className = "memberPicture" src = {props.children.photo} />
+                    <img className = "memberPicture" src = {props.children.picture} />
                 </div>
                 <div class = "memberNames">
                     <p className = "memberDisplayName memberEntryText">{props.children.displayName}</p>
@@ -289,14 +315,14 @@ const MemberEntry = (props) => {
 
 
             <div>
-                {(props.children.userType === "admin" || props.children.userType === "owner") ?
+                {(props.children.role === "admin" || props.children.role === "owner") ?
                 <img src = "https://i.imgur.com/551l8WX.png" alt = "key"/>
                 :
                 <></>
                 }
             </div>
                 <div>
-                {(props.children.userType === "owner") ?
+                {(props.children.role === "owner") ?
                 <img src = "https://i.imgur.com/FuiEy2B.png" alt = "crown"/>
                 :
                 <></>
@@ -307,7 +333,7 @@ const MemberEntry = (props) => {
                 <button className = "moreInfoButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png"/>
                 </button>
-                {(selectShow) ? <MemberSelect memberReact = {reactionFunction} scrollType = {props.scrollType} selfType = {props.selfType} userType = {props.children.userType}></MemberSelect>: <></>}
+                {(selectShow) ? <MemberSelect memberReact = {reactionFunction} scrollType = {props.scrollType} selfType = {props.selfType} userType = {props.children.role}></MemberSelect>: <></>}
             </div>
             </div>
 
