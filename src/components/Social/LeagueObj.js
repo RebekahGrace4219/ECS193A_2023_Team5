@@ -3,6 +3,7 @@ import LeagueSelect from './LeagueSelect';
 import OwnerSelect from './OwnerSelect';
 import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
+import InviteSelect from './InviteSelect';
 import "../../css/Social/obj.css";
 
 import axios from 'axios';
@@ -11,6 +12,7 @@ const backend_url = process.env.REACT_APP_DEV_BACKEND
 
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
+    const [id, setID] = useState(props.children._id);
     let type = props.type;
     console.log("LeagueObj",props);
     function toggleSelectShow(){
@@ -18,43 +20,136 @@ const LeagueObj = (props) => {
     }
 
     function leave(){
-      // console.log(props.children._id)
-      // var config = {
-      //   method : 'post',
-      //   url : backend_url + 'league/leave_league',
-      //   headers: {
-      //     Accept: 'application/json',
-      //   },
-      //   data :
-      //   {
-      //     leagueID : props.children._id
-      //   },
-      //   withCredentials: true,
-      //   credentials: 'include'
-      // };
-      // axios(config)
-      // .then(function(response) {
-      //     console.log(response.data)
-      // })
-      // .catch(function(error){
-      //     console.log(error)
-      //     console.log("No response")
-      // });
-      console.log("Leave the league")
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/leave_league',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
     function removeAdmin(){
-        console.log("remove admin");
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/user_remove_admin',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
     function deleteLeague(){
-        console.log("delete league");
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/delete_league',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
     function revoke(){
-        console.log("revoke request to join league");
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/user_undo_request',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
     }
 
+    function decline(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/user_decline_invite',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
+    }
+
+    function accept(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/user_accept_invite',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+          });
+    }
     function leagueReact(event){
         let value = event.target.value;
         if(value === "leave"){
@@ -68,6 +163,12 @@ const LeagueObj = (props) => {
         }
         else if(value === "revoke"){
             revoke();
+        }
+        else if(value === "decline"){
+            decline();
+        }
+        else if(value === "accept"){
+            accept();
         }
     }
 
@@ -94,6 +195,7 @@ const LeagueObj = (props) => {
                 {(selectShow && type === "owner") ? <OwnerSelect leagueReact = {leagueReact}></OwnerSelect>: <></>}
                 {(selectShow && type === "admin") ? <AdminSelect leagueReact = {leagueReact}></AdminSelect>: <></>}
                 {(selectShow && type === "sent") ? <SentLeagueSelect leagueReact = {leagueReact}></SentLeagueSelect>: <></>}
+                {(selectShow && type === "invite") ? <InviteSelect leagueReact = {leagueReact}></InviteSelect>: <></>}
             </div>
         </div>
     )

@@ -30,6 +30,7 @@ const LeagueSection = () => {
             { (leagueState === "owner") ? <LeagueScroll type = "owner"></LeagueScroll> : <></>}
             { (leagueState === "admin") ? <LeagueScroll type = "admin"></LeagueScroll> : <></>}
             { (leagueState === "sent") ? <LeagueScroll type = "sent"></LeagueScroll> : <></>}
+            { (leagueState === "invite") ? <LeagueScroll type = "invite"></LeagueScroll> : <></>}
 
 
         </div>
