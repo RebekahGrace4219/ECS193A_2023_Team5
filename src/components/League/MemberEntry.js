@@ -4,7 +4,7 @@ import {useState} from 'react';
 import "../../css/League/member.css";
 
 import axios from 'axios';
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
     function addFriend(){

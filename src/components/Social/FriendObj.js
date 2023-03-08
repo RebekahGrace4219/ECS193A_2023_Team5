@@ -6,7 +6,7 @@ import BlockedSelect from "./BlockedSelect";
 import "../../css/Social/obj.css";
 import axios from 'axios';
 import "../../css/Shared/button.css";
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
@@ -71,7 +71,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -96,7 +96,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -121,7 +121,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -146,7 +146,7 @@ const FriendObj = (props) => {
         headers: {
           Accept: 'application/json',
         },
-        data : 
+        data :
         {
           friendName : props.children.username
         },
@@ -189,7 +189,7 @@ const FriendObj = (props) => {
     return(
         <div id = "FriendObj" className = "displayObj">
             <div className = "objSection">
-                <img className = "friendProfilePhoto" src = {props.children.picture}/>
+                <img className = "objProfilePhoto" src = {props.children.picture}/>
             </div>
             <div className = "objSection objWritingSection">
                 <p className = "objDisplayName">{props.children.displayName}</p>

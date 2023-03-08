@@ -9,7 +9,7 @@ import "../../css/Shared/button.css";
 import axios from "axios";
 
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 const IssuedChallengeObj = (props) => {
     console.log("Issued Object: ", props.children.exercise);
     let myProgressBaseUnits = props.children.progress.progress;

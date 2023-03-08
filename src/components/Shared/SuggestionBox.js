@@ -6,7 +6,7 @@ import RecentMedalObj from "../Profile/RecentMedalObj";
 import axios from "axios";
 
 
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 
 const SuggestionBox= (props) => {
 
@@ -27,6 +27,7 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log("informationMAp", response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -61,7 +62,7 @@ const SuggestionBox= (props) => {
 
         var config = {
             method : 'post',
-            url : backend_url + 'league/get_recently_earned',
+            url : backend_url + 'medals/get_recently_earned',
             headers: {
             Accept: 'application/json',
             },
@@ -70,6 +71,7 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log("recently earned");
             setInformationMap(response.data)
         })
         .catch(function(error){

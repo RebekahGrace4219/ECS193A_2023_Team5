@@ -4,7 +4,7 @@ const SuggestedFriendObj = (props) => {
     return (
         <div className="suggestionObj">
             <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {props.photo}/>
+                <img className = "suggestionImage" src = "https://i.imgur.com/jJaPs4q.png"/>
             </div>
             <div className = "suggestionWritingSection">
                 <div  className = "suggestionHeaderStyle">{props.displayName}</div>

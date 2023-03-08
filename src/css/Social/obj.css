@@ -17,6 +17,7 @@
 .objProfilePhoto{
     width: 66px;
     height: 66px;
+    border-radius: 10px;
 }
 
 .objSection{
