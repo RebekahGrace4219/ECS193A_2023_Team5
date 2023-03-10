@@ -18,7 +18,7 @@ const ReceivedChallengeObj = (props) => {
             <p className="challengeText">{dueDate}</p>
         </div>
         <div className = "challengeEnd">
-            <AcceptChallengeButton id = {props.children._id} ></AcceptChallengeButton>
+            <AcceptChallengeButton id = {props.children._id}></AcceptChallengeButton>
             <DeclineChallengeButton id = {props.children._id}></DeclineChallengeButton>
         </div>
     </div>
