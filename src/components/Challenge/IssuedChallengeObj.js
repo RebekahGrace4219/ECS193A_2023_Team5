@@ -4,7 +4,7 @@ import ProgressBar from "../Shared/ProgressBar";
 import {useState, useEffect} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
-import "../../css/Challenge/ChallengeObj.css";
+import "../../css/Challenge/challengeObj.css";
 import "../../css/Shared/button.css";
 import axios from "axios";
 

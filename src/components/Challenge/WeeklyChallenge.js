@@ -1,6 +1,6 @@
 import ChallengeScroll from "./ChallengeScroll";
 
-import "../../css/Challenge/ChallengeObj.css"
+import "../../css/Challenge/challengeObj.css"
 const WeeklyChallenge = () => {
     return (
             <div id = "WeeklyChallenge" className = "challengeSection">

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import '../../css/Challenge/PhotoDisplay.css';
+import '../../css/Challenge/photoDisplay.css';
 const PhotoDisplay = (props) => {
     let pictures = props.photos;
     const [length] =  useState(findLength(pictures));

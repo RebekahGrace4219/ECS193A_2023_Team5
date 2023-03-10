@@ -3,6 +3,7 @@ html{
     padding: 0;
     margin:0;
 }
+
 #root{
     width:100%;
     height:100%;
@@ -13,7 +14,7 @@ html{
 .Body2Part{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 100%;
     height: 100%;
     padding: 0px;
@@ -22,12 +23,15 @@ html{
 }
 
 .leftSide2Part{
-    width:10%;
+    min-width: 155px;
     height: 100%;
 }
 
 .rightSide2Part{
-    width:90%;
     height: 100%;
+    padding-left: 40px;
+
+    padding-right: 40px;
+    min-width: 900px;
     background-color: transparent;
 }

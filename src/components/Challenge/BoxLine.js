@@ -1,9 +1,7 @@
-import "../../css/Challenge/boxLine.css";
+import "../../css/Challenge/challenge.css";
 
-const BoxLine = (props) => {
-
+const BoxLine = () => {
     return(<div id = "BoxLine"></div>);
-
 }
 
 export default BoxLine;
