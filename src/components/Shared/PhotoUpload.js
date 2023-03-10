@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import '../../css/Shared/PhotoUpload.css'
+import '../../css/Shared/photoUpload.css'
 import React, {useState} from 'react';
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 

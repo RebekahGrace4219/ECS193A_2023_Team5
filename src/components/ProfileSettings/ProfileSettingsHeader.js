@@ -1,5 +1,5 @@
 import '../../css/Shared/header.css';
-import '../../css/ProfileSettings/ProfileSettingsHeader.css';
+import '../../css/ProfileSettings/profileSettings.css';
 
 import UserSettingsButton from '../Shared/UserSettingsButton';
 const ProfileSettingsHeader = () => {

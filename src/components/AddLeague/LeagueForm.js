@@ -2,7 +2,7 @@ import Line from "../Shared/Line";
 import PhotoUpload from "../Shared/PhotoUpload";
 import '../../css/Shared/form.css'
 import '../../css/Shared/button.css'
-import '../../css/Shared/errorBox.css'
+
 import { useState } from "react";
 import axios from 'axios';
 

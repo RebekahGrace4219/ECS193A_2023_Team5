@@ -1,4 +1,4 @@
-import "../../css/Shared/suggestionBoxObj.css";
+import "../../css/Shared/suggestionBox.css";
 
 const RecentMedalObj = (props) => {
     return(

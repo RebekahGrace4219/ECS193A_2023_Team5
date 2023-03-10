@@ -1,5 +1,4 @@
 import MemberSelect from "./MemberSelect";
-import "../../css/Shared/ProfileSmall.css";
 import {useState} from 'react';
 import "../../css/League/member.css";
 
