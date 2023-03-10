@@ -1,8 +1,9 @@
-import '../../css/Shared/button.css';
 import axios from "axios";
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import '../../css/Shared/button.css';
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const DeleteChallengeButton = (props) => {
     function onDelete(){
         var config  = {

@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-
-import axios from 'axios';
 import PhotoUpload from '../Shared/PhotoUpload';
+import axios from 'axios';
+
 import '../../css/SignUp/signUpForm.css';
 import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
 import '../../css/Shared/header.css';
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const SignUpForm = (props) => {
 

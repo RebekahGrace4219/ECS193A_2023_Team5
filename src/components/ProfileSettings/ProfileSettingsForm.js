@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react';
 
 import PhotoUpload from '../Shared/PhotoUpload';
+
+import axios from 'axios';
+
 import "../../css/Shared/button.css";
 import "../../css/Shared/form.css";
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileSettingsForm = (props) => {
 

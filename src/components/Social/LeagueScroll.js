@@ -2,7 +2,7 @@ import LeagueObj from './LeagueObj';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueScroll = (props) => {
     let [scrollType] = useState(props.type);

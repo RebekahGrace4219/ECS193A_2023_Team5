@@ -1,13 +1,14 @@
+import {useState, useEffect} from "react";
+
 import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
-import {useState, useEffect} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
 import axios from "axios";
-import "../../css/Challenge/challengeObj.css";
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_PROD_BACKEND
 
+import "../../css/Challenge/challengeObj.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const WeeklyChallengeObj = (props) => {
     let myProgressBaseUnits = props.children.progress;

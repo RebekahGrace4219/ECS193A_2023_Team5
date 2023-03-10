@@ -2,6 +2,7 @@ import '../../css/Shared/header.css';
 import '../../css/ProfileSettings/profileSettings.css';
 
 import UserSettingsButton from '../Shared/UserSettingsButton';
+
 const ProfileSettingsHeader = () => {
 
     return (

@@ -1,7 +1,7 @@
 import ProgressBar from "./ProgressBar";
 import "../../css/Shared/leaderboard.css";
-const LeaderboardEntry = (props) => {
 
+const LeaderboardEntry = (props) => {
     return (
     <div id = "LeaderboardEntry">
         <div className = "leaderboardEntryImage">

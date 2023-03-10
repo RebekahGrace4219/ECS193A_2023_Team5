@@ -1,4 +1,5 @@
-import "../../css/Shared/form.css"
+import "../../css/Shared/form.css";
+
 const LeagueSelect = (props) => {
     return(
         <div>

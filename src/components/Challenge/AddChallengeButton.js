@@ -1,4 +1,3 @@
-
 import '../../css/Shared/button.css';
 
 const AddChallengeButton = () => {

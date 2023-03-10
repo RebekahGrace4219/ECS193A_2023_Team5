@@ -1,5 +1,6 @@
 import BarButton from "../Shared/BarButton";
 import "../../css/Shared/bar.css";
+
 const FriendBar = (props) => {
     function setFriend(){
         props.func("friend");

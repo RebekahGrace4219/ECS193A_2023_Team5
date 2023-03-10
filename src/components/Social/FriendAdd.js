@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import '../../css/Shared/addUser.css'
+import React, {useState} from 'react';
 import axios from 'axios';
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import '../../css/Shared/addUser.css';
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendAdd = () => {
 

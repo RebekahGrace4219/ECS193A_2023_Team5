@@ -1,5 +1,7 @@
 import BarButton from "../Shared/BarButton";
+
 import "../../css/Shared/bar.css";
+
 const CurrentChallengeBar = (props) => {
     function setIssued(){
         props.func("issued");

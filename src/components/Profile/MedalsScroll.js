@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react';
 import MedalObj from './MedalObj';
-import "../../css/Shared/scroll.css";
 import axios from "axios";
+import "../../css/Shared/scroll.css";
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const MedalsScroll = (props) => {
     let [type] = useState(props.children.type);
     let [informationMap, setInformationMap] = useState([]);

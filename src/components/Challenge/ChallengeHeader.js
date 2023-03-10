@@ -3,6 +3,7 @@ import PageSwitch from "../Shared/PageSwitch";
 
 import "../../css/Challenge/challenge.css";
 import "../../css/Shared/section.css";
+
 const ChallengeHeader = () => {
     return (<div id = "ChallengeHeader">
         <div id = "ChallengeTitle">

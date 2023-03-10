@@ -1,12 +1,13 @@
+import { useState } from "react";
 import Line from "../Shared/Line";
 import PhotoUpload from "../Shared/PhotoUpload";
-import '../../css/Shared/form.css'
-import '../../css/Shared/button.css'
-
-import { useState } from "react";
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import '../../css/Shared/form.css';
+import '../../css/Shared/button.css';
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 
 const LeagueForm = () => {
     const [photo, setPhoto] = useState("https://i.imgur.com/sXwXq45.png");
