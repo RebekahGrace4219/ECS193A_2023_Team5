@@ -3,7 +3,8 @@ import ActivityObj from './ActivityObj';
 import axios from "axios";
 import "../../css/Social/recentActivity.css";
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const RecentActivity = (props) => {
     const [activityInfo, setActivityInfo] = useState([]);
     const [activityType] = useState(props.children.type);

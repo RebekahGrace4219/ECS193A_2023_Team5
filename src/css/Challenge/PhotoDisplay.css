@@ -1,3 +1,13 @@
+#PhotoDisplay{
+    width: 180px;
+    height: 96px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction:"row";
+}
+
 .photoDisplayObj{
     width: 40px;
     height: 40px;
@@ -7,16 +17,6 @@
     background-color:black;
     border-radius: 25px;
     color: white;
-}
-
-#PhotoDisplay{
-    width: 180px;
-    height: 96px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction:"row";
 }
 
 .lastPhotoDisplay{

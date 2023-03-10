@@ -1,12 +1,38 @@
-#Challenge{
-    height: 100%;
-    width: 100%;
+#ChallengeScroll{
+    overflow-y: scroll;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ChallengeHeader{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100px;
+    width: 900px;
 }
 
-#ChallengeForm{
-    padding: 30px;
+#ChallengeTitle{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+}
+
+#UserButton{
+    display: flex;
+    align-items: center;
+}
+
+#BoxLine{
+    width: 0px;
+    height: 74px;
+
+    border: 2px solid #014421;
+
+    padding: 0px;
+    margin: 0px;
 }

@@ -1,4 +1,3 @@
-
 import SensorObj from './SensorObj';
 import "../../css/Shared/header.css";
 

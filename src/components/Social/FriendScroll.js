@@ -1,9 +1,7 @@
-import FriendObj from './FriendObj';
 import {useState,useEffect} from 'react';
+import FriendObj from './FriendObj';
 import axios from 'axios';
-
-const backend_url = process.env.REACT_APP_PROD_BACKEND
-
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendScroll = (props) => {
     let [scrollType] = useState(props.type);

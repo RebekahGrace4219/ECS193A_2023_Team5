@@ -1,5 +1,3 @@
-
-
 .sideBarClass{
     background-color: #014421;
     display: flex;
@@ -25,6 +23,7 @@
     max-width: 53px;
     max-height: 54px;
 }
+
 #sideBarButtons{
     display: flex;
     flex-direction: column;

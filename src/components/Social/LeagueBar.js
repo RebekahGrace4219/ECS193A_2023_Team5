@@ -1,5 +1,6 @@
 import BarButton from "../Shared/BarButton";
 import "../../css/Shared/bar.css";
+
 const LeagueBar = (props) => {
     function setLeague(){
         props.func("league");

@@ -1,8 +1,10 @@
-import '../../css/Shared/header.css'
+import axios from 'axios';
+
+import '../../css/Shared/header.css';
 import '../../css/Shared/coloredText.css';
 import '../../css/Shared/button.css';
-import axios from 'axios';
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const DeleteSection = () => {
 

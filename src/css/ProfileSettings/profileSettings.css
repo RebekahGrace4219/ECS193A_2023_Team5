@@ -1,8 +1,8 @@
-#ProfileSettings{
+#ProfileSettingsHeader{
     display: flex;
-}
-
-#SettingsForm{
-    padding-left: 20px;
-    padding-top: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    max-width: 80%;
 }

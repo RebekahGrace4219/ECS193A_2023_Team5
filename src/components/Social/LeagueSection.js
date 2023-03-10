@@ -1,10 +1,11 @@
+import {useState} from 'react';
 import LeagueBar from "./LeagueBar";
 import LeagueScroll from "./LeagueScroll";
-import Line from "../Shared/Line";
-import {useState} from 'react';
+
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
 import "../../css/Shared/button.css";
+
 const LeagueSection = () => {
     const [leagueState, setLeagueState] = useState("league");
 

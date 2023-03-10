@@ -1,6 +1,5 @@
 import BarButton from "../Shared/BarButton";
 import "../../css/Shared/bar.css";
-import {useState} from "react";
 
 const MembersBar = (props) => {
 

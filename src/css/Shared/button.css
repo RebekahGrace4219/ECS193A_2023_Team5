@@ -118,3 +118,45 @@
     color: #000000;
 
 }
+
+.addButton{
+    box-sizing: border-box;
+
+    width: 41px;
+    height: 41px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 21px;
+
+
+}
+
+.addButtonIcon{
+    width: 20px;
+    height: 20px;
+}
+
+.barButton{
+    width: 150px;
+    height: 22px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 20px;
+
+    text-align: center;
+
+    border-width: 0px;
+    background-color: transparent;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 4px;
+
+    color: #014421;
+}

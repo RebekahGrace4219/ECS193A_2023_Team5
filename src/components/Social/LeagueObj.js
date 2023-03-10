@@ -4,11 +4,11 @@ import OwnerSelect from './OwnerSelect';
 import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
 import InviteSelect from './InviteSelect';
-import "../../css/Social/obj.css";
-
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import "../../css/Social/obj.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();

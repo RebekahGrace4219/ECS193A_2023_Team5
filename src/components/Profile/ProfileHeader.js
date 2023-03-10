@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import PageSwitch from "../Shared/PageSwitch";
+import axios from 'axios';
 import "../../css/Profile/profileHeader.css";
 import "../../css/Shared/header.css";
-
-import axios from 'axios';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 

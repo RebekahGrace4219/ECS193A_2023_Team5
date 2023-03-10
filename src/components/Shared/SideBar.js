@@ -1,5 +1,6 @@
-import '../../css/Shared/sideBar.css'
 import React, {useState, useEffect} from 'react';
+import '../../css/Shared/sideBar.css';
+
 const SideBar = () => {
 
     let challengePages = ["/currentChallengePage",  "/weeklyChallengePage"];

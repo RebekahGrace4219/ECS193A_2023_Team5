@@ -1,5 +1,6 @@
 .challengeSection{
-    width: 900px;
+    min-width: 900px;
+    overflow: scroll;
 }
 .completeChallengeBox{
     width: 870px;

@@ -1,9 +1,11 @@
 import {useState} from 'react';
+
 import CurrentChallengeBar from './CurrentChallegeBar';
 import ChallengeScroll from './ChallengeScroll';
+
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
-import "../../css/Challenge/ChallengeObj.css"
+import "../../css/Challenge/challengeObj.css";
 
 const CurrentChallenge = () => {
     const [challengeState, setChallengeState] = useState("issued");

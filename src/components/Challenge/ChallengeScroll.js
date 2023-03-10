@@ -1,12 +1,17 @@
+import {useState, useEffect} from 'react';
+
 import IssuedChallengeObj from "./IssuedChallengeObj";
 import SentChallengeObj from "./SentChallengeObj";
 import WeeklyChallengeObj from "./WeeklyChallengeObj";
 import ReceivedChallengeObj from "./ReceivedChallengeObj";
-import {useState, useEffect} from 'react';
 import AddChallengeButton from "./AddChallengeButton";
-import "../../css/Challenge/ChallengeScroll.css";
+
 import axios from "axios";
+
+import "../../css/Challenge/challenge.css";
+
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [leagueID] = useState(props.leagueID);

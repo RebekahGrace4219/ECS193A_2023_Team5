@@ -1,9 +1,11 @@
 import {useState, useEffect} from 'react';
-import "../../css/Shared/userSettingsButton.css"
-import "../../css/Shared/form.css"
+
 import axios from 'axios';
 
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import "../../css/Shared/userSettingsButton.css";
+import "../../css/Shared/form.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const UserSettingsButton = () => {
 

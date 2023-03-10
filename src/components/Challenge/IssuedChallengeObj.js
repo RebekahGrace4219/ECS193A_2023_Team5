@@ -1,15 +1,18 @@
+import {useState, useEffect} from "react";
+
 import PhotoDisplay from "./PhotoDisplay";
 import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
-import {useState, useEffect} from "react";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
-import "../../css/Challenge/ChallengeObj.css";
-import "../../css/Shared/button.css";
+
 import axios from "axios";
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+import "../../css/Challenge/challengeObj.css";
+import "../../css/Shared/button.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const IssuedChallengeObj = (props) => {
     console.log("Issued Object: ", props.children.exercise);
     let myProgressBaseUnits = props.children.progress.progress;

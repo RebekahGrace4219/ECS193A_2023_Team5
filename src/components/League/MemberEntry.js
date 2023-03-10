@@ -1,10 +1,10 @@
-import MemberSelect from "./MemberSelect";
-import "../../css/Shared/ProfileSmall.css";
 import {useState} from 'react';
+import MemberSelect from "./MemberSelect";
+import axios from 'axios';
 import "../../css/League/member.css";
 
-import axios from 'axios';
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
     function addFriend(){
