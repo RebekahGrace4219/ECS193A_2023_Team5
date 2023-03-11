@@ -5,7 +5,7 @@ import axios from 'axios';
 import '../../css/SignUp/signUpForm.css';
 import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
-import '../../css/Shared/header.css';
+import '../../css/Shared/headerText.css';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 

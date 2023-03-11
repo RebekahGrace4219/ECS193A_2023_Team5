@@ -1,5 +1,5 @@
 import SideBar from "../components/Shared/SideBar";
-import ProfileSettingsHeader from "../components/ProfileSettings/ProfileSettingsHeader";
+import Header from "../components/Shared/Header";
 import Line from "../components/Shared/Line";
 import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsForm"
 import SensorSection from "../components/ProfileSettings/SensorSection";
@@ -68,7 +68,7 @@ const ProfileSettings = () => {
             <SideBar></SideBar>
         </div>
         <div className="rightSide2Part">
-            <ProfileSettingsHeader></ProfileSettingsHeader>
+            <Header>{{"title": "Profile Settings", "type": "none"}}</Header>
             <Line></Line>
             <ProfileSettingsForm>{{"displayName": displayName, "photo":profilePhoto}}</ProfileSettingsForm>
             <Line></Line>

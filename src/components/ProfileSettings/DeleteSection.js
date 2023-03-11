@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import '../../css/Shared/header.css';
+import '../../css/Shared/headerText.css';
 import '../../css/Shared/coloredText.css';
 import '../../css/Shared/button.css';
 

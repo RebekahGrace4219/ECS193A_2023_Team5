@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import SideBar from '../components/Shared/SideBar';
-import SocialHeader from "../components/Social/SocialHeader";
+import Header from "../components/Shared/Header";
 import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
@@ -28,13 +28,13 @@ const League = (props) => {
             {
                 (props.children.type === "description") ?
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"league", "leagueID":leagueName}}</SocialHeader>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
                     <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
                 </div>
                 :
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"league", "leagueID":leagueName}}</SocialHeader>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
                     <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
                 </div>
