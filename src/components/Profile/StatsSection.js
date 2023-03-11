@@ -1,4 +1,4 @@
-import '../../css/Shared/header.css';
+import '../../css/Shared/headerText.css';
 
 const StatsSection = () => {
     return (

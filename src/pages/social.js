@@ -1,5 +1,5 @@
 import SideBar from "../components/Shared/SideBar";
-import SocialHeader from "../components/Social/SocialHeader";
+import Header from "../components/Shared/Header";
 import RecentActivity from "../components/Social/RecentActivity";
 import FriendSection from "../components/Social/FriendSection";
 import LeagueSection from "../components/Social/LeagueSection";
@@ -18,13 +18,13 @@ const Social = (props) => {
             {
                 (props.children.type === "friend") ?
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"social"}}</SocialHeader>
+                    <Header>{{"title":"Social Hub", "type":"social"}}</Header>
                     <RecentActivity>{{"type":"friend"}}</RecentActivity>
                     <FriendSection></FriendSection>
                 </div>
                 :
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"social"}}</SocialHeader>
+                    <Header>{{"title":"Social Hub", "type":"social"}}</Header>
                     <RecentActivity>{{"type":"league"}}</RecentActivity>
                     <LeagueSection/>
                 </div>
@@ -33,12 +33,10 @@ const Social = (props) => {
             {
                 (props.children.type === "friend") ?
                 <div className = "rightSide3Part">
-                    <UserSettingsButton/>
                     <SuggestionBox>{{"type":"friend"}}</SuggestionBox>
                 </div>
                 :
                 <div className = "rightSide3Part">
-                    <UserSettingsButton/>
                     <SuggestionBox>{{"type":"league"}}</SuggestionBox>
                 </div>
             }
