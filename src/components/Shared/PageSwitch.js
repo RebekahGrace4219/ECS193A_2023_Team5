@@ -10,9 +10,7 @@ const PageSwitch = (props) => {
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
-                console.log("Element", element.id);
                 if (element.id === onButton){
-                    console.log("Element matches!", element, onButton);
                     element.classList.add("onButton");
                     element.classList.remove("offButton")
                 }

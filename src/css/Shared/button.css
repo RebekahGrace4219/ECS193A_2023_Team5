@@ -136,3 +136,43 @@
     width: 20px;
     height: 20px;
 }
+
+
+.barButton{
+    width: 150px;
+    height: 30px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 20px;
+
+    text-align: center;
+
+    border-width: 0px;
+    background-color: transparent;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.barSelectedButton{
+    background-color: #cdced1 !important;
+}
+
+.barUnselectedButton{
+    background-color: transparent !important;
+}
+
+.barAddSelectedButton{
+    background-color: #00853F !important;
+}
+
+.barAddUnselectedButton{
+    background-color: transparent !important;
+    color: #00853F !important;
+}

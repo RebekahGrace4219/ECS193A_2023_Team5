@@ -1,26 +1,28 @@
 import BarButton from "../Shared/BarButton";
-import {usteState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import "../../css/Shared/bar.css";
 
 const CurrentChallengeBar = (props) => {
-    const [onButton, setOnButton] = "issued";
+    const [onButton, setOnButton] = useState("All");
 
 
     useEffect (
         () => {
             let elements = document.getElementsByClassName("barButton");
+            console.log(elements[0].id);
+            console.log("OnBUtton is ", onButton);
+
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
-                console.log("Element", element.id);
                 if (element.id === onButton){
                     console.log("Element matches!", element, onButton);
-                    element.classList.add("onButton");
-                    element.classList.remove("offButton")
+                    element.classList.add("barSelectedButton");
+                    element.classList.remove("barUnselectedButton");
                 }
                 else{
-                    element.classList.add("offButton");
-                    element.classList.remove("onButton");
+                    element.classList.add("barUnselectedButton");
+                    element.classList.remove("barSelectedButton");
                 }
             }
 
@@ -29,23 +31,23 @@ const CurrentChallengeBar = (props) => {
 
     function setIssued(){
         props.func("issued");
-        setOnButton("issued");
+        setOnButton("All");
     }
 
     function setSent(){
         props.func("sent");
-        setOnButton("sent");
+        setOnButton("Sent");
     }
 
     function setReceived(){
         props.func("received");
-        setOnButton("received");
+        setOnButton("Received");
     }
     return (
     <div className = "bar">
-        <BarButton id = "issued" className = "barButton" function = {setIssued} name = "All"></BarButton>
-        <BarButton id = "sent" className = "barButton" function = {setSent} name = "Sent"></BarButton>
-        <BarButton id = "received" className = "barButton" function = {setReceived} name = "Received"></BarButton>
+        <BarButton function = {setIssued} name = "All"></BarButton>
+        <BarButton function = {setSent} name = "Sent"></BarButton>
+        <BarButton function = {setReceived} name = "Received"></BarButton>
     </div>
     );
 }
