@@ -16,9 +16,13 @@ const Challenge = (props) => {
 
             <div className = "rightSide2Part">
                 <div className = "mainInfo">
-                    <Header>{{"title":"Challenge", "type":"challenge", "onButton":props.children.type}}</Header>
-                    <AddExerciseBox></AddExerciseBox>
-                    {(props.children.type === "current") ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
+                    <div className = "TopInfo">
+                        <Header>{{"title":"Challenge", "type":"challenge", "onButton":props.children.type}}</Header>
+                        <AddExerciseBox></AddExerciseBox>
+                    </div>
+                    <div className = "BottomInfo">
+                        {(props.children.type === "current") ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
+                    </div>
                 </div>
             </div>
         </div>

@@ -32,7 +32,6 @@ html{
 .rightSide2Part{
     height: 100%;
     width: 100%;
-    padding: 40px;
     min-width: 980px;
     background-color: transparent;
 
@@ -41,7 +40,17 @@ html{
 }
 
 .mainInfo{
+    height: 100%;
     width: 900px;
     display: flex;
     flex-direction: column;
+}
+
+.TopInfo{
+    height: 600px;
+}
+
+
+.BottomInfo{
+    height: 100%;
 }

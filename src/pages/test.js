@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Leaderboard from '../components/Shared/Leaderboard';
+import ChallengeScroll from "../components/Challenge/ChallengeScroll";
 import "../css/Shared/page3.css"
 
 const TestDiv = () => {
@@ -52,7 +52,7 @@ const TestDiv = () => {
 
     return(
         <div id = "test">
-            <Leaderboard>{{"title":"Challenge", "entries": makeLeaderboardObj()}}</Leaderboard>
+            <ChallengeScroll type = "issued" ifLeague = {false} leagueID = {""}></ChallengeScroll>
         </div>
     );
 }
