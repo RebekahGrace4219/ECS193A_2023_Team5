@@ -8,7 +8,9 @@ const AddChallenge = () => {
             <SideBar></SideBar>
         </div>
         <div className = "rightSide2Part">
+            <div className = "mainInfo">
             <ChallengeForm></ChallengeForm>
+            </div>
         </div>
     </div>
     );

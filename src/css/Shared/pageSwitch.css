@@ -6,6 +6,16 @@
 
 }
 
+.offButton{
+    background-color: #014421;
+    opacity: 0.7;
+}
+
+.onButton{
+    background-color: #014421;
+    opacity: 1;
+}
+
 .switchButton{
     border-style:none;
 
@@ -19,7 +29,6 @@
     align-items: center;
     justify-content: center;
 
-    background:#014421;
     border-radius: 20px;
     margin-left: 20px;
 }
@@ -27,7 +36,6 @@
 .switchButtonText{
     font-family: '?????';
     font-style: normal;
-    font-weight: 400;
     font-size: 20px;
     line-height: 20px;
     color: #FFFFFF;

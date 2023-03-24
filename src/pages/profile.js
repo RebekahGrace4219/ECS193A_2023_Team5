@@ -14,20 +14,15 @@ const Profile = (props) => {
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
+            <div className = "middleSide3Part">
+                <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
+                <Line/>
+            </div>
             {
                 (props.children.type === "stats") ?
-                <div className = "middleSide3Part">
-                    <Header>{{"title":"Profile", "type":"profile"}}</Header>
-                    <Line/>
                     <StatsSection/>
-                </div>
                 :
-                <div className = "middleSide3Part">
-                    <Header>{{"title":"Profile", "type":"profile"}}</Header>
-                    <Line/>
-                    <MedalsSection/>
-                </div>
-
+                <MedalsSection/>
             }
             <div className = "rightSide3Part">
                 <SuggestionBox>{{"type":"medal"}}</SuggestionBox>

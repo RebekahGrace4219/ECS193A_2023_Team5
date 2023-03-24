@@ -28,13 +28,13 @@ const League = (props) => {
             {
                 (props.children.type === "description") ?
                 <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName}}</Header>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
                     <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
                 </div>
                 :
                 <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName}}</Header>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"member"}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
                     <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
                 </div>
