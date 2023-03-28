@@ -114,7 +114,7 @@ const SignUpForm = (props) => {
             username : username,
             picture : submitPhoto,
             displayName : displayName,
-            token: deviceToken
+            deviceToken: deviceToken
           }
         };
       axios(config)
