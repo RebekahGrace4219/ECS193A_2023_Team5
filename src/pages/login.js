@@ -1,15 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import '../css/Login/login.css';
-import { useNavigate } from 'react-router-dom'
+import { getToken} from 'firebase/messaging';
+import {exportMessaging, requestPermission} from "../firebase";
+import {useState} from "react";
 
 //const backend_url = process.env.REACT_APP_PROD_BACKEND
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 const env_client_id = process.env.REACT_APP_CLIENT_ID
 
 const Login = () => {
+  const [deviceToken, setToken] = useState("");
   // needs variable for nonce
   function handleCredentialResponse(token) {
+
 
     // Check that recieved nonce is correct
     // Send request to backend for nonce reply in result with cnonce:
@@ -22,7 +26,7 @@ const Login = () => {
     console.log("TEST MESSAGE");
     console.log("backend_url: " + backend_url);
     console.log("client id: " + env_client_id);
-
+    console.log("Sending device token" + deviceToken);
     var config = {
       method: 'post',
       url: backend_url+'auth/login/google',
@@ -32,12 +36,16 @@ const Login = () => {
         Authorization: `${token.credential}`,
         Accept: 'application/json',
       },
+      data :
+      {
+        token: deviceToken
+      }
     };
     let hasUsername= false;
     axios(config)
     .then(function (response) {
       hasUsername = response.data.hasUsername;
-
+      console.log("Would have navigated away here");
       if (!hasUsername){
         window.location.href = "./signUpPage";
       }
@@ -87,6 +95,7 @@ const Login = () => {
   loadScript('https://accounts.google.com/gsi/client')
     .then(() => {
       googleSignIn();
+      setDeviceToken();
     })
     .catch(() => {
       console.error('Script loading failed! Handle this error');
@@ -95,7 +104,24 @@ const Login = () => {
 
   // log out function to log the user out of google and set the profile array to null
 
+  const setDeviceToken = () => {
+    console.log("Here is where I would be posting the device token");
+    getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
+      if (currentToken) {
+        console.log("Setting token here", currentToken);
+        setToken(currentToken);
+      } else {
+        // Show permission request UI
+        console.log('No registration token available. Request permission to generate one.');
+        requestPermission();
+        // ...
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // ...
+    });
 
+  }
   return (
 
     <div className = "loginPage">

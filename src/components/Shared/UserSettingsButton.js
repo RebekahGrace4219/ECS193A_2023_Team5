@@ -4,11 +4,13 @@ import axios from 'axios';
 
 import "../../css/Shared/userSettingsButton.css";
 import "../../css/Shared/form.css";
+import { getToken} from 'firebase/messaging';
+import {exportMessaging, requestPermission} from "../../firebase";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const UserSettingsButton = () => {
-
+  const [deviceToken, setToken] = useState("");
   const [load] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [username, setUsername] = useState("");
@@ -20,6 +22,7 @@ const UserSettingsButton = () => {
   useEffect (
     () => {
         if(!load){
+            setDeviceToken();
             getUsername();
             getProfilePhoto();
             getDisplayName();
@@ -36,7 +39,10 @@ const UserSettingsButton = () => {
             Accept: 'application/json',
           },
         withCredentials: true,
-        credentials: 'include'
+        credentials: 'include',
+        data:{
+          token: deviceToken
+        }
       };
       axios(config)
       .then(function(response) {
@@ -59,6 +65,25 @@ const UserSettingsButton = () => {
     }
     function moveProfilePage(){
         window.location.href = "./profileStatsPage"
+    }
+
+    const setDeviceToken = () => {
+      console.log("Here is where I would be posting the device token");
+      getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
+        if (currentToken) {
+          console.log("Setting token here", currentToken);
+          setToken(currentToken);
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          requestPermission();
+          // ...
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+      });
+
     }
 
     function getDisplayName(){

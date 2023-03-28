@@ -1,13 +1,14 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-function requestPermission() {
+export function requestPermission() {
     console.log('Requesting permission...');
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
         console.log('Notification permission granted.');
       }
-    })};
+    })
+};
 
 const firebaseConfig = {
 
@@ -21,7 +22,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
-
+/*
 getToken(messaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
   if (currentToken) {
     // Send the token to your server and update the UI if necessary
@@ -37,11 +38,13 @@ getToken(messaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2
 }).catch((err) => {
   console.log('An error occurred while retrieving token. ', err);
   // ...
-});
+});*/
 
-onMessage(messaging, (payload) => {
+/*onMessage(messaging, (payload) => {
   console.log('Message received. ', payload);
   // ...
 });
 export const onForegroundMessage = () =>
   new Promise((resolve) => onMessage(messaging, (payload) => resolve(payload)));
+*/
+export const exportMessaging = messaging;

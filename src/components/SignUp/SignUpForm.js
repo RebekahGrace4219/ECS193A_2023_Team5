@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PhotoUpload from '../Shared/PhotoUpload';
 import axios from 'axios';
 
@@ -7,16 +7,49 @@ import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
 import '../../css/Shared/headerText.css';
 
+import { getToken} from 'firebase/messaging';
+import {exportMessaging, requestPermission} from "../../firebase";
+
+
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const SignUpForm = (props) => {
 
+    const [deviceToken, setToken] = useState("");
     const [photo, setPhoto] = useState("");
+    const [load] = useState(false);
     const [displayName, setDisplayName] = useState();
     const [username, setUsername] = useState();
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
     const [usernameErrorResponse, setUsernameErrorResponse] = useState("");
     const [submitErrorResponse, setSubmitErrorResponse] = useState("");
+
+    useEffect (
+      () => {
+          if(!load){
+              setDeviceToken();
+          }
+      }, [load]
+    );
+
+
+    const setDeviceToken = () => {
+      console.log("Here is where I would be posting the device token");
+      getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
+        if (currentToken) {
+          console.log("Setting token here", currentToken);
+          setToken(currentToken);
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          requestPermission();
+          // ...
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+      });
+    }
 
     function validateDisplay(event){
         let displayNameInput = event.target.value;
@@ -80,7 +113,8 @@ const SignUpForm = (props) => {
           {
             username : username,
             picture : submitPhoto,
-            displayName : displayName
+            displayName : displayName,
+            token: deviceToken
           }
         };
       axios(config)
@@ -99,7 +133,6 @@ const SignUpForm = (props) => {
         console.log(photo);
         setPhoto(photo);
     }
-
 
     return (
         <div id = "SignUpForm">
