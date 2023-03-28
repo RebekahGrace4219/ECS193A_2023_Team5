@@ -68,6 +68,7 @@ const ProfileSettings = () => {
             <SideBar></SideBar>
         </div>
         <div className="rightSide2Part">
+          <div className = "mainInfo">
             <Header>{{"title": "Profile Settings", "type": "none"}}</Header>
             <Line></Line>
             <ProfileSettingsForm>{{"displayName": displayName, "photo":profilePhoto}}</ProfileSettingsForm>
@@ -75,6 +76,7 @@ const ProfileSettings = () => {
             <SensorSection></SensorSection>
             <Line></Line>
             <DeleteSection></DeleteSection>
+        </div>
         </div>
     </div>
     );

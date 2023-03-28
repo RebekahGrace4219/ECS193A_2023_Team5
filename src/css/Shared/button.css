@@ -137,9 +137,10 @@
     height: 20px;
 }
 
+
 .barButton{
     width: 150px;
-    height: 22px;
+    height: 30px;
 
     font-style: normal;
     font-weight: 400;
@@ -157,6 +158,21 @@
     justify-content: center;
     margin: 10px;
     border-radius: 4px;
+}
 
-    color: #014421;
+.barSelectedButton{
+    background-color: #cdced1 !important;
+}
+
+.barUnselectedButton{
+    background-color: transparent !important;
+}
+
+.barAddSelectedButton{
+    background-color: #00853F !important;
+}
+
+.barAddUnselectedButton{
+    background-color: transparent !important;
+    color: #00853F !important;
 }

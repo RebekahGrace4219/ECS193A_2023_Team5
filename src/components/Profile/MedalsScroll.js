@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import MedalObj from './MedalObj';
 import axios from "axios";
-import "../../css/Shared/scroll.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -73,7 +72,7 @@ const MedalsScroll = (props) => {
         }, [type]
       );
     return (
-        <div id = "MedalsScroll" className = "scroll">
+        <div id = "MedalsScroll">
             {informationMap.map(createObj)}
         </div>
     );

@@ -4,6 +4,7 @@ import "../../css/Shared/header.css";
 const Header = (props) => {
     let title = props.children.title;
     let pageSwitchType = props.children.type;
+    let onButton = props.children.onButton;
 
     return (
         <div id = "Header">
@@ -11,14 +12,14 @@ const Header = (props) => {
             {
             (pageSwitchType !== "none" && pageSwitchType !== "league")
             ?
-            <PageSwitch type = {pageSwitchType}></PageSwitch>
+            <PageSwitch type = {pageSwitchType} onButton = {onButton}></PageSwitch>
             :
             <></>
             }
             {
             (pageSwitchType !== "none" && pageSwitchType === "league")
             ?
-            <PageSwitch type = {pageSwitchType} leaugeID = {props.children.leagueID}></PageSwitch>
+            <PageSwitch type = {pageSwitchType} onButton = {onButton} leaugeID = {props.children.leagueID}></PageSwitch>
             :
             <></>
             }

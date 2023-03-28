@@ -9,7 +9,9 @@ const AddLeague = () => {
             <SideBar></SideBar>
         </div>
         <div className = "rightSide2Part">
+        <div className = "mainInfo">
             <LeagueForm></LeagueForm>
+            </div>
         </div>
     </div>
     );
