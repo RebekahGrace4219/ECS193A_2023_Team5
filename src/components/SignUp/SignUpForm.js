@@ -1,47 +1,22 @@
 import React, {useState} from 'react';
 import PhotoUpload from '../Shared/PhotoUpload';
-
 import axios from 'axios';
-import '../../css/SignUp/SignUpForm.css';
+
+import '../../css/SignUp/signUpForm.css';
 import '../../css/Shared/button.css';
 import '../../css/Shared/form.css';
-import '../../css/Shared/header.css';
+import '../../css/Shared/headerText.css';
 
-// const backend_url = process.env.REACT_APP_PROD_BACKEND
-const backend_url = process.env.REACT_APP_DEV_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
-const token = window.sessionStorage.getItem("token")
+const SignUpForm = (props) => {
 
-const SignUpForm = () => {
-    function getProfilePhoto(){
-        //TODO
-        var config  = {
-            method : 'post',
-            url: backend_url+'auth/get_profile_photo',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            console.log("response received")
-            console.log(response.data)
-            return response.data;
-        })
-        .catch(function(error){
-            console.log(error)
-            console.log("No response")
-        });
-    }
-
-    const [photo, setPhoto] = useState(getProfilePhoto());
+    const [photo, setPhoto] = useState("");
     const [displayName, setDisplayName] = useState();
     const [username, setUsername] = useState();
-    const [displayErrorResponse, setDisplayErrorResponse] = useState();
-    const [usernameErrorResponse, setUsernameErrorResponse] = useState();
-    const [submitErrorResponse, setSubmitErrorResponse] = useState();
+    const [displayErrorResponse, setDisplayErrorResponse] = useState("");
+    const [usernameErrorResponse, setUsernameErrorResponse] = useState("");
+    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
     function validateDisplay(event){
         let displayNameInput = event.target.value;
@@ -79,9 +54,18 @@ const SignUpForm = () => {
     function submitSignUp(){
       console.log(displayErrorResponse);
       console.log(usernameErrorResponse);
-      if (displayErrorResponse != "" || usernameErrorResponse != ""){
+      if (displayErrorResponse !== "" || usernameErrorResponse !== ""){
         setSubmitErrorResponse("Correct the highlighted fields to proceed")
         return false
+      }
+
+      let submitPhoto = "";
+
+      if (!photo){
+        submitPhoto = props.children.profilePhoto;
+      }
+      else{
+        submitPhoto = photo;
       }
 
       var config = {
@@ -95,8 +79,8 @@ const SignUpForm = () => {
           data :
           {
             username : username,
-            picture : photo,
-            displayName :displayName
+            picture : submitPhoto,
+            displayName : displayName
           }
         };
       axios(config)
@@ -112,8 +96,10 @@ const SignUpForm = () => {
             // If fail, up date the failure reason on the three forms for failure
             // If succeed, move away from page
     function uploadPhoto(photo){
+        console.log(photo);
         setPhoto(photo);
     }
+
 
     return (
         <div id = "SignUpForm">
@@ -124,7 +110,7 @@ const SignUpForm = () => {
 
             <div className="formObj">
                 <h1>Profile Picture</h1>
-                <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload defaultImage = {props.children.profilePhoto} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">

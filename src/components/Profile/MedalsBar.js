@@ -1,5 +1,6 @@
 import BarButton from "../Shared/BarButton";
 import "../../css/Shared/bar.css";
+
 const MedalsBar = (props) => {
     function setEarned(){
         props.changeFunction(true);

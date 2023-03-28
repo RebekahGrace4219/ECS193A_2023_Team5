@@ -1,7 +1,11 @@
-import Line from "../Shared/Line";
 import {useState, useEffect} from 'react';
-import '../../css/Shared/form.css'
-import '../../css/Shared/button.css'
+import Line from "../Shared/Line";
+import axios from 'axios';
+
+import '../../css/Shared/form.css';
+import '../../css/Shared/button.css';
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 let sportList =  [
     "Aikido",
@@ -95,13 +99,13 @@ let sportList =  [
 
 const ChallengeForm = () =>{
     const [selfSpecify, setSelfSpecify] = useState(false);
-    const [sport, setSport] = useState("");
+    const [sport, setSport] = useState("Aikido");
     const [specifyError, setSpecifyError] = useState("");
-    const [unit, setUnit] = useState("");
+    const [unit, setUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [receiverGroup, setReceiverGroup] = useState();
+    const [receiverGroup, setReceiverGroup] = useState("self");
     const [receiver, setReceiver] = useState();
     const [inviteOptions, setInviteOptions] = useState([]);
     const [submitError, setSubmitError] = useState("");
@@ -112,6 +116,7 @@ const ChallengeForm = () =>{
 
         if (event.target.value !== "Other (Specify Below)"){
             setSport(event.target.value);
+            setSpecifyError("")
         }
     }
 
@@ -134,14 +139,15 @@ const ChallengeForm = () =>{
     }
 
     function startDateChange(event){
-        setStartDate(event.target.value);
+        setStartDate(event.target.valueAsNumber);
     }
 
     function endDateChange(event){
-        setEndDate(event.target.value);
+        setEndDate(event.target.valueAsNumber);
     }
 
     function receiverChange(event){
+        console.log(event);
         setReceiver(event.target.value);
     }
 
@@ -150,43 +156,128 @@ const ChallengeForm = () =>{
     }
 
     function getToday(){
-        //TODO
-        return "2023-05-06";
+      let date_ob = new Date()
+
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+
+      return (year + "-" + month + "-" + date);
     }
 
     function getTomorrow(){
-        // TODO
-        return "2023-05-06";
+      var date_ob = new Date()
+      date_ob.setDate(date_ob.getDate() + 1);
 
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+
+      return (year + "-" + month + "-" + date);
     }
 
     function getFriends(){
         // use SetInviteOptions to make it a list of friend names
-        setInviteOptions(["friend1", "friend2", "friend3"]);
+        var config ={
+          method: 'post',
+          url : backend_url+'friend_list/friend_list',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include'
+        };
+        axios(config)
+        .then(function(response){
+            setInviteOptions(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+            console.log("No response")
+        });
     }
 
     function getLeagues(){
         // use SetInviteOptions to make it a list of leagues that user is ADMIN or OWNER of
-        setInviteOptions(["league1", "leauge2", "league3"]);
+        var array_leagues = []
+        var config ={
+          method: 'post',
+          url : backend_url+'league/get_admin_leagues',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include'
+        };
+        axios(config)
+        .then(function(response){
+            for(let item of response.data){
+              array_leagues.push(item.leagueName + " - " + item._id);
+            }
+            setInviteOptions(array_leagues);
+        })
+        .catch(function(error){
+            console.log(error);
+            console.log("No response")
+        });
     }
 
     function submitChallenge(){
         //TODO
-        // Validate the input
-            // If the user selects "self specify", there needs to be a string > length 1 in the field
-                // -> if not, set the error response using setSpecifyErrorResponse();
-            // All other fields should be locked by their own types and do not need to be validated
-        // Sent the post request (make sure to select the exercise in the drop down or the self specify based on selfSpecify and only send one)
-        // Check the post request response, set the submitErrorResponse message if it fails
-        // if post succeeds, move to the current page
+        if (specifyError !== ""){
+          setSubmitError("Correct the highlighted fields to proceed")
+          return false;
+        }
+
+        var recipient = ""
+        recipient = receiver
+        if (receiverGroup === "league"){
+          recipient = receiver.split('-')[1].trim();
+        }
+
+        console.log(      {
+            receivedUser : recipient,
+            issueDate : startDate,
+            dueDate : endDate,
+            unit : unit,
+            amount : amount,
+            exerciseName : sport,
+          });
+        var config ={
+          method : 'post',
+          url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+          data :
+          {
+            receivedUser : recipient,
+            issueDate : startDate,
+            dueDate : endDate,
+            unit : unit,
+            amount : amount,
+            exerciseName : sport,
+          }
+        };
+        axios(config)
+        .then(function(response){
+          window.location.href = "./currentChallengePage";
+        })
+        .catch(function(err){
+          setSubmitError("Error in issuing challenge");
+          console.log(err)
+        })
+
     }
 
     useEffect(
         () => {
-          if (receiverGroup === "Friend") {
+          if (receiverGroup === "friend") {
             getFriends();
           }
-          else if(receiverGroup === "League"){
+          else if(receiverGroup === "league"){
             getLeagues();
           }
         }, [receiverGroup]
@@ -249,18 +340,19 @@ const ChallengeForm = () =>{
                 <p className = "formObjInner">What kind of challenge?</p>
                 <div className = "formObjInner">
                     <select className="formSelect" onChange = {receiverGroupChange}>
-                        <option value = "Self">Self</option>
-                        <option value = "Friend">Friend</option>
-                        <option value = "League">League</option>
+                        <option value = "self">Self</option>
+                        <option value = "friend">Friend</option>
+                        <option value = "league">League</option>
                     </select>
                 </div>
             </div>
 
-            { (receiverGroup  === "Friend" || receiverGroup === "League") ?
+            { (receiverGroup  === "friend" || receiverGroup === "league") ?
             <div className = "formObj">
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
                     <select onChange = {receiverChange} className = "formSelect">
+                        <option value = ""></option>
                     {inviteOptions.map((name)=>{return <option>{name}</option>;})}
                     </select>
                 </div>

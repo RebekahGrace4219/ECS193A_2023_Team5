@@ -1,5 +1,5 @@
 import SideBar from '../components/Shared/SideBar';
-import ProfileHeader from '../components/Profile/ProfileHeader';
+import Header from '../components/Shared/Header';
 import Line from "../components/Shared/Line";
 import StatsSection from '../components/Profile/StatsSection';
 import MedalsSection from '../components/Profile/MedalsSection';
@@ -14,23 +14,17 @@ const Profile = (props) => {
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
+            <div className = "middleSide3Part">
+                <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
+                <Line/>
+            </div>
             {
                 (props.children.type === "stats") ?
-                <div className = "middleSide3Part">
-                    <ProfileHeader/>
-                    <Line/>
                     <StatsSection/>
-                </div>
                 :
-                <div className = "middleSide3Part">
-                    <ProfileHeader/>
-                    <Line/>
-                    <MedalsSection/>
-                </div>
-
+                <MedalsSection/>
             }
             <div className = "rightSide3Part">
-                <UserSettingsButton/>
                 <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
             </div>
         </div>

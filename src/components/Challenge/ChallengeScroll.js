@@ -1,129 +1,150 @@
+import {useState, useEffect} from 'react';
+
 import IssuedChallengeObj from "./IssuedChallengeObj";
 import SentChallengeObj from "./SentChallengeObj";
 import WeeklyChallengeObj from "./WeeklyChallengeObj";
 import ReceivedChallengeObj from "./ReceivedChallengeObj";
-import {useState, useEffect} from 'react';
 import AddChallengeButton from "./AddChallengeButton";
-import "../../css/Challenge/ChallengeScroll.css";
+
+import axios from "axios";
+
+import "../../css/Challenge/challenge.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const ChallengeScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [leagueID] = useState(props.leagueID);
     let [ifLeague] = useState(props.ifLeague);
     let [information, setInformation] = useState([]);
-    let [username] = useState(getUsername());
 
     function getIssuedFriend(){
-        //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png",
-                " Prince":"https://i.imgur.com/3Ia9gVG.png",
-                "Diana":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/accepted_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+
+            console.log("Issued, " , response.data);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
 
     function getIssuedLeague(){
-        //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/league_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: leagueID
+            }
+        };
+        axios(config)
+        .then(function(response){
+
+            console.log(response);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getSent(){
-            //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/sent_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+
+            console.log(response.data);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
+
+
     }
 
     function getReceived(){
-            //TODO
-        setInformation([
-            {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-            "exerciseType":"Run",
-            "unit":"km",
-            "amount":100,
-            "dueDate":"2023-03-10",
-            "username":"Bruce Wayne",
-            "photos":{
-                "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-                "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-                "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-            "sentUser": "Clark Kent",
-            "receivedUser": "Justice League",
-            "type": "league"}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'challenges/received_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            console.log(response.data);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
 
     }
     function getWeekly(){
-        //TODO
-    setInformation([
-        {"progress":{"Bruce Wayne":10, "Diana Prince":40, "Clark Kent":60},
-        "exerciseType":"Run",
-        "unit":"km",
-        "amount":10,
-        "dueDate":"2023-03-10",
-        "username":"Bruce Wayne",
-        "photos":{
-            "Bruce Wayne": "https://i.imgur.com/E2x8xyY.png",
-            "Clark Kent": "https://i.imgur.com/q3vP5BH.png",
-            "Diana Prince":"https://i.imgur.com/3Ia9gVG.png"},
-        "sentUser": "Clark Kent",
-        "receivedUser": "Justice League",
-        "type": "league",
-    "top5":true}]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'global_challenge/get_challenges',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            console.log("Weekly", response.data);
+            setInformation(response.data);
+        })
+        .catch(function(error){
+            console.log(error)
+        });
 
-}
+    }
     function getUsername(){
         //TODO
         return "Bruce Wayne";
     }
     function makeIssuedChallengeObj(input){
-        return (<IssuedChallengeObj username = {username}>{input}</IssuedChallengeObj>);
+        return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
     }
 
     function makeSentChallengeObj(input){
-        return (<SentChallengeObj username = {username}>{input}</SentChallengeObj>);
+        return (<SentChallengeObj>{input}</SentChallengeObj>);
     }
 
     function makeReceivedChallengeObj(input){
-        return (<ReceivedChallengeObj username = {username}>{input}</ReceivedChallengeObj>);
+        return (<ReceivedChallengeObj>{input}</ReceivedChallengeObj>);
     }
 
     function makeWeeklyChallengeObj(input){
-        return (<WeeklyChallengeObj username = {username}>{input}</WeeklyChallengeObj>);
+        return (<WeeklyChallengeObj>{input}</WeeklyChallengeObj>);
     }
 
     useEffect (

@@ -1,34 +1,54 @@
 import {useState, useEffect} from 'react';
 import MedalObj from './MedalObj';
-import "../../css/Shared/scroll.css";
+import axios from "axios";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const MedalsScroll = (props) => {
     let [type] = useState(props.children.type);
     let [informationMap, setInformationMap] = useState([]);
 
-    function getProgressMedals(){
+    function getInProgressMedals(){
         // ask for progress medals
         // move to needed format
-        let info = [
-            {"description": "Run 100 Miles", "done": 79, "total": 100},
-            {"description": "Try 5 types of exercise", "done": 3, "total": 5},
-            {"description": "Make a friend", "done": 0, "total": 1},
-            {"description": "Swim 5 days in one week", "done": 3, "total": 5},
-            {"description": "Join a leauge", "done": 0, "total": 1},
-        ]
-        setInformationMap(info);
+
+        var config = {
+            method : 'post',
+            url : backend_url + 'medals/get_in_progress',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformationMap(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getEarnedMedals(){
         // ask for earned medals
         // move to needed format
-        let info = [
-            {"description": "Complete a Challenge", "date": "09-04-2022"},
-            {"description": "Add a sensor", "date": "10-05-2022"},
-            {"description": "Try Weighlifting!", "date": "01-12-2022"},
-            {"description": "Jog 5 times", "date": "10-31-2022"},
-            {"description": "Swim 100 km", "date": "01-26-2022"},
-        ];
-        setInformationMap(info);
+        var config = {
+            method : 'post',
+            url : backend_url + 'medals/get_earned',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setInformationMap(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
 
@@ -47,12 +67,12 @@ const MedalsScroll = (props) => {
             getEarnedMedals();
           }
           else if(type === "progress"){
-            getProgressMedals();
+            getInProgressMedals();
           }
         }, [type]
       );
     return (
-        <div id = "MedalsScroll" className = "scroll">
+        <div id = "MedalsScroll">
             {informationMap.map(createObj)}
         </div>
     );

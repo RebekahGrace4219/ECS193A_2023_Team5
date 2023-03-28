@@ -1,9 +1,12 @@
+import {useState} from 'react';
+
 import FriendBar from './FriendBar';
 import FriendScroll from './FriendScroll';
 import FriendAdd from './FriendAdd';
-import {useState, useEffect} from 'react';
+
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
+
 const FriendSection = (props) => {
     const [friendState, setFriendState] = useState("friend");
 

@@ -1,30 +1,27 @@
 import React, {useState} from 'react';
 
 import PhotoUpload from '../Shared/PhotoUpload';
+
+import axios from 'axios';
+
 import "../../css/Shared/button.css";
 import "../../css/Shared/form.css";
 
-const ProfileSettingsForm = () => {
-    const [photo, setPhoto] = useState(getProfilePhoto());
-    const [displayName, setDisplayName] = useState(getDisplayName());
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
+const ProfileSettingsForm = (props) => {
+
+    const [photo, setPhoto] = useState(props.children.photo);
+    const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
-    const [submitErrorResponse, setSubmitErrorResponse] = useState();
-
-    function getProfilePhoto(){
-        //TODO get the profile photo from the db
-        return ("https://i.imgur.com/4e8Io40.png");
-    }
-
-    function getDisplayName(){
-        // TODO get the display name from the db
-        return ("Generic Display name");
-    }
+    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
     function uploadPhoto(photo){
         setPhoto(photo);
     }
 
     function validateDisplay(event){
+      event.preventDefault();
         let displayNameInput = event.target.value;
         if (displayNameInput.length === 0 || displayNameInput.length > 32){
             setDisplayErrorResponse("Cannot sign up, display name between 1-32 characters");
@@ -43,20 +40,48 @@ const ProfileSettingsForm = () => {
 
     function submitProfileSettings(){
         //verify stuff, if bad inputs or bad response, trigger errors and if succesful, stay on page
+        if (displayErrorResponse !== ""){
+          setSubmitErrorResponse("Correct Highlighted fields to proceed");
+          return false;
+        }
+        var config = {
+          method : 'post',
+          url : backend_url + 'user/update_profile_info',
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+          data :
+          {
+            picture : photo,
+            displayName :displayName
+          }
+        };
+      axios(config)
+      .then(function(response){
+        window.location.href = "./profileStatsPage";
+      })
+      .catch(function(error){
+        console.log(error)
+      });
     }
 
+    function stopSubmit(event){
+      event.preventDefault();
+    }
 
     return (
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload defaultImage = {props.children.photo} func = {uploadPhoto}></PhotoUpload>
             </div>
 
             <div className="formObj">
                 <h2>Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
-                <input className="formTextInput" type = "text"  onChange = {validateDisplay}/>
+                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" placeholder={props.children.displayName} onChange = {validateDisplay} onSubmit = {stopSubmit}/>
                 <p className = "errorBox">{displayErrorResponse}</p>
             </div>
 

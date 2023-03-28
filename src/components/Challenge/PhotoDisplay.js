@@ -1,8 +1,9 @@
 import {useState} from 'react';
-import '../../css/Challenge/PhotoDisplay.css';
-const PhotoDisplay = (props) => {
 
-    let pictures = props.children.photos;
+import '../../css/Challenge/photoDisplay.css';
+
+const PhotoDisplay = (props) => {
+    let pictures = props.photos;
     const [length] =  useState(findLength(pictures));
     const [pictureLength] = useState(min(3, length));
     const [firstThreePictureList, setPictureList] = useState(moveList(pictures));
@@ -12,16 +13,14 @@ const PhotoDisplay = (props) => {
         return (a<b?(a):b);
     }
 
-    function findLength(hashPictures){
-        return Object.keys(hashPictures).length;
+    function findLength(pictures){
+        return pictures.length;
     }
 
     function moveList(hashPictures) {
-        let keyList = Object.keys(hashPictures);
         let list_ = [];
-        for(let i = 0; i < min(keyList.length, 3); i++){
-            list_.push(hashPictures[keyList[i]]);
-
+        for(let i = 0; i < min(pictures.length, 3); i++){
+            list_.push(pictures[i].picture);
         }
         return list_;
     }
@@ -37,7 +36,6 @@ const PhotoDisplay = (props) => {
 
     function calculatePictureDiv(){
         let photoObj = firstThreePictureList.map(createPhotoObj);
-        console.log(length);
         let additionalDivNumber = length - 3;
 
         if (additionalDivNumber > 0){

@@ -4,7 +4,7 @@ import '../../css/Shared/addUser.css';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
-const FriendAdd = () => {
+const MemberAdd = (props) => {
 
     const [userText, setUserText] = useState("");
     const [usernameText, setUsernameText] = useState("");
@@ -13,19 +13,21 @@ const FriendAdd = () => {
 
         var config = {
             method : 'post',
-            url : backend_url + 'friend_list/send_friend_request',
+            url : backend_url + 'league/invite_to_join',
             headers: {
               Accept: 'application/json',
             },
             data :
             {
-              friendName : usernameText
+              recipient: usernameText,
+              leagueID: props.leagueID
             },
             withCredentials: true,
             credentials: 'include'
           };
           axios(config)
           .then(function(response) {
+            console.log("Send invite");
               console.log(response.data);
           })
           .catch(function(error){
@@ -52,4 +54,4 @@ const FriendAdd = () => {
 
 }
 
-export default FriendAdd;
+export default MemberAdd;

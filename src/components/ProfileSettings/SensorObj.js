@@ -1,4 +1,4 @@
-import "../../css/ProfileSettings/SensorObj.css"
+import "../../css/ProfileSettings/sensorObj.css";
 
 const SensorObj = (props) => {
     return (

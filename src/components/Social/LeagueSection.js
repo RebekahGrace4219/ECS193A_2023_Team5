@@ -1,10 +1,11 @@
+import {useState} from 'react';
 import LeagueBar from "./LeagueBar";
 import LeagueScroll from "./LeagueScroll";
-import Line from "../Shared/Line";
-import {useState} from 'react';
+
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
 import "../../css/Shared/button.css";
+
 const LeagueSection = () => {
     const [leagueState, setLeagueState] = useState("league");
 
@@ -30,6 +31,7 @@ const LeagueSection = () => {
             { (leagueState === "owner") ? <LeagueScroll type = "owner"></LeagueScroll> : <></>}
             { (leagueState === "admin") ? <LeagueScroll type = "admin"></LeagueScroll> : <></>}
             { (leagueState === "sent") ? <LeagueScroll type = "sent"></LeagueScroll> : <></>}
+            { (leagueState === "invite") ? <LeagueScroll type = "invite"></LeagueScroll> : <></>}
 
 
         </div>

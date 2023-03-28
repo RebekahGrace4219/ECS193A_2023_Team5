@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import MedalsBar from './MedalsBar';
 import MedalsScroll from './MedalsScroll';
 import "../../css/Shared/section.css";

@@ -19,6 +19,7 @@
 #leftSide{
     display: flex;
 }
+
 #SensorImage{
     height: 78px;
     width: 78px;
@@ -26,8 +27,6 @@
 }
 
 .SensorTypeText{
-
-
     font-family: '?????';
     font-style: normal;
     font-weight: 400;

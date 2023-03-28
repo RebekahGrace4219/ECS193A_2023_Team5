@@ -1,27 +1,50 @@
 import {useState, useEffect} from 'react';
 import ActivityObj from './ActivityObj';
-
+import axios from "axios";
 import "../../css/Social/recentActivity.css";
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
+
 const RecentActivity = (props) => {
     const [activityInfo, setActivityInfo] = useState([]);
     const [activityType] = useState(props.children.type);
 
     function getRecentActivityFriend(){
-        //TODO
-        setActivityInfo(
-            [{"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Jonah Jameson", "challengeType": "Personal", "challengeTitle": "Do 50 push ups", "time": "1h", "type": "progress"},
-            {"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Ash Ketchum", "challengeType": "League", "challengeTitle": "Swim 4 km", "time": "2d", "type":"progress"},
-            {"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Elle Woods", "challengeType": "Global", "challengeTitle": "Run 10 miles", "time": "3d", "type":"complete"}
-            ]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'friend_list/get_recent_activity',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setActivityInfo(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function getRecentActivityLeague(){
-        //TODO
-        setActivityInfo(
-            [{"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Jonah Jameson", "challengeType": "Personal", "challengeTitle": "Do 50 push ups", "time": "1h", "type": "progress"},
-            {"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Ash Ketchum", "challengeType": "League", "challengeTitle": "Swim 4 km", "time": "2d", "type":"progress"},
-            {"photo":"https://i.imgur.com/3Ia9gVG.png","displayName": "Elle Woods", "challengeType": "Global", "challengeTitle": "Run 10 miles", "time": "3d", "type":"complete"}
-            ]);
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/get_recent_activity',
+            headers: {
+            Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+        };
+        axios(config)
+        .then(function(response){
+            setActivityInfo(response.data)
+        })
+        .catch(function(error){
+            console.log(error)
+        });
     }
 
     function createActivityObj(input, index){

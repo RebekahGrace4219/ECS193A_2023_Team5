@@ -1,15 +1,38 @@
-import "../css/SignUp/SignUp.css"
+import "../css/SignUp/signUp.css";
 
 import SignUpSideBar from "../components/SignUp/SignUpSideBar";
 import SignUpForm from "../components/SignUp/SignUpForm";
+import {useState} from "react";
+import axios from "axios";
+
+// const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SignUp = () => {
-    // const token = window.sessionStorage.getItem("token_credential")
-    // console.log('Hit sign up page');
-    // console.log(token);
+    const [profilePhoto,setPhoto] = useState(getProfilePhoto());
+    function getProfilePhoto(){
+        var config  = {
+            method : 'post',
+            url: backend_url+'auth/get_profile_photo',
+            headers: {
+                Accept: 'application/json',
+              },
+            withCredentials: true,
+            credentials: 'include'
+        };
+        axios(config)
+        .then(function(response) {
+            setPhoto(response.data);
+            return response.data;
+        })
+        .catch(function(error){
+            console.log(error)
+        });
+    }
+
     return (
         <div id = "SignUp">
             <SignUpSideBar id = "SignUpBar"/>
-            <SignUpForm id = "SignUpForm"/>
+            <SignUpForm id = "SignUpForm">{{"profilePhoto":profilePhoto}}</SignUpForm>
         </div>
     );
 }

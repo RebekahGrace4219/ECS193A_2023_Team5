@@ -1,5 +1,5 @@
 import SideBar from "../components/Shared/SideBar";
-import ChallengeHeader from "../components/Challenge/ChallengeHeader";
+import Header from "../components/Shared/Header";
 import AddExerciseBox from "../components/Challenge/AddExerciseBox";
 import CurrentChallenge from "../components/Challenge/CurrentChallenge";
 import WeeklyChallenge from "../components/Challenge/WeeklyChallenge";
@@ -15,9 +15,15 @@ const Challenge = (props) => {
             </div>
 
             <div className = "rightSide2Part">
-                <ChallengeHeader></ChallengeHeader>
-                <AddExerciseBox></AddExerciseBox>
-                {(props.children.type === "current") ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
+                <div className = "mainInfo">
+                    <div className = "TopInfo">
+                        <Header>{{"title":"Challenge", "type":"challenge", "onButton":props.children.type}}</Header>
+                        <AddExerciseBox></AddExerciseBox>
+                    </div>
+                    <div className = "BottomInfo">
+                        {(props.children.type === "current") ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
+                    </div>
+                </div>
             </div>
         </div>
       );

@@ -1,5 +1,5 @@
-import '../../css/Profile/statsSection.css';
-import '../../css/Shared/header.css';
+import '../../css/Shared/headerText.css';
+
 const StatsSection = () => {
     return (
         <div id = "StatsSection">

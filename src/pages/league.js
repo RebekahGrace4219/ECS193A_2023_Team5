@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import SideBar from '../components/Shared/SideBar';
-import SocialHeader from "../components/Social/SocialHeader";
+import Header from "../components/Shared/Header";
 import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
@@ -28,15 +28,15 @@ const League = (props) => {
             {
                 (props.children.type === "description") ?
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"league", "leagueID":{leagueName}}}</SocialHeader>
-                    <LeagueHeader>{{"id": {leagueName}}}</LeagueHeader>
-                    <LeagueChallengeList>{{"id": {leagueName}}}</LeagueChallengeList>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
+                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
+                    <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
                 </div>
                 :
                 <div className = "middleSide3Part">
-                    <SocialHeader>{{"type":"league", "leagueID":{leagueName}}}</SocialHeader>
-                    <LeagueHeader>{{"id": {leagueName}}}</LeagueHeader>
-                    <LeagueMemberList>{{"id": {leagueName}}}</LeagueMemberList>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"member"}}</Header>
+                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
+                    <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
                 </div>
             }
             <div className = "rightSide3Part">

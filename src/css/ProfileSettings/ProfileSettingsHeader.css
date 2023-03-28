@@ -1,8 +1,0 @@
-#ProfileSettingsHeader{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    max-width: 80%;
-}
