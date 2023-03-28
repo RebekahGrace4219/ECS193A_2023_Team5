@@ -30,7 +30,7 @@ html{
 }
 
 .middleSide3Part{
-    width: 65%;
+    width: 900px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@ html{
 }
 
 .rightSide3Part{
-    width: 25%;
+    width: 322px;
     height: 100%;
 
     display: flex;
