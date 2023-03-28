@@ -38,7 +38,7 @@ const Login = () => {
       },
       data :
       {
-        token: deviceToken
+        deviceToken: deviceToken
       }
     };
     let hasUsername= false;
