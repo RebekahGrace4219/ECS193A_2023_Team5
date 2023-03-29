@@ -3,7 +3,7 @@ import "../../css/Shared/pageSwitch.css";
 
 const PageSwitch = (props) => {
     const [onButton, setOnButton] = useState(props.onButton);
-
+    console.log("props", props);
     useEffect (
         () => {
             let elements = document.getElementsByClassName("switchButton");
@@ -54,7 +54,7 @@ const PageSwitch = (props) => {
     }
 
     function moveLeagueDescription(){
-        window.location.href = "./leagueDescriptionPage?="+ props.leagueID;
+        window.location.href = "./leagueDescriptionPage?=" + props.leagueID;
         setOnButton("description");
     }
 

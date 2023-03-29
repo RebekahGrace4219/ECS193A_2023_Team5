@@ -5,7 +5,9 @@ const Header = (props) => {
     let title = props.children.title;
     let pageSwitchType = props.children.type;
     let onButton = props.children.onButton;
+    let leagueID = props.children.leagueID;
 
+    console.log("In header league ID is ", leagueID);
     return (
         <div id = "Header">
             <h1>{title}</h1>
@@ -19,7 +21,7 @@ const Header = (props) => {
             {
             (pageSwitchType !== "none" && pageSwitchType === "league")
             ?
-            <PageSwitch type = {pageSwitchType} onButton = {onButton} leaugeID = {props.children.leagueID}></PageSwitch>
+            <PageSwitch type = {pageSwitchType} onButton = {onButton} leagueID = {leagueID}></PageSwitch>
             :
             <></>
             }
