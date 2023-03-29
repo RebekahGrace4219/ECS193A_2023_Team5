@@ -1,7 +1,7 @@
 .submitButton{
     box-sizing: border-box;
 
-    width: 150px;
+    width: 160px;
     height: 34px;
 
     background: #014421;
@@ -168,11 +168,12 @@
     background-color: transparent !important;
 }
 
-.barAddSelectedButton{
+.barAddUnselectedButton{
     background-color: #00853F !important;
+    color: white;
 }
 
-.barAddUnselectedButton{
+.barAddSelectedButton{
     background-color: transparent !important;
     color: #00853F !important;
 }

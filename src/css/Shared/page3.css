@@ -2,6 +2,7 @@ html{
     height:100%;
     padding: 0;
     margin:0;
+    overflow-y: scroll;
 }
 #root{
     width:100%;
@@ -13,8 +14,7 @@ html{
 .Body3Part{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: nowrap;
 
     background-color: #F1EEEA;
 
@@ -29,21 +29,33 @@ html{
     height: 100%;
 }
 
-.middleSide3Part{
-    width: 900px;
+.rightSide3Part{
     height: 100%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    justify-content: center;
+    min-width: 1000px;
 }
 
-.rightSide3Part{
-    width: 322px;
-    height: 100%;
+.rightPadding{
+    width: 150px;
+}
 
-    display: flex;
-    flex-direction: column;
-    flex-wrap:nowrap;
-    justify-content: space-around;
+.centerInfo{
+    width: 1000px;
+}
+
+.sidePart{
+    align-self: center;
+}
+
+@media(max-width: 1700px){
+    .rightPadding{
+        display:none;
+    }
+    .sidePart{
+        display: none;
+    }
 }

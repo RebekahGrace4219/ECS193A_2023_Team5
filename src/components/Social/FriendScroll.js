@@ -1,8 +1,56 @@
 import {useState,useEffect} from 'react';
 import FriendObj from './FriendObj';
 import axios from 'axios';
+import "../../css/Social/friend.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
+let basic = [{displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+    {displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
+    , username: "batman#6380"
+    , _id
+    :
+    "6405c7a5b023435deb979a09"},
+
+]
 const FriendScroll = (props) => {
     let [scrollType] = useState(props.type);
     let [information, setInformation] = useState([]);
@@ -20,8 +68,9 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
+            console.log("friend" , response.data)
+            setInformation(response.data);
+            setInformation(basic);
         })
         .catch(function(error){
             console.log(error)
@@ -118,7 +167,7 @@ const FriendScroll = (props) => {
     );
 
     return(
-        <div id = "FriendScroll">
+        <div className = "scroll">
             {information.map(makeFriendObj)}
         </div>
     )

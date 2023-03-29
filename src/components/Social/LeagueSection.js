@@ -16,7 +16,7 @@ const LeagueSection = () => {
     return (
         <div id = "LeagueSection" className="section">
             <div>
-                <button className = "submitButton" onClick = {addLeague}><p className = "submitButtonText">Add League</p></button>
+                <button className = "submitButton" onClick = {addLeague}><p className = "submitButtonText">Create League</p></button>
             </div>
 
             <div className ="selectButtonHeader">

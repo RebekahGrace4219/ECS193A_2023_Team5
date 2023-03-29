@@ -40,11 +40,11 @@ getToken(messaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2
   // ...
 });*/
 
-/*onMessage(messaging, (payload) => {
+onMessage(messaging, (payload) => {
   console.log('Message received. ', payload);
   // ...
 });
 export const onForegroundMessage = () =>
   new Promise((resolve) => onMessage(messaging, (payload) => resolve(payload)));
-*/
+
 export const exportMessaging = messaging;

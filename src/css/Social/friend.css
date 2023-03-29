@@ -1,0 +1,8 @@
+.scroll{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+    max-height: calc(100vh - 450px);
+}
