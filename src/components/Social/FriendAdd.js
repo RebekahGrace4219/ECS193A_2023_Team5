@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import '../../css/Shared/addUser.css';
+import '../../css/Shared/coloredText.css';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendAdd = () => {
 
-    const [userText, setUserText] = useState("");
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
@@ -40,11 +40,13 @@ const FriendAdd = () => {
 
     return (<div >
         <div id = "addFriendInputForm">
-        <div>
+        <h3>ADD FRIEND</h3>
+        <p className = "greenBaseText">You can add a friend with their username.</p>
+        <div id = "addFriendInput">
             <input id = "textInput"  placeholder = "username#0000" type = "text" onChange = {handleTextChange}></input>
-            <p>{userText}</p>
+            <button id = "buttonInput"  type = "button" onClick = {sendFriendRequest}>Send</button>
         </div>
-        <button id = "buttonInput"  type = "button" onClick = {sendFriendRequest}>Send</button>
+
         </div>
     </div>);
 
