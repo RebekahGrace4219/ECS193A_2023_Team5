@@ -14,19 +14,24 @@ const Profile = (props) => {
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
-            <div className = "middleSide3Part">
-                <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
-                <Line/>
-            </div>
-            {
-                (props.children.type === "stats") ?
-                    <StatsSection/>
-                :
-                <MedalsSection/>
-            }
             <div className = "rightSide3Part">
-                <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
+                <div className = "centerInfo">
+                    <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
+                    <Line/>
+                    {
+                        (props.children.type === "stats") ?
+                        <StatsSection/>
+                        :
+                        <MedalsSection/>
+                    }
+                </div>
+                <div className = "rightPadding"></div>
+                <div className="sidePart">
+                    <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
+                </div>
+
             </div>
+
         </div>
       );
 }

@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import FriendObj from './FriendObj';
 import axios from 'axios';
-import "../../css/Social/friend.css";
+import "../../css/Social/scroll.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 let basic = [{displayName: "Jhao Hua", picture: "https://lh3.googleusercontent.com/a/AGNmyxZbozogq_2hGmHB4Bgqv-8LwaD77U6WOirsrrV6=s96-c"
