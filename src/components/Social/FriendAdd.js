@@ -6,7 +6,7 @@ import '../../css/Shared/coloredText.css';
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendAdd = () => {
-
+    const [userResponse, setUserResponse] = useState("");
     const [usernameText, setUsernameText] = useState("");
 
     async function sendFriendRequest(){
@@ -26,7 +26,7 @@ const FriendAdd = () => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data);
+              setUserResponse(response.data);
           })
           .catch(function(error){
               console.log(error)
@@ -36,6 +36,7 @@ const FriendAdd = () => {
 
     const handleTextChange = (event) => {
         setUsernameText(event.target.value);
+        setUserResponse("");
     }
 
     return (<div >
@@ -45,6 +46,9 @@ const FriendAdd = () => {
         <div id = "addFriendInput">
             <input id = "textInput"  placeholder = "username#0000" type = "text" onChange = {handleTextChange}></input>
             <button id = "buttonInput"  type = "button" onClick = {sendFriendRequest}>Send</button>
+        </div>
+        <div>
+            <p className='greenBaseText'>{userResponse}</p>
         </div>
 
         </div>
