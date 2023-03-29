@@ -4,7 +4,7 @@ import AcceptChallengeButton from "./AcceptChallengeButton";
 import DeclineChallengeButton from "./DeclineChallengeButton";
 
 const ReceivedChallengeObj = (props) => {
-    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
+    let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit;
     let dueDate = new Date(props.children.dueDate).toISOString().split("T")[0];
 
     return (
