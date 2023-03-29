@@ -27,7 +27,7 @@ const League = (props) => {
             </div>
             <div className = "rightSide3Part">
                 <div className = "centerInfo">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":props.children.type}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
                     {
                     (props.children.type === "description") ?
