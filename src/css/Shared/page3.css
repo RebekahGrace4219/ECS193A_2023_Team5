@@ -2,6 +2,7 @@ html{
     height:100%;
     padding: 0;
     margin:0;
+    overflow-y: scroll;
 }
 #root{
     width:100%;
@@ -35,16 +36,26 @@ html{
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+    min-width: 1000px;
 }
 
 .rightPadding{
     width: 150px;
 }
 
-.mainInfo{
+.centerInfo{
     width: 1000px;
 }
 
 .sidePart{
     align-self: center;
+}
+
+@media(max-width: 1700px){
+    .rightPadding{
+        display:none;
+    }
+    .sidePart{
+        display: none;
+    }
 }

@@ -16,7 +16,7 @@ const Social = (props) => {
             </div>
 
             <div className = "rightSide3Part">
-                <div className = "mainInfo">
+                <div className = "centerInfo">
                     <Header>{{"title":"Social Hub", "type":"social", "onButton" : props.children.type}}</Header>
                     <RecentActivity>{{"type":props.children.type}}</RecentActivity>
                     {
