@@ -25,24 +25,23 @@ const League = (props) => {
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
-            {
-                (props.children.type === "description") ?
-                <div className = "middleSide3Part">
+            <div className = "rightSide3Part">
+                <div className = "centerInfo">
                     <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
                     <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
+                    {
+                    (props.children.type === "description") ?
+                        <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
+                    :
+                        <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
+                    }
                 </div>
-                :
-                <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"member"}}</Header>
-                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
+                <div className = "rightPadding"></div>
+                <div className="sidePart">
+                    <SuggestionBox>{{"type":"league"}}</SuggestionBox>
                 </div>
-            }
-            <div className = "rightSide3Part">
-                <UserSettingsButton/>
-                <SuggestionBox>{{"type":"league"}}</SuggestionBox>
             </div>
+
         </div>
     );
 }

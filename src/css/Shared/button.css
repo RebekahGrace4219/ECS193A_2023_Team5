@@ -87,6 +87,9 @@
     border-style: none;
 }
 
+.movePageButton:hover {
+    text-decoration: underline;
+}
 .moreInfoButton{
     border-style:none;
     background-color: transparent;
