@@ -6,7 +6,7 @@ import DeclineChallengeButton from "./DeclineChallengeButton";
 const ReceivedChallengeObj = (props) => {
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit;
     let dueDate = new Date(props.children.dueDate).toISOString().split("T")[0];
-    console.log("Due date is ", dueDate, props.children.dueDate);
+
     return (
     <div id = "ReceivedChallengedObj" className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
