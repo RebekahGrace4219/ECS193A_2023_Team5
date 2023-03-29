@@ -168,11 +168,12 @@
     background-color: transparent !important;
 }
 
-.barAddSelectedButton{
+.barAddUnselectedButton{
     background-color: #00853F !important;
+    color: white;
 }
 
-.barAddUnselectedButton{
+.barAddSelectedButton{
     background-color: transparent !important;
     color: #00853F !important;
 }
