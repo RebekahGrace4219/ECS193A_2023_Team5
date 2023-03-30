@@ -131,8 +131,6 @@
     background: #014421;
     border: 1px solid #F9A800;
     border-radius: 21px;
-
-
 }
 
 .addButtonIcon{
@@ -142,7 +140,7 @@
 
 
 .barButton{
-    width: 140px;
+    width: 150px;
     height: 30px;
 
     font-style: normal;
