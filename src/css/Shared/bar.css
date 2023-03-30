@@ -1,5 +1,6 @@
 .bar{
     display: flex;
+    width: 100%;
     flex-wrap: nowrap;
     flex-direction: row;
 
