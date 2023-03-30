@@ -175,7 +175,7 @@ const LeagueMemberList = (props) => {
         <div className = "leagueMemberHeader">
             <div className ="selectButtonHeader">
                 <h1>Members</h1>
-                <MembersBar selfType = {selfType} changeFunction = {setMemberScroll}></MembersBar>
+                {selfType === "owner" || selfType === "admin" ? <MembersBar selfType = {selfType} changeFunction = {setMemberScroll}></MembersBar> : <></>}
             </div>
 
             {

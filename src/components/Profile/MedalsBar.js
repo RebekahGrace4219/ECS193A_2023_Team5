@@ -8,21 +8,10 @@ const MedalsBar = (props) => {
     useEffect (
         () => {
             let elements = document.getElementsByClassName("barButton");
-            console.log(elements[0].id);
-            console.log("OnBUtton is ", onButton);
-
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
-                if (element.id === "Add Friend" && onButton === "Add Friend"){
-                    element.classList.add("barAddSelectedButton");
-                    element.classList.remove("barAddUnselectedButton");
-                }
-                else if(element.id === "Add Friend" && onButton !== "Add Friend"){
-                    element.classList.add("barAddUnselectedButton");
-                    element.classList.remove("barAddSelectedButton");
-                }
-                else if (element.id === onButton){
+                if (element.id === onButton){
                     console.log("Element matches!", element, onButton);
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
