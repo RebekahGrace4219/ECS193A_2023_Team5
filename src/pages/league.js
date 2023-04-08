@@ -5,10 +5,11 @@ import Header from "../components/Shared/Header";
 import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
-import UserSettingsButton from '../components/Shared/UserSettingsButton';
+import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import "../css/Shared/page3.css"
+import LeagueLeaderboardEntry from '../components/League/LeagueLeaderboardEntry';
 
 const League = (props) => {
     function getLeagueName(){
@@ -32,9 +33,18 @@ const League = (props) => {
                     {
                     (props.children.type === "description") ?
                         <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
+
                     :
                         <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
                     }
+                        {
+                    (props.children.type === "description") ?
+                        <LeagueLeaderboard>{{"id":leagueName}}</LeagueLeaderboard>
+
+                    :
+                        <></>
+                    }
+
                 </div>
                 <div className = "rightPadding"></div>
                 <div className="sidePart">
