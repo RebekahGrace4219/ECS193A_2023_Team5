@@ -14,7 +14,7 @@ import League from "./pages/league";
 import TestDiv from "./pages/test";
 import { useEffect } from "react";
 
-//import { onForegroundMessage } from "./firebase";
+import { onForegroundMessage } from "./firebase";
 function App() {
 
 
