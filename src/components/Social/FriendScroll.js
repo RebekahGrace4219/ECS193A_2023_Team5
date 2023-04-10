@@ -21,7 +21,6 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log("friend" , response.data)
             setInformation(response.data);
 
         })
@@ -44,8 +43,7 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
+            setInformation(response.data);
         })
         .catch(function(error){
             console.log(error)
@@ -98,7 +96,6 @@ const FriendScroll = (props) => {
         });        }
 
     function makeFriendObj(input){
-        // console.log(input)
         return (<FriendObj type = {scrollType}>{input}</FriendObj>);
     }
 

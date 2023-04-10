@@ -111,7 +111,6 @@ const FriendObj = (props) => {
           console.log(error)
           console.log("No response")
       });
-      console.log("Unblock this person");
     }
 
     function accept(){
@@ -136,7 +135,6 @@ const FriendObj = (props) => {
           console.log(error)
           console.log("No response")
       });
-      console.log("Accept received request");
     }
 
     function decline(){
@@ -161,7 +159,6 @@ const FriendObj = (props) => {
           console.log(error)
           console.log("No response")
       });
-      console.log("Decline received request");
     }
 
     function friendReact(event){

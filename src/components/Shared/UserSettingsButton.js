@@ -46,7 +46,6 @@ const UserSettingsButton = () => {
       };
       axios(config)
       .then(function(response) {
-          console.log("logged out")
           window.location.href = "./";
 
       })
@@ -68,7 +67,6 @@ const UserSettingsButton = () => {
     }
 
     const setDeviceToken = () => {
-      console.log("Here is where I would be posting the device token");
       getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
         if (currentToken) {
           console.log("Setting token here", currentToken);

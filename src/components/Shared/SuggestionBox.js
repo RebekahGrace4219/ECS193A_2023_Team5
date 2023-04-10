@@ -27,7 +27,6 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
-            console.log("informationMAp", response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -49,6 +48,7 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log(response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -71,7 +71,6 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
-            console.log("recently earned");
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -97,7 +96,7 @@ const SuggestionBox= (props) => {
                 <div>
                     <p className = "SuggestionBoxTitle">Suggested Friends</p>
                     <div>
-                        {informationMap.map((info) => {return (<SuggestedFriendObj displayName = {info["DisplayName"]} mutualFriends = {info["MutualFriends"]} mutualLeagues = {info["MutualLeagues"]}/>);})}
+                        {informationMap.map((info) => {return (<SuggestedFriendObj username = {info["username"]} mutualFriends = {info["mutualFriendCount"]} picture = {info["picture"]}/>);})}
                     </div>
                 </div>
                 :
@@ -108,7 +107,7 @@ const SuggestionBox= (props) => {
                 <div>
                     <p className = "SuggestionBoxTitle">Suggested Leagues</p>
                     <div>
-                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["LeagueName"]} mutualFriends = {info["MutualFriends"]}/>);})}
+                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["leagueName"]} leagueID = {info["_id"]}/>);})}
                     </div>
                 </div>
                 :

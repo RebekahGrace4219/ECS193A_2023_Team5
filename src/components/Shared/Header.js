@@ -7,7 +7,6 @@ const Header = (props) => {
     let onButton = props.children.onButton;
     let leagueID = props.children.leagueID;
 
-    console.log("In header league ID is ", leagueID);
     return (
         <div id = "Header">
             <h1>{title}</h1>
