@@ -16,8 +16,6 @@ import { useEffect } from "react";
 
 import { onForegroundMessage } from "./firebase";
 function App() {
-
-
   useEffect(() => {
     onForegroundMessage()
       .then((payload) => {
