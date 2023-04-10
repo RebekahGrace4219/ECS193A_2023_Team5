@@ -21,6 +21,7 @@ const RecentActivity = (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log("The recent activity friend looks like: ", response.data);
             setActivityInfo(response.data)
         })
         .catch(function(error){
@@ -40,6 +41,7 @@ const RecentActivity = (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log("The recent activity league looks like: ", response.data);
             setActivityInfo(response.data)
         })
         .catch(function(error){
