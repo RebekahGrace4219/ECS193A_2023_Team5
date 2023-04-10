@@ -10,9 +10,6 @@ const FriendBar = (props) => {
     useEffect (
         () => {
             let elements = document.getElementsByClassName("barButton");
-            console.log(elements[0].id);
-            console.log("OnBUtton is ", onButton);
-
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
@@ -25,7 +22,6 @@ const FriendBar = (props) => {
                     element.classList.remove("barAddSelectedButton");
                 }
                 else if (element.id === onButton){
-                    console.log("Element matches!", element, onButton);
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
                 }

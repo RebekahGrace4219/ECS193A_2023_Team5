@@ -27,7 +27,6 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
-            console.log("informationMAp", response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -71,7 +70,6 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
-            console.log("recently earned");
             setInformationMap(response.data)
         })
         .catch(function(error){

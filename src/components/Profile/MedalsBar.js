@@ -12,7 +12,6 @@ const MedalsBar = (props) => {
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
                 if (element.id === onButton){
-                    console.log("Element matches!", element, onButton);
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
                 }

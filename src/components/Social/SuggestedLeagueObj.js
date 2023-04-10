@@ -1,7 +1,6 @@
 import "../../css/Shared/suggestionBox.css";
 
 const SuggestedLeagueObj = (props) => {
-    console.log("League is getting: ", props);
     return(
         <div id = "SuggestedLeagueObj" className="suggestionObj">
             <div className = "suggestionImageSection">

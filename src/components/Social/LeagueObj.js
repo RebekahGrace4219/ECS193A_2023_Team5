@@ -14,7 +14,7 @@ const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
     const [id, setID] = useState(props.children._id);
     let type = props.type;
-    console.log("LeagueObj",props);
+
     function toggleSelectShow(){
         setSelectShow(!selectShow);
     }

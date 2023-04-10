@@ -1,7 +1,6 @@
 import "../../css/Shared/suggestionBox.css";
 
 const SuggestedFriendObj = (props) => {
-    console.log("Friend is getting: ", props);
     return (
         <div className="suggestionObj">
             <div className = "suggestionImageSection">
