@@ -14,19 +14,16 @@ import League from "./pages/league";
 import TestDiv from "./pages/test";
 import { useEffect } from "react";
 
-//import { onForegroundMessage } from "./firebase";
+import { onForegroundMessage } from "./firebase";
 function App() {
-
-
-  /*useEffect(() => {
-    console.log('hi')
+  useEffect(() => {
     onForegroundMessage()
       .then((payload) => {
         console.log('Received foreground message: ', payload);
         const { notification: { title, body } } = payload;
       })
       .catch(err => console.log('An error occured while retrieving foreground message. ', err));
-  }, []);*/
+  }, []);
 
   return (
     <div id = "page">

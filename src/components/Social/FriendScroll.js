@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import FriendObj from './FriendObj';
 import axios from 'axios';
+import "../../css/Social/scroll.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendScroll = (props) => {
@@ -20,8 +21,9 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
+            console.log("friend" , response.data)
+            setInformation(response.data);
+
         })
         .catch(function(error){
             console.log(error)
@@ -118,7 +120,7 @@ const FriendScroll = (props) => {
     );
 
     return(
-        <div id = "FriendScroll">
+        <div className = "scroll">
             {information.map(makeFriendObj)}
         </div>
     )

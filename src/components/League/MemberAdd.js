@@ -9,7 +9,7 @@ const MemberAdd = (props) => {
     const [userText, setUserText] = useState("");
     const [usernameText, setUsernameText] = useState("");
 
-    async function sendFriendRequest(){
+    async function sendLeagueRequest(){
 
         var config = {
             method : 'post',
@@ -28,11 +28,12 @@ const MemberAdd = (props) => {
           axios(config)
           .then(function(response) {
             console.log("Send invite");
-              console.log(response.data);
+              setUserText(response.data);
           })
           .catch(function(error){
-              console.log(error)
-              console.log("No response")
+              console.log(error);
+              setUserText(error);
+
           });
     }
 
@@ -41,12 +42,17 @@ const MemberAdd = (props) => {
     }
 
     return (<div >
-        <div id = "addFriendInputForm">
-        <div>
+    <div id = "addFriendInputForm">
+        <h3>INVITE USER</h3>
+        <p className = "greenBaseText">Invite someone to your league with their username</p>
+        <div id = "addFriendInput">
             <input id = "textInput"  placeholder = "username#0000" type = "text" onChange = {handleTextChange}></input>
-            <p>{userText}</p>
+            <button id = "buttonInput"  type = "button" onClick = {sendLeagueRequest}>Send</button>
         </div>
-        <button id = "buttonInput"  type = "button" onClick = {sendFriendRequest}>Send</button>
+        <div>
+            <p className='greenBaseText'>{userText}</p>
+        </div>
+
         </div>
     </div>);
 

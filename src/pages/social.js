@@ -15,26 +15,30 @@ const Social = (props) => {
                 <SideBar></SideBar>
             </div>
 
-            <div className = "middleSide3Part">
-                <Header>{{"title":"Social Hub", "type":"social", "onButton" : props.children.type}}</Header>
-                <RecentActivity>{{"type":props.children.type}}</RecentActivity>
-                {
+            <div className = "rightSide3Part">
+                <div className = "centerInfo">
+                    <Header>{{"title":"Social Hub", "type":"social", "onButton" : props.children.type}}</Header>
+                    <RecentActivity>{{"type":props.children.type}}</RecentActivity>
+                    {
+                        (props.children.type === "friend") ?
+                        <FriendSection></FriendSection>
+                        :
+                        <LeagueSection/>
+                    }
+                </div>
+                <div className = "rightPadding"></div>
+                <div className="sidePart">
+                    {
                     (props.children.type === "friend") ?
-                    <FriendSection></FriendSection>
+                        <SuggestionBox>{{"type":"friend"}}</SuggestionBox>
+
                     :
-                    <LeagueSection/>
-                }
+                        <SuggestionBox>{{"type":"league"}}</SuggestionBox>
+
+                    }
+                </div>
             </div>
-            {
-                (props.children.type === "friend") ?
-                <div className = "rightSide3Part">
-                    <SuggestionBox>{{"type":"friend"}}</SuggestionBox>
-                </div>
-                :
-                <div className = "rightSide3Part">
-                    <SuggestionBox>{{"type":"league"}}</SuggestionBox>
-                </div>
-            }
+
 
         </div>
       );

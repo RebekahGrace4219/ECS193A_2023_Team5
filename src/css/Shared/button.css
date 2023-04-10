@@ -1,7 +1,7 @@
 .submitButton{
     box-sizing: border-box;
 
-    width: 150px;
+    width: 160px;
     height: 34px;
 
     background: #014421;
@@ -87,6 +87,9 @@
     border-style: none;
 }
 
+.movePageButton:hover {
+    text-decoration: underline;
+}
 .moreInfoButton{
     border-style:none;
     background-color: transparent;
@@ -128,8 +131,6 @@
     background: #014421;
     border: 1px solid #F9A800;
     border-radius: 21px;
-
-
 }
 
 .addButtonIcon{
@@ -139,7 +140,7 @@
 
 
 .barButton{
-    width: 150px;
+    width: 140px;
     height: 30px;
 
     font-style: normal;
@@ -168,11 +169,12 @@
     background-color: transparent !important;
 }
 
-.barAddSelectedButton{
+.barAddUnselectedButton{
     background-color: #00853F !important;
+    color: white;
 }
 
-.barAddUnselectedButton{
+.barAddSelectedButton{
     background-color: transparent !important;
     color: #00853F !important;
 }

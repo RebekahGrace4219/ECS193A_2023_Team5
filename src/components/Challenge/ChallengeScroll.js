@@ -169,7 +169,6 @@ const ChallengeScroll = (props) => {
 
     return (<div id = "ChallengeScroll">
         {(scrollType === "issued") ? information.map(makeIssuedChallengeObj) : <></>}
-        {(scrollType === "issued" && !ifLeague) ? <AddChallengeButton></AddChallengeButton> : <></>}
         {(scrollType === "sent") ? information.map(makeSentChallengeObj) : <></>}
         {(scrollType === "received") ? information.map(makeReceivedChallengeObj) : <></>}
         {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj) : <></>}

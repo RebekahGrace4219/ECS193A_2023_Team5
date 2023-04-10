@@ -15,7 +15,15 @@ const CurrentChallengeBar = (props) => {
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
-                if (element.id === onButton){
+                if (element.id === "Add" && onButton === "Add"){
+                    element.classList.add("barAddSelectedButton");
+                    element.classList.remove("barAddUnselectedButton");
+                }
+                else if(element.id === "Add" && onButton !== "Add"){
+                    element.classList.add("barAddUnselectedButton");
+                    element.classList.remove("barAddSelectedButton");
+                }
+                else if (element.id === onButton){
                     console.log("Element matches!", element, onButton);
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
@@ -43,11 +51,17 @@ const CurrentChallengeBar = (props) => {
         props.func("received");
         setOnButton("Received");
     }
+
+    function setAdd(){
+        props.func("add");
+        setOnButton("Add");
+    }
     return (
     <div className = "bar">
         <BarButton function = {setIssued} name = "All"></BarButton>
         <BarButton function = {setSent} name = "Sent"></BarButton>
         <BarButton function = {setReceived} name = "Received"></BarButton>
+        <BarButton function = {setAdd} name = "Add"></BarButton>
     </div>
     );
 }

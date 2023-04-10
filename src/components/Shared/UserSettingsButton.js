@@ -41,7 +41,7 @@ const UserSettingsButton = () => {
         withCredentials: true,
         credentials: 'include',
         data:{
-          token: deviceToken
+          deviceToken: deviceToken
         }
       };
       axios(config)

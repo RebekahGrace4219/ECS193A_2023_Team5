@@ -1,14 +1,18 @@
 #addFriendInputForm{
     display: flex;
-    align-items: flex-start;
-    padding: 10px;
-    justify-content: space-around;
+    flex-direction: column;
 }
 
+#addFriendInput{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 #textInput {
     box-sizing: border-box;
 
-    width: 550px;
+    width: 400px;
     height: 38px;
 
     background: #D9D9D9;

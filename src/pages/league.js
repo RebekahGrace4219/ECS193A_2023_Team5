@@ -5,10 +5,11 @@ import Header from "../components/Shared/Header";
 import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
-import UserSettingsButton from '../components/Shared/UserSettingsButton';
+import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import "../css/Shared/page3.css"
+import LeagueLeaderboardEntry from '../components/League/LeagueLeaderboardEntry';
 
 const League = (props) => {
     function getLeagueName(){
@@ -25,24 +26,32 @@ const League = (props) => {
             <div className = "leftSide3Part">
                 <SideBar></SideBar>
             </div>
-            {
-                (props.children.type === "description") ?
-                <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
-                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
-                </div>
-                :
-                <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"member"}}</Header>
-                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
-                </div>
-            }
             <div className = "rightSide3Part">
-                <UserSettingsButton/>
-                <SuggestionBox>{{"type":"league"}}</SuggestionBox>
+                <div className = "centerInfo">
+                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":props.children.type}}</Header>
+                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
+                    {
+                    (props.children.type === "description") ?
+                        <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
+
+                    :
+                        <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
+                    }
+                        {
+                    (props.children.type === "description") ?
+                        <LeagueLeaderboard>{{"id":leagueName}}</LeagueLeaderboard>
+
+                    :
+                        <></>
+                    }
+
+                </div>
+                <div className = "rightPadding"></div>
+                <div className="sidePart">
+                    <SuggestionBox>{{"type":"league"}}</SuggestionBox>
+                </div>
             </div>
+
         </div>
     );
 }
