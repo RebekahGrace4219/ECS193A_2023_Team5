@@ -107,7 +107,7 @@ const SuggestionBox= (props) => {
                 <div>
                     <p className = "SuggestionBoxTitle">Suggested Leagues</p>
                     <div>
-                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["leagueName"]}/>);})}
+                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["leagueName"]} leagueID = {info["_id"]}/>);})}
                     </div>
                 </div>
                 :
