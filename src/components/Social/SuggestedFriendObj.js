@@ -33,7 +33,7 @@ const SuggestedFriendObj = (props) => {
             </div>
             <div className = "suggestionWritingSection">
                 <div  className = "suggestionHeaderStyle">{props.username}</div>
-                <div  className = "suggestionTextStyle">{props.mutualFriends} Mutual Friends</div>
+                <div  className = "suggestionTextStyle">{props.mutualFriends} Mutual Friend(s)</div>
                 <button className = "submitButton" onClick = {sendFriendRequest}><p className = "submitButtonText"> Add Friend</p></button>
             </div>
         </div>
