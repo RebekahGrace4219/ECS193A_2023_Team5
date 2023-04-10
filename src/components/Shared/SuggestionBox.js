@@ -48,6 +48,7 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log(response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -106,7 +107,7 @@ const SuggestionBox= (props) => {
                 <div>
                     <p className = "SuggestionBoxTitle">Suggested Leagues</p>
                     <div>
-                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["LeagueName"]} mutualFriends = {info["MutualFriends"]}/>);})}
+                    {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["leagueName"]}/>);})}
                     </div>
                 </div>
                 :
