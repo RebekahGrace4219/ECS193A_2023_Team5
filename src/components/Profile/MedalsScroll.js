@@ -23,7 +23,8 @@ const MedalsScroll = (props) => {
         };
         axios(config)
         .then(function(response){
-            setInformationMap(response.data)
+            console.log("In progress", response.data);
+            //setInformationMap(response.data)
         })
         .catch(function(error){
             console.log(error)
@@ -44,7 +45,7 @@ const MedalsScroll = (props) => {
         };
         axios(config)
         .then(function(response){
-            setInformationMap(response.data)
+            //setInformationMap(response.data)
         })
         .catch(function(error){
             console.log(error)
