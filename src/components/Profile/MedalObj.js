@@ -17,9 +17,16 @@ let calculateProgress = (progress, goalUnit) => {
 
     return progress*conversionKey[goalUnit];
 }
+
+const min = (a, b) => {
+    if (a < b){
+        return a;
+    }
+    return b;
+}
 const MedalObj = (props) => {
 
-    let convertedProgress = calculateProgress(props.children.progress, props.children.exercise.unit);
+    let convertedProgress = min(calculateProgress(props.children.progress, props.children.exercise.unit), props.children.exercise.amount);
     console.log("Medal gets", props.children);
     /*
     <a href="https://www.flaticon.com/free-icons/silver-cup" title="silver cup icons">Silver cup icons created by Freepik - Flaticon</a>*/
@@ -37,7 +44,7 @@ const MedalObj = (props) => {
             </div>
 
             <div className = "medalRight">
-                <p className = "medalsItem medalsText">Progress : {convertedProgress}/{props.children.exercise.amount}</p>
+                <p className = "medalsItem medalsText">Progress : {convertedProgress}/{props.children.exercise.amount} {props.children.exercise.unit}</p>
 
             </div>
         </div>
