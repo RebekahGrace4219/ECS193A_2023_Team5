@@ -24,7 +24,7 @@ const MedalsScroll = (props) => {
         axios(config)
         .then(function(response){
             console.log("In progress", response.data);
-            //setInformationMap(response.data)
+            setInformationMap(response.data)
         })
         .catch(function(error){
             console.log(error)
@@ -45,7 +45,8 @@ const MedalsScroll = (props) => {
         };
         axios(config)
         .then(function(response){
-            //setInformationMap(response.data)
+            console.log("earned", response.data);
+            setInformationMap(response.data)
         })
         .catch(function(error){
             console.log(error)
@@ -55,10 +56,10 @@ const MedalsScroll = (props) => {
 
     function createObj(input){
         if(type === "earned"){
-            return(<MedalObj date = {input["date"]} description = {input["description"]} ifEarned = {true}></MedalObj>);
+            return(<MedalObj>{input}</MedalObj>);
         }
         else if(type === "progress"){
-            return(<MedalObj done = {input["done"]} total = {input["total"]} description = {input["description"]} ifEarned = {false}></MedalObj>);
+            return(<MedalObj>{input}</MedalObj>);
         }
     }
 
