@@ -50,14 +50,14 @@ const CurrentChallengeBar = (props) => {
 
     function setAdd(){
         props.func("add");
-        setOnButton("Add");
+        setOnButton("Create");
     }
     return (
     <div className = "bar">
         <BarButton function = {setIssued} name = "All"></BarButton>
         <BarButton function = {setSent} name = "Sent"></BarButton>
         <BarButton function = {setReceived} name = "Received"></BarButton>
-        <BarButton function = {setAdd} name = "Add"></BarButton>
+        <BarButton function = {setAdd} name = "Create"></BarButton>
     </div>
     );
 }
