@@ -10,6 +10,16 @@ import '../../css/Shared/headerText.css';
 import { getToken} from 'firebase/messaging';
 import {exportMessaging, requestPermission} from "../../firebase";
 
+const cloudinary = require('cloudinary').v2;
+
+
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+});
+
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -32,6 +42,28 @@ const SignUpForm = (props) => {
       }, [load]
     );
 
+    const submitPhoto = (username) => {
+
+      let photoUp = "";
+      if (!photo){
+        photoUp = props.children.profilePhoto;
+      }
+      else{
+        photoUp = photo;
+      }
+
+
+      let public_key = username + "_" + "profile_photo";
+      const res = cloudinary.uploader.upload(photoUp, {public_id: public_key})
+      res.then((data) => {
+        console.log(data);
+        console.log(data.secure_url);
+      }).catch((err) => {
+        console.log(err);
+      });
+
+
+    }
 
     const setDeviceToken = () => {
       getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
@@ -89,14 +121,7 @@ const SignUpForm = (props) => {
         return false
       }
 
-      let submitPhoto = "";
 
-      if (!photo){
-        submitPhoto = props.children.profilePhoto;
-      }
-      else{
-        submitPhoto = photo;
-      }
 
       var config = {
           method : 'post',
@@ -109,14 +134,16 @@ const SignUpForm = (props) => {
           data :
           {
             username : username,
-            picture : submitPhoto,
             displayName : displayName,
             deviceToken: deviceToken
           }
         };
       axios(config)
       .then(function(response){
-        window.location.href = "./currentChallengePage";
+        let username = response.data;
+        submitPhoto(username);
+        //window.location.href = "./currentChallengePage";
+
       })
       .catch(function(error){
         console.log(error)
