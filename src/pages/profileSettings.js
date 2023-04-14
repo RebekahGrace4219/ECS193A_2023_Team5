@@ -68,6 +68,7 @@ const ProfileSettings = () => {
             <SideBar></SideBar>
         </div>
         <div className="rightSide2Part">
+          <div className = "main">
           <div className = "mainInfo">
             <Header>{{"title": "Profile Settings", "type": "none"}}</Header>
             <Line></Line>
@@ -77,7 +78,7 @@ const ProfileSettings = () => {
             <Line></Line>
             <DeleteSection></DeleteSection>
         </div>
-        </div>
+        </div></div>
     </div>
     );
 }
