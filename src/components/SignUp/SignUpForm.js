@@ -10,15 +10,9 @@ import '../../css/Shared/headerText.css';
 import { getToken} from 'firebase/messaging';
 import {exportMessaging, requestPermission} from "../../firebase";
 
-const cloudinary = require('cloudinary').v2;
 
 
-// Configuration
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
-});
+
 
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
@@ -53,14 +47,7 @@ const SignUpForm = (props) => {
       }
 
 
-      let public_key = username + "_" + "profile_photo";
-      const res = cloudinary.uploader.upload(photoUp, {public_id: public_key})
-      res.then((data) => {
-        console.log(data);
-        console.log(data.secure_url);
-      }).catch((err) => {
-        console.log(err);
-      });
+      return photoUp;
 
 
     }
