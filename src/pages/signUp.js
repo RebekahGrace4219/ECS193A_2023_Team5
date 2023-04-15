@@ -26,6 +26,9 @@ const SignUp = () => {
         })
         .catch(function(error){
             console.log(error)
+            if(error.response.status===400){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
