@@ -99,6 +99,9 @@ const LeagueForm = () => {
           window.location.href = "./socialLeaguePage";
         })
         .catch(function(error){
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
           setSubmitErrorResponse("Could not create League")
           console.log(error)
         });

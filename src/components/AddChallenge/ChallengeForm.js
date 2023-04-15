@@ -192,6 +192,9 @@ const ChallengeForm = () =>{
             setInviteOptions(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error);
             console.log("No response")
         });
@@ -217,6 +220,9 @@ const ChallengeForm = () =>{
             setInviteOptions(array_leagues);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error);
             console.log("No response")
         });
@@ -265,9 +271,12 @@ const ChallengeForm = () =>{
         .then(function(response){
           window.location.href = "./currentChallengePage";
         })
-        .catch(function(err){
+        .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
           setSubmitError("Error in issuing challenge");
-          console.log(err)
+          console.log(error)
         })
 
     }

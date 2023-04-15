@@ -23,6 +23,9 @@ const AcceptChallengeButton = (props) => {
             return response.data;
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }

@@ -27,6 +27,9 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -48,6 +51,9 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
         // setInformation([[{"displayName":"Sent Requests", "username":"Batman", "profilePicture": "https://i.imgur.com/jJaPs4q.png"}]]);
     }
@@ -71,6 +77,9 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
       }
 
@@ -93,6 +102,9 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });        }
 
     function makeFriendObj(input){

@@ -35,7 +35,10 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
-            console.log(error)
+            if(error.response.status===401){
+                console.log("User is not logged in");
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -60,6 +63,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }
@@ -81,6 +87,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 
@@ -103,6 +112,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 
@@ -123,6 +135,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 

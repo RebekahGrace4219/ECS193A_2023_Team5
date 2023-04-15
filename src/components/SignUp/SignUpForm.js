@@ -134,6 +134,9 @@ const SignUpForm = (props) => {
       })
       .catch(function(error){
         console.log(error)
+        if(error.response.status===401){
+          window.location.href = "/loginPage";
+      }
       });
       }
         // validate the pieces information

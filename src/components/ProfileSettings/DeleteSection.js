@@ -24,7 +24,10 @@ const DeleteSection = () => {
           window.location.href = "./";
         })
         .catch(function(error){
-          console.log(error)
+          console.log(error);
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
         });
     }
     return (
