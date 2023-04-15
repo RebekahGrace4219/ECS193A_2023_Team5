@@ -52,9 +52,6 @@ const LeagueBar = (props) => {
         setOnButton("Received");
     }
 
-
-
-
     return (
         <div id = "LeagueBar" className="bar">
             <BarButton function = {setLeague} name = "All"></BarButton>

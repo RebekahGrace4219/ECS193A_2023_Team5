@@ -95,17 +95,17 @@ const SideBar = () => {
             <button id = "sideBarTreadLogo" ><img id = "treadLogoSideBar" onClick={moveToFrontPage} src = "https://i.imgur.com/5SSwq0U.png" alt = "Tread logo"/></button>
             <div id = "sideBarButtons">
                 <div id = "sideBarChallenges">
-                    <button className = "sideBarButtonClass" onClick = {clickChallengeButton}  id = "sideBarButtonChallenges">
+                    <button title = "Challenges" className = "sideBarButtonClass" onClick = {clickChallengeButton}  id = "sideBarButtonChallenges">
                         <img className = "sideBarButtonClassInner" id = "challengeImage" src = "https://i.imgur.com/orph0OI.png" alt = "Button for Challenges"/>
                     </button>
                 </div>
                 <div id = "sideBarSocial">
-                    <button className = "sideBarButtonClass" onClick = {clickSocialButton} id = "sideBarButtonSocial">
+                    <button title = "Social Page" className = "sideBarButtonClass" onClick = {clickSocialButton} id = "sideBarButtonSocial">
                         <img className = "sideBarButtonClassInner" id = "socialImage" src = "https://i.imgur.com/GR3dM2t.png" alt = "Button for Social"/>
                     </button>
                 </div>
                 <div id = "sideBarSettings">
-                    <button className = "sideBarButtonClass" onClick = {clickSettingsButton} id = "sideBarButtonSettings">
+                    <button title = "Profile Settings" className = "sideBarButtonClass" onClick = {clickSettingsButton} id = "sideBarButtonSettings">
                         <img className = "sideBarButtonClassInner" id = "settingsImage" src = "https://i.imgur.com/4XiFFVT.png" alt = "Button for Settings"/>
                     </button>
                 </div>

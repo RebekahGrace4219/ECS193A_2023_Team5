@@ -15,6 +15,7 @@ const Challenge = (props) => {
             </div>
 
             <div className = "rightSide2Part">
+                <div className = "main">
                 <div className = "mainInfo">
                     <div className = "TopInfo">
                         <Header>{{"title":"Challenge", "type":"challenge", "onButton":props.children.type}}</Header>
@@ -23,7 +24,7 @@ const Challenge = (props) => {
                     <div className = "BottomInfo">
                         {(props.children.type === "current") ? <CurrentChallenge></CurrentChallenge> : <WeeklyChallenge></WeeklyChallenge>}
                     </div>
-                </div>
+                </div></div>
             </div>
         </div>
       );

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import CurrentChallengeBar from './CurrentChallegeBar';
 import ChallengeScroll from './ChallengeScroll';
@@ -11,9 +11,17 @@ import AddChallengeButton from './AddChallengeButton';
 const CurrentChallenge = () => {
     const [challengeState, setChallengeState] = useState("issued");
 
-  /*
 
-          */
+    useEffect(
+      () => {
+        if (challengeState === "add") {
+          window.location.href = "/addChallengePage";
+        }
+
+      }, [challengeState]
+    );
+
+
     return (
         <div className = "challengeSection">
           <div id = "TopPart" className="selectButtonHeader">
@@ -24,7 +32,6 @@ const CurrentChallenge = () => {
           {(challengeState === "issued") ? <ChallengeScroll type = "issued" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <></>}
           {(challengeState === "sent") ? <ChallengeScroll type = "sent" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <></>}
           {(challengeState === "received") ? <ChallengeScroll type = "received" ifLeague = {false} leagueID = {""}></ChallengeScroll> : <></>}
-          {(challengeState === "add") ? <AddChallengeButton></AddChallengeButton> : <></>}
           </div>
         </div>
       );
