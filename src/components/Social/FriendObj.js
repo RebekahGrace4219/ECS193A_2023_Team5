@@ -37,6 +37,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -61,6 +64,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -85,6 +91,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
       console.log("Revoke sent request");
     }
@@ -110,6 +119,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -134,6 +146,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -158,6 +173,9 @@ const FriendObj = (props) => {
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
     }
 

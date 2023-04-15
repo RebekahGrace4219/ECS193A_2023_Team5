@@ -28,6 +28,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -50,6 +53,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });     }
 
     function getAdmin(){
@@ -71,6 +77,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
       }
 
@@ -93,6 +102,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
       }
 
@@ -114,6 +126,9 @@ const LeagueScroll = (props) => {
           .catch(function(error){
               console.log(error)
               console.log("No response")
+              if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
           });
       }
 

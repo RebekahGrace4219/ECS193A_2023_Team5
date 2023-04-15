@@ -27,7 +27,10 @@ const MedalsScroll = (props) => {
             setInformationMap(response.data)
         })
         .catch(function(error){
-            console.log(error)
+            console.log(error);
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -50,6 +53,9 @@ const MedalsScroll = (props) => {
         })
         .catch(function(error){
             console.log(error)
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
