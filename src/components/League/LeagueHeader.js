@@ -44,6 +44,9 @@ const LeagueHeader = (props) => {
             setLeagueName(response.data.leagueName);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }
