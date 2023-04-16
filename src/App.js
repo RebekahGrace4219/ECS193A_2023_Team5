@@ -12,6 +12,7 @@ import Social from "./pages/social";
 import Profile from "./pages/profile";
 import League from "./pages/league";
 import TestDiv from "./pages/test";
+import RedirectPage from "./pages/redirectPage";
 import { useEffect } from "react";
 
 import { onForegroundMessage } from "./firebase";
@@ -44,6 +45,8 @@ function App() {
         <Route path = "/profileStatsPage" element = {<Profile>{{"type":"stats"}}</Profile>} />
         <Route path = "/leagueDescriptionPage?" element = {<League>{{"type":"description"}}</League>}/>
         <Route path = "/leagueMemberPage?" element = {<League>{{"type":"member"}}</League>}/>
+        <Route path = "/requestFriend?" element = {<RedirectPage type = "Friend"></RedirectPage>}/>
+        <Route path = "/requestLeague?" element = {<RedirectPage type = "League"></RedirectPage>}/>
       </Routes>
       </Router>
       </div>
