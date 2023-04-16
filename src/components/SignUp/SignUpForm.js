@@ -108,34 +108,41 @@ const SignUpForm = (props) => {
         return false
       }
 
+/*username : username,
+            displayName : displayName,
+            deviceToken: deviceToken*/
+      var formData = new FormData();
+      formData.append("username", username);
+      formData.append("displayName", displayName);
+      formData.append("deviceToken", deviceToken);
+      //formData.append("picture", getBase64(photo));
 
-
+      for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]);
+    }
       var config = {
           method : 'post',
           url : backend_url + 'auth/sign_up',
           headers: {
-            Accept: 'application/json',
+            "Content-Type": "multipart/form-data"
           },
           withCredentials: true,
           credentials: 'include',
-          data :
-          {
-            username : username,
-            displayName : displayName,
-            deviceToken: deviceToken
-          }
+          data: formData
         };
       axios(config)
       .then(function(response){
-        let username = response.data;
-        submitPhoto(username);
+        //let username = response.data;
+        //submitPhoto(username);
         //window.location.href = "./currentChallengePage";
-
+        console.log("Sent Sign up Succesfuly")
       })
       .catch(function(error){
-        console.log(error)
+        console.log("Did not send sign up succesfully", error);
         if(error.response.status===401){
           window.location.href = "/loginPage";
+
+
       }
       });
       }

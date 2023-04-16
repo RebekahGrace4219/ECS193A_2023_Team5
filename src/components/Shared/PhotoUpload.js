@@ -9,11 +9,13 @@ const PhotoUpload = (props) => {
 
     function onImageChange(event) {
         let image = event.target.files[0];
-        let url = URL.createObjectURL(image);
-        document.getElementById("uploadProfilePicture").src = url;
+        console.log(
+            "uploaded image"
+        );
+        document.getElementById("uploadProfilePicture").src = image;
 
-        setImageSrc(url);
-        props.func(url);
+        setImageSrc(image);
+        props.func(image);
     }
 
     return (
