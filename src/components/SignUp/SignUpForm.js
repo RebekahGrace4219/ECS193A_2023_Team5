@@ -118,9 +118,7 @@ const SignUpForm = (props) => {
             };
           axios(config)
           .then(function(response){
-            //let username = response.data;
-            //submitPhoto(username);
-            //window.location.href = "./currentChallengePage";
+            window.location.href = "./currentChallengePage";
             console.log("Sent Sign up Succesfuly")
           })
           .catch(function(error){

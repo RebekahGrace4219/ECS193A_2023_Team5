@@ -142,10 +142,6 @@ const ChallengeScroll = (props) => {
         });
 
     }
-    function getUsername(){
-        //TODO
-        return "Bruce Wayne";
-    }
     function makeIssuedChallengeObj(input){
         return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
     }
