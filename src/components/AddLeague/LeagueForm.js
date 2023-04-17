@@ -77,6 +77,12 @@ const LeagueForm = () => {
           return false;
         }
 
+        var formData = new FormData();
+        formData.append("leagueName", leagueName);
+        formData.append("leagueType", leagueType);
+        formData.append("leagueDescription", leagueDescription);
+        formData.append("leaguePicture", photo);
+
         var config = {
           method : 'post',
           url : backend_url + 'league/create_league',
@@ -85,14 +91,7 @@ const LeagueForm = () => {
           },
           withCredentials: true,
           credentials: 'include',
-          data :
-          {
-            leagueName : leagueName,
-            leagueType : leagueType,
-            leagueDescription : leagueDescription,
-            leaguePicture: photo
-
-          }
+          data : formData
         };
         axios(config)
         .then(function(response){
@@ -115,7 +114,7 @@ const LeagueForm = () => {
 
         <div className="formObj">
             <h2>League Picture</h2>
-            <PhotoUpload defaultImage = {photo} func = {uploadPhoto}></PhotoUpload>
+            <PhotoUpload>{{"default": photo, "func":uploadPhoto}}</PhotoUpload>
         </div>
 
         <div className="formObj">
