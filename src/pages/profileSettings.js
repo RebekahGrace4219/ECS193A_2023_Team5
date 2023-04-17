@@ -5,68 +5,68 @@ import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsFo
 import SensorSection from "../components/ProfileSettings/SensorSection";
 import DeleteSection from "../components/ProfileSettings/DeleteSection";
 import {useState, useEffect} from "react";
-import axios from "axios";
-
+import axios from 'axios';
 import "../css/Shared/page2.css"
-const backend_url = process.env.REACT_APP_PROD_BACKEND
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 const ProfileSettings = () => {
-    const [load, setLoad] = useState(false);
-    const [profilePhoto, setPhoto] = useState("");
-    const [displayName, setDisplayName] = useState("");
+  const [load, setLoad] = useState(false);
+  const [photo, setPhoto] = useState();
+  const [displayName, setDisplayName] = useState("");
 
-    useEffect (
-        () => {
-            if(!load){
-                getPhoto();
-                getDisplayName();
-            }
-        }, [load]
-    );
-
-    function getPhoto(){
-        var config  = {
-          method : 'post',
-          url: backend_url+'auth/get_profile_photo',
-          headers: {
-              Accept: 'application/json',
-            },
-          withCredentials: true,
-          credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            setPhoto(response.data);
-        })
-        .catch(function(error){
-            console.log(error)
-            if(error.response.status===401){
-              window.location.href = "/loginPage";
-          }
-        });
-      }
-
-    function getDisplayName(){
-        // TODO get the display name from the db
-        var config = {
-          method : 'post',
-          url : backend_url + 'user/get_display_name',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include',
-        };
-        axios(config)
-        .then(function(response){
-            setDisplayName(response.data.displayName);
-        })
-        .catch(function(error){
-          console.log(error)
-          if(error.response.status===401){
-            window.location.href = "/loginPage";
+  useEffect (
+    () => {
+        if(!load){
+            getPhoto();
+            getDisplayName();
         }
-        });
-    }
+    }, [load]
+  );
+
+  const createURL = (username) => {
+    return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+  }
+
+  function getDisplayName(){
+    // GET from db
+    var config = {
+      method : 'post',
+      url : backend_url + 'user/get_display_name',
+      headers: {
+        Accept: 'application/json',
+      },
+      withCredentials: true,
+      credentials: 'include',
+    };
+    axios(config)
+    .then(function(response){
+      setDisplayName(response.data.displayName);
+    })
+    .catch(function(error){
+      console.log(error)
+    });
+}
+
+function getPhoto(){
+  var config = {
+    method : 'post',
+    url : backend_url + 'user/get_username',
+    headers: {
+      Accept: 'application/json',
+    },
+    withCredentials: true,
+    credentials: 'include',
+    };
+    axios(config)
+    .then(function(response){
+      setPhoto(createURL(response.data))
+      return response.data;
+    })
+    .catch(function(error){
+      console.log(error)
+    });
+}
+
+
 
     return (
     <div id = "ProfileSettings" className = "Body2Part">
@@ -78,7 +78,7 @@ const ProfileSettings = () => {
           <div className = "mainInfo">
             <Header>{{"title": "Profile Settings", "type": "none"}}</Header>
             <Line></Line>
-            <ProfileSettingsForm>{{"displayName": displayName, "photo":profilePhoto}}</ProfileSettingsForm>
+            <ProfileSettingsForm>{{"photo":photo, "displayName":displayName}}</ProfileSettingsForm>
             <Line></Line>
             <SensorSection></SensorSection>
             <Line></Line>

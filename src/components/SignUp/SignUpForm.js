@@ -10,11 +10,6 @@ import '../../css/Shared/headerText.css';
 import { getToken} from 'firebase/messaging';
 import {exportMessaging, requestPermission} from "../../firebase";
 
-
-
-
-
-
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const SignUpForm = (props) => {
@@ -22,8 +17,8 @@ const SignUpForm = (props) => {
     const [deviceToken, setToken] = useState("");
     const [photo, setPhoto] = useState("");
     const [load] = useState(false);
-    const [displayName, setDisplayName] = useState();
-    const [username, setUsername] = useState();
+    const [displayName, setDisplayName] = useState("");
+    const [username, setUsername] = useState("");
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
     const [usernameErrorResponse, setUsernameErrorResponse] = useState("");
     const [submitErrorResponse, setSubmitErrorResponse] = useState("");
@@ -36,22 +31,14 @@ const SignUpForm = (props) => {
       }, [load]
     );
 
-    const submitPhoto = (username) => {
-
-      let photoUp = "";
-      if (!photo){
-        photoUp = props.children.profilePhoto;
+    const determinePhoto = () => {
+      if (photo === ""){
+        return props.children.profilePhoto;
       }
       else{
-        photoUp = photo;
+        return photo;
       }
-
-
-      return photoUp;
-
-
     }
-
     const setDeviceToken = () => {
       getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
         if (currentToken) {
@@ -103,48 +90,48 @@ const SignUpForm = (props) => {
     }
 
     function submitSignUp(){
+
       if (displayErrorResponse !== "" || usernameErrorResponse !== ""){
         setSubmitErrorResponse("Correct the highlighted fields to proceed")
         return false
       }
 
+      let submitPhoto = determinePhoto();
 
+      var formData = new FormData();
+      formData.append("username", username);
+      formData.append("displayName", displayName);
+      formData.append("deviceToken", deviceToken);
+      formData.append("picture", submitPhoto);
+
+      console.log(submitPhoto);
 
       var config = {
-          method : 'post',
-          url : backend_url + 'auth/sign_up',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include',
-          data :
-          {
-            username : username,
-            displayName : displayName,
-            deviceToken: deviceToken
-          }
-        };
-      axios(config)
-      .then(function(response){
-        let username = response.data;
-        submitPhoto(username);
-        //window.location.href = "./currentChallengePage";
+              method : 'post',
+              url : backend_url + 'auth/sign_up',
+              headers: {
+                "Content-Type": "multipart/form-data"
+              },
+              withCredentials: true,
+              credentials: 'include',
+              data: formData
+            };
+          axios(config)
+          .then(function(response){
+            window.location.href = "./currentChallengePage";
+            console.log("Sent Sign up Succesfuly")
+          })
+          .catch(function(error){
+            console.log("Did not send sign up succesfully", error);
+            if(error.response.status===401){
+              window.location.href = "/loginPage";
 
-      })
-      .catch(function(error){
-        console.log(error)
-        if(error.response.status===401){
-          window.location.href = "/loginPage";
+
+          }
+          });
       }
-      });
-      }
-        // validate the pieces information
-        // Send to post
-            // If fail, up date the failure reason on the three forms for failure
-            // If succeed, move away from page
+
     function uploadPhoto(photo){
-        console.log(photo);
         setPhoto(photo);
     }
 
@@ -157,7 +144,7 @@ const SignUpForm = (props) => {
 
             <div className="formObj">
                 <h1>Profile Picture</h1>
-                <PhotoUpload defaultImage = {props.children.profilePhoto} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload>{{"default":props.children.profilePhoto, "func":uploadPhoto}}</PhotoUpload>
             </div>
 
             <div className="formObj">

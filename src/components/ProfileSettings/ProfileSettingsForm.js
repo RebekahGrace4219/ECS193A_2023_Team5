@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import PhotoUpload from '../Shared/PhotoUpload';
 
@@ -10,15 +10,17 @@ import "../../css/Shared/form.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileSettingsForm = (props) => {
-
+  console.log(props.children.photo);
+  console.log(props.children.displayName);
     const [photo, setPhoto] = useState(props.children.photo);
     const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
-    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
-    function uploadPhoto(photo){
-        setPhoto(photo);
+    function uploadPhoto(submitPhoto){
+        setPhoto(submitPhoto);
     }
+
+
 
     function validateDisplay(event){
       event.preventDefault();
@@ -38,15 +40,36 @@ const ProfileSettingsForm = (props) => {
         return true;
     }
 
-    function submitProfileSettings(){
-        //verify stuff, if bad inputs or bad response, trigger errors and if succesful, stay on page
+    function submitPhoto(){
+      var formData = new FormData();
+      formData.append("photo", photo);
+      var config = {
+        method : 'post',
+        url : backend_url + 'user/update_picture',
+        headers: {
+          Accept: 'application/json',
+        },
+        withCredentials: true,
+        credentials: 'include',
+        data : formData
+      };
+    axios(config)
+    .then(function(response){
+    })
+    .catch(function(error){
+      console.log(error)
+      if(error.response.status===401){
+        window.location.href = "/loginPage";
+    }
+    });
+    }
+    function submitDisplayName(){
         if (displayErrorResponse !== ""){
-          setSubmitErrorResponse("Correct Highlighted fields to proceed");
-          return false;
+          return;
         }
         var config = {
           method : 'post',
-          url : backend_url + 'user/update_profile_info',
+          url : backend_url + 'user/update_display_name',
           headers: {
             Accept: 'application/json',
           },
@@ -54,13 +77,12 @@ const ProfileSettingsForm = (props) => {
           credentials: 'include',
           data :
           {
-            picture : photo,
             displayName :displayName
           }
         };
       axios(config)
       .then(function(response){
-        window.location.href = "./profileStatsPage";
+        setDisplayErrorResponse("succesfully updated display name");
       })
       .catch(function(error){
         console.log(error)
@@ -78,19 +100,16 @@ const ProfileSettingsForm = (props) => {
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload defaultImage = {props.children.photo} func = {uploadPhoto}></PhotoUpload>
+                <PhotoUpload>{{"default":props.children.photo, "func":uploadPhoto}}</PhotoUpload>
+                <button className="submitButton" onClick = {submitPhoto}><p className = "submitButtonText">Submit</p></button>
             </div>
 
             <div className="formObj">
                 <h2>Display Name</h2>
                 <p className="formObjInner">This is what others will see</p>
                 <input id = "profileSettingsTextInput" className="formTextInput" type = "text" placeholder={props.children.displayName} onChange = {validateDisplay} onSubmit = {stopSubmit}/>
+                <button className="submitButton" onClick = {submitDisplayName}><p className = "submitButtonText">Submit</p></button>
                 <p className = "errorBox">{displayErrorResponse}</p>
-            </div>
-
-            <div className = "formObj">
-                <button className="submitButton" onClick = {submitProfileSettings}><p className = "submitButtonText">Submit</p></button>
-                <p className = "errorBox">{submitErrorResponse}</p>
             </div>
     </div>
     );
