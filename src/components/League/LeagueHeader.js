@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
-
+import QRcode from "qrcode";
 import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
 
@@ -14,18 +14,31 @@ const LeagueHeader = (props) => {
     const [numberChallenges, setNumberChallenges] = useState();
     const [leagueDescription, setLeagueDescription] = useState();
     const [leaguePhoto, setLeaguePhoto] = useState();
+    const [qrCode, setQRCode] = useState("");
 
     useEffect (
         () => {
             if(!loaded){
+                generateQRCode();
                 getLeagueName();
                 getNumberChallenges();
                 getLeagueDescription();
                 getLeaguePhoto();
                 getNumberMembers();
+
             }
         }, [loaded]
     );
+
+    const generateQRCode = () => {
+        let url = "https://tread.run/requestLeague?" + id;
+        QRcode.toDataURL(url, {"color":{"light":"#F1EEEA"}}, (err, url) => {
+            if (err) return console.error(err)
+
+            setQRCode(url);
+        })
+    }
+
     function getLeagueName(){
         var config  = {
           method : 'post',
@@ -167,7 +180,7 @@ const LeagueHeader = (props) => {
                 </div>
                 <div className='leagueMainRight'>
                     <h2>Add Code</h2>
-                    <img src = "https://i.imgur.com/rpi5EL2.png" alt = "qrcode"/>
+                    <img src = {qrCode} alt = "qrcode"/>
                 </div>
             </div>
         </div>

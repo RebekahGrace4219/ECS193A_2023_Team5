@@ -16,6 +16,7 @@ const RedirectPage = (props) => {
 
 
     async function sendFriendRequest(requestID){
+        console.log("sent friend request");
         var config = {
             method : 'post',
             url : backend_url + 'friend_list/send_friend_request',
@@ -31,18 +32,49 @@ const RedirectPage = (props) => {
           };
           axios(config)
           .then(function(response) {
+            console.log("sent request succesffully");
             window.location.href = "/socialFriendPage";
           })
           .catch(function(error){
+            console.log("could not send request");
               console.log(error)
               console.log("Not Logged in");
               if(error.response.status===401){
                 window.location.href = "/loginPage";
             }
+            else{
+                window.location.href = "./currentChallengePage";
+            }
           });
     }
 
-    const sendLeagueRequest = () => {
+    const sendLeagueRequest = (requestID) => {
+
+        var config  = {
+            method : 'post',
+            url: backend_url+'league/user_request_to_join',
+            headers: {
+                Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: requestID
+            }
+        };
+        axios(config)
+        .then(function(response) {
+            window.location.href = "./socialLeaguePage";
+        })
+        .catch(function(error){
+            console.log(error)
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
+            else{
+                window.location.href = "./currentChallengePage";
+            }
+        });
 
     }
 
@@ -50,27 +82,25 @@ const RedirectPage = (props) => {
         // Grab the url
         // parse out the instruction
         // send the right post request
-
+        console.log("Followed request");
         let requestID = processURL();
-
-        /*if ("type" === "friend"){
+        console.log("Requested id is , ", requestID);
+        if (type === "Friend"){
             sendFriendRequest(requestID);
-        } else if ("type" === "league"){
+        } else if (type === "League"){
             sendLeagueRequest(requestID);
-        }*/
+        }
 
     }
     useEffect (
         () => {
             if(!load){
                 followRequest();
-
             }
         }, [load]
     );
 
-    return (<div>
-    </div>);
+    return (<div><h1>Request sending...</h1></div>);
 
 }
 
