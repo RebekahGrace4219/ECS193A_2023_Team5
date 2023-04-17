@@ -96,7 +96,6 @@ const RedirectPage = (props) => {
         () => {
             if(!load){
                 followRequest();
-
             }
         }, [load]
     );
