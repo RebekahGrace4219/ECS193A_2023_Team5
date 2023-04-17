@@ -2,13 +2,23 @@ import "../css/SignUp/signUp.css";
 
 import SignUpSideBar from "../components/SignUp/SignUpSideBar";
 import SignUpForm from "../components/SignUp/SignUpForm";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 
 // const backend_url = process.env.REACT_APP_PROD_BACKEND
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SignUp = () => {
-    const [profilePhoto,setPhoto] = useState(getProfilePhoto());
+    const [profilePhoto,setPhoto] = useState("");
+    const [load, setLoad] = useState(false);
+
+    useEffect (
+        () => {
+            if(!load){
+                getProfilePhoto();
+            }
+        }, [load]
+      );
+
     function getProfilePhoto(){
         var config  = {
             method : 'post',
@@ -22,7 +32,6 @@ const SignUp = () => {
         axios(config)
         .then(function(response) {
             setPhoto(response.data);
-            return response.data;
         })
         .catch(function(error){
             console.log(error)
@@ -36,6 +45,7 @@ const SignUp = () => {
         <div id = "SignUp">
             <SignUpSideBar id = "SignUpBar"/>
             <SignUpForm id = "SignUpForm">{{"profilePhoto":profilePhoto}}</SignUpForm>
+
         </div>
     );
 }
