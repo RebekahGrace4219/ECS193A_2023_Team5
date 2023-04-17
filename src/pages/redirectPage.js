@@ -100,8 +100,7 @@ const RedirectPage = (props) => {
         }, [load]
     );
 
-    return (<div><h1>If you can see this you have a request that was incorrectly sent!</h1>
-    </div>);
+    return (<div><h1>Request sending...</h1></div>);
 
 }
 
