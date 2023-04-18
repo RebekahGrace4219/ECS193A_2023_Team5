@@ -2,6 +2,7 @@ import "../../css/Shared/suggestionBox.css";
 import axios from 'axios';
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SuggestedLeagueObj = (props) => {
+
     let leagueID = props.leagueID;
 
     const requestJoinLeague = () => {
