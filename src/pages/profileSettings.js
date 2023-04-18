@@ -58,7 +58,7 @@ function getPhoto(){
     };
     axios(config)
     .then(function(response){
-      setPhoto(createURL(response.data))
+      setPhoto(createURL(response.data));
       return response.data;
     })
     .catch(function(error){
