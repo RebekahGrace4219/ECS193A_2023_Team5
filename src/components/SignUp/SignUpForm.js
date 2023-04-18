@@ -104,7 +104,7 @@ const SignUpForm = (props) => {
       formData.append("deviceToken", deviceToken);
       formData.append("picture", submitPhoto);
 
-      console.log(submitPhoto);
+      console.log("submitPhoto", submitPhoto);
 
       var config = {
               method : 'post',
