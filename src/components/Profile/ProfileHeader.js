@@ -1,7 +1,9 @@
 import {useState, useEffect} from 'react';
 import QRcode from "qrcode";
 import axios from "axios";
-
+const createURL = (username) => {
+    return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+}
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileHeader = () => {
@@ -45,6 +47,7 @@ const ProfileHeader = () => {
         axios(config)
         .then(function(response){
           setUsername(response.data)
+          setProfilePhoto(createURL(response.data));
           return response.data;
         })
         .catch(function(error){
@@ -86,7 +89,7 @@ const ProfileHeader = () => {
     return(
         <div>
             <div className = "profilePhoto">
-                <img></img>
+                <img src = {profilePhoto}></img>
             </div>
             <div className = "profileDescription">
                 <p>{username}</p>
