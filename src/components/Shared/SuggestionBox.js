@@ -27,6 +27,7 @@ const SuggestionBox= (props) => {
         };
         axios(config)
         .then(function(response){
+            console.log("Recommended friends is, ", response.data);
             setInformationMap(response.data)
         })
         .catch(function(error){
@@ -105,7 +106,7 @@ const SuggestionBox= (props) => {
                 <div>
                     <p className = "SuggestionBoxTitle">Suggested Friends</p>
                     <div>
-                        {informationMap.map((info) => {return (<SuggestedFriendObj username = {info["username"]} mutualFriends = {info["mutualFriendCount"]} picture = {info["picture"]}/>);})}
+                        {informationMap.map((info) => {return (<SuggestedFriendObj username = {info[0]} mutualFriends = {info[1]}/>);})}
                     </div>
                 </div>
                 :

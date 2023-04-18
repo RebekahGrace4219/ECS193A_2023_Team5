@@ -9,8 +9,8 @@ import '../../css/Shared/button.css';
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 
-const LeagueForm = () => {
-    const [photo, setPhoto] = useState("https://i.imgur.com/sXwXq45.png");
+const LeagueForm = (props) => {
+    const [photo, setPhoto] = useState("");
     const [leagueName, setLeagueName] = useState("");
     const [leagueDescription, setLeagueDescription] = useState("");
     const [leagueType, setLeagueType] = useState("private");
@@ -19,8 +19,8 @@ const LeagueForm = () => {
     const [leagueDescriptionErrorResponse, setLeagueDescriptionErrorResponse] = useState("");
     const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
-    function uploadPhoto(){
-        setPhoto(photo);
+    function uploadPhoto(photo){
+      setPhoto(photo);
     }
 
     function changeLeagueSetting(event){
@@ -77,12 +77,16 @@ const LeagueForm = () => {
           return false;
         }
 
+        let submitPhoto = photo;
+        if (photo === ""){
+          submitPhoto = "https://i.imgur.com/sXwXq45.png";
+        }
         var formData = new FormData();
         formData.append("leagueName", leagueName);
         formData.append("leagueType", leagueType);
         formData.append("leagueDescription", leagueDescription);
-        formData.append("leaguePicture", photo);
-
+        formData.append("leaguePicture", submitPhoto);
+        console.log("Submit photo", submitPhoto);
         var config = {
           method : 'post',
           url : backend_url + 'league/create_league',
@@ -114,7 +118,7 @@ const LeagueForm = () => {
 
         <div className="formObj">
             <h2>League Picture</h2>
-            <PhotoUpload>{{"default": photo, "func":uploadPhoto}}</PhotoUpload>
+            <PhotoUpload>{{"default": "https://i.imgur.com/sXwXq45.png", "func":uploadPhoto}}</PhotoUpload>
         </div>
 
         <div className="formObj">
