@@ -24,7 +24,6 @@ const UserSettingsButton = () => {
         if(!load){
             setDeviceToken();
             getUsername();
-            getProfilePhoto();
             getDisplayName();
         }
     }, [load]
@@ -53,6 +52,11 @@ const UserSettingsButton = () => {
           console.log(error)
           console.log("No response")
       });
+    }
+
+
+    const createURL = (username) => {
+      return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
     }
 
     function stopLogoutDisplay(){
@@ -117,7 +121,8 @@ const UserSettingsButton = () => {
       };
       axios(config)
       .then(function(response){
-        setUsername(response.data)
+        setUsername(response.data);
+        setPhoto(createURL(response.data));
         return response.data;
       })
       .catch(function(error){
@@ -125,25 +130,7 @@ const UserSettingsButton = () => {
       });
   }
 
-  function getProfilePhoto(){
-      var config  = {
-        method : 'post',
-        url: backend_url+'auth/get_profile_photo',
-        headers: {
-            Accept: 'application/json',
-          },
-        withCredentials: true,
-        credentials: 'include'
-      };
-      axios(config)
-      .then(function(response) {
-          setPhoto(response.data)
-          return response.data;
-      })
-      .catch(function(error){
-          console.log(error)
-      });
-    }
+
 
     function movePage(event){
         setDecisionState(event.target.value);

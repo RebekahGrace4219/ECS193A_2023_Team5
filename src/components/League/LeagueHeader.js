@@ -39,6 +39,10 @@ const LeagueHeader = (props) => {
         })
     }
 
+    const createLeagueURL = (id) => {
+        return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/leaguePicture/"+id + ".png";
+    }
+
     function getLeagueName(){
         var config  = {
           method : 'post',
@@ -110,27 +114,7 @@ const LeagueHeader = (props) => {
     }
 
     function getLeaguePhoto(){
-        var config  = {
-            method : 'post',
-            url: backend_url+'league/get_league_picture',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include',
-            data : {
-              leagueID: id
-            }
-          };
-          axios(config)
-          .then(function(response) {
-
-
-              setLeaguePhoto(response.data.leaguePicture);
-          })
-          .catch(function(error){
-              console.log(error)
-          });
+        setLeaguePhoto(createLeagueURL(id));
     }
 
     function getNumberMembers(){

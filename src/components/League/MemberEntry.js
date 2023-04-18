@@ -4,6 +4,9 @@ import axios from 'axios';
 import "../../css/League/member.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
+const createURL = (username) => {
+  return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+}
 
 const MemberEntry = (props) => {
     const [selectShow, setSelectShow] = useState();
@@ -333,7 +336,7 @@ const MemberEntry = (props) => {
         <div className = "memberEntry">
             <div className = "memberEntryLeft">
                 <div>
-                    <img className = "memberPicture" src = {props.children.picture} />
+                    <img className = "memberPicture" src = {createURL(props.children.username)} />
                 </div>
                 <div class = "memberNames">
                     <p className = "memberDisplayName memberEntryText">{props.children.displayName}</p>

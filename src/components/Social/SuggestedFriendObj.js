@@ -1,6 +1,10 @@
 import "../../css/Shared/suggestionBox.css";
 import axios from "axios";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
+const createURL = (username) => {
+  return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+}
+
 const SuggestedFriendObj = (props) => {
     async function sendFriendRequest(){
 
@@ -32,7 +36,7 @@ const SuggestedFriendObj = (props) => {
     return (
         <div className="suggestionObj">
             <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {props.picture}/>
+                <img className = "suggestionImage" src = {createURL(props.username)}/>
             </div>
             <div className = "suggestionWritingSection">
                 <div  className = "suggestionHeaderStyle">{props.username}</div>

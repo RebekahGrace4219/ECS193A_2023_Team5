@@ -100,7 +100,7 @@ const IssuedChallengeObj = (props) => {
     <div id = "issuedChallengeObj" className = "completeChallengeBox">
         <div className = "challengeBox">
         <div className="photoDiv">
-        <PhotoDisplay photos = {props.children.pictures}></PhotoDisplay><BoxLine></BoxLine>
+        <PhotoDisplay photos = {props.children.participants}></PhotoDisplay><BoxLine></BoxLine>
         </div>
         <div className = "challengeMiddle">
             <div className = "challengeInnerMiddle">

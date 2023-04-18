@@ -1,6 +1,10 @@
 import ProgressBar from "./ProgressBar";
 import "../../css/Shared/leaderboard.css";
 
+const createURL = (username) => {
+    return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+}
+
 const LeaderboardEntry = (props) => {
     return (
     <div id = "LeaderboardEntry">
@@ -11,7 +15,7 @@ const LeaderboardEntry = (props) => {
             {(props.children.level !== 1 && props.children.level !== 2 && props.children.level !== 3) ? <p>{props.children.level}</p>: <></>}
         </div>
         <div className = "leaderboardRightSide">
-            <img className = "leaderboardPhoto firstDiv" src={props.children.photo}/>
+            <img className = "leaderboardPhoto firstDiv" src={createURL(props.children.name)}/>
             <p className="leaderboardText secondDiv">{props.children.name}</p>
             <div className = "thirdDiv">
                 <ProgressBar>{{"completed":props.children.complete}}</ProgressBar>

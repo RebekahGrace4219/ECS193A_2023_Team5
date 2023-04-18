@@ -19,6 +19,10 @@ const LeagueObj = (props) => {
         setSelectShow(!selectShow);
     }
 
+    const createLeagueURL = (id) => {
+        return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/leaguePicture/"+id + ".png";
+    }
+
     function leave(){
         var config = {
             method : 'post',
@@ -197,7 +201,7 @@ const LeagueObj = (props) => {
         <div id = "LeagueObj" className = "displayObj">
             <div className = "objSection">
                 <button className = "objButton" onClick = {moveLeaguePage}>
-                <img className = "objProfilePhoto" src = {props.children.leaguePicture}/>
+                <img className = "objProfilePhoto" src = {createLeagueURL(id)}/>
                 </button>
             </div>
             <div className = "objSection objWritingSection">

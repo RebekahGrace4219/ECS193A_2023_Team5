@@ -42,7 +42,7 @@ const ProfileSettingsForm = (props) => {
 
     function submitPhoto(){
       var formData = new FormData();
-      formData.append("photo", photo);
+      formData.append("picture", photo);
       var config = {
         method : 'post',
         url : backend_url + 'user/update_picture',
@@ -55,6 +55,7 @@ const ProfileSettingsForm = (props) => {
       };
     axios(config)
     .then(function(response){
+      console.log("succesfully uploaded photo");
     })
     .catch(function(error){
       console.log(error)

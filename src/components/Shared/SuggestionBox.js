@@ -122,17 +122,6 @@ const SuggestionBox= (props) => {
                 :
                 <></>
             }
-            {
-                (informationType === "medal") ?
-                <div>
-                    <p className = "SuggestionBoxTitle">Recent Medals</p>
-                    <div>
-                        {informationMap.map((info) => {return (<RecentMedalObj name = {info["Name"]}></RecentMedalObj>);})}
-                    </div>
-                </div>
-                :
-                <></>
-            }
 
         </div>
     );
