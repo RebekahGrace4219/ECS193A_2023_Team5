@@ -271,7 +271,7 @@ const StatsSection = () => {
             return;
         }
         let dataList = [];
-        let firstDate = Date.parse(exerciseLog[exerciseLog.length-1].loggedDate);
+        let firstDate = Date.parse(exerciseLog[0].loggedDate);
 
 
         labels.forEach((day) => {
@@ -308,7 +308,7 @@ const StatsSection = () => {
     }
 
     const  calculateExerciseDays = (exerciseLog) => {
-        let firstDay = calculateFirstDay(exerciseLog[exerciseLog.length-1]);
+        let firstDay = calculateFirstDay(exerciseLog[0]);
         let today = Date.now();
 
         let dayLabels = [];
