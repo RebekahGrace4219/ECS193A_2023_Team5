@@ -9,6 +9,9 @@ class ExerciseLog{
         this.convertedAmount = hashMap.exercise.convertedAmount;
         this.postedDate = hashMap.postedDate;
         this.unitType = hashMap.exercise.unitType;
+        this.day = this.loggedDate.split("T")[0];
+        this.month = this.loggedDate.substring(0,7);
+        this.year = this.loggedDate.substring(0,4);
     }
 }
 
