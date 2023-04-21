@@ -22,7 +22,7 @@ const SignUp = () => {
     function getProfilePhoto(){
         var config  = {
             method : 'post',
-            url: backend_url+'auth/get_profile_photo',
+            url: backend_url+'sign_up/get_profile_photo',
             headers: {
                 Accept: 'application/json',
               },
