@@ -108,7 +108,7 @@ const SignUpForm = (props) => {
 
       var config = {
               method : 'post',
-              url : backend_url + 'auth/sign_up',
+              url : backend_url + 'sign_up/sign_up',
               headers: {
                 "Content-Type": "multipart/form-data"
               },

@@ -1,10 +1,13 @@
 import SideBar from '../components/Shared/SideBar';
 import Header from '../components/Shared/Header';
 import Line from "../components/Shared/Line";
-import StatsSection from '../components/Profile/StatsSection';
+import StatsExerciseSection from '../components/Profile/StatsExerciseSection';
 import MedalsSection from '../components/Profile/MedalsSection';
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import '../css/Shared/page2.css';
+import StatsChallengeSection from '../components/Profile/StatsChallengeSection';
+import StatsCalculatorSection from '../components/Profile/StatsCalculatorSection';
+import StatsDownloadSection from '../components/Profile/StatsDownloadSection';
 
 const Profile = (props) => {
     return (
@@ -20,7 +23,15 @@ const Profile = (props) => {
                     <Line/>
                     {
                         (props.children.type === "stats") ?
-                        <StatsSection/>
+                        <div>
+                        <StatsExerciseSection/>
+                        <Line></Line>
+                        <StatsChallengeSection/>
+                        <Line></Line>
+                        <StatsCalculatorSection/>
+                        <Line></Line>
+                        <StatsDownloadSection/>
+                        </div>
                         :
                         <MedalsSection/>
                     }

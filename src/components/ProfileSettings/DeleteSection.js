@@ -12,7 +12,7 @@ const DeleteSection = () => {
         //TODO: send request to delete user account
         var config = {
           method : 'delete',
-          url : backend_url + 'user/delete_account',
+          url : backend_url + 'delete_user',
           headers: {
             Accept: 'application/json',
           },

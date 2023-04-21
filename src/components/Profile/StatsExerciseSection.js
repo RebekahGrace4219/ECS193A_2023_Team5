@@ -23,140 +23,9 @@ ChartJS.register(
   );
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
-    export const options = {
-        responsive: true,
-        plugins: {
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
-        },
-    };
-    /*const [load, setLoad] = useState(false);
-    const [exerciseLog, setExerciseLog] = useState([]);
-    const [reducedExerciseLog, setReducedExerciseLog] = useState({});
-    const [exerciseList, setExerciseList] = useState([]);
-    const [challengeLog, setChallengeLog] = useState([]);
-    const [unitOptions, setUnitOptions] = useState([]);
-    const [timeSlice, setTimeSlice] = useState([]);
-
-    useEffect(() => {
-        if(!load){
-            requestChallenges();
-            requestExercises();
-        }
-    }, [load]);
-
-    const setDefaultOptions = (reducedExerciseList) => {
-        let list = Object.keys(reducedExerciseList);
-        setExerciseList(list);
-        setUnitOptions(Array.from(reducedExerciseLog[list[0]]))
-    }
-    const reduceExercises = (exerciseList) => {
-        console.log(exerciseList);
-        let reducedExerciseList =  {}
-
-        exerciseList.forEach((newItem) => {
-            if (!(newItem.exercise.exerciseName in reducedExerciseList)){
-                // Add the exercise Info
-                reducedExerciseList[newItem.exercise.exerciseName] = new Set();
-            }
-            reducedExerciseList[newItem.exercise.exerciseName].add(newItem.exercise.unitType);
-        });
-
-        setReducedExerciseLog(reducedExerciseList);
-        setDefaultOptions(reducedExerciseList);
-
-    }
-
-    const requestExercises = () => {
-        var config = {
-            method : 'post',
-            url : backend_url + 'stats/get_exercise_log',
-            headers: {
-              Accept: 'application/json',
-            },
-            withCredentials: true,
-            credentials: 'include'
-          };
-          axios(config)
-          .then(function(response){
-            console.log("start in exercises");
-            setExerciseLog(response.data.map((item) => {return new ExerciseLog(item)}));
-            console.log("set exercise log");
-            reduceExercises(response.data);
-            console.log("finished exercies");
-          })
-          .catch(function(error){
-            console.log("error");
-            console.log(error);
-            if(error.response.status===401){
-              window.location.href = "/loginPage";
-          }
-          });
-
-    }
-
-    const requestChallenges = () => {
-        var config = {
-            method : 'post',
-            url : backend_url + 'stats/get_past_challenges',
-            headers: {
-              Accept: 'application/json',
-            },
-            withCredentials: true,
-            credentials: 'include'
-          };
-          axios(config)
-          .then(function(response){
-            setChallengeLog(response.data.map((item) => {return new Challenge(item)}));
-
-          })
-          .catch(function(error){
-            if(error.response.status===401){
-              window.location.href = "/loginPage";
-          }
-          });
-    }
 
 
-    const updateOptions = (event) => {
-        let value = event.target.value;
-        setUnitOptions(Array.from(reducedExerciseLog[value]));
-
-        updateGraph();
-
-    }
-
-    const updateGraph = () => {
-
-    }
-
-    const changeTimeSlice = (event) =>{
-        setTimeSlice(event.target.value);
-    }
-    return(
-        <div>
-            <select onChange = {updateOptions}>
-                <option value = "Exercise">Exercise</option>
-                {exerciseList.map((item) => {return <option value = {item}>{item}</option>})}
-            </select>
-
-            <select onChange = {updateGraph}>
-                <option value = "Unit">Unit</option>
-                {unitOptions.map((item) => {return <option value = {item}>{item}</option>})}
-            </select>
-
-            <select onChange = {changeTimeSlice}>
-                <option value = "Time">Time</option>
-                <option value = "Day">Day</option>
-                <option value = "Month">Month</option>
-                <option value = "Year">Year</option>
-            </select>
-        </div>
-    );*/
-
-const StatsSection = () => {
+const StatsExerciseSection = () => {
     const [load, setLoad] = useState(false);
     const [graphChange, setGraphChange] = useState(false);
 
@@ -167,7 +36,6 @@ const StatsSection = () => {
     const [selectedExerciseName, setSelectedExerciseName] = useState("");
     const [selectedExerciseUnit, setSelectedExerciseUnit] = useState("m");
     const [selectedExerciseUnitType, setSelectedExerciseUnitType] = useState("distance");
-    const [selectedExerciseTimeSlice, setSelectedExerciseTimeSlice] = useState("d");
 
     const [data, setData] = useState([]);
     const [config, setConfig] = useState(
@@ -271,7 +139,7 @@ const StatsSection = () => {
             return;
         }
         let dataList = [];
-        let firstDate = Date.parse(exerciseLog[exerciseLog.length-1].loggedDate);
+        let firstDate = Date.parse(exerciseLog[0].loggedDate);
 
 
         labels.forEach((day) => {
@@ -308,7 +176,7 @@ const StatsSection = () => {
     }
 
     const  calculateExerciseDays = (exerciseLog) => {
-        let firstDay = calculateFirstDay(exerciseLog[exerciseLog.length-1]);
+        let firstDay = calculateFirstDay(exerciseLog[0]);
         let today = Date.now();
 
         let dayLabels = [];
@@ -359,6 +227,7 @@ const StatsSection = () => {
 
     }
 
+
     const changeUnit = (event) => {
         setSelectedExerciseUnit(event.target.value);
     }
@@ -394,4 +263,4 @@ const StatsSection = () => {
         );
 }
 
-export default StatsSection;
+export default StatsExerciseSection;
