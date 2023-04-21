@@ -1,5 +1,5 @@
 const StatsChallengeSection = () => {
-    const [load, setLoad] = useState(false);
+  /*  const [load, setLoad] = useState(false);
 
     const [labels, setLabels] = useState([]);
     const [challengeLog, setChallengeLogs] = useState([]);
@@ -68,11 +68,11 @@ const StatsChallengeSection = () => {
           });
     }
 
-
+*/
 
     return (
     <div>
-
+      Challenge Graph in Progress
     </div>
     )
 }

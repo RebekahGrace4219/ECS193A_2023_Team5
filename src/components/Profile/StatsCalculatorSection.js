@@ -1,6 +1,6 @@
 const StatsCalculatorSection = () => {
     return (<div>
-        Calculator
+        Calculator Section in Progress
     </div>)
 }
 
