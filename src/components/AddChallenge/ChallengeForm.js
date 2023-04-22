@@ -103,11 +103,13 @@ const ChallengeForm = () =>{
     const [specifyError, setSpecifyError] = useState("");
     const [unit, setUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     const [receiverGroup, setReceiverGroup] = useState("self");
-    const [receiver, setReceiver] = useState();
+    const [receiver, setReceiver] = useState("self");
     const [inviteOptions, setInviteOptions] = useState([]);
+    const [startDateError, setStartDateError] = useState("");
+    const [endDateError, setEndDateError] = useState("");
     const [submitError, setSubmitError] = useState("");
     /***/
 
@@ -118,6 +120,9 @@ const ChallengeForm = () =>{
             setSport(event.target.value);
             setSpecifyError("")
         }
+        else{
+            setSport("");
+        }
     }
 
     function selfSpecifyChange(event){
@@ -125,6 +130,7 @@ const ChallengeForm = () =>{
 
         if (selfEntry.length === 0 || selfEntry.length > 32){
             setSpecifyError("The sport object should be 1-32 characters");
+            setSport("");
             return false;
         }
         setSpecifyError("");
@@ -143,11 +149,13 @@ const ChallengeForm = () =>{
     }
 
     function endDateChange(event){
+        if (startDate > event.target.valueAsNumber){
+            setEndDateError("Cannot have end date before start date.")
+        }
         setEndDate(event.target.valueAsNumber);
     }
 
     function receiverChange(event){
-        console.log(event);
         setReceiver(event.target.value);
     }
 
@@ -230,26 +238,43 @@ const ChallengeForm = () =>{
 
     function submitChallenge(){
         //TODO
-        if (specifyError !== ""){
-          setSubmitError("Correct the highlighted fields to proceed")
-          return false;
+        if (receiverGroup !== "self" && receiver === ""){
+            setSubmitError("No recepient specified");
+            setSpecifyError("No recipient specified");
+            return false;
+        }
+        else if (startDate === ""){
+            setSubmitError("No start date specified");
+            return false;
+        }
+        else if(endDate === ""){
+            setSubmitError("No end date specified");
+            return false;
+        }
+        else if(endDate < startDate){
+            setSubmitError("Cannot have start date after end date");
+            setEndDateError("Cannot have start date after end date");
+            return false;
+        }
+        else if(amount <= 0){
+            setSubmitError("The amount must be greater than zero.");
+            return false;
+        }
+        else if(sport === ""){
+            setSubmitError("A sport must be specified");
+            return false;
+        }
+        else{
+            setSubmitError("");
         }
 
-        var recipient = ""
-        recipient = receiver
+
+        let recipient = receiver
         if (receiverGroup === "league"){
           recipient = receiver.split('-')[1].trim();
         }
-
-        console.log(      {
-            receivedUser : recipient,
-            issueDate : startDate,
-            dueDate : endDate,
-            unit : unit,
-            amount : amount,
-            exerciseName : sport,
-          });
-        var config ={
+        console.log(recipient, receiverGroup);
+        /*var config ={
           method : 'post',
           url : backend_url+"challenges/add_"+receiverGroup+"_challenge",
           headers: {
@@ -277,7 +302,7 @@ const ChallengeForm = () =>{
             }
           setSubmitError("Error in issuing challenge");
           console.log(error)
-        })
+        })*/
 
     }
 
@@ -321,7 +346,7 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">How much?</p>
                 <div className = "formObjInner">
-                    <input className = "formTextInput" type = "number" onChange = {amountChange}/>
+                    <input className = "formTextInput" placeholder = "0" type = "number" onChange = {amountChange}/>
                     <select className = "formSelect" onChange = {unitChange}>
                         <option value = "ct">ct</option>
                         <option value = "m">m</option>
@@ -338,11 +363,13 @@ const ChallengeForm = () =>{
             <div className = "formObj">
                 <p className = "formObjInner">Start Date</p>
                 <input id="issueDate" className = "formDateInput" type = "date" min = {getToday()} onChange = {startDateChange}></input>
+                <p className = "errorBox">{startDateError}</p>
             </div>
 
             <div className = "formObj">
                 <p className = "formObjInner">End Date</p>
                 <input id="dueDate" className = "formDateInput" type = "date" min = {getTomorrow()} onChange = {endDateChange}></input>
+                <p className = "errorBox">{endDateError}</p>
             </div>
 
             <div className = "formObj">
@@ -361,8 +388,7 @@ const ChallengeForm = () =>{
                 <p className = "formObjInner">Who should receive the challenge?</p>
                 <div>
                     <select onChange = {receiverChange} className = "formSelect">
-                        <option value = ""></option>
-                    {inviteOptions.map((name)=>{return <option>{name}</option>;})}
+                    {inviteOptions.map((name)=>{return <option value = {name}>{name.split("-")[0]}</option>;})}
                     </select>
                 </div>
             </div>
