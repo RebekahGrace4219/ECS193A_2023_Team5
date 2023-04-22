@@ -20,8 +20,6 @@ const StatsDownloadSection = () => {
             calculateBlob(response.data);
           })
           .catch(function(error){
-            console.log("error");
-            console.log(error);
             if(error.response.status===401){
               window.location.href = "/loginPage";
           }
@@ -30,7 +28,6 @@ const StatsDownloadSection = () => {
     }
 
     const calculateBlob = (data) => {
-        console.log("data", data[0]);
         let rows = "Date Completed, Date Posted, Exercise, Amount, Unit\n";
 
         data.forEach((row) =>
@@ -43,12 +40,10 @@ const StatsDownloadSection = () => {
             file += row.exercise.unit +"\n";
             rows += file;
         });
-        console.log(rows);
         const csvFile = new Blob([rows], { type: 'text/csv;charset=utf-16;' });
-        console.log(csvFile);
+
         let url = URL.createObjectURL(csvFile);
         setOwnBlob(url);
-        console.log("url", url);
     }
     useEffect(() => {
         if(!load){
