@@ -73,6 +73,20 @@ const RecentActivity = (props) => {
 
     }
 
+    const setDisplayProperty = (type) => {
+        document.getElementById("RecentActivity").style.display = type;
+    }
+    useEffect(
+        () => {
+          if (activityInfo.length === 0) {
+            setDisplayProperty("none")
+          }
+          else if(activityInfo){
+            setDisplayProperty("block")
+          }
+        }, [activityInfo]
+      );
+
     useEffect(
         () => {
           if (activityType === "friend") {
