@@ -130,11 +130,10 @@ const StatsExerciseSection = () => {
             "min": 1,
             "hr": (1/60)
         }
-        console.log(amount, toUnit, amount*conversionKey[toUnit]);
+
         return amount * conversionKey[toUnit];
     }
     const calculateData = () => {
-        console.log("log", exerciseLog);
         if (exerciseLog.length === 0){
             return;
         }
@@ -145,7 +144,7 @@ const StatsExerciseSection = () => {
         labels.forEach((day) => {
             dataList.push(0);
         });
-        console.log(selectedExerciseName, selectedExerciseUnitType, selectedExerciseUnit);
+
         exerciseLog.forEach((exercise) =>
         {
 
@@ -218,8 +217,6 @@ const StatsExerciseSection = () => {
             setExerciseLog(response.data);
           })
           .catch(function(error){
-            console.log("error");
-            console.log(error);
             if(error.response.status===401){
               window.location.href = "/loginPage";
           }
