@@ -59,6 +59,7 @@ const ProfileHeader = () => {
             if(!load){
                 getUsername();
                 getDisplayName();
+                setLoad(true);
             }
         }, [load]
     );
@@ -86,6 +87,9 @@ const ProfileHeader = () => {
         }, [username]
     );
 
+    const moveSettingsPage = () => {
+        window.location.href = "./profileSettingsPage";
+    }
     return(
         <div>
             <div className = "profilePhoto">
@@ -98,6 +102,7 @@ const ProfileHeader = () => {
             <div className = "qrcode">
                 <img src = {qrcode}></img>
             </div>
+            <button onClick = {moveSettingsPage}><img src = {"https://i.imgur.com/but4GRp.png"}></img></button>
 
         </div>
     )

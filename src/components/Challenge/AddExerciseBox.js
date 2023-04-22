@@ -107,6 +107,7 @@ const AddExerciseBox = () => {
     const [amount, setAmount] = useState(0);
     const [completionDate, setCompletionDate] = useState(Date.now());
     const [submitError, setSubmitError] = useState("");
+    const [toggleState, setToggleState] = useState(false);
 
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
@@ -207,9 +208,18 @@ const AddExerciseBox = () => {
             }
         });
     }
+
+    const toggleBox = () =>{
+        setToggleState(!toggleState);
+    }
     return(
         <div id = "AddExerciseBox">
+            <div>
             <h2>Add an Exercise</h2>
+            <button className = "dropDownButton" onClick = {toggleBox}><img src = "https://i.imgur.com/B5Dnylx.png" alt = "Dropdown"/></button>
+            </div>
+            { toggleState ?
+            <div>
             <div className = "horizontalForm">
                 <p>Exercise</p>
                 <select id = "addExerciseSport" name = "addExerciseSport" className = "formSelect" onChange = {sportChange}>
@@ -254,6 +264,7 @@ const AddExerciseBox = () => {
                 <button className="submitButton" onClick = {submitExercise}><p className = "submitButtonText">Submit</p></button>
                 <p>{submitError}</p>
             </div>
+            </div>: <></>}
         </div>
     )
 
