@@ -6,7 +6,6 @@ const Front = () => {
     return (
         <div id = "Front">
             <div id = "frontPageHeader">
-                <button className = "frontPageButton">About</button>
                 <button className = "frontPageButton" onClick = {moveLogin}>Log in/Sign up</button>
             </div>
             <div id = "frontPageBody">
