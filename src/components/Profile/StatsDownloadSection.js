@@ -45,6 +45,7 @@ const StatsDownloadSection = () => {
         let url = URL.createObjectURL(csvFile);
         setOwnBlob(url);
     }
+
     useEffect(() => {
         if(!load){
             requestExercises();

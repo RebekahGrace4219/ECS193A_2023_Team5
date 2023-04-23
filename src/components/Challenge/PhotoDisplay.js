@@ -2,8 +2,8 @@ import {useState} from 'react';
 
 import '../../css/Challenge/photoDisplay.css';
 const createURL = (username) => {
-    return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-  }
+    return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
+}
 
 const createURLS = (usernames) => {
     let list = [];

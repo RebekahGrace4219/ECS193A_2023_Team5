@@ -4,7 +4,7 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SuggestedLeagueObj = (props) => {
 
     const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/leaguePicture/"+id + ".png";
+        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
     }
 
     let leagueID = props.leagueID;

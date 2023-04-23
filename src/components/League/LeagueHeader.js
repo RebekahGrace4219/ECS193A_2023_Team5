@@ -40,7 +40,7 @@ const LeagueHeader = (props) => {
     }
 
     const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/"+process.env.REACT_APP_CLOUDINARY_NAME+"/image/upload/leaguePicture/"+id + ".png";
+        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
     }
 
     function getLeagueName(){
