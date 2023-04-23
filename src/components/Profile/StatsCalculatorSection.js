@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Challenge from "../../classes/Challenge";
+import Challenge from "../../Helpers/Challenge";
 const tf = require('@tensorflow/tfjs');
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
