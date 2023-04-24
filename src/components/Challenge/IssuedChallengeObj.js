@@ -5,7 +5,7 @@ import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
-
+import { flipButton } from "../../Helpers/CssEffects";
 import axios from "axios";
 
 import "../../css/Challenge/challengeObj.css";
@@ -26,8 +26,10 @@ const IssuedChallengeObj = (props) => {
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
 
     const [showState, setState] = useState(false);
+
     function toggleState(){
         setState(!showState);
+        flipButton(challengeID + "button", showState);
     }
 
     function convertProgress(progress, goal_unit){
@@ -115,7 +117,7 @@ const IssuedChallengeObj = (props) => {
 
         <div className = "challengeEnd">
             <button className = "challengeDropButton" onClick = {toggleState}>
-                <img src = "https://i.imgur.com/DiUB6gk.png" alt = "expandButton"/>
+                <img src = "https://i.imgur.com/DiUB6gk.png" id = {challengeID+"button"} alt = "expandButton"/>
             </button>
             {
                 (percentageDone < 100) ?

@@ -7,6 +7,7 @@ import "../../css/Shared/form.css";
 import { getToken} from 'firebase/messaging';
 import {exportMessaging, requestPermission} from "../../firebase";
 import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import { flipButton } from '../../Helpers/CssEffects';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -61,6 +62,7 @@ const UserSettingsButton = () => {
 
     function toggleLogoutDisplay(){
         setLogoutDisplay(!logoutDisplay);
+        flipButton("UserSettingsTriangle", logoutDisplay);
     }
     function moveProfilePage(){
         window.location.href = "./profileStatsPage"
@@ -156,7 +158,7 @@ const UserSettingsButton = () => {
                 </div>
             </button>
             <div id = "userSettingButtonSection">
-                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/msPQZqA.png" alt = "Dropdown"/></button>
+                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img id = "UserSettingsTriangle" src = "https://i.imgur.com/msPQZqA.png" alt = "Dropdown"/></button>
                 {
                     logoutDisplay ?
                     <select className = "formSelect" id = "LogoutSelect" onChange={movePage}>
