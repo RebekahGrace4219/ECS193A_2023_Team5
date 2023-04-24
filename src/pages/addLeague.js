@@ -4,17 +4,16 @@ import LeagueForm from "../components/AddLeague/LeagueForm";
 import "../css/Shared/page2.css";
 const AddLeague = () => {
     return (
-    <div id = "AddLeague" className = "Body2Part">
-        <div  className = "leftSide2Part">
-            <SideBar></SideBar>
+        <div id="AddLeague" className="Body2Part">
+            <div className="leftSide2Part">
+                <SideBar></SideBar>
+            </div>
+            <div className="rightSide2Part">
+                <div className="mainInfo">
+                    <LeagueForm></LeagueForm>
+                </div>
+            </div>
         </div>
-        <div className = "rightSide2Part">
-            <div className="main">
-        <div className = "mainInfo">
-            <LeagueForm></LeagueForm>
-            </div></div>
-        </div>
-    </div>
     );
 }
 

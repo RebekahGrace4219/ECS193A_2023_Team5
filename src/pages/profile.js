@@ -16,7 +16,6 @@ const Profile = (props) => {
                 <SideBar></SideBar>
             </div>
             <div className = "rightSide2Part">
-                <div classname = "main">
                 <div className = "mainInfo">
                     <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
                     <ProfileHeader></ProfileHeader>
@@ -35,8 +34,6 @@ const Profile = (props) => {
                         :
                         <MedalsSection/>
                     }
-                </div>
-
                 </div>
             </div>
 
