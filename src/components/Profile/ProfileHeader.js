@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react';
 import QRcode from "qrcode";
 import axios from "axios";
 import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
-
+import "../../css/Shared/button.css";
+import "../../css/Profile/profileHeader.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileHeader = () => {
@@ -65,7 +66,7 @@ const ProfileHeader = () => {
 
     const getQrCode = () => {
         let url = "https://tread.run/requestFriend?" + username;
-        QRcode.toDataURL(url, {"color":{"light":"#F1EEEA"}}, (err, url) => {
+        QRcode.toDataURL(url, {"color":{"light":"#D9D9D9"}}, (err, url) => {
             if (err) return console.error(err)
             setQRCode(url);
         })
@@ -83,18 +84,26 @@ const ProfileHeader = () => {
         window.location.href = "./profileSettingsPage";
     }
     return(
-        <div>
-            <div className = "profilePhoto">
-                <img src = {profilePhoto} alt = "profile"></img>
+        <div id = "profileHeader">
+            <div id = "profileHeaderLeft">
+            <div className = "profilePictureDiv">
+                <img className = "profilePicture" src = {profilePhoto} alt = "profile"></img>
+
+
             </div>
             <div className = "profileDescription">
-                <p>{username}</p>
-                <p>{displayName}</p>
+                <div id = "profileTopLine">
+
+                <h2>{username}</h2>
+                <button className = "editButton" onClick = {moveSettingsPage}><img className = "editButtonImage" src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
+                </div>
+                <h3>{displayName}</h3>
+            </div>
             </div>
             <div className = "qrcode">
-                <img src = {qrcode} alt = "qr code for friend request"></img>
+                <img className = "qrcodeImage" src = {qrcode} alt = "qr code for friend request"></img>
             </div>
-            <button onClick = {moveSettingsPage}><img src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
+
 
         </div>
     )

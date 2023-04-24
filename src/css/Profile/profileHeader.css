@@ -1,30 +1,57 @@
-#ProfileHeader{
-    width: 80%;
-}
-
-.headerTop{
+#profileHeader{
     display: flex;
     flex-direction: row;
-    margin: 20px;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-#profileInformationSide{
-    display:flex;
+#profileHeaderLeft{
+    display: flex;
     flex-direction: row;
+    width: 100%;
+}
+
+.profilePicture{
+    width: 120px;
+    height: 120px;
+}
+
+.profilePictureDiv{
+    box-sizing: border-box;
+
+    min-width: 160px;
+    width: 160px;
+    height: 160px;
+
+    background: #D9D9D9;
+    border: 1px solid #F9A800;
+    border-radius: 20px;
+
+    display:flex;
+    justify-content: center;
     align-items: center;
 }
 
-#profilePhoto{
-    height: 180px;
-    width: 180px;
-    margin-right: 20px;
-    border-radius: 20px;
+.profileDescription{
+    padding-left: 20px;
+    width: 100%;
+    padding-right: 20px;
 }
 
-.profileBody{
+#profileTopLine{
     display: flex;
     flex-direction: row;
+    width: 100%;
     justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 10px;
+}
+
+.qrcodeImage{
+    width: 160px;
+    height: 160px;
+
+    background: #D9D9D9;
+    border: 1px solid #F9A800;
+    border-radius: 20px;
 }

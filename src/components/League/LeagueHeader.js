@@ -26,14 +26,14 @@ const LeagueHeader = (props) => {
                 getLeagueDescription();
                 getLeaguePhoto();
                 getNumberMembers();
-
+                setLoaded(true);
             }
         }, [loaded]
     );
 
     const generateQRCode = () => {
         let url = "https://tread.run/requestLeague?" + id;
-        QRcode.toDataURL(url, {"color":{"light":"#F1EEEA"}}, (err, url) => {
+        QRcode.toDataURL(url, {"color":{"light":"#D9D9D9"}}, (err, url) => {
             if (err) return console.error(err)
 
             setQRCode(url);
