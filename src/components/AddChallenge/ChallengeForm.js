@@ -50,11 +50,9 @@ const ChallengeForm = () =>{
 
     const submitChallenge = () => {
 
-        //TODO
         if (!checkValidInputs()){
           return false;
         }
-
 
         let recipient = receiver
         if (receiverGroup === "league"){
