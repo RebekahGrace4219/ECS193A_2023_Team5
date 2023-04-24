@@ -5,7 +5,9 @@ import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsFo
 import DeleteSection from "../components/ProfileSettings/DeleteSection";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import "../css/Shared/page2.css"
+import "../css/Shared/page2.css";
+import {createProfilePictureURL} from "../Helpers/CloudinaryURLHelpers";
+
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 const ProfileSettings = () => {
   const [load, setLoad] = useState(false);
@@ -20,10 +22,6 @@ const ProfileSettings = () => {
       }
     }, [load]
   );
-
-  const createURL = (username) => {
-    return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/" + username.replace("#", "_") + ".png";
-  }
 
   function getDisplayName() {
     // GET from db
@@ -57,7 +55,7 @@ const ProfileSettings = () => {
     };
     axios(config)
       .then(function (response) {
-        setPhoto(createURL(response.data));
+        setPhoto(createProfilePictureURL(response.data));
         return response.data;
       })
       .catch(function (error) {

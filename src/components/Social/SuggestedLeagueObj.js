@@ -1,12 +1,9 @@
 import "../../css/Shared/suggestionBox.css";
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+
 import axios from 'axios';
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SuggestedLeagueObj = (props) => {
-
-    const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
-    }
-
     let leagueID = props.leagueID;
 
     const requestJoinLeague = () => {
@@ -36,7 +33,7 @@ const SuggestedLeagueObj = (props) => {
     return(
         <div id = "SuggestedLeagueObj" className="suggestionObj">
             <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {createLeagueURL(leagueID)}/>
+                <img className = "suggestionImage" src = {createLeaguePictureURL(leagueID)}/>
             </div>
             <div className = "suggestionWritingSection">
                 <p  className = "suggestionHeaderStyle" >{props.leagueName}</p>

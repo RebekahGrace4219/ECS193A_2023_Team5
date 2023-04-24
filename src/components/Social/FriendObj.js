@@ -6,11 +6,10 @@ import BlockedSelect from "./BlockedSelect";
 import axios from 'axios';
 import "../../css/Shared/button.css";
 import "../../css/Social/obj.css";
-const backend_url = process.env.REACT_APP_PROD_BACKEND;
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 
-const createURL = (username) => {
-  return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-}
+
+const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendObj = (props) => {
     const [selectShow, setSelectShow] = useState();
@@ -208,7 +207,7 @@ const FriendObj = (props) => {
     return(
         <div id = "FriendObj" className = "displayObj">
             <div className = "objSection">
-                <img className = "objProfilePhoto" src = {createURL(props.children.username)}/>
+                <img className = "objProfilePhoto" src = {createProfilePictureURL(props.children.username)}/>
             </div>
             <div className = "objSection objWritingSection">
                 <p className = "objDisplayName">{props.children.displayName}</p>

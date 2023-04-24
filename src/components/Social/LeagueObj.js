@@ -5,7 +5,7 @@ import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
 import InviteSelect from './InviteSelect';
 import axios from 'axios';
-
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import "../../css/Social/obj.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
@@ -17,10 +17,6 @@ const LeagueObj = (props) => {
 
     function toggleSelectShow(){
         setSelectShow(!selectShow);
-    }
-
-    const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
     }
 
     function leave(){
@@ -201,7 +197,7 @@ const LeagueObj = (props) => {
         <div id = "LeagueObj" className = "displayObj">
             <div className = "objSection">
                 <button className = "objButton" onClick = {moveLeaguePage}>
-                <img className = "objProfilePhoto" src = {createLeagueURL(id)}/>
+                <img className = "objProfilePhoto" src = {createLeaguePictureURL(id)}/>
                 </button>
             </div>
             <div className = "objSection objWritingSection">

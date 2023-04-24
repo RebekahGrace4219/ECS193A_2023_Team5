@@ -1,9 +1,7 @@
 import "../../css/Shared/leaderboard.css";
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 
 const LeagueLeaderboardEntry = (props) => {
-    const createURL = (username) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-    }
     return (
     <div id = "LeaderboardEntry">
         <div className = "leaderboardEntryImage">
@@ -13,7 +11,7 @@ const LeagueLeaderboardEntry = (props) => {
             {(props.children.level !== 1 && props.children.level !== 2 && props.children.level !== 3) ? <p>{props.children.level}</p>: <></>}
         </div>
         <div className = "leaderboardRightSide">
-            <img className = "leaderboardPhoto firstDiv" src={createURL(props.children.username)}/>
+            <img className = "leaderboardPhoto firstDiv" src={createProfilePictureURL(props.children.username)}/>
             <p className="leaderboardText secondDiv">{props.children.username}</p>
             <p className="leaderboardText fifthDiv">{props.children.completed}</p>
         </div>

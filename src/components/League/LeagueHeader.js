@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
 import QRcode from "qrcode";
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import "../../css/League/leagueHeader.css";
 import "../../css/Shared/button.css";
 
@@ -39,9 +40,6 @@ const LeagueHeader = (props) => {
         })
     }
 
-    const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
-    }
 
     function getLeagueName(){
         var config  = {
@@ -114,7 +112,7 @@ const LeagueHeader = (props) => {
     }
 
     function getLeaguePhoto(){
-        setLeaguePhoto(createLeagueURL(id));
+        setLeaguePhoto(createLeaguePictureURL(id));
     }
 
     function getNumberMembers(){

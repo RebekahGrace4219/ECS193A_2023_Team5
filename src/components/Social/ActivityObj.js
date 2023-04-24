@@ -1,7 +1,6 @@
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+
 const ActivityObj = (props) => {
-    const createURL = (username) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-    }
     let username = props.children.username;
     let exerciseName = props.children.exercise.exerciseName;
     let progress = props.children.exercise.amount;
@@ -11,7 +10,7 @@ const ActivityObj = (props) => {
     return (
         <div id = "ActivityObj">
             <div id = "ActivityLeftSide">
-                <img id = "activityProfilePhoto" src = {createURL(username)}></img>
+                <img id = "activityProfilePhoto" src = {createProfilePictureURL(username)}></img>
                 <p className = "activityObjText">{username} did {exerciseName} {progress} {unit} on {date}</p>
             </div>
         </div>
