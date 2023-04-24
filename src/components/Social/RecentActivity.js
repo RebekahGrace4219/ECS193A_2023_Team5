@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import ActivityObj from './ActivityObj';
 import axios from "axios";
 import "../../css/Social/recentActivity.css";
-
+import {setDisplayProperty} from "../../Helpers/CssEffects";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const RecentActivity = (props) => {
@@ -73,16 +73,13 @@ const RecentActivity = (props) => {
 
     }
 
-    const setDisplayProperty = (type) => {
-        document.getElementById("RecentActivity").style.display = type;
-    }
     useEffect(
         () => {
           if (activityInfo.length === 0) {
-            setDisplayProperty("none")
+            setDisplayProperty("RecentActivity", "none")
           }
           else if(activityInfo){
-            setDisplayProperty("block")
+            setDisplayProperty("RecentActivity", "block")
           }
         }, [activityInfo]
       );

@@ -1,5 +1,6 @@
 import LeagueLeaderboardEntry from "./LeagueLeaderboardEntry";
 import {useState, useEffect} from "react";
+import {setDisplayProperty} from "../../Helpers/CssEffects";
 import axios from 'axios';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
@@ -45,10 +46,23 @@ const LeagueLeaderboard = (props) => {
         () => {
           if (!load) {
             getLeaderboardInfo();
+            setLoad(true);
 
           }
         }, [load]
       );
+
+      useEffect(
+        () => {
+          if (leaderboardInfo.length === 0) {
+            setDisplayProperty("Leaderboard", "none")
+          }
+          else if(leaderboardInfo){
+            setDisplayProperty("Leaderboard", "block")
+          }
+        }, [leaderboardInfo]
+      );
+
 
     // Send out the request
     // set the information to map

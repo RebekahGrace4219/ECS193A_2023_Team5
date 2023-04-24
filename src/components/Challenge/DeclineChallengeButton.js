@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import '../../css/Shared/button.css';
-
+import { reloadPage } from "../../Helpers/CssEffects";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const DeclineChallengeButton = (props) => {
@@ -20,6 +20,7 @@ const DeclineChallengeButton = (props) => {
         };
         axios(config)
         .then(function(response) {
+            reloadPage();
             return response.data;
         })
         .catch(function(error){

@@ -160,7 +160,7 @@ const UserSettingsButton = () => {
                 </div>
             </button>
             <div id = "userSettingButtonSection">
-                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/B5Dnylx.png" alt = "Dropdown"/></button>
+                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/msPQZqA.png" alt = "Dropdown"/></button>
                 {
                     logoutDisplay ?
                     <select className = "formSelect" id = "LogoutSelect" onChange={movePage}>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Challenge from "../../classes/Challenge";
-const tf = require('@tensorflow/tfjs');
+import Challenge from "../../Helpers/Challenge";
+//const tf = require('@tensorflow/tfjs');
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 // Code derived from TensorFlow.JS Pitch Example
 const StatsCalculatorSection = () => {
-    const [load, setLoad] = useState(false);
+    /*const [load, setLoad] = useState(false);
     const [trainingData, setTrainingData]= useState([]);
 
     useEffect(() => {
@@ -109,7 +109,7 @@ const StatsCalculatorSection = () => {
         let sample = [1681689600000, 1681948800000, 1, 0, "04", "04", "Baseball", 23, "m", "distance"];
 
         let result = model.predict(tf.tensor([1681689600000, 1681948800000, 1, 0, "04", "04", "Baseball", 23, "m", "distance"])).arraySync();
-        //console.log("The model result is", result);*/
+        //console.log("The model result is", result);
 
     }
 
@@ -133,11 +133,11 @@ const StatsCalculatorSection = () => {
             })
             .catch(function (error) {
                 console.log("Error is ", error);
-                /*if (error.response.status === 401) {
+                if (error.response.status === 401) {
                     window.location.href = "/loginPage";
-                }*/
+                }
             });
-    }
+    }*/
 
     return (
         <div>Working on it</div>

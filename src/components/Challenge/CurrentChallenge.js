@@ -6,8 +6,7 @@ import ChallengeScroll from './ChallengeScroll';
 import "../../css/Shared/section.css";
 import "../../css/Shared/bar.css";
 import "../../css/Challenge/challengeObj.css";
-import "../../css/Challenge/currentChallenge.css";
-import AddChallengeButton from './AddChallengeButton';
+
 const CurrentChallenge = () => {
     const [challengeState, setChallengeState] = useState("issued");
 

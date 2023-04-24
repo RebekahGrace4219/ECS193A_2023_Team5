@@ -10,8 +10,6 @@ import {
   } from 'chart.js';
 import axios from 'axios';
 import "../../css/Shared/page3.css";
-import ExerciseLog from "../../../src/classes/ExerciseLog";
-import Challenge from "../../../src/classes/Challenge";
 import { Bar } from 'react-chartjs-2';
 ChartJS.register(
     CategoryScale,
