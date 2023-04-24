@@ -1,8 +1,7 @@
 import SideBar from "../components/Shared/SideBar";
 import Header from "../components/Shared/Header";
 import Line from "../components/Shared/Line";
-import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsForm"
-import SensorSection from "../components/ProfileSettings/SensorSection";
+import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsForm";
 import DeleteSection from "../components/ProfileSettings/DeleteSection";
 import { useState, useEffect } from "react";
 import axios from 'axios';
@@ -78,8 +77,6 @@ const ProfileSettings = () => {
           <Header>{{ "title": "Profile Settings", "type": "none" }}</Header>
           <Line></Line>
           <ProfileSettingsForm>{{ "photo": photo, "displayName": displayName }}</ProfileSettingsForm>
-          <Line></Line>
-          <SensorSection></SensorSection>
           <Line></Line>
           <DeleteSection></DeleteSection>
         </div>
