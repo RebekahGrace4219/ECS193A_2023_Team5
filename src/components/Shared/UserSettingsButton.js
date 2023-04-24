@@ -6,6 +6,7 @@ import "../../css/Shared/userSettingsButton.css";
 import "../../css/Shared/form.css";
 import { getToken} from 'firebase/messaging';
 import {exportMessaging, requestPermission} from "../../firebase";
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -52,11 +53,6 @@ const UserSettingsButton = () => {
           console.log(error)
           console.log("No response")
       });
-    }
-
-
-    const createURL = (username) => {
-      return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
     }
 
     function stopLogoutDisplay(){
@@ -122,7 +118,7 @@ const UserSettingsButton = () => {
       axios(config)
       .then(function(response){
         setUsername(response.data);
-        setPhoto(createURL(response.data));
+        setPhoto(createProfilePictureURL(response.data));
         return response.data;
       })
       .catch(function(error){
