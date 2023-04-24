@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Line from "../Shared/Line";
 import axios from 'axios';
 import ExerciseNameForm from "../Shared/ExerciseNameForm";
@@ -7,7 +7,6 @@ import ExerciseDateForm from "../Shared/ExerciseDateForm";
 import ExerciseReceiverForm from '../Shared/ExerciseReceiverForm';
 import '../../css/Shared/form.css';
 import '../../css/Shared/button.css';
-import { ErrorResponse } from '@remix-run/router';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
