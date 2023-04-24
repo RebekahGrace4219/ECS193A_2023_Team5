@@ -7,12 +7,31 @@ const RedirectPage = (props) => {
     const [load, setLoad] = useState(false);
     let type = props.type;
 
+    useEffect (
+        () => {
+            const followRequest = () => {
+                let requestID = processURL();
+                if (type === "Friend"){
+                    sendFriendRequest(requestID);
+                } else if (type === "League"){
+                    sendLeagueRequest(requestID);
+                }
+            }
 
-    const processURL = () => {
-        let url = window.location.href;
-        let id = url.split("request"+type+"?")[1];
-        return id;
-    }
+            const processURL = () => {
+                let url = window.location.href;
+                let id = url.split("request"+type+"?")[1];
+                return id;
+            }
+
+
+            if(!load){
+                followRequest();
+                setLoad(true);
+            }
+        }, [load, type]
+    );
+
 
 
     async function sendFriendRequest(requestID){
@@ -78,27 +97,8 @@ const RedirectPage = (props) => {
 
     }
 
-    const followRequest = () => {
-        // Grab the url
-        // parse out the instruction
-        // send the right post request
-        console.log("Followed request");
-        let requestID = processURL();
-        console.log("Requested id is , ", requestID);
-        if (type === "Friend"){
-            sendFriendRequest(requestID);
-        } else if (type === "League"){
-            sendLeagueRequest(requestID);
-        }
 
-    }
-    useEffect (
-        () => {
-            if(!load){
-                followRequest();
-            }
-        }, [load]
-    );
+
 
     return (<div><h1>Request sending...</h1></div>);
 

@@ -207,7 +207,7 @@ const FriendObj = (props) => {
     return(
         <div id = "FriendObj" className = "displayObj">
             <div className = "objSection">
-                <img className = "objProfilePhoto" src = {createProfilePictureURL(props.children.username)}/>
+                <img className = "objProfilePhoto" src = {createProfilePictureURL(props.children.username)} alt = "profile"/>
             </div>
             <div className = "objSection objWritingSection">
                 <p className = "objDisplayName">{props.children.displayName}</p>
@@ -215,7 +215,7 @@ const FriendObj = (props) => {
             </div>
             <div className = "objSection">
                 <button className = "moreInfoButton" onClick = {toggleSelectShow}>
-                    <img src = "https://i.imgur.com/pnzihUp.png"/>
+                    <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
                 {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}
                 {(selectShow && type === "sent") ? <SentSelect friendReact = {friendReact}></SentSelect>: <></>}

@@ -64,7 +64,6 @@ const ProfileHeader = () => {
     );
 
     const getQrCode = () => {
-
         let url = "https://tread.run/requestFriend?" + username;
         QRcode.toDataURL(url, {"color":{"light":"#F1EEEA"}}, (err, url) => {
             if (err) return console.error(err)
@@ -72,16 +71,10 @@ const ProfileHeader = () => {
         })
     }
 
-    const getProfilePhoto = ()=> {
-        // here I will get the profile photo
-        return 1;
-    }
-
     useEffect (
         () => {
-            if(username != ""){
+            if(username !== ""){
                 getQrCode();
-                getProfilePhoto();
             }
         }, [username]
     );
@@ -92,16 +85,16 @@ const ProfileHeader = () => {
     return(
         <div>
             <div className = "profilePhoto">
-                <img src = {profilePhoto}></img>
+                <img src = {profilePhoto} alt = "profile"></img>
             </div>
             <div className = "profileDescription">
                 <p>{username}</p>
                 <p>{displayName}</p>
             </div>
             <div className = "qrcode">
-                <img src = {qrcode}></img>
+                <img src = {qrcode} alt = "qr code for friend request"></img>
             </div>
-            <button onClick = {moveSettingsPage}><img src = {"https://i.imgur.com/but4GRp.png"}></img></button>
+            <button onClick = {moveSettingsPage}><img src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
 
         </div>
     )

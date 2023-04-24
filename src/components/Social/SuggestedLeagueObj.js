@@ -33,7 +33,7 @@ const SuggestedLeagueObj = (props) => {
     return(
         <div id = "SuggestedLeagueObj" className="suggestionObj">
             <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {createLeaguePictureURL(leagueID)}/>
+                <img className = "suggestionImage" src = {createLeaguePictureURL(leagueID)} alt = "league"/>
             </div>
             <div className = "suggestionWritingSection">
                 <p  className = "suggestionHeaderStyle" >{props.leagueName}</p>

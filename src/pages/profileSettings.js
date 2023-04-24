@@ -19,6 +19,7 @@ const ProfileSettings = () => {
       if (!load) {
         getPhoto();
         getDisplayName();
+        setLoad(true);
       }
     }, [load]
   );

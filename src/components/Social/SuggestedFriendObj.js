@@ -37,7 +37,7 @@ const SuggestedFriendObj = (props) => {
     return (
         <div className="suggestionObj">
             <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {createProfilePictureURL(props.username)}/>
+                <img className = "suggestionImage" src = {createProfilePictureURL(props.username)} alt = "profile"/>
             </div>
             <div className = "suggestionWritingSection">
                 <div  className = "suggestionHeaderStyle">{props.username}</div>

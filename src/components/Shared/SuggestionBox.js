@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import SuggestedFriendObj from "../Social/SuggestedFriendObj";
 import SuggestedLeagueObj from "../Social/SuggestedLeagueObj";
-import RecentMedalObj from "../Profile/RecentMedalObj";
 import axios from "axios";
 
 import "../../css/Shared/suggestionBox.css";

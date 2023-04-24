@@ -3,7 +3,6 @@ import Header from "../components/Shared/Header";
 import RecentActivity from "../components/Social/RecentActivity";
 import FriendSection from "../components/Social/FriendSection";
 import LeagueSection from "../components/Social/LeagueSection";
-import UserSettingsButton from "../components/Shared/UserSettingsButton";
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import '../css/Shared/page3.css'

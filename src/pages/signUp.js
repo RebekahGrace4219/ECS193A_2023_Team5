@@ -15,6 +15,7 @@ const SignUp = () => {
         () => {
             if(!load){
                 getProfilePhoto();
+                setLoad(true);
             }
         }, [load]
       );
