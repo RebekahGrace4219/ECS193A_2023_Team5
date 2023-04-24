@@ -2,4 +2,7 @@ const setDisplayProperty = (id, type) => {
     document.getElementById(id).style.display = type;
 }
 
-export {setDisplayProperty};
+const reloadPage = () => {
+    window.location.href = window.location.href;
+}
+export {setDisplayProperty, reloadPage};

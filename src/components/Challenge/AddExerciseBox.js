@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "../../css/Challenge/addExercise.css";
 import "../../css/Shared/form.css";
+import { reloadPage } from '../../Helpers/CssEffects';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -197,6 +198,7 @@ const AddExerciseBox = () => {
         };
         axios(config)
         .then(function(response){
+            reloadPage();
             console.log(response);
             resetInfo();
             resetVisuals();
