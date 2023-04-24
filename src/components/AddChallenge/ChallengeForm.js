@@ -69,8 +69,8 @@ const ChallengeForm = () =>{
           data :
           {
             receivedUser : recipient,
-            issueDate : issueDate,
-            dueDate : dueDate,
+            issueDate : issueDate.valueOf(),
+            dueDate : dueDate.valueOf(),
             unit : unit,
             amount : amount,
             exerciseName : exerciseName,

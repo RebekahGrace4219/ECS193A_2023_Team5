@@ -7,7 +7,7 @@ const ExerciseDateForm = (props) => {
 
     const issueDateChange = (event) => {
         setIssueDate(event.target.value)
-        props.updateIssueDate(event.target.value);
+        props.updateIssueDate(new Date(event.target.value));
         dueDateCheck(dueDate)
     }
 
@@ -24,7 +24,7 @@ const ExerciseDateForm = (props) => {
         }
         setDueDateError("");
         setDueDate(targetDueDate);
-        props.updateDueDate(targetDueDate);
+        props.updateDueDate(new Date(targetDueDate));
     }
 
     function getToday(){

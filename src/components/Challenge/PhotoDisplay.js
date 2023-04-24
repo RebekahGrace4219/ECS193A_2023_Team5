@@ -43,7 +43,7 @@ const PhotoDisplay = (props) => {
     }
 
     function createPhotoObj(pictureURL, index){
-        return (<div className = "holder"><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
+        return (<div className = "holder" key = {pictureURL}><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
     }
 
     function calculatePictureDiv(){

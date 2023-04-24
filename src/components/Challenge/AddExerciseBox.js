@@ -42,7 +42,6 @@ const AddExerciseBox = () => {
             return false;
         }
 
-
         var config = {
             method: 'post',
             url: backend_url + 'exercise_log/add',
@@ -52,18 +51,19 @@ const AddExerciseBox = () => {
             withCredentials: true,
             credentials: 'include',
             data: {
-                loggedDate: loggedDate,
+                loggedDate: loggedDate.valueOf(),
                 exerciseName: exerciseName,
                 unit: unit,
                 amount: amount
-
             }
         };
         axios(config)
             .then(function (response) {
+                console.log("Response here!!!");
                 reloadPage();
             })
             .catch(function (error) {
+                console.log("Straight to error!");
                 console.log(error)
                 if (error.response.status === 401) {
                     window.location.href = "/loginPage";
@@ -78,13 +78,13 @@ const AddExerciseBox = () => {
 
     return (
         <div id="AddExerciseBox">
-            <div>
+            <div id = "AddExerciseHeader">
                 <h2>Add an Exercise</h2>
                 <button className="dropDownButton" onClick={toggleShowState}><img id="AddExerciseButtonShowState" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
             </div>
             {showState
                 ?
-                <div>
+                <div id = "AddExerciseFormBox">
                     <ExerciseNameForm updateExerciseName = {setExerciseName}/>
                     <ExerciseAmountForm updateAmount = {setAmount} updateUnit = {setUnit}/>
                     <ExerciseLoggedDateForm updateLoggedDate = {setLoggedDate}/>
@@ -92,7 +92,7 @@ const AddExerciseBox = () => {
                     <div className="formButton">
                         <button className="submitButton" onClick={submitExercise}><p className="submitButtonText">Submit</p></button>
                     </div>
-                    <p classname = "errorBox">{submitError}</p>
+                    <p className = "errorBox">{submitError}</p>
                 </div>
                 :
                 <></>

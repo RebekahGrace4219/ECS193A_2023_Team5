@@ -143,19 +143,19 @@ const ChallengeScroll = (props) => {
 
     }
     function makeIssuedChallengeObj(input){
-        return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
+        return (<IssuedChallengeObj key = {input["challengeId"]} >{input}</IssuedChallengeObj>);
     }
 
     function makeSentChallengeObj(input){
-        return (<SentChallengeObj>{input}</SentChallengeObj>);
+        return (<SentChallengeObj key = {input["challengeId"]} >{input}</SentChallengeObj>);
     }
 
     function makeReceivedChallengeObj(input){
-        return (<ReceivedChallengeObj>{input}</ReceivedChallengeObj>);
+        return (<ReceivedChallengeObj key = {input["challengeId"]} >{input}</ReceivedChallengeObj>);
     }
 
     function makeWeeklyChallengeObj(input){
-        return (<WeeklyChallengeObj>{input}</WeeklyChallengeObj>);
+        return (<WeeklyChallengeObj key = {input["challengeId"]}>{input}</WeeklyChallengeObj>);
     }
 
     useEffect (
