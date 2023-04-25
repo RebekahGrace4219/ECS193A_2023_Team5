@@ -1,8 +1,5 @@
 import {useState} from 'react';
 import FriendSelect from "./FriendSelect";
-import SentSelect from "./SentSelect";
-import ReceivedSelect from "./ReceivedSelect";
-import BlockedSelect from "./BlockedSelect";
 import axios from 'axios';
 import "../../css/Shared/button.css";
 import "../../css/Social/obj.css";
@@ -217,10 +214,7 @@ const FriendObj = (props) => {
                 <button className = "moreInfoButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}
-                {(selectShow && type === "sent") ? <SentSelect friendReact = {friendReact}></SentSelect>: <></>}
-                {(selectShow && type === "received") ? <ReceivedSelect friendReact = {friendReact}></ReceivedSelect>: <></>}
-                {(selectShow && type === "blocked") ? <BlockedSelect friendReact = {friendReact}></BlockedSelect>: <></>}
+                {(selectShow) ? <FriendSelect type = {type} friendReact = {friendReact}></FriendSelect>: <></>}
             </div>
         </div>
     )
