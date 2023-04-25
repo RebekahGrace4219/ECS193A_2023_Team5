@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import PhotoUpload from '../Shared/PhotoUpload';
+import PhotoUploadForm from '../Shared/Form/PhotoUploadForm';
 import axios from 'axios';
 
 import '../../css/SignUp/signUpForm.css';
@@ -144,7 +144,7 @@ const SignUpForm = (props) => {
 
             <div className="formObj">
                 <h1>Profile Picture</h1>
-                <PhotoUpload>{{"default":props.children.profilePhoto, "func":uploadPhoto}}</PhotoUpload>
+                <PhotoUploadForm>{{"default":props.children.profilePhoto, "func":uploadPhoto}}</PhotoUploadForm>
             </div>
 
             <div className="formObj">

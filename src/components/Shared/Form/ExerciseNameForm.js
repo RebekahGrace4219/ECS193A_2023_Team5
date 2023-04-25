@@ -1,5 +1,5 @@
 import {useState} from "react";
-import hardCodedInfo from "../../Helpers/SharedHardCodeInfo.json";
+import hardCodedInfo from "../../../Helpers/SharedHardCodeInfo.json";
 
 let sportList = hardCodedInfo.sportList;
 

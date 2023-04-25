@@ -4,9 +4,9 @@ import axios from "axios";
 import "../../css/Challenge/addExercise.css";
 import "../../css/Shared/form.css";
 import { reloadPage, flipButton } from '../../Helpers/CssEffects';
-import ExerciseNameForm from '../Shared/ExerciseNameForm';
-import ExerciseAmountForm from '../Shared/ExerciseAmountForm';
-import ExerciseLoggedDateForm from "../Shared/ExerciseLoggedDateForm";
+import ExerciseNameForm from '../Shared/Form/ExerciseNameForm';
+import ExerciseAmountForm from '../Shared/Form/ExerciseAmountForm';
+import ExerciseLoggedDateForm from "../Shared/Form/ExerciseLoggedDateForm";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const AddExerciseBox = () => {

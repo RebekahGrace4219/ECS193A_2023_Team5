@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import PhotoUpload from '../Shared/PhotoUpload';
+import PhotoUploadForm from '../Shared/Form/PhotoUploadForm';
 
 import axios from 'axios';
 
@@ -101,7 +101,7 @@ const ProfileSettingsForm = (props) => {
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload>{{"default":props.children.photo, "func":uploadPhoto}}</PhotoUpload>
+                <PhotoUploadForm>{{"default":props.children.photo, "func":uploadPhoto}}</PhotoUploadForm>
                 <button className="submitButton" onClick = {submitPhoto}><p className = "submitButtonText">Submit</p></button>
             </div>
 

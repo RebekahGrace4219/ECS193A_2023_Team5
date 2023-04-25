@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Line from "../Shared/Line";
-import PhotoUpload from "../Shared/PhotoUpload";
+import PhotoUploadForm from "../Shared/Form/PhotoUploadForm";
 import axios from 'axios';
 
 import '../../css/Shared/form.css';
@@ -118,7 +118,7 @@ const LeagueForm = (props) => {
 
         <div className="formObj">
             <h2>League Picture</h2>
-            <PhotoUpload>{{"default": "https://i.imgur.com/sXwXq45.png", "func":uploadPhoto}}</PhotoUpload>
+            <PhotoUploadForm>{{"default": "https://i.imgur.com/sXwXq45.png", "func":uploadPhoto}}</PhotoUploadForm>
         </div>
 
         <div className="formObj">

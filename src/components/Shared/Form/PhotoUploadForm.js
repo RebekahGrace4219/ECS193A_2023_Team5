@@ -1,6 +1,6 @@
-import '../../css/Shared/photoUpload.css';
+import '../../../css/Shared/photoUploadForm.css';
 
-const PhotoUpload = (props) => {
+const PhotoUploadForm = (props) => {
     console.log(props);
 
     function getBase64(file) {
@@ -39,4 +39,4 @@ const PhotoUpload = (props) => {
 }
 
 
-export default PhotoUpload;
+export default PhotoUploadForm;
