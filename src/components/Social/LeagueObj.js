@@ -1,19 +1,54 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import LeagueSelect from './LeagueSelect';
-import OwnerSelect from './OwnerSelect';
-import AdminSelect from './AdminSelect';
-import SentLeagueSelect from './SentLeagueSelect';
-import InviteSelect from './InviteSelect';
 import axios from 'axios';
 import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import "../../css/Social/obj.css";
-
+import "../../css/Shared/dropDown.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueObj = (props) => {
+    const [load, setLoad] = useState(false);
+    const [role, setRole] = useState("none");
     const [selectShow, setSelectShow] = useState();
+
     const id = props.children._id;
     let type = props.type;
+
+    useEffect (
+        () => {
+            if(!load){
+                getRole();
+                setLoad(true);
+            }
+        }, [load]
+    );
+
+    function getRole(){
+        var config  = {
+          method : 'post',
+          url: backend_url+'league/get_role',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include',
+          data : {
+            leagueID: id
+          }
+        };
+        axios(config)
+        .then(function(response) {
+            setRole(response.data);
+        })
+        .catch(function(error){
+            setRole(
+                "none"
+            );
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
+        });
+    }
 
     function toggleSelectShow(){
         setSelectShow(!selectShow);
@@ -209,11 +244,7 @@ const LeagueObj = (props) => {
                 <button className = "objButton" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow && type === "league") ? <LeagueSelect leagueReact = {leagueReact}></LeagueSelect>: <></>}
-                {(selectShow && type === "owner") ? <OwnerSelect leagueReact = {leagueReact}></OwnerSelect>: <></>}
-                {(selectShow && type === "admin") ? <AdminSelect leagueReact = {leagueReact}></AdminSelect>: <></>}
-                {(selectShow && type === "sent") ? <SentLeagueSelect leagueReact = {leagueReact}></SentLeagueSelect>: <></>}
-                {(selectShow && type === "invite") ? <InviteSelect leagueReact = {leagueReact}></InviteSelect>: <></>}
+                {(selectShow) ? <LeagueSelect role = {role} type = {type} leagueReact = {leagueReact}></LeagueSelect>: <></>}
             </div>
         </div>
     )

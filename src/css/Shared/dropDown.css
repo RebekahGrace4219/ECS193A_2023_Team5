@@ -1,0 +1,17 @@
+.dropdown {
+    float: left;
+    position: relative; /* <-- added declaration */
+}
+
+.dropdownItem {
+    margin-top: 5px;
+    list-style-type: none;
+    height: 0px;
+    overflow: hidden;
+
+    position: absolute;  /* <-- added declarations */
+    left: 0; top: 100%;  /*     here               */
+    width: 100%;         /*     and here...        */
+
+    transition: height 1s ease;
+}
