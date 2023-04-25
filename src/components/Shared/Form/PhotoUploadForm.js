@@ -1,7 +1,6 @@
 import '../../../css/Shared/photoUploadForm.css';
 
 const PhotoUploadForm = (props) => {
-    console.log(props);
 
     function getBase64(file) {
         var reader = new FileReader();
