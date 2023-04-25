@@ -1,5 +1,8 @@
 const LeagueEditForm = () => {
-    return (<p>There is a div here!</p>);
+    return (
+    <div>
+        Div There!
+    </div>);
 }
 
 export default LeagueEditForm;

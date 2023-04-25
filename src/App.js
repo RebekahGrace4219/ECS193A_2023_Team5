@@ -44,6 +44,7 @@ function App() {
         <Route path = "/profileMedalPage" element = {<Profile>{{"type":"medal"}}</Profile>} />
         <Route path = "/profileStatsPage" element = {<Profile>{{"type":"stats"}}</Profile>} />
         <Route path = "/leagueDescriptionPage?" element = {<League>{{"type":"description"}}</League>}/>
+        <Route path = "/leagueEditPage?" element = {<League>{{"type":"edit"}}</League>}/>
         <Route path = "/leagueMemberPage?" element = {<League>{{"type":"member"}}</League>}/>
         <Route path = "/requestFriend?" element = {<RedirectPage type = "Friend"></RedirectPage>}/>
         <Route path = "/requestLeague?" element = {<RedirectPage type = "League"></RedirectPage>}/>
