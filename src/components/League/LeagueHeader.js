@@ -10,7 +10,7 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
-    const [role] = useState("");
+    const [role, setRole] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [leagueName, setLeagueName] = useState();
     const [numberMembers, setNumberMembers] = useState();
