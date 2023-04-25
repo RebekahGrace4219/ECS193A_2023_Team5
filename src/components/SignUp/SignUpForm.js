@@ -121,7 +121,7 @@ const SignUpForm = (props) => {
       </div>
 
       <UsernameForm updateUsername = {setUsername}/>
-      <DisplayNameForm updateDisplayName = {setDisplayName}/>
+      <DisplayNameForm placeholder = "" updateDisplayName = {setDisplayName}/>
 
 
       <div className="formObj">
