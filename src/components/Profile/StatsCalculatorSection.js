@@ -138,10 +138,10 @@ const StatsCalculatorSection = () => {
                 }
             });
     }*/
-
+    //<div>Working on it</div>
     return (
-        <div>Working on it</div>
-    )
+        <div></div>
+    );
 }
 
 export default StatsCalculatorSection;

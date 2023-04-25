@@ -9,6 +9,10 @@ import StatsChallengeSection from '../components/Profile/StatsChallengeSection';
 import StatsCalculatorSection from '../components/Profile/StatsCalculatorSection';
 import StatsDownloadSection from '../components/Profile/StatsDownloadSection';
 
+/*
+<Line></Line>
+                        <StatsCalculatorSection/>
+*/
 const Profile = (props) => {
     return (
         <div id = "Profile" className='Body2Part'>
@@ -26,8 +30,7 @@ const Profile = (props) => {
                         <StatsExerciseSection/>
                         <Line></Line>
                         <StatsChallengeSection/>
-                        <Line></Line>
-                        <StatsCalculatorSection/>
+
                         <Line></Line>
                         <StatsDownloadSection/>
                         </div>
