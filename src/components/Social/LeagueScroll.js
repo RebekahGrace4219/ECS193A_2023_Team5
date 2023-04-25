@@ -82,31 +82,6 @@ const LeagueScroll = (props) => {
         });
       }
 
-    function getOwner(){
-        // get Blocked
-        var config = {
-          method : 'post',
-          url : backend_url + 'league/get_owned_leagues',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
-        })
-        .catch(function(error){
-            console.log(error)
-            console.log("No response")
-            if(error.response.status===401){
-                window.location.href = "/loginPage";
-            }
-        });
-      }
-
       function getInvite(){
         var config = {
             method : 'post',
@@ -146,11 +121,11 @@ const LeagueScroll = (props) => {
             else if(scrollType === "admin"){
                 getAdmin();
             }
-            else if(scrollType === "owner"){
-                getOwner();
-            }
             else if(scrollType === "invite"){
                 getInvite();
+            }
+            else if(scrollType === "create"){
+                window.location.href = "./addLeaguePage"
             }
         }, [scrollType]
     );

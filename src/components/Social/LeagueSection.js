@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import LeagueBar from "./LeagueBar";
 import LeagueScroll from "./LeagueScroll";
 
@@ -12,6 +12,18 @@ const LeagueSection = () => {
     function addLeague (){
         window.location.href = "./addLeaguePage";
     }
+
+    useEffect (
+        () => {
+            if(leagueState === "create"){
+                console.log( "Set league state to create");
+                window.location.href = "./addLeaguePage";
+            }
+            else{
+                console.log( "Set league state to not create", leagueState);
+            }
+        }, [leagueState]
+    );
 
     return (
         <div id = "LeagueSection" className="section">
@@ -32,7 +44,6 @@ const LeagueSection = () => {
             { (leagueState === "admin") ? <LeagueScroll type = "admin"></LeagueScroll> : <></>}
             { (leagueState === "sent") ? <LeagueScroll type = "sent"></LeagueScroll> : <></>}
             { (leagueState === "invite") ? <LeagueScroll type = "invite"></LeagueScroll> : <></>}
-
 
         </div>
         )

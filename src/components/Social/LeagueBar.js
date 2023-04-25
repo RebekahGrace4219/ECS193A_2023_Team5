@@ -14,7 +14,15 @@ const LeagueBar = (props) => {
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
 
-                if (element.id === onButton){
+                if (element.id === "Create" && onButton === "Create"){
+                    element.classList.add("barAddSelectedButton");
+                    element.classList.remove("barAddUnselectedButton");
+                }
+                else if(element.id === "Create" && onButton !== "Create"){
+                    element.classList.add("barAddUnselectedButton");
+                    element.classList.remove("barAddSelectedButton");
+                }
+                else if (element.id === onButton){
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
                 }
@@ -37,11 +45,6 @@ const LeagueBar = (props) => {
         setOnButton("Sent");
     }
 
-    function setOwner(){
-        props.func("owner");
-        setOnButton("Owner");
-    }
-
     function setAdmin(){
         props.func("admin");
         setOnButton("Admin");
@@ -52,13 +55,18 @@ const LeagueBar = (props) => {
         setOnButton("Received");
     }
 
+    function setCreate(){
+        props.func("create");
+        setOnButton("Create");
+    }
+
     return (
         <div id = "LeagueBar" className="bar">
             <BarButton function = {setLeague} name = "All"></BarButton>
-            <BarButton function = {setOwner} name = "Owner"></BarButton>
             <BarButton function = {setAdmin} name = "Admin"></BarButton>
             <BarButton function = {setSent} name = "Sent"></BarButton>
             <BarButton function = {setInvite} name = "Received"></BarButton>
+            <BarButton function = {setCreate} name = "Create"></BarButton>
         </div>
         )
 }
