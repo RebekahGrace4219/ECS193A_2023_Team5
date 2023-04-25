@@ -93,7 +93,6 @@ const ProfileHeader = () => {
                 </div>
                 <div className="pictureHeaderMiddle">
                     <div id="pictureHeaderContent">
-
                         <h2>{username}</h2>
                         <h3>{displayName}</h3>
                     </div>
