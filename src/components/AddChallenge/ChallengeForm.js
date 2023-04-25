@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import Line from "../Shared/Line";
 import axios from 'axios';
-import ExerciseNameForm from "../Shared/ExerciseNameForm";
-import ExericseAmountForm from "../Shared/ExerciseAmountForm";
-import ExerciseDateForm from "../Shared/ExerciseDateForm";
-import ExerciseReceiverForm from '../Shared/ExerciseReceiverForm';
+import ExerciseNameForm from "../Shared/Form/ExerciseNameForm";
+import ExericseAmountForm from "../Shared/Form/ExerciseAmountForm";
+import ExerciseDateForm from "../Shared/Form/ExerciseDateForm";
+import ExerciseReceiverForm from '../Shared/Form/ExerciseReceiverForm';
 import '../../css/Shared/form.css';
 import '../../css/Shared/button.css';
 

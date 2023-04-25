@@ -1,26 +1,19 @@
 import React, {useState, useEffect} from 'react';
 
-import PhotoUpload from '../Shared/PhotoUpload';
+import PhotoUploadForm from '../Shared/Form/PhotoUploadForm';
 
 import axios from 'axios';
 
 import "../../css/Shared/button.css";
 import "../../css/Shared/form.css";
+import DisplayNameForm from '../Shared/Form/DisplayNameForm';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileSettingsForm = (props) => {
-  console.log(props.children.photo);
-  console.log(props.children.displayName);
     const [photo, setPhoto] = useState(props.children.photo);
     const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
-
-    function uploadPhoto(submitPhoto){
-        setPhoto(submitPhoto);
-    }
-
-
 
     function validateDisplay(event){
       event.preventDefault();
@@ -101,16 +94,13 @@ const ProfileSettingsForm = (props) => {
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload>{{"default":props.children.photo, "func":uploadPhoto}}</PhotoUpload>
+                <PhotoUploadForm>{{"default":props.children.photo, "func":setPhoto}}</PhotoUploadForm>
                 <button className="submitButton" onClick = {submitPhoto}><p className = "submitButtonText">Submit</p></button>
-            </div>
 
+          </div>
             <div className="formObj">
-                <h2>Display Name</h2>
-                <p className="formObjInner">This is what others will see</p>
-                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" placeholder={props.children.displayName} onChange = {validateDisplay} onSubmit = {stopSubmit}/>
-                <button className="submitButton" onClick = {submitDisplayName}><p className = "submitButtonText">Submit</p></button>
-                <p className = "errorBox">{displayErrorResponse}</p>
+            <DisplayNameForm placeholder = {props.children.displayName} updateDisplayName = {setDisplayName}/>
+            <button className="submitButton" onClick = {submitDisplayName}><p className = "submitButtonText">Submit</p></button>
             </div>
     </div>
     );

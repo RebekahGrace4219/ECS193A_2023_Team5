@@ -10,6 +10,7 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
+    const [role, setRole] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [leagueName, setLeagueName] = useState();
     const [numberMembers, setNumberMembers] = useState();
@@ -27,6 +28,7 @@ const LeagueHeader = (props) => {
                 getNumberChallenges();
                 getLeaguePhoto();
                 getNumberMembers();
+                getRole();
                 setLoaded(true);
             }
         }, [loaded]
@@ -67,6 +69,31 @@ const LeagueHeader = (props) => {
             setLeagueName(response.data.leagueName);
             setLeagueDescription(response.data.leagueDescription);
             setLeagueTypeText(response.data.leagueType);
+        })
+        .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
+            console.log(error)
+        });
+    }
+
+    function getRole(){
+        var config  = {
+          method : 'post',
+          url: backend_url+'league/get_role',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include',
+          data : {
+            leagueID: id
+          }
+        };
+        axios(config)
+        .then(function(response) {
+            setRole(response.data);
         })
         .catch(function(error){
             if(error.response.status===401){
@@ -143,7 +170,12 @@ const LeagueHeader = (props) => {
                         <p className = "pictureHeaderText">{leagueType}<br></br>{numberChallenges} Active Challenges  <br></br>{numberMembers} Members</p>
                     </div>
                     <div className = "pictureHeaderButton">
-                        <button className = "editButton" onClick = {moveEditPage}><img className = "editButtonImage" src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
+                        {
+                            (role === "admin" || role === "owner")?
+                            <button className = "editButton" onClick = {moveEditPage}><img className = "editButtonImage" src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
+                            :
+                            <></>
+                        }
                     </div>
                 </div>
             </div>
