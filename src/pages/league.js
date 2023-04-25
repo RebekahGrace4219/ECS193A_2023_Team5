@@ -31,7 +31,7 @@ const League = (props) => {
                     <Header>{{ "title": "Social Hub", "type": "league", "leagueID": leagueName, "onButton": props.children.type }}</Header>
                     {
                         props.children.type === "edit" ?
-                        <LeagueEditForm></LeagueEditForm>
+                        <LeagueEditForm leagueID = {leagueName}></LeagueEditForm>
                         :
                         <div>
                         <LeagueHeader>{{ "id": leagueName }}</LeagueHeader>
