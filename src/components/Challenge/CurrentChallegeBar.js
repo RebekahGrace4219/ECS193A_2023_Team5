@@ -12,11 +12,11 @@ const CurrentChallengeBar = (props) => {
 
             for (let i = 0; i < elements.length; i++ ){
                 let element = elements[i];
-                if (element.id === "Add" && onButton === "Add"){
+                if (element.id === "Create" && onButton === "Create"){
                     element.classList.add("barAddSelectedButton");
                     element.classList.remove("barAddUnselectedButton");
                 }
-                else if(element.id === "Add" && onButton !== "Add"){
+                else if(element.id === "Create" && onButton !== "Create"){
                     element.classList.add("barAddUnselectedButton");
                     element.classList.remove("barAddSelectedButton");
                 }

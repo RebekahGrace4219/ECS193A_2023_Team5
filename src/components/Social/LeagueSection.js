@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import LeagueBar from "./LeagueBar";
 import LeagueScroll from "./LeagueScroll";
 
@@ -13,12 +13,20 @@ const LeagueSection = () => {
         window.location.href = "./addLeaguePage";
     }
 
+    useEffect (
+        () => {
+            if(leagueState === "create"){
+                console.log( "Set league state to create");
+                window.location.href = "./addLeaguePage";
+            }
+            else{
+                console.log( "Set league state to not create", leagueState);
+            }
+        }, [leagueState]
+    );
+
     return (
         <div id = "LeagueSection" className="section">
-            <div>
-                <button className = "submitButton" onClick = {addLeague}><p className = "submitButtonText">Create League</p></button>
-            </div>
-
             <div className ="selectButtonHeader">
                 <h1>Leagues</h1>
                 <LeagueBar func = {setLeagueState}></LeagueBar>
@@ -32,7 +40,6 @@ const LeagueSection = () => {
             { (leagueState === "admin") ? <LeagueScroll type = "admin"></LeagueScroll> : <></>}
             { (leagueState === "sent") ? <LeagueScroll type = "sent"></LeagueScroll> : <></>}
             { (leagueState === "invite") ? <LeagueScroll type = "invite"></LeagueScroll> : <></>}
-
 
         </div>
         )

@@ -9,6 +9,7 @@ import {
     Legend,
   } from 'chart.js';
 import axios from 'axios';
+import "../../css/Profile/profile.css";
 import "../../css/Shared/page3.css";
 import { Bar } from 'react-chartjs-2';
 ChartJS.register(
@@ -235,24 +236,26 @@ const StatsExerciseSection = () => {
 
 
     return (<div>
-        <select onChange = {changeExerciseName}>
-            {availableExercises.map((item) => {return <option value = {item}>{item}</option>})}
-        </select>
-        <select onChange = {changeUnit}>
-            <option value = "m">m</option>
-            <option value = "km">km</option>
-            <option value = "ft">ft</option>
-            <option value = "yd">yd</option>
-            <option value = "mi">mi</option>
+        <h1>Exercise History</h1>
+        <div >
+            <select className = "formSelect exercisePicker" onChange = {changeExerciseName}>
+                {availableExercises.map((item) => {return <option value = {item}>{item}</option>})}
+            </select>
+            <select className = "formSelect exercisePicker" onChange = {changeUnit}>
+                <option value = "m">m</option>
+                <option value = "km">km</option>
+                <option value = "ft">ft</option>
+                <option value = "yd">yd</option>
+                <option value = "mi">mi</option>
 
-            <option value = "s">s</option>
-            <option value = "min">min</option>
-            <option value = "hr">hr</option>
+                <option value = "s">s</option>
+                <option value = "min">min</option>
+                <option value = "hr">hr</option>
 
-            <option value = "ct">ct</option>
+                <option value = "ct">ct</option>
 
-        </select>
-
+            </select>
+        </div>
         <Bar data = {config}></Bar>
         </div>
         );

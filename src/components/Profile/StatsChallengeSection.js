@@ -139,6 +139,7 @@ const StatsChallengeSection = () => {
 
   return (
     <div>
+      <h1>Challenge History</h1>
       <Bar data = {config}></Bar>
     </div>
   )
