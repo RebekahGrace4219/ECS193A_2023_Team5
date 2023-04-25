@@ -1,11 +1,13 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
 import "../../css/Shared/userSettingsButton.css";
 import "../../css/Shared/form.css";
-import { getToken} from 'firebase/messaging';
-import {exportMessaging, requestPermission} from "../../firebase";
+import { getToken } from 'firebase/messaging';
+import { exportMessaging, requestPermission } from "../../firebase";
+import { createProfilePictureURL } from "../../Helpers/CloudinaryURLHelpers";
+import { flipButton } from '../../Helpers/CssEffects';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -19,161 +21,159 @@ const UserSettingsButton = () => {
   const [logoutDisplay, setLogoutDisplay] = useState(false);
   const [decisionState, setDecisionState] = useState("");
 
-  useEffect (
+  useEffect(
     () => {
-        if(!load){
-            setDeviceToken();
-            getUsername();
-            getDisplayName();
-        }
+      if (!load) {
+        setDeviceToken();
+        getUsername();
+        getDisplayName();
+      }
     }, [load]
   );
 
 
-    function logout(){
-      var config  = {
-        method : 'post',
-        url: backend_url+'auth/logout',
-        headers: {
-            Accept: 'application/json',
-          },
-        withCredentials: true,
-        credentials: 'include',
-        data:{
-          deviceToken: deviceToken
-        }
-      };
-      axios(config)
-      .then(function(response) {
-          window.location.href = "./";
-
-      })
-      .catch(function(error){
-          console.log(error)
-          console.log("No response")
-      });
-    }
 
 
-    const createURL = (username) => {
-      return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-    }
-
-    function stopLogoutDisplay(){
-        setLogoutDisplay(false);
-    }
-
-    function toggleLogoutDisplay(){
-        setLogoutDisplay(!logoutDisplay);
-    }
-    function moveProfilePage(){
-        window.location.href = "./profileStatsPage"
-    }
-
-    const setDeviceToken = () => {
-      getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
-        if (currentToken) {
-          console.log("Setting token here", currentToken);
-          setToken(currentToken);
-        } else {
-          // Show permission request UI
-          console.log('No registration token available. Request permission to generate one.');
-          requestPermission();
-          // ...
-        }
-      }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-        // ...
-      });
-
-    }
-
-    function getDisplayName(){
-      // GET from db
-      var config = {
-        method : 'post',
-        url : backend_url + 'user/get_display_name',
-        headers: {
-          Accept: 'application/json',
-        },
-        withCredentials: true,
-        credentials: 'include',
-      };
-      axios(config)
-      .then(function(response){
-        setDisplayName(response.data.displayName)
-        return response.data.displayName;
-      })
-      .catch(function(error){
-        console.log(error)
-      });
+  function stopLogoutDisplay() {
+    setLogoutDisplay(false);
   }
 
-  function getUsername(){
+  function toggleLogoutDisplay() {
+    setLogoutDisplay(!logoutDisplay);
+    flipButton("UserSettingsTriangle", logoutDisplay);
+  }
+  function moveProfilePage() {
+    window.location.href = "./profileStatsPage"
+  }
+
+  const setDeviceToken = () => {
+    getToken(exportMessaging, { vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0" }).then((currentToken) => {
+      if (currentToken) {
+        console.log("Setting token here", currentToken);
+        setToken(currentToken);
+      } else {
+        // Show permission request UI
+        console.log('No registration token available. Request permission to generate one.');
+        requestPermission();
+        // ...
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // ...
+    });
+
+  }
+
+  function getDisplayName() {
+    // GET from db
     var config = {
-      method : 'post',
-      url : backend_url + 'user/get_username',
+      method: 'post',
+      url: backend_url + 'user/get_display_name',
       headers: {
         Accept: 'application/json',
       },
       withCredentials: true,
       credentials: 'include',
-      };
-      axios(config)
-      .then(function(response){
+    };
+    axios(config)
+      .then(function (response) {
+        setDisplayName(response.data.displayName)
+        return response.data.displayName;
+      })
+      .catch(function (error) {
+        console.log(error)
+      });
+  }
+
+  function getUsername() {
+    var config = {
+      method: 'post',
+      url: backend_url + 'user/get_username',
+      headers: {
+        Accept: 'application/json',
+      },
+      withCredentials: true,
+      credentials: 'include',
+    };
+    axios(config)
+      .then(function (response) {
         setUsername(response.data);
-        setPhoto(createURL(response.data));
+        setPhoto(createProfilePictureURL(response.data));
         return response.data;
       })
-      .catch(function(error){
+      .catch(function (error) {
         console.log(error)
       });
   }
 
 
 
-    function movePage(event){
-        setDecisionState(event.target.value);
-    }
+  function movePage(event) {
+    setDecisionState(event.target.value);
+  }
 
-    useEffect(
-        () => {
-          if (decisionState === "Profile") {
-            moveProfilePage();
-            stopLogoutDisplay();
+  useEffect(
+    () => {
+      function logout() {
+        var config = {
+          method: 'post',
+          url: backend_url + 'auth/logout',
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+          credentials: 'include',
+          data: {
+            deviceToken: deviceToken
           }
-          else if (decisionState === "Logout"){
-            logout();
-            stopLogoutDisplay();
-          }
-        }, [ decisionState]
-      );
-    return (
-        <div id = "UserSettingsButton" >
-            <button id = "UserSettingsLeft" onClick={moveProfilePage}>
-                <div>
-                    <img id = "UserSettingButtonProfileImage" src = {profilePhoto} alt = "Profile"/>
-                </div>
-                <div id = "userSettingNaming">
-                    <p id ="userSettingDisplayName">{displayName}</p>
-                    <p id ="userSettingUsername">{username}</p>
-                </div>
-            </button>
-            <div id = "userSettingButtonSection">
-                <button className = "dropDownButton" onClick = {toggleLogoutDisplay}><img src = "https://i.imgur.com/msPQZqA.png" alt = "Dropdown"/></button>
-                {
-                    logoutDisplay ?
-                    <select className = "formSelect" id = "LogoutSelect" onChange={movePage}>
-                        <option value = ""></option>
-                        <option value = "Profile">Profile</option>
-                        <option value = "Logout">Logout</option>
-                    </select>
-                    : <></>
-                }
+        };
+        axios(config)
+          .then(function (response) {
+            window.location.href = "./";
 
-            </div>
+          })
+          .catch(function (error) {
+            console.log(error)
+            console.log("No response")
+          });
+      }
+
+      if (decisionState === "Profile") {
+        moveProfilePage();
+        stopLogoutDisplay();
+      }
+      else if (decisionState === "Logout") {
+        logout();
+        stopLogoutDisplay();
+      }
+    }, [decisionState, deviceToken]
+  );
+  return (
+    <div id="UserSettingsButton" >
+      <button id="UserSettingsLeft" onClick={moveProfilePage}>
+        <div>
+          <img id="UserSettingButtonProfileImage" src={profilePhoto} alt="Profile" />
         </div>
-    );
+        <div id="userSettingNaming">
+          <p id="userSettingDisplayName">{displayName}</p>
+          <p id="userSettingUsername">{username}</p>
+        </div>
+      </button>
+      <div id="userSettingButtonSection">
+        <button className="dropDownButton" onClick={toggleLogoutDisplay}><img id="UserSettingsTriangle" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
+        {
+          logoutDisplay ?
+            <select className="formSelect" id="LogoutSelect" onChange={movePage}>
+              <option value=""></option>
+              <option value="Profile">Profile</option>
+              <option value="Logout">Logout</option>
+            </select>
+            : <></>
+        }
+
+      </div>
+    </div>
+  );
 }
 
 

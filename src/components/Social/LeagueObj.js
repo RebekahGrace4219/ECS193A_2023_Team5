@@ -5,22 +5,18 @@ import AdminSelect from './AdminSelect';
 import SentLeagueSelect from './SentLeagueSelect';
 import InviteSelect from './InviteSelect';
 import axios from 'axios';
-
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import "../../css/Social/obj.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueObj = (props) => {
     const [selectShow, setSelectShow] = useState();
-    const [id, setID] = useState(props.children._id);
+    const id = props.children._id;
     let type = props.type;
 
     function toggleSelectShow(){
         setSelectShow(!selectShow);
-    }
-
-    const createLeagueURL = (id) => {
-        return "https://res.cloudinary.com/dtsw9d8om/image/upload/leaguePicture/"+id + ".png";
     }
 
     function leave(){
@@ -201,7 +197,7 @@ const LeagueObj = (props) => {
         <div id = "LeagueObj" className = "displayObj">
             <div className = "objSection">
                 <button className = "objButton" onClick = {moveLeaguePage}>
-                <img className = "objProfilePhoto" src = {createLeagueURL(id)}/>
+                <img className = "objProfilePhoto" src = {createLeaguePictureURL(id)} alt = "league"/>
                 </button>
             </div>
             <div className = "objSection objWritingSection">
@@ -211,7 +207,7 @@ const LeagueObj = (props) => {
             </div>
             <div className = "objSection">
                 <button className = "objButton" onClick = {toggleSelectShow}>
-                    <img src = "https://i.imgur.com/pnzihUp.png"/>
+                    <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
                 {(selectShow && type === "league") ? <LeagueSelect leagueReact = {leagueReact}></LeagueSelect>: <></>}
                 {(selectShow && type === "owner") ? <OwnerSelect leagueReact = {leagueReact}></OwnerSelect>: <></>}

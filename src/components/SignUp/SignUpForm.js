@@ -16,7 +16,7 @@ const SignUpForm = (props) => {
 
     const [deviceToken, setToken] = useState("");
     const [photo, setPhoto] = useState("");
-    const [load] = useState(false);
+    const [load, setLoad] = useState(false);
     const [displayName, setDisplayName] = useState("");
     const [username, setUsername] = useState("");
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
@@ -27,6 +27,7 @@ const SignUpForm = (props) => {
       () => {
           if(!load){
               setDeviceToken();
+              setLoad(true);
           }
       }, [load]
     );

@@ -47,12 +47,3 @@ html{
     flex-direction: column;
     width: 950px;
 }
-
-.TopInfo{
-    height: 600px;
-}
-
-
-.BottomInfo{
-    height: 100%;
-}

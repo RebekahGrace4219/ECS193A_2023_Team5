@@ -1,13 +1,7 @@
-import React, {useState} from 'react';
 import '../../css/Shared/photoUpload.css';
-
-const backend_url = process.env.REACT_APP_PROD_BACKEND;
-
-
 
 const PhotoUpload = (props) => {
     console.log(props);
-    const [image, setImage] = useState(props.children.default);
 
     function getBase64(file) {
         var reader = new FileReader();

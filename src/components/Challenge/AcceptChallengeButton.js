@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import '../../css/Shared/button.css';
-
+import { reloadPage } from "../../Helpers/CssEffects";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const AcceptChallengeButton = (props) => {
@@ -20,7 +20,7 @@ const AcceptChallengeButton = (props) => {
         };
         axios(config)
         .then(function(response) {
-            return response.data;
+            reloadPage();
         })
         .catch(function(error){
             if(error.response.status===401){

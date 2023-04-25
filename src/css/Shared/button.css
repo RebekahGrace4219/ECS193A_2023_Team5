@@ -178,3 +178,17 @@
     background-color: transparent !important;
     color: #00853F !important;
 }
+
+.editButton{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: 0;
+}
+
+.editButtonImage{
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+    padding: 0;
+}

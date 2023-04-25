@@ -5,7 +5,7 @@ import ProgressBar from "../Shared/ProgressBar";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
 import axios from "axios";
-
+import { flipButton } from "../../Helpers/CssEffects";
 import "../../css/Challenge/challengeObj.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
@@ -20,9 +20,7 @@ const WeeklyChallengeObj = (props) => {
     let myProgressRealUnits = Math.round(convertProgress(myProgressBaseUnits, props.children.exercise.unit));
     const [showState, setState] = useState(false);
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
-    const [top5, setTop5] = useState([]);
-    const [selfData, setSelfData] = useState([]);
-
+    const [load, setLoad] = useState(false);
     function max(a, b){
         if (a>b){
             return a;
@@ -39,10 +37,11 @@ const WeeklyChallengeObj = (props) => {
 
     function toggleState(){
         setState(!showState);
+        flipButton(challengeID + "button", showState);
     }
 
-    function selfInTop5(){
-        let myUsername = selfData[0].username;
+    function selfInTop5(top5, selfData){
+        let myUsername = selfData.username;
 
         for (let i = 0; i < top5.length; i++){
             if (myUsername === top5[i].username){
@@ -52,15 +51,13 @@ const WeeklyChallengeObj = (props) => {
         return false;
     }
 
-    function buildLeaderboard(){
+    function buildLeaderboard(top5, selfData){
         let top5Info = top5.map(makeLeaderboardObj);
-
-        if(!selfInTop5){
+        if(!selfInTop5(top5, selfData)){
             let item = selfData.map(makeLeaderboardObj);
             item[0]["level"] = " - ";
             top5Info.push(item[0]);
         }
-
         setLeaderboardInfo(top5Info);
     }
     function getLeaderboard(){
@@ -78,16 +75,14 @@ const WeeklyChallengeObj = (props) => {
         };
         axios(config)
         .then(function(response){
-            setTop5(response.data[0]);
-            setSelfData(response.data[1]);
-            buildLeaderboard();
+            buildLeaderboard(response.data[0], response.data[1]);
 
         })
         .catch(function(error){
             console.log(error);
-            if(error.response.status===401){
+            /*if(error.response.status===401){
                 window.location.href = "/loginPage";
-            }
+            }*/
         });
     }
 
@@ -113,7 +108,6 @@ const WeeklyChallengeObj = (props) => {
     }
 
     function makeLeaderboardObj(item, index){
-        console.log(item, index);
         let entry = {}
         entry["level"] = index + 1;
         entry["photo"] = item["pictures"];
@@ -125,10 +119,11 @@ const WeeklyChallengeObj = (props) => {
 
     useEffect (
         () => {
-            if(showState){
+            if(!load){
                 getLeaderboard();
+                setLoad(true);
             }
-        }, [showState]
+        }, [load]
     );
 
     return (
@@ -154,7 +149,7 @@ const WeeklyChallengeObj = (props) => {
 
         <div className = "challengeEnd">
             <button className = "challengeDropButton" onClick = {toggleState}>
-                <img src = "https://i.imgur.com/DiUB6gk.png" alt = "expandButton"/>
+                <img src = "https://i.imgur.com/DiUB6gk.png" id = {challengeID+"button"}alt = "expandButton"/>
             </button>
             {
                 (percentageDone < 100) ?

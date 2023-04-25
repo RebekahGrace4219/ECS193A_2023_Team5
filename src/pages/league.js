@@ -8,8 +8,7 @@ import LeagueMemberList from "../components/League/LeagueMemberList";
 import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
-import "../css/Shared/page3.css"
-import LeagueLeaderboardEntry from '../components/League/LeagueLeaderboardEntry';
+import "../css/Shared/page3.css";
 
 const League = (props) => {
     function getLeagueName(){

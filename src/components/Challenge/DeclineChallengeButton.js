@@ -21,7 +21,6 @@ const DeclineChallengeButton = (props) => {
         axios(config)
         .then(function(response) {
             reloadPage();
-            return response.data;
         })
         .catch(function(error){
             if(error.response.status===401){

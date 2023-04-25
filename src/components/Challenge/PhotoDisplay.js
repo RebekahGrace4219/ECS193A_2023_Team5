@@ -1,14 +1,12 @@
 import {useState} from 'react';
-
+import { createProfilePictureURL } from '../../Helpers/CloudinaryURLHelpers';
 import '../../css/Challenge/photoDisplay.css';
-const createURL = (username) => {
-    return "https://res.cloudinary.com/dtsw9d8om/image/upload/profilePictures/"+username.replace("#", "_") + ".png";
-}
+
 
 const createURLS = (usernames) => {
     let list = [];
 
-    usernames.forEach((username) => {list.push(createURL(username))});
+    usernames.forEach((username) => {list.push(createProfilePictureURL(username))});
     console.log(list);
     return list;
 }
@@ -43,7 +41,7 @@ const PhotoDisplay = (props) => {
     }
 
     function createPhotoObj(pictureURL, index){
-        return (<div className = "holder"><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
+        return (<div className = "holder" key = {pictureURL}><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
     }
 
     function calculatePictureDiv(){
