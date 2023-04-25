@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import FriendObj from './FriendObj';
 import axios from 'axios';
+import "../../css/Social/scroll.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendScroll = (props) => {
