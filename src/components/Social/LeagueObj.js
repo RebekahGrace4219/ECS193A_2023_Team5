@@ -3,7 +3,7 @@ import LeagueSelect from './LeagueSelect';
 import axios from 'axios';
 import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import "../../css/Social/obj.css";
-
+import "../../css/Shared/dropDown.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueObj = (props) => {
