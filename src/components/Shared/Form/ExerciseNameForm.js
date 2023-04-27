@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import hardCodedInfo from "../../../Helpers/SharedHardCodeInfo.json";
 import { setDisplayProperty } from "../../../Helpers/CssEffects";
+
 let sportList = hardCodedInfo.sportList;
 
 const ExerciseNameForm = (props) => {
@@ -38,6 +39,7 @@ const ExerciseNameForm = (props) => {
             }
         }, [selfSpecify]
     );
+
     function sportChange(event){
         setSelfSpecify((event.target.value === "Other (Specify Below)"));
         setSpecifyError("");
@@ -51,6 +53,13 @@ const ExerciseNameForm = (props) => {
 
     }
 
+    function checkMatch(string1, string2){
+        let regexPattern = /[^A-Za-z]/g;
+        let newString1 = string1.replace(regexPattern, "");
+        let newString2 = string2.replace(regexPattern, "");
+
+        return (newString1.toUpperCase() === newString2.toUpperCase());
+    }
     function selfSpecifyChange(event){
         let selfEntry = event.target.value;
 
@@ -59,6 +68,12 @@ const ExerciseNameForm = (props) => {
             props.updateExerciseName("");
             return false;
         }
+
+        sportList.forEach((item) => {
+            if( checkMatch(item, selfEntry)){
+                selfEntry = item;
+            }
+        });
 
         setSpecifyError("");
         props.updateExerciseName(event.target.value);
