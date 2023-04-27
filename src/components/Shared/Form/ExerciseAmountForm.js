@@ -2,7 +2,6 @@ import {useState, useEffect} from "react";
 
 const ExerciseAmountForm = (props) => {
     const [amountError, setAmountError] = useState("");
-    console.log("defautl Unit" , props.defaultUnit);
     const amountChange = (event) => {
         let targetAmount = event.target.value;
 
