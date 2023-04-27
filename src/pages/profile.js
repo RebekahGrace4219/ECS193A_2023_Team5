@@ -6,13 +6,8 @@ import MedalsSection from '../components/Profile/MedalsSection';
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import '../css/Shared/page2.css';
 import StatsChallengeSection from '../components/Profile/StatsChallengeSection';
-import StatsCalculatorSection from '../components/Profile/StatsCalculatorSection';
 import StatsDownloadSection from '../components/Profile/StatsDownloadSection';
 
-/*
-<Line></Line>
-                        <StatsCalculatorSection/>
-*/
 const Profile = (props) => {
     return (
         <div id = "Profile" className='Body2Part'>

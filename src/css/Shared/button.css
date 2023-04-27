@@ -1,7 +1,6 @@
 .submitButton{
     box-sizing: border-box;
-
-    width: 160px;
+    min-width: 160px;
     height: 34px;
 
     background: #014421;
@@ -14,7 +13,6 @@
 }
 
 .submitButtonText{
-    width: 141px;
     height: 27px;
 
 
@@ -23,7 +21,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 24px;
-
+    padding: 2px;
     color: #F9A800;
 }
 
