@@ -1,9 +1,26 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 const ExerciseDateForm = (props) => {
     const [issueDate, setIssueDate] = useState("");
     const [dueDate, setDueDate] = useState("");
     const [dueDateError, setDueDateError] = useState("");
+
+
+    useEffect (
+        () => {
+            if(props.defaultIssueDate){
+                document.getElementById("issueDateInput").value = new Date(props.defaultIssueDate).toISOString().substring(0,10);
+            }
+        }, [props.defaultIssueDate]
+    );
+
+    useEffect (
+        () => {
+            if(props.defaultDueDate){
+                document.getElementById("dueDateInput").value = new Date(props.defaultDueDate).toISOString().substring(0,10);
+            }
+        }, [props.defaultDueDate]
+    );
 
     const issueDateChange = (event) => {
         setIssueDate(event.target.value)
@@ -41,12 +58,12 @@ const ExerciseDateForm = (props) => {
         <div>
             <div className="formObj">
                 <p className="formObjInner">Issue Date</p>
-                <input id="issueDate" className="formDateInput" type="date" min={getToday()} onChange={issueDateChange}></input>
+                <input id="issueDateInput" className="formDateInput" type="date" min={getToday()} onChange={issueDateChange}></input>
             </div>
 
             <div className="formObj">
                 <p className="formObjInner">Due Date</p>
-                <input id="dueDate" className="formDateInput" type="date" min={getToday()} onChange={dueDateChange}></input>
+                <input id="dueDateInput" className="formDateInput" type="date" min={getToday()} onChange={dueDateChange}></input>
                 <p className="errorBox">{dueDateError}</p>
             </div>
         </div>);

@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import Line from "../Shared/Line";
 import axios from 'axios';
+import ChallengeStats from "./ChallengeStats";
 import ExerciseNameForm from "../Shared/Form/ExerciseNameForm";
 import ExericseAmountForm from "../Shared/Form/ExerciseAmountForm";
 import ExerciseDateForm from "../Shared/Form/ExerciseDateForm";
@@ -12,13 +13,35 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ChallengeForm = () =>{
     const [exerciseName, setExerciseName] = useState("");
+    const [defaultExerciseName, setDefaultExerciseName] = useState("");
     const [unit, setUnit] = useState("ct");
+    const [defaultUnit, setDefaultUnit] = useState("ct");
     const [amount, setAmount] = useState(0);
+    const [defaultAmount, setDefaultAmount] = useState(0);
     const [issueDate, setIssueDate] = useState("");
+    const [defaultIssueDate, setDefaultIssueDate] = useState();
     const [dueDate, setDueDate] = useState("");
+    const [defaultDueDate, setDefaultDueDate] = useState();
     const [receiverGroup, setReceiverGroup] = useState("self");
     const [receiver, setReceiver] = useState("");
     const [submitError, setSubmitError] = useState("");
+
+    const updateInputs = (data) => {
+      if (data === "NA"){
+        return;
+      }
+
+      setAmount(data.amount);
+      setDefaultAmount(data.amount);
+      setUnit(data.unit);
+      setDefaultUnit(data.unit);
+      setIssueDate(data.issueDate);
+      setDefaultIssueDate(data.issueDate);
+      setDueDate(data.dueDate);
+      setDefaultDueDate(data.dueDate);
+      setExerciseName(data.exerciseName);
+      setDefaultExerciseName(data.exerciseName);
+    }
 
     const checkValidInputs = () => {
       setSubmitError("");
@@ -95,10 +118,10 @@ const ChallengeForm = () =>{
             <h1>Challenges</h1>
             <h2>Create a Challenge</h2>
             <Line/>
-
-            <ExerciseNameForm updateExerciseName = {setExerciseName}/>
-            <ExericseAmountForm updateAmount = {setAmount} updateUnit = {setUnit}/>
-            <ExerciseDateForm updateIssueDate = {setIssueDate} updateDueDate = {setDueDate} />
+            <ChallengeStats updateInputs = {updateInputs}/>
+            <ExerciseNameForm defaultExerciseName = {defaultExerciseName} updateExerciseName = {setExerciseName}/>
+            <ExericseAmountForm defaultAmount = {defaultAmount} defaultUnit = {defaultUnit} updateAmount = {setAmount} updateUnit = {setUnit}/>
+            <ExerciseDateForm defaultIssueDate = {defaultIssueDate} defaultDueDate =  {defaultDueDate} updateIssueDate = {setIssueDate} updateDueDate = {setDueDate} />
             <ExerciseReceiverForm updateReceiver = {setReceiver} updateReceiverGroup = {setReceiverGroup}/>
 
 
