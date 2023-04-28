@@ -154,7 +154,7 @@ const LeagueEditForm = (props) => {
             <button className="submitButton" onClick={submitUpdatedPhoto}><p className="submitButtonText">Submit</p></button>
             <p className = "greenBaseText">{photoUpdateResponse}</p>
 
-            <LeagueNameForm updateName={setLeagueName} />
+            <LeagueNameForm updateLeagueName={setLeagueName} />
             <button className="submitButton" onClick={submitUpdatedName}><p className="submitButtonText">Submit</p></button>
             <p className = "greenBaseText">{nameUpdateResponse}</p>
 
@@ -162,7 +162,7 @@ const LeagueEditForm = (props) => {
             <button className="submitButton" onClick={submitUpdatedDescription}><p className="submitButtonText">Submit</p></button>
             <p className = "greenBaseText">{descriptionUpdateResponse}</p>
 
-            <LeagueTypeForm defaultValue="" updateType={setLeagueType} />
+            <LeagueTypeForm defaultValue="" updateLeagueType={setLeagueType} />
             <button className="submitButton" onClick={submitUpdatedType}><p className="submitButtonText">Submit</p></button>
             <p className = "greenBaseText">{typeUpdateResponse}</p>
         </div>);
