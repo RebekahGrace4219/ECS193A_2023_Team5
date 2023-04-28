@@ -60,6 +60,7 @@ const MemberEntry = (props) => {
     }
     setMemberDropDownEntries(dropdownOptions);
   }
+
   function addFriend() {
     var config = {
       method: 'post',
@@ -76,7 +77,6 @@ const MemberEntry = (props) => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         reloadPage();
       })
       .catch(function (error) {
@@ -105,7 +105,6 @@ const MemberEntry = (props) => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data)
         reloadPage();
       })
       .catch(function (error) {
@@ -134,7 +133,6 @@ const MemberEntry = (props) => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data)
         setDisplayProperty(props.children.username + "MemberEntry", "none");
       })
       .catch(function (error) {
@@ -164,7 +162,6 @@ const MemberEntry = (props) => {
     axios(config)
       .then(function (response) {
         setDisplayProperty(props.children.username + "MemberEntry", "none");
-        console.log(response.data)
       })
       .catch(function (error) {
         console.log(error)

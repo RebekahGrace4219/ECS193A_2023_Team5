@@ -90,7 +90,8 @@ const LeagueObj = (props) => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data)
+              console.log(response.data);
+              setDisplayProperty("LeagueObj"+props.children._id, "none");
           })
           .catch(function(error){
               console.log(error)
@@ -115,7 +116,8 @@ const LeagueObj = (props) => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data)
+              console.log(response.data);
+              setDisplayProperty("LeagueObj"+props.children._id, "none");
           })
           .catch(function(error){
               console.log(error)
@@ -140,7 +142,8 @@ const LeagueObj = (props) => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data)
+              console.log(response.data);
+              setDisplayProperty("LeagueObj"+props.children._id, "none");
           })
           .catch(function(error){
               console.log(error)
@@ -165,7 +168,8 @@ const LeagueObj = (props) => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data)
+              console.log(response.data);
+              setDisplayProperty("LeagueObj"+props.children._id, "none");
           })
           .catch(function(error){
               console.log(error)
@@ -190,7 +194,8 @@ const LeagueObj = (props) => {
           };
           axios(config)
           .then(function(response) {
-              console.log(response.data)
+              console.log(response.data);
+              setDisplayProperty("LeagueObj"+props.children._id, "none");
           })
           .catch(function(error){
               console.log(error)
@@ -221,7 +226,7 @@ const LeagueObj = (props) => {
         window.location.href = "leagueDescriptionPage?=" + props.children._id;
     }
     return(
-        <div id = "LeagueObj" className = "displayObj">
+        <div id = {"LeagueObj"+props.children._id} className = "displayObj">
             <div className = "objSection">
                 <button className = "objButton" onClick = {moveLeaguePage}>
                 <img className = "objProfilePhoto" src = {createLeaguePictureURL(id)} alt = "league"/>
