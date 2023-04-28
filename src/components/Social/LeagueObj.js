@@ -41,7 +41,7 @@ const LeagueObj = (props) => {
             else{
                 setDisplayProperty(props.children._id+"moreInfoButton", "block")
             }
-        }, [role]
+        }, [dropdownOptions]
     );
 
     function getRole(){
@@ -54,7 +54,7 @@ const LeagueObj = (props) => {
           withCredentials: true,
           credentials: 'include',
           data : {
-            leagueID: id
+            leagueID: props.children._id
           }
         };
         axios(config)
@@ -208,6 +208,7 @@ const LeagueObj = (props) => {
             options.push({ "name": "Remove Self as Admin", "func": removeAdmin });
         }
         if(type === "sent"){
+            console.log("log sent type");
             options.push({ "name": "Revoke Request", "func": revoke });
         }
         if(type ==="invite"){

@@ -88,7 +88,7 @@ const LeagueHeader = (props) => {
           withCredentials: true,
           credentials: 'include',
           data : {
-            leagueID: id
+            leagueID: props.children.id
           }
         };
         axios(config)
