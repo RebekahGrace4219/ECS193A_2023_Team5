@@ -1,7 +1,7 @@
 
 import SideBar from "../components/Shared/SideBar";
 import LeagueForm from "../components/AddLeague/LeagueForm";
-import "../css/Shared/page2.css";
+import "../css/Shared/page.css";
 const AddLeague = () => {
     return (
         <div id="AddLeague" className="Body2Part">

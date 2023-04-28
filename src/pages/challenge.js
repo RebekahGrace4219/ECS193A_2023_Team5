@@ -3,7 +3,7 @@ import Header from "../components/Shared/Header";
 import AddExerciseBox from "../components/Challenge/AddExerciseBox";
 import CurrentChallenge from "../components/Challenge/CurrentChallenge";
 import WeeklyChallenge from "../components/Challenge/WeeklyChallenge";
-import "../css/Shared/page2.css";
+import "../css/Shared/page.css";
 
 const Challenge = (props) => {
 
