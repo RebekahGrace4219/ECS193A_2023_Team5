@@ -93,7 +93,7 @@ const LeagueForm = (props) => {
 
       <LeagueNameForm updateLeagueName={setLeagueName} />
       <LeagueDescriptionForm updateDescription={setLeagueDescription} />
-      <LeagueTypeForm deafaultValue = "private" updateType={setLeagueType} />
+      <LeagueTypeForm deafaultValue = "private" updateLeagueType={setLeagueType} />
 
 
       <div className="formObj">
