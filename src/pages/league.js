@@ -11,6 +11,7 @@ import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 import "../css/Shared/page.css";
 
 const League = (props) => {
+
     function getLeagueName() {
         let href = window.location.href;
         let locationQuery = href.indexOf("=");

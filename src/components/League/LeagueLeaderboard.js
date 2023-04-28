@@ -80,8 +80,6 @@ const LeagueLeaderboard = (props) => {
 
     );
 
-    return(<div>Leaderboard Will GO Here</div>)
-
 }
 
 export default LeagueLeaderboard;
