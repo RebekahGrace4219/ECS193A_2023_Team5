@@ -4,6 +4,7 @@ import "../../css/Shared/button.css";
 import "../../css/Social/obj.css";
 import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import DropDown from '../Shared/DropDown';
+import { setDisplayProperty } from '../../Helpers/CssEffects';
 
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
@@ -44,11 +45,13 @@ const FriendObj = (props) => {
       axios(config)
       .then(function(response) {
           console.log(response.data)
+          setDisplayProperty("FriendObj"+props.children.username, "none");
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
           if(error.response.status===401){
+            setDisplayProperty("FriendObj"+props.children.username, "none");
             window.location.href = "/loginPage";
         }
       });
@@ -71,11 +74,13 @@ const FriendObj = (props) => {
       axios(config)
       .then(function(response) {
           console.log(response.data)
+          setDisplayProperty("FriendObj"+props.children.username, "none");
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
           if(error.response.status===401){
+            setDisplayProperty("FriendObj"+props.children.username, "none");
             window.location.href = "/loginPage";
         }
       });
@@ -97,6 +102,7 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
@@ -125,6 +131,7 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
@@ -152,6 +159,7 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
@@ -179,6 +187,7 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+          setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
@@ -212,7 +221,7 @@ const FriendObj = (props) => {
       setDropdownOptions(friendOptions);
     }
     return(
-        <div id = "FriendObj" className = "displayObj">
+        <div id = {"FriendObj"+props.children.username} className = "displayObj">
             <div className = "objSection">
                 <img className = "objProfilePhoto" src = {createProfilePictureURL(props.children.username)} alt = "profile"/>
             </div>
