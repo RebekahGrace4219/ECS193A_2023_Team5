@@ -68,6 +68,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getBanned(){
         // get list from service
         var config = {
@@ -92,6 +93,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getInvited(){
         // get list from service
         var config = {

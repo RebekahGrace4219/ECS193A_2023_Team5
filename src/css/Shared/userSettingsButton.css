@@ -82,5 +82,6 @@
 .userSettingsDropDown{
     position:relative;
     top: 25px;
-
+    z-index: 2;
+    overflow: visible;
 }

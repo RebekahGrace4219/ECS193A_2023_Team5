@@ -21,7 +21,6 @@ const MembersBar = (props) => {
                     element.classList.remove("barAddSelectedButton");
                 }
                 else if (element.id === onButton){
-                    console.log("Element matches!", element, onButton);
                     element.classList.add("barSelectedButton");
                     element.classList.remove("barUnselectedButton");
                 }
