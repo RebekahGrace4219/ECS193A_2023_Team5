@@ -9,6 +9,7 @@ import "../../css/Social/rowBox.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const RowBox = (props) => {
+
     const [load, setLoad] = useState(false);
     const [title, setTitle] = useState("");
     const [info, setInfo] = useState([]);

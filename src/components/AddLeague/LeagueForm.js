@@ -91,7 +91,7 @@ const LeagueForm = (props) => {
       </div>
 
 
-      <LeagueNameForm updateName={setLeagueName} />
+      <LeagueNameForm updateLeagueName={setLeagueName} />
       <LeagueDescriptionForm updateDescription={setLeagueDescription} />
       <LeagueTypeForm deafaultValue = "private" updateType={setLeagueType} />
 
