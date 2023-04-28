@@ -14,7 +14,8 @@
 
     display: flex;
     flex-direction: row;
-
+    flex-wrap: nowrap;
+    justify-content: space-between;
     border: 0px;
     display: flex;
     align-items: center;
@@ -54,16 +55,20 @@
 }
 
 #userSettingButtonSection{
-    display: flex;
-    padding: 0;
+    width: 83px;
+    height: 100%;
     margin: 0;
-    justify-content: center;
-    flex-direction: column;
 }
 
+#buttonUserDropDown{
+    position: relative;
+    left: 30px;
+    top: 25px;
+}
 .dropDownButton{
     background-color: transparent;
     border:0px;
+    z-index: 0;
 }
 
 #UserSettingsLeft{
@@ -72,4 +77,10 @@
     border: 0;
     background-color: transparent;
     align-items: center;
+}
+
+.userSettingsDropDown{
+    position:relative;
+    top: 25px;
+
 }

@@ -2,12 +2,7 @@ import RowBox from "../components/Social/RowBox";
 import {useState} from "react";
 import "./try.css";
 import DropDown from "../components/Shared/DropDown";
-/*<p>Divide</p>
-            //<RowBox>{{"informationType": "Suggest", "socialType": "League"}}</RowBox>
-            <p>Divide</p>
-            //<RowBox>{{"informationType": "Recent", "socialType": "League"}}</RowBox>
-            <p>Divide</p>
-            //<RowBox>{{"informationType": "Recent", "socialType": "Friend"}}</RowBox>*/
+
 const TestDiv = () => {
     const [listShow, setListShow] = useState(false);
     const showList = () => {
