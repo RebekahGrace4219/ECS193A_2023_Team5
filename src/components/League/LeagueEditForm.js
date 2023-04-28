@@ -144,7 +144,31 @@ const LeagueEditForm = (props) => {
                 console.log(error)
             });
     }
-
+/*
+    function deleteLeague(){
+        var config = {
+            method : 'post',
+            url : backend_url + 'league/delete_league',
+            headers: {
+              Accept: 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'include',
+            data:{
+                leagueID: id
+            }
+          };
+          axios(config)
+          .then(function(response) {
+              console.log(response.data)
+          })
+          .catch(function(error){
+              console.log(error)
+              if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
+          });
+    }*/
     return (
         <div>
             <div className="formObj">
@@ -165,6 +189,8 @@ const LeagueEditForm = (props) => {
             <LeagueTypeForm defaultValue="" updateLeagueType={setLeagueType} />
             <button className="submitButton" onClick={submitUpdatedType}><p className="submitButtonText">Submit</p></button>
             <p className = "greenBaseText">{typeUpdateResponse}</p>
+
+
         </div>);
 }
 

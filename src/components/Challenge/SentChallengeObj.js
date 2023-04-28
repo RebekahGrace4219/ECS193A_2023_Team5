@@ -7,7 +7,7 @@ const SentChallengeObj = (props) => {
     let title = props.children.exercise.exerciseName + " " + props.children.exercise.amount + " " + props.children.exercise.unit
     let receivedUser = props.children.receivedUser;
     return (
-    <div className = "challengeBox completeChallengeBox">
+    <div id = {"sentObj" + props.children._id} className = "challengeBox completeChallengeBox">
         <div className="photoDiv">
             <PhotoDisplay photos = {props.children.participants}></PhotoDisplay>
             <BoxLine></BoxLine>

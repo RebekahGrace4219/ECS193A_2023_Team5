@@ -8,6 +8,7 @@ import { getToken } from 'firebase/messaging';
 import { exportMessaging, requestPermission } from "../../firebase";
 import { createProfilePictureURL } from "../../Helpers/CloudinaryURLHelpers";
 import { flipButton } from '../../Helpers/CssEffects';
+import DropDown from './DropDown';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
@@ -30,9 +31,6 @@ const UserSettingsButton = () => {
       }
     }, [load]
   );
-
-
-
 
   function stopLogoutDisplay() {
     setLogoutDisplay(false);
@@ -112,42 +110,30 @@ const UserSettingsButton = () => {
     setDecisionState(event.target.value);
   }
 
-  useEffect(
-    () => {
-      function logout() {
-        var config = {
-          method: 'post',
-          url: backend_url + 'auth/logout',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include',
-          data: {
-            deviceToken: deviceToken
-          }
-        };
-        axios(config)
-          .then(function (response) {
-            window.location.href = "./";
+  function logout() {
+    var config = {
+      method: 'post',
+      url: backend_url + 'auth/logout',
+      headers: {
+        Accept: 'application/json',
+      },
+      withCredentials: true,
+      credentials: 'include',
+      data: {
+        deviceToken: deviceToken
+      }
+    };
+    axios(config)
+      .then(function (response) {
+        window.location.href = "./";
 
-          })
-          .catch(function (error) {
-            console.log(error)
-            console.log("No response")
-          });
-      }
-
-      if (decisionState === "Profile") {
-        moveProfilePage();
-        stopLogoutDisplay();
-      }
-      else if (decisionState === "Logout") {
-        logout();
-        stopLogoutDisplay();
-      }
-    }, [decisionState, deviceToken]
-  );
+      })
+      .catch(function (error) {
+        console.log(error)
+        console.log("No response")
+      });
+  }
+  let dropdownFunctions = [{"name":"Logout", "func":logout},{"name":"Profile", "func":moveProfilePage}];
   return (
     <div id="UserSettingsButton" >
       <button id="UserSettingsLeft" onClick={moveProfilePage}>
@@ -160,18 +146,16 @@ const UserSettingsButton = () => {
         </div>
       </button>
       <div id="userSettingButtonSection">
-        <button className="dropDownButton" onClick={toggleLogoutDisplay}><img id="UserSettingsTriangle" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
+        <button id = "buttonUserDropDown" className="dropDownButton" onClick={toggleLogoutDisplay}><img id="UserSettingsTriangle" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
         {
           logoutDisplay ?
-            <select className="formSelect" id="LogoutSelect" onChange={movePage}>
-              <option value=""></option>
-              <option value="Profile">Profile</option>
-              <option value="Logout">Logout</option>
-            </select>
+          <div className = "userSettingsDropDown"><DropDown>{dropdownFunctions}</DropDown></div>
+
             : <></>
         }
 
       </div>
+
     </div>
   );
 }

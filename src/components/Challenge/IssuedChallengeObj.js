@@ -99,7 +99,7 @@ const IssuedChallengeObj = (props) => {
 
 
     return (
-    <div id = "issuedChallengeObj" className = "completeChallengeBox">
+    <div id = {"issuedChallengeObj"+props.children._id} className = "completeChallengeBox">
         <div className = "challengeBox">
         <div className="photoDiv">
         <PhotoDisplay photos = {props.children.participants}></PhotoDisplay><BoxLine></BoxLine>

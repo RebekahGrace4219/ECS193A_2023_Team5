@@ -1,16 +1,27 @@
-import {useState} from 'react';
-import FriendSelect from "./FriendSelect";
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import "../../css/Shared/button.css";
 import "../../css/Social/obj.css";
 import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import DropDown from '../Shared/DropDown';
 
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendObj = (props) => {
-    const [selectShow, setSelectShow] = useState();
+  const [load, setLoad] = useState(false);
+    const [selectShow, setSelectShow] = useState(false);
+    const [dropdownOptions,setDropdownOptions] = useState([]);
     let type = props.type;
+    useEffect (
+      () => {
+          if(!load){
+            setLoad(true);
+            calculateFriendOptions();
+          }
+
+      }, [load]
+  );
 
     function toggleSelectShow(){
         setSelectShow(!selectShow);
@@ -179,27 +190,26 @@ const FriendObj = (props) => {
       });
     }
 
-    function friendReact(event){
-      let value = event.target.value;
-
-      if(value === "Unfriend"){
-          unfriend();
+    function calculateFriendOptions (){
+      let friendOptions = [];
+      if(type === "friend"){
+        friendOptions.push({ "name": "Unfriend", "func": unfriend });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "Block"){
-          block();
+      else if(type === "sent"){
+        friendOptions.push({ "name": "Revoke Request", "func": revoke });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "revoke"){
-          revoke();
+      else if(type === "received"){
+        friendOptions.push({ "name": "Accept", "func": accept });
+        friendOptions.push({ "name": "Decline", "func": decline });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "Unblock"){
-          unblock();
+      else if(type === "blocked"){
+        friendOptions.push({ "name": "Unblock", "func": unblock });
       }
-      else if (value === "Accept"){
-          accept();
-      }
-      else if (value === "Decline"){
-          decline();
-      }
+      console.log(friendOptions)
+      setDropdownOptions(friendOptions);
     }
     return(
         <div id = "FriendObj" className = "displayObj">
@@ -210,11 +220,11 @@ const FriendObj = (props) => {
                 <p className = "objDisplayName">{props.children.displayName}</p>
                 <p className = "objUsername">{props.children.username}</p>
             </div>
-            <div className = "objSection">
-                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
+            <div className = "objSection objButtonSection">
+                <button className = "moreInfoButton objButtonMore" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow) ? <FriendSelect type = {type} friendReact = {friendReact}></FriendSelect>: <></>}
+                {(selectShow) ?<div className='objDropdown'><DropDown>{dropdownOptions}</DropDown></div> : <></>}
             </div>
         </div>
     )

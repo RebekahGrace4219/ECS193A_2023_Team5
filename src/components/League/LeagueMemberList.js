@@ -28,7 +28,7 @@ const LeagueMemberList = (props) => {
             withCredentials: true,
             credentials: 'include',
             data:{
-                leagueID: id
+                leagueID: props.children.id
             }
         };
         axios(config)
@@ -55,7 +55,7 @@ const LeagueMemberList = (props) => {
             withCredentials: true,
             credentials: 'include',
             data:{
-                leagueID: id
+                leagueID: props.children.id
             }
         };
         axios(config)
@@ -68,6 +68,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getBanned(){
         // get list from service
         var config = {
@@ -79,7 +80,7 @@ const LeagueMemberList = (props) => {
             withCredentials: true,
             credentials: 'include',
             data:{
-                leagueID: id
+                leagueID: props.children.id
             }
         };
         axios(config)
@@ -92,6 +93,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getInvited(){
         // get list from service
         var config = {
@@ -103,7 +105,7 @@ const LeagueMemberList = (props) => {
             withCredentials: true,
             credentials: 'include',
             data:{
-                leagueID: id
+                leagueID: props.children.id
             }
         };
         axios(config)
@@ -127,7 +129,7 @@ const LeagueMemberList = (props) => {
             withCredentials: true,
             credentials: 'include',
             data:{
-                leagueID: id
+                leagueID: props.children.id
             }
         };
         axios(config)

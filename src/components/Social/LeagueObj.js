@@ -1,13 +1,15 @@
 import {useState, useEffect} from 'react';
-import LeagueSelect from './LeagueSelect';
 import axios from 'axios';
+import DropDown from '../Shared/DropDown';
 import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import {setDisplayProperty} from "../../Helpers/CssEffects";
 import "../../css/Social/obj.css";
 import "../../css/Shared/dropDown.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueObj = (props) => {
     const [load, setLoad] = useState(false);
+    const [dropdownOptions, setDropdownOptions] = useState([]);
     const [role, setRole] = useState("none");
     const [selectShow, setSelectShow] = useState();
 
@@ -23,6 +25,25 @@ const LeagueObj = (props) => {
         }, [load]
     );
 
+    useEffect (
+        () => {
+            if(role){
+                calculateDropdownOptions();
+            }
+        }, [role]
+    );
+
+    useEffect (
+        () => {
+            if(dropdownOptions.length === 0){
+                setDisplayProperty(props.children._id+"moreInfoButton", "none");
+            }
+            else{
+                setDisplayProperty(props.children._id+"moreInfoButton", "block")
+            }
+        }, [dropdownOptions]
+    );
+
     function getRole(){
         var config  = {
           method : 'post',
@@ -33,7 +54,7 @@ const LeagueObj = (props) => {
           withCredentials: true,
           credentials: 'include',
           data : {
-            leagueID: id
+            leagueID: props.children._id
           }
         };
         axios(config)
@@ -83,31 +104,6 @@ const LeagueObj = (props) => {
         var config = {
             method : 'post',
             url : backend_url + 'league/user_remove_admin',
-            headers: {
-              Accept: 'application/json',
-            },
-            withCredentials: true,
-            credentials: 'include',
-            data:{
-                leagueID: id
-            }
-          };
-          axios(config)
-          .then(function(response) {
-              console.log(response.data)
-          })
-          .catch(function(error){
-              console.log(error)
-              if(error.response.status===401){
-                window.location.href = "/loginPage";
-            }
-          });
-    }
-
-    function deleteLeague(){
-        var config = {
-            method : 'post',
-            url : backend_url + 'league/delete_league',
             headers: {
               Accept: 'application/json',
             },
@@ -203,28 +199,24 @@ const LeagueObj = (props) => {
             }
           });
     }
-    function leagueReact(event){
-        let value = event.target.value;
-        if(value === "leave"){
-            leave();
+    function calculateDropdownOptions(){
+        let options = [];
+        if((role === "admin" || role === "participant")&&(type==="league"||type === "admin")){
+            options.push({ "name": "Leave League", "func": leave });
         }
-        else if(value === "remove"){
-            removeAdmin();
+        if(role === "admin" && (type==="league"||type === "admin")){
+            options.push({ "name": "Remove Self as Admin", "func": removeAdmin });
         }
-        else if(value === "delete"){
-            deleteLeague();
+        if(type === "sent"){
+            console.log("log sent type");
+            options.push({ "name": "Revoke Request", "func": revoke });
         }
-        else if(value === "revoke"){
-            revoke();
+        if(type ==="invite"){
+            options.push({ "name": "Accept", "func": accept });
+            options.push({ "name": "Decline", "func": decline });
         }
-        else if(value === "decline"){
-            decline();
-        }
-        else if(value === "accept"){
-            accept();
-        }
+        setDropdownOptions(options);
     }
-
     function moveLeaguePage(){
         window.location.href = "leagueDescriptionPage?=" + props.children._id;
     }
@@ -240,11 +232,11 @@ const LeagueObj = (props) => {
                 <p className = "objUsername">{props.children.members.length} Members</p>
                 <p className = "objUsername">{props.children.activeChallenges} active challenges</p>
             </div>
-            <div className = "objSection">
-                <button className = "objButton" onClick = {toggleSelectShow}>
+            <div className = "objButtonSection objSection">
+                <button id = {props.children._id+"moreInfoButton"} className = "moreInfoButton objButtonMore" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow) ? <LeagueSelect role = {role} type = {type} leagueReact = {leagueReact}></LeagueSelect>: <></>}
+                {(selectShow) ? <div className='objDropdown'><DropDown>{dropdownOptions}</DropDown></div>: <></>}
             </div>
         </div>
     )
