@@ -61,3 +61,19 @@
 .objWritingSection{
     width: 300px;
 }
+
+.objButtonSection{
+    width: 35px;
+    height: 100%;
+}
+
+.objButtonMore{
+    position: relative;
+    left:0px;
+    top: 25px;
+}
+
+.objDropdown{
+    position: relative;
+    top: 20px;
+}
