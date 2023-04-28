@@ -103,8 +103,8 @@ const SuggestionBox= (props) => {
             {
                 (informationType === "friend") ?
                 <div>
-                    <p className = "SuggestionBoxTitle">Suggested Friends</p>
-                    <div>
+                    <h2>Suggested Friends</h2>
+                    <div className = "suggestionBoxInformation">
                         {informationMap.map((info) => {return (<SuggestedFriendObj username = {info[0]} mutualFriends = {info[1]}/>);})}
                     </div>
                 </div>
@@ -113,9 +113,10 @@ const SuggestionBox= (props) => {
             }
             {
                 (informationType === "league") ?
+
                 <div>
-                    <p className = "SuggestionBoxTitle">Suggested Leagues</p>
-                    <div>
+                    <h2>Suggested Leagues</h2>
+                    <div className = "suggestionBoxInformation">
                     {informationMap.map((info) => {return (<SuggestedLeagueObj leagueName = {info["leagueName"]} leagueID = {info["_id"]}/>);})}
                     </div>
                 </div>

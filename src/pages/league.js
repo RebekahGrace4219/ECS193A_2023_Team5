@@ -9,7 +9,7 @@ import LeagueMemberList from "../components/League/LeagueMemberList";
 import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 import SuggestionBox from "../components/Shared/SuggestionBox";
 
-import "../css/Shared/page3.css";
+import "../css/Shared/page2.css";
 
 const League = (props) => {
     function getLeagueName() {
@@ -51,10 +51,6 @@ const League = (props) => {
                         }
                         </div>
                     }
-                </div>
-                <div className="rightPadding"></div>
-                <div className="sidePart">
-                    <SuggestionBox>{{ "type": "league" }}</SuggestionBox>
                 </div>
             </div>
 

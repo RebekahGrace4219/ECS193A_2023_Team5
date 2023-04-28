@@ -1,9 +1,8 @@
 import SideBar from "../components/Shared/SideBar";
 import Header from "../components/Shared/Header";
-import RecentActivity from "../components/Social/RecentActivity";
 import FriendSection from "../components/Social/FriendSection";
 import LeagueSection from "../components/Social/LeagueSection";
-import SuggestionBox from "../components/Shared/SuggestionBox";
+import RowBox from "../components/Social/RowBox";
 
 import '../css/Shared/page3.css'
 const Social = (props) => {
@@ -17,23 +16,15 @@ const Social = (props) => {
             <div className = "rightSide3Part">
                 <div className = "centerInfo">
                     <Header>{{"title":"Social Hub", "type":"social", "onButton" : props.children.type}}</Header>
-                    <RecentActivity>{{"type":props.children.type}}</RecentActivity>
+                    <div className="extraInfo">
+                    <RowBox>{{"informationType": "Recent", "socialType": props.children.type}}</RowBox>
+                    <RowBox>{{"informationType": "Suggest", "socialType": props.children.type}}</RowBox>
+                    </div>
                     {
                         (props.children.type === "friend") ?
                         <FriendSection></FriendSection>
                         :
                         <LeagueSection/>
-                    }
-                </div>
-                <div className = "rightPadding"></div>
-                <div className="sidePart">
-                    {
-                    (props.children.type === "friend") ?
-                        <SuggestionBox>{{"type":"friend"}}</SuggestionBox>
-
-                    :
-                        <SuggestionBox>{{"type":"league"}}</SuggestionBox>
-
                     }
                 </div>
             </div>

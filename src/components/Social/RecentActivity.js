@@ -57,14 +57,14 @@ const RecentActivity = (props) => {
 
     function createActivityObj(input, index){
         if(index === 0){
-            return (<div>
+            return (<div className = "fullActivityRow">
                 <ActivityObj>
                     {input}
                 </ActivityObj></div>);
         }
         else{
             return (
-                <div>
+                <div className = "fullActivityRow">
                 <div className = "topLine"></div>
                 <ActivityObj>
                     {input}

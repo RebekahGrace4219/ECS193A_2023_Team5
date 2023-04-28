@@ -1,10 +1,10 @@
 import "../../css/Shared/suggestionBox.css";
 import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
-
+import { setDisplayProperty } from "../../Helpers/CssEffects";
 import axios from 'axios';
 const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SuggestedLeagueObj = (props) => {
-    let leagueID = props.leagueID;
+    let leagueID = props.children._id;
 
     const requestJoinLeague = () => {
     var config  = {
@@ -21,9 +21,10 @@ const SuggestedLeagueObj = (props) => {
     };
     axios(config)
     .then(function(response) {
+        setDisplayProperty(leagueID + "SuggestionObj", "none");
+
     })
     .catch(function(error){
-        console.log(error)
         if(error.response.status===401){
             window.location.href = "/loginPage";
         }
@@ -31,14 +32,12 @@ const SuggestedLeagueObj = (props) => {
     }
 
     return(
-        <div id = "SuggestedLeagueObj" className="suggestionObj">
-            <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = {createLeaguePictureURL(leagueID)} alt = "league"/>
+        <div id = {leagueID + "SuggestionObj"} className="ItemsSuggestionObj">
+            <div className = "ItemsSuggestionInner">
+                <img className = "ItemsProfilePhoto" src = {createLeaguePictureURL(leagueID)} alt = "league"/>
+                <p className = "greenBaseText ItemsObjText">{props.children.leagueName}</p>
             </div>
-            <div className = "suggestionWritingSection">
-                <p  className = "suggestionHeaderStyle" >{props.leagueName}</p>
-                <button className="submitButton" onClick= {requestJoinLeague} ><p className="submitButtonText">Join</p></button>
-            </div>
+            <button className = "submitCircleButton" onClick = {requestJoinLeague}><img className = "submitCircleButtonIcon" src = "https://i.imgur.com/hzH7hdK.png"/></button>
         </div>
     )
 }
