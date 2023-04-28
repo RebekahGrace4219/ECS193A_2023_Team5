@@ -1,17 +1,33 @@
 .dropdown {
-    float: left;
-    position: relative; /* <-- added declaration */
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid #014421;
 }
 
-.dropdownItem {
-    margin-top: 5px;
-    list-style-type: none;
-    height: 0px;
-    overflow: hidden;
+.topLine{
+    border: 0.5px solid #014421;
+}
 
-    position: absolute;  /* <-- added declarations */
-    left: 0; top: 100%;  /*     here               */
-    width: 100%;         /*     and here...        */
+.dropDownEntry{
+    width: 100px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    transition: height 1s ease;
+.dropDownEntry:hover{
+    cursor: pointer;
+}
+
+.dropDownText{
+    font-family: '?????';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    margin:0px;
+
+    text-align: center;
+
+    color:#014421;
 }

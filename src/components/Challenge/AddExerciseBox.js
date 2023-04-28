@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "../../css/Challenge/addExercise.css";
 import "../../css/Shared/form.css";
+import "../../css/Shared/button.css";
 import { reloadPage, flipButton } from '../../Helpers/CssEffects';
 import ExerciseNameForm from '../Shared/Form/ExerciseNameForm';
 import ExerciseAmountForm from '../Shared/Form/ExerciseAmountForm';
@@ -80,7 +81,7 @@ const AddExerciseBox = () => {
         <div id="AddExerciseBox">
             <div id = "AddExerciseHeader">
                 <h2>Add an Exercise</h2>
-                <button className="dropDownButton" onClick={toggleShowState}><img id="AddExerciseButtonShowState" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
+                <button className="dropDownButton" onClick={toggleShowState}><img className="dropDownButton" id="AddExerciseButtonShowState" src="https://i.imgur.com/msPQZqA.png" alt="Dropdown" /></button>
             </div>
             {showState
                 ?

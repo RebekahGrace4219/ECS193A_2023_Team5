@@ -1,3 +1,6 @@
+button{
+    cursor: pointer;
+}
 .submitButton{
     box-sizing: border-box;
     min-width: 160px;
@@ -10,6 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .submitButtonText{
