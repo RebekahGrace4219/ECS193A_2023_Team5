@@ -224,7 +224,7 @@ const FriendObj = (props) => {
                 <button className = "moreInfoButton objButtonMore" onClick = {toggleSelectShow}>
                     <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow) ? <div className='objDropdown'><DropDown>{dropdownOptions}</DropDown></div>: <></>}
+                {(selectShow) ?<div className='objDropdown'><DropDown>{dropdownOptions}</DropDown></div> : <></>}
             </div>
         </div>
     )
