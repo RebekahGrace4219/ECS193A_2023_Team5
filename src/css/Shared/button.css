@@ -190,3 +190,23 @@
     margin: 0 auto;
     padding: 0;
 }
+
+.submitCircleButton{
+    /* Ellipse 1 */
+    box-sizing: border-box;
+
+    width: 41px;
+    height: 41px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitCircleButtonIcon{
+    width: 20px;
+    height: 20px;
+}

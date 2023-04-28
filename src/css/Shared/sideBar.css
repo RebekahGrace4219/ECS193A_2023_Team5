@@ -43,3 +43,16 @@
     background-color: transparent;
     border: 0px;
 }
+
+.sideBarText{
+    color:#F9A800;
+    font-size: large;
+    margin: 3px;
+}
+
+.sideBarButtonSet{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

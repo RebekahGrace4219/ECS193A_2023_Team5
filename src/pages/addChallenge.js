@@ -1,6 +1,6 @@
 import ChallengeForm from "../components/AddChallenge/ChallengeForm";
 import SideBar from "../components/Shared/SideBar";
-import "../css/Shared/page2.css";
+import "../css/Shared/page.css";
 const AddChallenge = () => {
     return (
         <div id="AddChallenge" className="Body2Part">

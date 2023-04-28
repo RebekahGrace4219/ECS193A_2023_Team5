@@ -1,0 +1,53 @@
+.ItemsBox{
+    box-sizing: border-box;
+    width: 490px;
+    background: #D9D9D9;
+    border: 1px solid #014421;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ItemsRecentObj{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+}
+
+.ItemsProfilePhoto{
+    width: 50px;
+    height: 50px;
+}
+.ItemsObjText{
+    margin-left: 10px;
+}
+
+.fullRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ItemsSuggestionObj{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.ItemsSuggestionInner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.topLine{
+    border: 1px solid #014421;
+}

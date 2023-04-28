@@ -10,7 +10,6 @@ import {
   } from 'chart.js';
 import axios from 'axios';
 import "../../css/Profile/profile.css";
-import "../../css/Shared/page3.css";
 import { Bar } from 'react-chartjs-2';
 ChartJS.register(
     CategoryScale,

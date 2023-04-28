@@ -5,7 +5,7 @@ import ProfileSettingsForm from "../components/ProfileSettings/ProfileSettingsFo
 import DeleteSection from "../components/ProfileSettings/DeleteSection";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import "../css/Shared/page2.css";
+import "../css/Shared/page.css";
 import {createProfilePictureURL} from "../Helpers/CloudinaryURLHelpers";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
