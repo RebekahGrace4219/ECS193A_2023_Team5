@@ -1,4 +1,3 @@
-import "../../css/Shared/suggestionBox.css";
 import axios from "axios";
 import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import { setDisplayProperty } from "../../Helpers/CssEffects";

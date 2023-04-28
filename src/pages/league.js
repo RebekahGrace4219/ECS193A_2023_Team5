@@ -7,7 +7,6 @@ import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
 import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
-import SuggestionBox from "../components/Shared/SuggestionBox";
 
 import "../css/Shared/page2.css";
 

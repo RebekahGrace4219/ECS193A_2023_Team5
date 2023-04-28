@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import ActivityObj from './ActivityObj';
 import axios from "axios";
-import "../../css/Social/recentActivity.css";
 import { setDisplayProperty } from "../../Helpers/CssEffects";
 import SuggestedFriendObj from './SuggestedFriendObj';
 import SuggestedLeagueObj from './SuggestedLeagueObj';
@@ -159,14 +158,14 @@ const RowBox = (props) => {
     function createBoxSection(input, index) {
         if (index === 0) {
             return (
-                <div className="fullActivityRow">
+                <div className="fullRow">
                     {callFunc[props.children.socialType][props.children.informationType]["create"](input)}
                 </div>
             );
         }
         else {
             return (
-                <div className="fullActivityRow">
+                <div className="fullRow">
                     <div className="topLine"></div>
                     {callFunc[props.children.socialType][props.children.informationType]["create"](input)}
                 </div>

@@ -1,4 +1,3 @@
-import "../../css/Shared/suggestionBox.css";
 import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
 import { setDisplayProperty } from "../../Helpers/CssEffects";
 import axios from 'axios';

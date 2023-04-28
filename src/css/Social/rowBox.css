@@ -27,6 +27,13 @@
     margin-left: 10px;
 }
 
+.fullRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .ItemsSuggestionObj{
     display: flex;
     flex-direction: row;
