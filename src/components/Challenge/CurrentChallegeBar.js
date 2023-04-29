@@ -5,7 +5,6 @@ import "../../css/Shared/bar.css";
 const CurrentChallengeBar = (props) => {
     const [onButton, setOnButton] = useState("All");
 
-
     useEffect (
         () => {
             let elements = document.getElementsByClassName("barButton");

@@ -1,29 +1,21 @@
 import RowBox from "../components/Social/RowBox";
 import {useState} from "react";
+import Bar from "../components/Shared/Bar";
 import "./try.css";
-import DropDown from "../components/Shared/DropDown";
 
 const TestDiv = () => {
-    const [listShow, setListShow] = useState(false);
-    const showList = () => {
-        setListShow(!listShow);
+    const updateFunc = (value) => {
+        console.log(value, " clicked")
     }
 
-    const profileGo = () => {
-        console.log("would have gone to profile");
-    }
-
-    const logoutGo = () => {
-
-    console.log("would have gone to loguout");
-    }
-
-    let values = [{"name":"Logout", "func":logoutGo},{"name":"Profile", "func":profileGo}];
-    return(
-        <div id = "testID">
-            <DropDown>{values}</DropDown>
-        </div>
-    );
+    let buttonList = [{"name": "All", "defaultOn":true, "create":false},
+                        {"name": "Sent", "defaultOn":false, "create":false},
+                        {"name": "Received", "defaultOn":false, "create":false},
+                        {"name": "Create", "defaultOn":false, "create":true}];
+    return (<div>
+        <p>Testing Page</p>
+        <Bar>{{"buttonList":buttonList, "updateFunc":updateFunc}}</Bar>
+    </div>)
 }
 
 export default TestDiv;
