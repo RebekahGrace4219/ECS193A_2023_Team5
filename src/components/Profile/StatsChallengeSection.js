@@ -17,12 +17,12 @@ const StatsChallengeSection = () => {
       {
         label: 'Succesful Challenges',
         data: completedData,
-        backgroundColor: "#33A82D",
+        backgroundColor: "rgba(1, 68, 33, 0.7)",
       },
       {
         label: 'Failed Challenges',
         data: failedData,
-        backgroundColor: "#D31B18",
+        backgroundColor: "rgb(138, 12, 12, 0.7)",
       }
     ]
   });
@@ -60,12 +60,12 @@ const StatsChallengeSection = () => {
           {
             label: 'Succesful Challenges',
             data: completedData,
-            backgroundColor: "#33A82D",
+            backgroundColor: "rgba(1, 68, 33, 0.7)",
           },
           {
             label: 'Failed Challenges',
             data: failedData,
-            backgroundColor: "#D31B18",
+            backgroundColor: "rgb(138, 12, 12, 0.7)",
           }
         ]
       })

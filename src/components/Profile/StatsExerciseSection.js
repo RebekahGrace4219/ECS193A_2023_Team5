@@ -43,7 +43,7 @@ const StatsExerciseSection = () => {
               {
                 label: selectedExerciseName,
                 data: [],
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: 'rgba(1, 68, 33, 0.5)',
               }
             ],
         }
@@ -87,7 +87,7 @@ const StatsExerciseSection = () => {
                   {
                     label: selectedExerciseName,
                     data: data,
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    backgroundColor: 'rgba(1, 68, 33, 0.7)',
                   }
                 ],
             }
