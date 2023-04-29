@@ -32,10 +32,10 @@ const ExerciseNameForm = (props) => {
     useEffect (
         () => {
             if(selfSpecify){
-                setDisplayProperty("AddChallengeSelfSpecifyExerciseName", "block");
+                setDisplayProperty("SpecifyElement", "block");
             }
             else{
-                setDisplayProperty("AddChallengeSelfSpecifyExerciseName", "none");
+                setDisplayProperty("SpecifyElement", "none");
             }
         }, [selfSpecify]
     );
@@ -95,9 +95,9 @@ const ExerciseNameForm = (props) => {
             </div>
 
 
-            <div id = "AddChallengeSelfSpecifyExerciseName" className="formObj">
+            <div id = "SpecifyElement" className="formObj">
                 <p className = "formObjInner">Specify your own activity: </p>
-                <input  className = "formTextInput" type = "text" onChange = {selfSpecifyChange}/>
+                <input id = "AddChallengeSelfSpecifyExerciseName" className = "formTextInput" type = "text" onChange = {selfSpecifyChange}/>
                 <p className = "errorBox">{specifyError}</p>
             </div>
 
