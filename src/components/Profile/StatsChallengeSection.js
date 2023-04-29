@@ -11,8 +11,31 @@ const StatsChallengeSection = () => {
 
   const [graphChange, setGraphChange] = useState([]);
 
+  const options = {
+    plugins: {
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+        title:{
+          display: true,
+          text: "Date"
+        }
+      },
+      y: {
+        stacked: true,
+        title:{
+          display: true,
+          text: "Number of Challenges"
+        }
+      },
+    },
+  };
+
   const [config, setConfig] = useState({
     labels,
+    stacked:true,
     datasets: [
       {
         label: 'Succesful Challenges',
@@ -56,6 +79,7 @@ const StatsChallengeSection = () => {
     if (graphChange) {
       setConfig({
         labels,
+        stacked:true,
         datasets: [
           {
             label: 'Succesful Challenges',
@@ -66,7 +90,8 @@ const StatsChallengeSection = () => {
             label: 'Failed Challenges',
             data: failedData,
             backgroundColor: "rgb(138, 12, 12, 0.7)",
-          }
+          },
+
         ]
       })
     setGraphChange(false);
@@ -140,7 +165,7 @@ const StatsChallengeSection = () => {
   return (
     <div>
       <h1>Challenge History</h1>
-      <Bar data = {config}></Bar>
+      <Bar options = {options} data = {config}></Bar>
     </div>
   )
 }

@@ -49,6 +49,27 @@ const StatsExerciseSection = () => {
         }
     );
 
+    const options = {
+        plugins: {
+        },
+        responsive: true,
+        scales: {
+          x: {
+            title:{
+              display: true,
+              text: "Date"
+            }
+          },
+          y: {
+            title:{
+              display: true,
+              text: selectedExerciseUnit
+            }
+          },
+        },
+      };
+
+
     const [exerciseLog, setExerciseLog] = useState([]);
 
 
@@ -255,7 +276,7 @@ const StatsExerciseSection = () => {
 
             </select>
         </div>
-        <Bar data = {config}></Bar>
+        <Bar options = {options} data = {config}></Bar>
         </div>
         );
 }
