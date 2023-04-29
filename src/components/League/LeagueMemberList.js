@@ -13,7 +13,7 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueMemberList = (props) => {
     const [id] = useState(props.children.id);
-    const [memberScroll, setMemberScroll] = useState("all");
+    const [memberScroll, setMemberScroll] = useState("All");
     const [memberList, setMemberList] = useState([]);
     const [load, setLoad] = useState(false);
     const [selfType, setSelfType] = useState("");
