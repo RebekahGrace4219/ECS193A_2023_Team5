@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import FriendObj from './FriendObj';
 import axios from 'axios';
+import "../../css/Social/scroll.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendScroll = (props) => {
@@ -20,12 +21,15 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
+            setInformation(response.data);
+
         })
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -42,12 +46,14 @@ const FriendScroll = (props) => {
         };
         axios(config)
         .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
+            setInformation(response.data);
         })
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
         // setInformation([[{"displayName":"Sent Requests", "username":"Batman", "profilePicture": "https://i.imgur.com/jJaPs4q.png"}]]);
     }
@@ -71,6 +77,9 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
       }
 
@@ -93,10 +102,12 @@ const FriendScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });        }
 
     function makeFriendObj(input){
-        // console.log(input)
         return (<FriendObj type = {scrollType}>{input}</FriendObj>);
     }
 
@@ -118,7 +129,7 @@ const FriendScroll = (props) => {
     );
 
     return(
-        <div id = "FriendScroll">
+        <div className = "scroll">
             {information.map(makeFriendObj)}
         </div>
     )

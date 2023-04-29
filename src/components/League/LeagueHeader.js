@@ -1,35 +1,60 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
-
-import "../../css/League/leagueHeader.css";
+import QRcode from "qrcode";
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import "../../css/Shared/pictureHeader.css";
 import "../../css/Shared/button.css";
+import "../../css/Shared/coloredText.css";
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueHeader = (props) => {
     const [id] = useState(props.children.id);
+    const [role, setRole] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [leagueName, setLeagueName] = useState();
     const [numberMembers, setNumberMembers] = useState();
     const [numberChallenges, setNumberChallenges] = useState();
     const [leagueDescription, setLeagueDescription] = useState();
+    const [leagueType, setLeagueType] = useState();
     const [leaguePhoto, setLeaguePhoto] = useState();
+    const [qrCode, setQRCode] = useState("");
 
     useEffect (
         () => {
             if(!loaded){
-                getLeagueName();
+                generateQRCode();
+                getLeagueInfo();
                 getNumberChallenges();
-                getLeagueDescription();
                 getLeaguePhoto();
                 getNumberMembers();
+                getRole();
+                setLoaded(true);
             }
         }, [loaded]
     );
-    function getLeagueName(){
+
+    const generateQRCode = () => {
+        let url = "https://tread.run/requestLeague?" + id;
+        QRcode.toDataURL(url, {"color":{"light":"#D9D9D9"}}, (err, url) => {
+            if (err) return console.error(err)
+
+            setQRCode(url);
+        })
+    }
+
+    const setLeagueTypeText = (type) => {
+        if (type === "private"){
+            setLeagueType("Private League");
+        }
+        else{
+            setLeagueType("Public League");
+        }
+    }
+    function getLeagueInfo(){
         var config  = {
           method : 'post',
-          url: backend_url+'league/get_league_name',
+          url: backend_url+'league/get_league_name_description_type',
           headers: {
               Accept: 'application/json',
             },
@@ -42,8 +67,38 @@ const LeagueHeader = (props) => {
         axios(config)
         .then(function(response) {
             setLeagueName(response.data.leagueName);
+            setLeagueDescription(response.data.leagueDescription);
+            setLeagueTypeText(response.data.leagueType);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
+            console.log(error)
+        });
+    }
+
+    function getRole(){
+        var config  = {
+          method : 'post',
+          url: backend_url+'league/get_role',
+          headers: {
+              Accept: 'application/json',
+            },
+          withCredentials: true,
+          credentials: 'include',
+          data : {
+            leagueID: props.children.id
+          }
+        };
+        axios(config)
+        .then(function(response) {
+            setRole(response.data);
+        })
+        .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }
@@ -70,51 +125,8 @@ const LeagueHeader = (props) => {
         });
     }
 
-    function getLeagueDescription() {
-        var config  = {
-            method : 'post',
-            url: backend_url+'league/get_league_description',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include',
-            data : {
-              leagueID: id
-            }
-          };
-          axios(config)
-          .then(function(response) {
-
-              setLeagueDescription(response.data.leagueDescription);
-          })
-          .catch(function(error){
-              console.log(error)
-          });
-    }
-
     function getLeaguePhoto(){
-        var config  = {
-            method : 'post',
-            url: backend_url+'league/get_league_picture',
-            headers: {
-                Accept: 'application/json',
-              },
-            withCredentials: true,
-            credentials: 'include',
-            data : {
-              leagueID: id
-            }
-          };
-          axios(config)
-          .then(function(response) {
-
-
-              setLeaguePhoto(response.data.leaguePicture);
-          })
-          .catch(function(error){
-              console.log(error)
-          });
+        setLeaguePhoto(createLeaguePictureURL(id));
     }
 
     function getNumberMembers(){
@@ -139,33 +151,36 @@ const LeagueHeader = (props) => {
         });
     }
 
-    function moveDescriptionPage(){
-        window.location.href = "./leagueDescriptionPage?="+ id;
+    const moveEditPage = () => {
+        window.location.href = "./leagueEditPage?="+id;
     }
 
-    function moveMemberPage(){
-        window.location.href = "./leagueMemberPage?=" + id;
-    }
     return(
-        <div id = "LeagueHeader">
-            <div className = "leagueHeaderTop">
-                <h2>{leagueName}</h2>
-                <p>{leagueDescription}</p>
+        <div className = "pictureHeader">
+            <div className = "pictureHeaderLeft">
+                <div className = "pictureHeaderFarLeft">
+                    <div className = "pictureHolderDiv">
+                        <img className = "picture" src = {leaguePhoto} alt = "league"/>
+                    </div>
+                </div>
+                <div className = "pictureHeaderMiddle">
+                    <div className = "pictureHeaderContent">
+                        <h2>{leagueName}</h2>
+                        <p className = "pictureHeaderText">Description: {leagueDescription}</p>
+                        <p className = "pictureHeaderText">{leagueType}<br></br>{numberChallenges} Active Challenges  <br></br>{numberMembers} Members</p>
+                    </div>
+                    <div className = "pictureHeaderButton">
+                        {
+                            (role === "admin" || role === "owner")?
+                            <button className = "editButton" onClick = {moveEditPage}><img className = "editButtonImage" src = {"https://i.imgur.com/but4GRp.png"} alt = "edit button"></img></button>
+                            :
+                            <></>
+                        }
+                    </div>
+                </div>
             </div>
-            <div className = "leagueMain">
-                <div className = "leagueMainLeft">
-                    <div className = "leaguePhotoDiv">
-                        <img className = "leagueProfilePhoto" src = {leaguePhoto} alt = "league"/>
-                    </div>
-                    <div className='leagueItem'>
-                        <button className = "movePageButton" onClick = {moveDescriptionPage}><h3>{numberChallenges} Active Challenges</h3></button>
-                        <button className = "movePageButton" onClick = {moveMemberPage} ><h3>{numberMembers} Members</h3></button>
-                    </div>
-                </div>
-                <div className='leagueMainRight'>
-                    <h2>Add Code</h2>
-                    <img src = "https://i.imgur.com/rpi5EL2.png" alt = "qrcode"/>
-                </div>
+            <div className = "pictureHeaderRight">
+                <img className = "qrcodeImage" src = {qrCode} alt = "qr code for friend request"></img>
             </div>
         </div>
     )

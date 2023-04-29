@@ -1,15 +1,42 @@
-import "../../css/Shared/suggestionBox.css";
-
+import {createLeaguePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import { setDisplayProperty } from "../../Helpers/CssEffects";
+import axios from 'axios';
+const backend_url = process.env.REACT_APP_PROD_BACKEND
 const SuggestedLeagueObj = (props) => {
+    let leagueID = props.children._id;
+
+    const requestJoinLeague = () => {
+    var config  = {
+        method : 'post',
+        url: backend_url+'league/user_request_to_join',
+        headers: {
+            Accept: 'application/json',
+        },
+        withCredentials: true,
+        credentials: 'include',
+        data:{
+            leagueID: leagueID
+        }
+    };
+    axios(config)
+    .then(function(response) {
+        setDisplayProperty(leagueID + "SuggestionObj", "none");
+
+    })
+    .catch(function(error){
+        if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
+    });
+    }
+
     return(
-        <div id = "SuggestedLeagueObj" className="suggestionObj">
-            <div className = "suggestionImageSection">
-                <img className = "suggestionImage" src = "https://i.imgur.com/uPaX0Km.png"/>
+        <div id = {leagueID + "SuggestionObj"} className="ItemsSuggestionObj">
+            <div className = "ItemsSuggestionInner">
+                <img className = "ItemsProfilePhoto" src = {createLeaguePictureURL(leagueID)} alt = "league"/>
+                <p className = "greenBaseText ItemsObjText">{props.children.leagueName}</p>
             </div>
-            <div className = "suggestionWritingSection">
-                <p  className = "suggestionHeaderStyle" >{props.leagueName}</p>
-                <p  className = "suggestionTextStyle">{props.mutualFriends} Mutual Friends</p>
-            </div>
+            <button className = "submitCircleButton" onClick = {requestJoinLeague}><img className = "submitCircleButtonIcon" src = "https://i.imgur.com/hzH7hdK.png"/></button>
         </div>
     )
 }

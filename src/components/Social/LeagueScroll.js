@@ -1,7 +1,7 @@
 import LeagueObj from './LeagueObj';
 import {useState,useEffect} from 'react';
+import "../../css/Social/scroll.css";
 import axios from 'axios';
-
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueScroll = (props) => {
@@ -28,6 +28,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -50,6 +53,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });     }
 
     function getAdmin(){
@@ -71,28 +77,9 @@ const LeagueScroll = (props) => {
         .catch(function(error){
             console.log(error)
             console.log("No response")
-        });
-      }
-
-    function getOwner(){
-        // get Blocked
-        var config = {
-          method : 'post',
-          url : backend_url + 'league/get_owned_leagues',
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true,
-          credentials: 'include'
-        };
-        axios(config)
-        .then(function(response) {
-            console.log(response.data)
-            setInformation(response.data)
-        })
-        .catch(function(error){
-            console.log(error)
-            console.log("No response")
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
       }
 
@@ -114,6 +101,9 @@ const LeagueScroll = (props) => {
           .catch(function(error){
               console.log(error)
               console.log("No response")
+              if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
           });
       }
 
@@ -132,17 +122,17 @@ const LeagueScroll = (props) => {
             else if(scrollType === "admin"){
                 getAdmin();
             }
-            else if(scrollType === "owner"){
-                getOwner();
-            }
             else if(scrollType === "invite"){
                 getInvite();
+            }
+            else if(scrollType === "create"){
+                window.location.href = "./addLeaguePage"
             }
         }, [scrollType]
     );
 
     return(
-        <div id = "LeagueScroll">
+        <div className = "scroll">
             {information.map(makeLeagueObj)}
         </div>
     )

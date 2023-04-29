@@ -1,7 +1,9 @@
+button{
+    cursor: pointer;
+}
 .submitButton{
     box-sizing: border-box;
-
-    width: 150px;
+    min-width: 160px;
     height: 34px;
 
     background: #014421;
@@ -11,10 +13,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .submitButtonText{
-    width: 141px;
     height: 27px;
 
 
@@ -23,7 +25,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 24px;
-
+    padding: 2px;
     color: #F9A800;
 }
 
@@ -87,6 +89,9 @@
     border-style: none;
 }
 
+.movePageButton:hover {
+    text-decoration: underline;
+}
 .moreInfoButton{
     border-style:none;
     background-color: transparent;
@@ -128,8 +133,6 @@
     background: #014421;
     border: 1px solid #F9A800;
     border-radius: 21px;
-
-
 }
 
 .addButtonIcon{
@@ -137,9 +140,8 @@
     height: 20px;
 }
 
-
-.barButton{
-    width: 150px;
+.BarButton{
+    width: 140px;
     height: 30px;
 
     font-style: normal;
@@ -160,19 +162,54 @@
     border-radius: 4px;
 }
 
-.barSelectedButton{
+.OnButtonCreate{
+    background-color: transparent !important;
+    color: #014421 !important;
+}
+
+.OnButtonNoCreate{
     background-color: #cdced1 !important;
 }
 
-.barUnselectedButton{
+.OffButtonNoCreate{
     background-color: transparent !important;
 }
 
-.barAddSelectedButton{
-    background-color: #00853F !important;
+.OffButtonCreate{
+    background-color: #014421 !important;
+    color: white;
 }
 
-.barAddUnselectedButton{
-    background-color: transparent !important;
-    color: #00853F !important;
+.editButton{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: 0;
+}
+
+.editButtonImage{
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.submitCircleButton{
+    /* Ellipse 1 */
+    box-sizing: border-box;
+
+    width: 41px;
+    height: 41px;
+
+    background: #014421;
+    border: 1px solid #F9A800;
+    border-radius: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitCircleButtonIcon{
+    width: 20px;
+    height: 20px;
 }

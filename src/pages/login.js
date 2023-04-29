@@ -105,7 +105,6 @@ const Login = () => {
   // log out function to log the user out of google and set the profile array to null
 
   const setDeviceToken = () => {
-    console.log("Here is where I would be posting the device token");
     getToken(exportMessaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2BpAVIV4Znb7OgKzWJAz9eLOKde6YhWLpAdw1EZ0"}).then((currentToken) => {
       if (currentToken) {
         console.log("Setting token here", currentToken);

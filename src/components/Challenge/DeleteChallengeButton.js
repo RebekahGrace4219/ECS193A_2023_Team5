@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import '../../css/Shared/button.css';
-
+import { setDisplayProperty } from "../../Helpers/CssEffects";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const DeleteChallengeButton = (props) => {
@@ -20,15 +20,18 @@ const DeleteChallengeButton = (props) => {
         };
         axios(config)
         .then(function(response) {
-            return response.data;
+            setDisplayProperty("sentObj"+props.id, "none");
         })
         .catch(function(error){
             console.log(error)
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
     return(
-        <button id = "DeleteButton" className = "circleButton" onClick = {onDelete}>
+        <button id = {"DeleteButton"+props.id} className = "circleButton" onClick = {onDelete}>
             <img className = "circleButtonInner" src ="https://i.imgur.com/WgGT2MJ.png"/>
         </button>
     );

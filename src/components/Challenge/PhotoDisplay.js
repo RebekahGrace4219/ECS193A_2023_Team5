@@ -1,13 +1,23 @@
 import {useState} from 'react';
-
+import { createProfilePictureURL } from '../../Helpers/CloudinaryURLHelpers';
 import '../../css/Challenge/photoDisplay.css';
 
+
+const createURLS = (usernames) => {
+    let list = [];
+
+    usernames.forEach((username) => {list.push(createProfilePictureURL(username))});
+    console.log(list);
+    return list;
+}
+
 const PhotoDisplay = (props) => {
-    let pictures = props.photos;
+    let pictures = createURLS(props.photos);
     const [length] =  useState(findLength(pictures));
     const [pictureLength] = useState(min(3, length));
     const [firstThreePictureList, setPictureList] = useState(moveList(pictures));
     const [pictureDiv] = useState(calculatePictureDiv());
+
 
     function min(a, b){
         return (a<b?(a):b);
@@ -17,10 +27,10 @@ const PhotoDisplay = (props) => {
         return pictures.length;
     }
 
-    function moveList(hashPictures) {
+    function moveList() {
         let list_ = [];
         for(let i = 0; i < min(pictures.length, 3); i++){
-            list_.push(pictures[i].picture);
+            list_.push(pictures[i]);
         }
         return list_;
     }
@@ -31,7 +41,7 @@ const PhotoDisplay = (props) => {
     }
 
     function createPhotoObj(pictureURL, index){
-        return (<div className = "holder"><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
+        return (<div className = "holder" key = {pictureURL}><img className = "photoDisplayObj"  src = {pictureURL} alt = "profile"/></div>);
     }
 
     function calculatePictureDiv(){

@@ -3,6 +3,7 @@
     margin-left: 35px;
     margin-top: 20px;
     background-color: #F1EEEA;
+    overflow-y: scroll;
 }
 
 #title{

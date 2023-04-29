@@ -1,4 +1,5 @@
-import '../css/Front/front.css'
+import '../css/Front/front.css';
+
 const Front = () => {
     function moveLogin(){
         window.location.href = "/loginPage";
@@ -6,12 +7,11 @@ const Front = () => {
     return (
         <div id = "Front">
             <div id = "frontPageHeader">
-                <button className = "frontPageButton">About</button>
                 <button className = "frontPageButton" onClick = {moveLogin}>Log in/Sign up</button>
             </div>
             <div id = "frontPageBody">
                 <div id = "logoTitleSide">
-                    <img id = "frontPageLogo" src = "https://i.imgur.com/qajrJEV.png"></img>
+                    <img id = "frontPageLogo" src = "https://i.imgur.com/qajrJEV.png" alt = "Tread Logo"></img>
                     <p id = "frontPageTitle">Tread</p>
                     <p id = "frontPageSubtitle">Stay Fit with Friends</p>
                 </div>
@@ -20,7 +20,4 @@ const Front = () => {
     );
 }
 
-/*
-<img id = "TreadTitle" src = "https://i.imgur.com/U7OO0JG.png" alt = "Tread"/></div>
-          <div id = "TreadSubtitleDiv"><img id = "TreadSubtitle" src = "https://i.imgur.com/Mx4rK6l.png" alt = "Stay Fit with Friends"/></div>*/
 export default Front;

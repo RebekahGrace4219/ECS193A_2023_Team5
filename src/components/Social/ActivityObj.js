@@ -1,17 +1,15 @@
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import "../../css/Shared/coloredText.css";
 const ActivityObj = (props) => {
-    let displayName = props.children.displayName;
-    let progress = (props.children.type === "progress") ? ("made progress") : ("completed");
-    let challengeType = props.children.challengeType;
-    let time = props.children.time;
-    let challengeTitle = props.children.challengeTitle;
-    let photo = props.children.photo;
+    let username = props.children.username;
+    let exerciseName = props.children.exercise.exerciseName;
+    let progress = props.children.exercise.amount;
+    let unit = props.children.exercise.unit;
+    let date = props.children.loggedDate.split("T")[0];
     return (
-        <div id = "ActivityObj">
-            <div id = "ActivityLeftSide">
-                <img id = "activityProfilePhoto" src = {photo}></img>
-                <p className = "activityObjText">{displayName} {progress} on a {challengeType} Challenge - {challengeTitle}</p>
-            </div>
-            <p>{time}</p>
+        <div className = "ItemsRecentObj">
+            <img className= "ItemsProfilePhoto" src = {createProfilePictureURL(username)} alt = "profile"></img>
+            <p className = "greenBaseText ItemsObjText">{username} did {exerciseName} {progress} {unit} on {date}</p>
         </div>
     );
 }

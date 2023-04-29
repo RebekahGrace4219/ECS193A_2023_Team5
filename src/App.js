@@ -11,29 +11,25 @@ import Challenge from "./pages/challenge";
 import Social from "./pages/social";
 import Profile from "./pages/profile";
 import League from "./pages/league";
-import TestDiv from "./pages/test";
+import RedirectPage from "./pages/redirectPage";
 import { useEffect } from "react";
 
-//import { onForegroundMessage } from "./firebase";
+import { onForegroundMessage } from "./firebase";
 function App() {
-
-
-  /*useEffect(() => {
-    console.log('hi')
+  useEffect(() => {
     onForegroundMessage()
       .then((payload) => {
         console.log('Received foreground message: ', payload);
         const { notification: { title, body } } = payload;
       })
       .catch(err => console.log('An error occured while retrieving foreground message. ', err));
-  }, []);*/
+  }, []);
 
   return (
     <div id = "page">
       <Router>
       <Routes>
         <Route path = "/" element = {<Front/>}/>
-        <Route path = "/test" element = {<TestDiv/>}/>
         <Route path = "/loginPage" element = {<Login/>}/>
         <Route path = "/signUpPage" element = {<SignUp/>} />
         <Route path = "/profileSettingsPage" element = {<ProfileSettings/>} />
@@ -46,7 +42,10 @@ function App() {
         <Route path = "/profileMedalPage" element = {<Profile>{{"type":"medal"}}</Profile>} />
         <Route path = "/profileStatsPage" element = {<Profile>{{"type":"stats"}}</Profile>} />
         <Route path = "/leagueDescriptionPage?" element = {<League>{{"type":"description"}}</League>}/>
+        <Route path = "/leagueEditPage?" element = {<League>{{"type":"edit"}}</League>}/>
         <Route path = "/leagueMemberPage?" element = {<League>{{"type":"member"}}</League>}/>
+        <Route path = "/requestFriend?" element = {<RedirectPage type = "Friend"></RedirectPage>}/>
+        <Route path = "/requestLeague?" element = {<RedirectPage type = "League"></RedirectPage>}/>
       </Routes>
       </Router>
       </div>

@@ -1,32 +1,40 @@
 import SideBar from '../components/Shared/SideBar';
 import Header from '../components/Shared/Header';
 import Line from "../components/Shared/Line";
-import StatsSection from '../components/Profile/StatsSection';
+import StatsExerciseSection from '../components/Profile/StatsExerciseSection';
 import MedalsSection from '../components/Profile/MedalsSection';
-import UserSettingsButton from '../components/Shared/UserSettingsButton';
-import SuggestionBox from '../components/Shared/SuggestionBox';
-
-import '../css/Shared/page3.css';
+import ProfileHeader from "../components/Profile/ProfileHeader";
+import '../css/Shared/page.css';
+import StatsChallengeSection from '../components/Profile/StatsChallengeSection';
+import StatsDownloadSection from '../components/Profile/StatsDownloadSection';
 
 const Profile = (props) => {
     return (
-        <div id = "Profile" className='Body3Part'>
-            <div className = "leftSide3Part">
+        <div id = "Profile" className='Body2Part'>
+            <div className = "leftSide2Part">
                 <SideBar></SideBar>
             </div>
-            <div className = "middleSide3Part">
-                <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
-                <Line/>
+            <div className = "rightSide2Part">
+                <div className = "mainInfo">
+                    <Header>{{"title":"Profile", "type":"profile", "onButton":props.children.type}}</Header>
+                    <ProfileHeader></ProfileHeader>
+                    <Line/>
+                    {
+                        (props.children.type === "stats") ?
+                        <div>
+                        <StatsExerciseSection/>
+                        <Line></Line>
+                        <StatsChallengeSection/>
+
+                        <Line></Line>
+                        <StatsDownloadSection/>
+                        </div>
+                        :
+                        <MedalsSection/>
+                    }
+                </div>
             </div>
-            {
-                (props.children.type === "stats") ?
-                    <StatsSection/>
-                :
-                <MedalsSection/>
-            }
-            <div className = "rightSide3Part">
-                <SuggestionBox>{{"type":"medal"}}</SuggestionBox>
-            </div>
+
         </div>
       );
 }

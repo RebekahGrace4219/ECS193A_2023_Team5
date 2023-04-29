@@ -5,7 +5,7 @@ import BoxLine from "./BoxLine";
 import ProgressBar from "../Shared/ProgressBar";
 import Line from "../Shared/Line";
 import Leaderboard from "../Shared/Leaderboard";
-
+import { flipButton } from "../../Helpers/CssEffects";
 import axios from "axios";
 
 import "../../css/Challenge/challengeObj.css";
@@ -14,7 +14,7 @@ import "../../css/Shared/button.css";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const IssuedChallengeObj = (props) => {
-    console.log("Issued Object: ", props.children.exercise);
+    console.log(props);
     let myProgressBaseUnits = props.children.progress.progress;
     let totalBaseUnits = props.children.progress.exercise.convertedAmount;
     let totalRealUnits = props.children.progress.exercise.amount;
@@ -27,8 +27,10 @@ const IssuedChallengeObj = (props) => {
     const [leaderboardInfo, setLeaderboardInfo] = useState([]);
 
     const [showState, setState] = useState(false);
+
     function toggleState(){
         setState(!showState);
+        flipButton(challengeID + "button", showState);
     }
 
     function convertProgress(progress, goal_unit){
@@ -69,7 +71,10 @@ const IssuedChallengeObj = (props) => {
             console.log("Item sends: ", leaderboardInfo);
         })
         .catch(function(error){
-            console.log(error)
+            console.log(error);
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -95,10 +100,10 @@ const IssuedChallengeObj = (props) => {
 
 
     return (
-    <div id = "issuedChallengeObj" className = "completeChallengeBox">
+    <div id = {"issuedChallengeObj"+props.children._id} className = "completeChallengeBox">
         <div className = "challengeBox">
         <div className="photoDiv">
-        <PhotoDisplay photos = {props.children.pictures}></PhotoDisplay><BoxLine></BoxLine>
+        <PhotoDisplay photos = {props.children.participants}></PhotoDisplay><BoxLine></BoxLine>
         </div>
         <div className = "challengeMiddle">
             <div className = "challengeInnerMiddle">
@@ -113,7 +118,7 @@ const IssuedChallengeObj = (props) => {
 
         <div className = "challengeEnd">
             <button className = "challengeDropButton" onClick = {toggleState}>
-                <img src = "https://i.imgur.com/DiUB6gk.png" alt = "expandButton"/>
+                <img src = "https://i.imgur.com/DiUB6gk.png" id = {challengeID+"button"} alt = "expandButton"/>
             </button>
             {
                 (percentageDone < 100) ?

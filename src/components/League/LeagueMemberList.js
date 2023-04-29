@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 
 import MemberEntry from './MemberEntry';
 import MemberAdd from './MemberAdd';
-import MembersBar from './MembersBar';
+import Bar from '../Shared/Bar';
 
 import axios from "axios";
 
@@ -13,10 +13,16 @@ const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const LeagueMemberList = (props) => {
     const [id] = useState(props.children.id);
-    const [memberScroll, setMemberScroll] = useState("all");
+    const [memberScroll, setMemberScroll] = useState("All");
     const [memberList, setMemberList] = useState([]);
     const [load, setLoad] = useState(false);
     const [selfType, setSelfType] = useState("");
+    let buttonList = [{"name": "All", "defaultOn":true, "create":false},
+    {"name": "Pending", "defaultOn":false, "create":false},
+    {"name": "Invited", "defaultOn":false, "create":false},
+    {"name": "Banned", "defaultOn":false, "create":false},
+    {"name": "Add User", "defaultOn":false, "create":true}];
+
 
     function getAll(){
         var config = {
@@ -37,7 +43,10 @@ const LeagueMemberList = (props) => {
             setMemberList(response.data);
         })
         .catch(function(error){
-            console.log(error)
+            console.log(error);
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
         });
 
     }
@@ -65,6 +74,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getBanned(){
         // get list from service
         var config = {
@@ -89,6 +99,7 @@ const LeagueMemberList = (props) => {
             console.log(error)
         });
     }
+
     function getInvited(){
         // get list from service
         var config = {
@@ -146,16 +157,16 @@ const LeagueMemberList = (props) => {
 
     useEffect (
         () => {
-            if(memberScroll === "all"){
+            if(memberScroll === "All"){
                 getAll();
             }
-            else if(memberScroll === "requesting" && (selfType === "admin" || selfType === "owner")){
+            else if(memberScroll === "Pending" && (selfType === "admin" || selfType === "owner")){
                 getRequesting();
             }
-            else if(memberScroll === "banned" && (selfType === "admin" || selfType === "owner")){
+            else if(memberScroll === "Banned" && (selfType === "admin" || selfType === "owner")){
                 getBanned();
             }
-            else if(memberScroll === "invited" && (selfType === "admin" || selfType === "owner")){
+            else if(memberScroll === "Invited" && (selfType === "admin" || selfType === "owner")){
                 getInvited();
             }
         }, [memberScroll]
@@ -175,23 +186,23 @@ const LeagueMemberList = (props) => {
         <div className = "leagueMemberHeader">
             <div className ="selectButtonHeader">
                 <h1>Members</h1>
-                <MembersBar selfType = {selfType} changeFunction = {setMemberScroll}></MembersBar>
+                {selfType === "owner" || selfType === "admin" ? <Bar>{{"buttonList":buttonList, "updateFunc":setMemberScroll}}</Bar> : <></>}
             </div>
 
             {
-                (memberScroll === "all") ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
+                (memberScroll === "All") ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
             }
             {
-                (memberScroll === "requesting" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
+                (memberScroll === "Pending" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
             }
             {
-                (memberScroll === "banned" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
+                (memberScroll === "Banned" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
             }
             {
-                (memberScroll === "invited" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
+                (memberScroll === "Invited" && (selfType === "admin" || selfType === "owner")) ? <div id = "LeagueMemberList">{memberList.map(makeMemberEntryObj)}</div> : <></>
             }
             {
-                (memberScroll === "addUser" && (selfType === "admin" || selfType === "owner")) ? <MemberAdd leagueID = {id}></MemberAdd>:<></>}
+                (memberScroll === "Add User" && (selfType === "admin" || selfType === "owner")) ? <MemberAdd leagueID = {id}></MemberAdd>:<></>}
         </div>
     )
 }

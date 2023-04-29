@@ -10,28 +10,24 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     padding: 20px;
-    width: 900px;
-    height: 350px;
+    width: 100%;
     margin-bottom : 40px;
     margin-top: 30px;
 }
 
-.horizontalForm{
+#AddExerciseHeader {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     justify-content: space-between;
-    width: 100%;
-    padding-top: 10px;
+    width: 90%;
 }
-
-.twoDivForm{
-    display: flex;
-    flex-direction: flex-end;
-}
-
 .formButton{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     padding: 10px;
+}
+
+#AddExerciseFormBox {
+    width: 90%;
 }

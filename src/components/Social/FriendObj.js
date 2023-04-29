@@ -1,16 +1,28 @@
-import {useState} from 'react';
-import FriendSelect from "./FriendSelect";
-import SentSelect from "./SentSelect";
-import ReceivedSelect from "./ReceivedSelect";
-import BlockedSelect from "./BlockedSelect";
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import "../../css/Shared/button.css";
 import "../../css/Social/obj.css";
+import {createProfilePictureURL} from "../../Helpers/CloudinaryURLHelpers";
+import DropDown from '../Shared/DropDown';
+import { setDisplayProperty } from '../../Helpers/CssEffects';
+
+
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const FriendObj = (props) => {
-    const [selectShow, setSelectShow] = useState();
+  const [load, setLoad] = useState(false);
+    const [selectShow, setSelectShow] = useState(false);
+    const [dropdownOptions,setDropdownOptions] = useState([]);
     let type = props.type;
+    useEffect (
+      () => {
+          if(!load){
+            setLoad(true);
+            calculateFriendOptions();
+          }
+
+      }, [load]
+  );
 
     function toggleSelectShow(){
         setSelectShow(!selectShow);
@@ -33,10 +45,15 @@ const FriendObj = (props) => {
       axios(config)
       .then(function(response) {
           console.log(response.data)
+          setDisplayProperty("FriendObj"+props.children.username, "none");
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            setDisplayProperty("FriendObj"+props.children.username, "none");
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -57,10 +74,15 @@ const FriendObj = (props) => {
       axios(config)
       .then(function(response) {
           console.log(response.data)
+          setDisplayProperty("FriendObj"+props.children.username, "none");
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            setDisplayProperty("FriendObj"+props.children.username, "none");
+            window.location.href = "/loginPage";
+        }
       });
     }
 
@@ -80,11 +102,15 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
       console.log("Revoke sent request");
     }
@@ -105,13 +131,16 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
-      console.log("Unblock this person");
     }
 
     function accept(){
@@ -130,13 +159,16 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+        setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
-      console.log("Accept received request");
     }
 
     function decline(){
@@ -155,54 +187,53 @@ const FriendObj = (props) => {
       };
       axios(config)
       .then(function(response) {
+          setDisplayProperty("FriendObj"+props.children.username, "none");
           console.log(response.data)
       })
       .catch(function(error){
           console.log(error)
           console.log("No response")
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
       });
-      console.log("Decline received request");
     }
 
-    function friendReact(event){
-      let value = event.target.value;
-
-      if(value === "Unfriend"){
-          unfriend();
+    function calculateFriendOptions (){
+      let friendOptions = [];
+      if(type === "friend"){
+        friendOptions.push({ "name": "Unfriend", "func": unfriend });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "Block"){
-          block();
+      else if(type === "sent"){
+        friendOptions.push({ "name": "Revoke Request", "func": revoke });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "revoke"){
-          revoke();
+      else if(type === "received"){
+        friendOptions.push({ "name": "Accept", "func": accept });
+        friendOptions.push({ "name": "Decline", "func": decline });
+        friendOptions.push({ "name": "Block", "func": block });
       }
-      else if(value === "Unblock"){
-          unblock();
+      else if(type === "blocked"){
+        friendOptions.push({ "name": "Unblock", "func": unblock });
       }
-      else if (value === "Accept"){
-          accept();
-      }
-      else if (value === "Decline"){
-          decline();
-      }
+      console.log(friendOptions)
+      setDropdownOptions(friendOptions);
     }
     return(
-        <div id = "FriendObj" className = "displayObj">
-            <div className = "objSection">
-                <img className = "objProfilePhoto" src = {props.children.picture}/>
+        <div id = {"FriendObj"+props.children.username} className = "displayObj">
+            <div className = "objSection objSectionLeague">
+                <img className = "objProfilePhoto objSectionLeague" src = {createProfilePictureURL(props.children.username)} alt = "profile"/>
             </div>
             <div className = "objSection objWritingSection">
                 <p className = "objDisplayName">{props.children.displayName}</p>
                 <p className = "objUsername">{props.children.username}</p>
             </div>
-            <div className = "objSection">
-                <button className = "moreInfoButton" onClick = {toggleSelectShow}>
-                    <img src = "https://i.imgur.com/pnzihUp.png"/>
+            <div className = "objSection objButtonSection">
+                <button className = "moreInfoButton objButtonMore" onClick = {toggleSelectShow}>
+                    <img src = "https://i.imgur.com/pnzihUp.png" alt = "toggle button"/>
                 </button>
-                {(selectShow && type === "friend") ? <FriendSelect friendReact = {friendReact}></FriendSelect>: <></>}
-                {(selectShow && type === "sent") ? <SentSelect friendReact = {friendReact}></SentSelect>: <></>}
-                {(selectShow && type === "received") ? <ReceivedSelect friendReact = {friendReact}></ReceivedSelect>: <></>}
-                {(selectShow && type === "blocked") ? <BlockedSelect friendReact = {friendReact}></BlockedSelect>: <></>}
+                {(selectShow) ?<div className='objDropdown'><DropDown>{dropdownOptions}</DropDown></div> : <></>}
             </div>
         </div>
     )

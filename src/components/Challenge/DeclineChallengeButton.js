@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import '../../css/Shared/button.css';
-
+import { setDisplayProperty } from "../../Helpers/CssEffects";
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const DeclineChallengeButton = (props) => {
@@ -20,15 +20,18 @@ const DeclineChallengeButton = (props) => {
         };
         axios(config)
         .then(function(response) {
-            return response.data;
+            setDisplayProperty("ReceivedChallengedObj"+props.id, "none");
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }
 
     return(
-        <button id = "DeclineButton" className = "circleButton" onClick = {onDecline}>
+        <button id = {"DeclineButton"+props.id} className = "circleButton" onClick = {onDecline}>
             <img className = "circleButtonInner" src ="https://i.imgur.com/4e8Io40.png"/>
         </button>
     );

@@ -35,7 +35,10 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
-            console.log(error)
+            if(error.response.status===401){
+                console.log("User is not logged in");
+                window.location.href = "/loginPage";
+            }
         });
     }
 
@@ -60,6 +63,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
     }
@@ -81,6 +87,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 
@@ -103,6 +112,9 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 
@@ -123,28 +135,27 @@ const ChallengeScroll = (props) => {
             setInformation(response.data);
         })
         .catch(function(error){
+            if(error.response.status===401){
+                window.location.href = "/loginPage";
+            }
             console.log(error)
         });
 
     }
-    function getUsername(){
-        //TODO
-        return "Bruce Wayne";
-    }
     function makeIssuedChallengeObj(input){
-        return (<IssuedChallengeObj>{input}</IssuedChallengeObj>);
+        return (<IssuedChallengeObj key = {input["challengeId"]} >{input}</IssuedChallengeObj>);
     }
 
     function makeSentChallengeObj(input){
-        return (<SentChallengeObj>{input}</SentChallengeObj>);
+        return (<SentChallengeObj key = {input["challengeId"]} >{input}</SentChallengeObj>);
     }
 
     function makeReceivedChallengeObj(input){
-        return (<ReceivedChallengeObj>{input}</ReceivedChallengeObj>);
+        return (<ReceivedChallengeObj key = {input["challengeId"]} >{input}</ReceivedChallengeObj>);
     }
 
     function makeWeeklyChallengeObj(input){
-        return (<WeeklyChallengeObj>{input}</WeeklyChallengeObj>);
+        return (<WeeklyChallengeObj key = {input["challengeId"]}>{input}</WeeklyChallengeObj>);
     }
 
     useEffect (
@@ -169,7 +180,6 @@ const ChallengeScroll = (props) => {
 
     return (<div id = "ChallengeScroll">
         {(scrollType === "issued") ? information.map(makeIssuedChallengeObj) : <></>}
-        {(scrollType === "issued" && !ifLeague) ? <AddChallengeButton></AddChallengeButton> : <></>}
         {(scrollType === "sent") ? information.map(makeSentChallengeObj) : <></>}
         {(scrollType === "received") ? information.map(makeReceivedChallengeObj) : <></>}
         {(scrollType === "weekly") ? information.map(makeWeeklyChallengeObj) : <></>}

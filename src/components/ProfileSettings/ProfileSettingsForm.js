@@ -1,52 +1,51 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-import PhotoUpload from '../Shared/PhotoUpload';
+import PhotoUploadForm from '../Shared/Form/PhotoUploadForm';
 
 import axios from 'axios';
 
 import "../../css/Shared/button.css";
 import "../../css/Shared/form.css";
+import DisplayNameForm from '../Shared/Form/DisplayNameForm';
 
 const backend_url = process.env.REACT_APP_PROD_BACKEND;
 
 const ProfileSettingsForm = (props) => {
-
     const [photo, setPhoto] = useState(props.children.photo);
     const [displayName, setDisplayName] = useState(props.children.displayName);
     const [displayErrorResponse, setDisplayErrorResponse] = useState("");
-    const [submitErrorResponse, setSubmitErrorResponse] = useState("");
 
-    function uploadPhoto(photo){
-        setPhoto(photo);
+    function submitPhoto(){
+      var formData = new FormData();
+      formData.append("picture", photo);
+      var config = {
+        method : 'post',
+        url : backend_url + 'user/update_picture',
+        headers: {
+          Accept: 'application/json',
+        },
+        withCredentials: true,
+        credentials: 'include',
+        data : formData
+      };
+    axios(config)
+    .then(function(response){
+      console.log("succesfully uploaded photo");
+    })
+    .catch(function(error){
+      console.log(error)
+      if(error.response.status===401){
+        window.location.href = "/loginPage";
     }
-
-    function validateDisplay(event){
-      event.preventDefault();
-        let displayNameInput = event.target.value;
-        if (displayNameInput.length === 0 || displayNameInput.length > 32){
-            setDisplayErrorResponse("Cannot sign up, display name between 1-32 characters");
-            return false;
-        }
-
-        if (!(/^[a-z0-9 ]+$/i.test(displayNameInput))) {
-            setDisplayErrorResponse("Display Name input must only have alphanumeric and spaces");
-            return false;
-        }
-
-        setDisplayErrorResponse("");
-        setDisplayName(displayNameInput);
-        return true;
+    });
     }
-
-    function submitProfileSettings(){
-        //verify stuff, if bad inputs or bad response, trigger errors and if succesful, stay on page
+    function submitDisplayName(){
         if (displayErrorResponse !== ""){
-          setSubmitErrorResponse("Correct Highlighted fields to proceed");
-          return false;
+          return;
         }
         var config = {
           method : 'post',
-          url : backend_url + 'user/update_profile_info',
+          url : backend_url + 'user/update_display_name',
           headers: {
             Accept: 'application/json',
           },
@@ -54,16 +53,18 @@ const ProfileSettingsForm = (props) => {
           credentials: 'include',
           data :
           {
-            picture : photo,
             displayName :displayName
           }
         };
       axios(config)
       .then(function(response){
-        window.location.href = "./profileStatsPage";
+        setDisplayErrorResponse("succesfully updated display name");
       })
       .catch(function(error){
         console.log(error)
+        if(error.response.status===401){
+          window.location.href = "/loginPage";
+      }
       });
     }
 
@@ -75,19 +76,13 @@ const ProfileSettingsForm = (props) => {
     <div className = "Form">
         <div className="formObj">
                 <h2>Profile Picture</h2>
-                <PhotoUpload defaultImage = {props.children.photo} func = {uploadPhoto}></PhotoUpload>
-            </div>
+                <PhotoUploadForm>{{"default":props.children.photo, "func":setPhoto}}</PhotoUploadForm>
+                <button className="submitButton" onClick = {submitPhoto}><p className = "submitButtonText">Submit</p></button>
 
+          </div>
             <div className="formObj">
-                <h2>Display Name</h2>
-                <p className="formObjInner">This is what others will see</p>
-                <input id = "profileSettingsTextInput" className="formTextInput" type = "text" placeholder={props.children.displayName} onChange = {validateDisplay} onSubmit = {stopSubmit}/>
-                <p className = "errorBox">{displayErrorResponse}</p>
-            </div>
-
-            <div className = "formObj">
-                <button className="submitButton" onClick = {submitProfileSettings}><p className = "submitButtonText">Submit</p></button>
-                <p className = "errorBox">{submitErrorResponse}</p>
+            <DisplayNameForm placeholder = {props.children.displayName} updateDisplayName = {setDisplayName}/>
+            <button className="submitButton" onClick = {submitDisplayName}><p className = "submitButtonText">Submit</p></button>
             </div>
     </div>
     );

@@ -12,7 +12,7 @@ const DeleteSection = () => {
         //TODO: send request to delete user account
         var config = {
           method : 'delete',
-          url : backend_url + 'user/delete_account',
+          url : backend_url + 'delete_user',
           headers: {
             Accept: 'application/json',
           },
@@ -24,7 +24,10 @@ const DeleteSection = () => {
           window.location.href = "./";
         })
         .catch(function(error){
-          console.log(error)
+          console.log(error);
+          if(error.response.status===401){
+            window.location.href = "/loginPage";
+        }
         });
     }
     return (

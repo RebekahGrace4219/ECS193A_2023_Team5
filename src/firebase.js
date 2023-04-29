@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, onMessage } from "firebase/messaging";
 
 export function requestPermission() {
     console.log('Requesting permission...');
@@ -40,11 +40,11 @@ getToken(messaging, {vapidKey: "BDXZrQCKEnAfnJWh6oIbEYKTuogSmiNl4gKVIDNmOEabzRt2
   // ...
 });*/
 
-/*onMessage(messaging, (payload) => {
+onMessage(messaging, (payload) => {
   console.log('Message received. ', payload);
   // ...
 });
 export const onForegroundMessage = () =>
   new Promise((resolve) => onMessage(messaging, (payload) => resolve(payload)));
-*/
+
 export const exportMessaging = messaging;

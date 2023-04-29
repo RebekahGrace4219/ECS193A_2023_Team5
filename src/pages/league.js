@@ -1,48 +1,59 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import SideBar from '../components/Shared/SideBar';
 import Header from "../components/Shared/Header";
+import LeagueEditForm from '../components/League/LeagueEditForm';
 import LeagueHeader from "../components/League/LeagueHeader";
 import LeagueChallengeList from "../components/League/LeagueChallengeList";
 import LeagueMemberList from "../components/League/LeagueMemberList";
-import UserSettingsButton from '../components/Shared/UserSettingsButton';
-import SuggestionBox from "../components/Shared/SuggestionBox";
+import LeagueLeaderboard from '../components/League/LeagueLeaderboard';
 
-import "../css/Shared/page3.css"
+import "../css/Shared/page.css";
 
 const League = (props) => {
-    function getLeagueName(){
+
+    function getLeagueName() {
         let href = window.location.href;
         let locationQuery = href.indexOf("=");
-        let substring = href.substring(locationQuery+1);
+        let substring = href.substring(locationQuery + 1);
         return substring;
     }
 
     const [leagueName] = useState(getLeagueName());
 
-    return(
-        <div id = "League" className='Body3Part'>
-            <div className = "leftSide3Part">
+    return (
+        <div id="League" className='Body2Part'>
+            <div className="leftSide2Part">
                 <SideBar></SideBar>
             </div>
-            {
-                (props.children.type === "description") ?
-                <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"description"}}</Header>
-                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueChallengeList>{{"id": leagueName}}</LeagueChallengeList>
+            <div className="rightSide2Part">
+                <div className="mainInfo">
+                    <Header>{{ "title": "Social Hub", "type": "league", "leagueID": leagueName, "onButton": props.children.type }}</Header>
+                    {
+                        props.children.type === "edit" ?
+                        <LeagueEditForm leagueID = {leagueName}></LeagueEditForm>
+                        :
+                        <div>
+                        <LeagueHeader>{{ "id": leagueName }}</LeagueHeader>
+                        {
+                            (props.children.type === "description") ?
+                                <LeagueChallengeList>{{ "id": leagueName }}</LeagueChallengeList>
+
+                                :
+                                <LeagueMemberList>{{ "id": leagueName }}</LeagueMemberList>
+                        }
+                        {
+                            (props.children.type === "description") ?
+                                <LeagueLeaderboard>{{ "id": leagueName }}</LeagueLeaderboard>
+
+                                :
+                                <></>
+                        }
+                        </div>
+                    }
                 </div>
-                :
-                <div className = "middleSide3Part">
-                    <Header>{{"title": "Social Hub", "type":"league", "leagueID":leagueName, "onButton":"member"}}</Header>
-                    <LeagueHeader>{{"id": leagueName}}</LeagueHeader>
-                    <LeagueMemberList>{{"id": leagueName}}</LeagueMemberList>
-                </div>
-            }
-            <div className = "rightSide3Part">
-                <UserSettingsButton/>
-                <SuggestionBox>{{"type":"league"}}</SuggestionBox>
             </div>
+
         </div>
     );
 }
